@@ -48,7 +48,7 @@
         </div>
         <div>
             <x-input-label for="phone_number" :value="__('Phone number')" />
-            <x-text-input id="phone_number" name="phone_number" type="number" class="mt-1 block w-full" :value="old('phone_number', $user->email)" required autocomplete="username" />
+            <x-text-input id="phone_number" name="phone_number" type="text" class="mt-1 block w-full" :value="old('phone_number', $user->phone_number)" />
             <x-input-error class="mt-2" :messages="$errors->get('phone_number')" />
         </div>
 
