@@ -46,6 +46,11 @@
                 </div>
             @endif
         </div>
+        <div>
+            <x-input-label for="phone_number" :value="__('Phone number')" />
+            <x-text-input id="phone_number" name="phone_number" type="number" class="mt-1 block w-full" :value="old('phone_number', $user->email)" required autocomplete="username" />
+            <x-input-error class="mt-2" :messages="$errors->get('phone_number')" />
+        </div>
 
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>

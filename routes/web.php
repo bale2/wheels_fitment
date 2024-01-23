@@ -29,3 +29,9 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::get('/users', function () {
+    return view('users', [
+      'users' => App\Models\User::get()
+    ]);
+  })->name('users');
