@@ -1,10 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="grid grid-cols-2">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center">
-            {{ __('Ads') }}
-        </h2>
-        <div><div class="bg-slate-200 font-semibold text-xl text-gray-800 leading-tight rounded-3xl pl-5 mr-1 text-center">Hirdetésfeladás</div></div>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center">
+                {{ __('Ads') }}
+            </h2>
+            <div>
+                <a href="#"><div class="bg-slate-200 font-semibold text-xl text-gray-800 leading-tight rounded-3xl pl-5 mr-1 text-center">Hirdetésfeladás</div></a>
+            </div>
         </div>
     </x-slot>
 <div class="bg-purple-800">
