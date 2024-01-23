@@ -35,3 +35,11 @@ Route::get('/users', function () {
       'users' => App\Models\User::get()
     ]);
   })->name('users');
+
+
+
+  Route::get('/ads', function () {
+    return view('ads', [
+      'ads' => App\Models\Ad::get()
+    ]);
+  })->name('ads');
