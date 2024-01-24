@@ -22,11 +22,10 @@
             </div>
         </div>
     </x-slot>
-<div class="bg-purple-800 py-5">
-    <div class="pt-4">
+<div class="bg-purple-800 py-2">
         <div class=" max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-slate-400 overflow-hidden shadow-sm sm:rounded-lg my-5">
-                <div class="p-6 text-gray-900">
+            <div class="bg-slate-400 overflow-hidden shadow-sm sm:rounded-lg my-5 py-1">
+                <div class="px-6 text-gray-900 mx-5">
                     <form method="post" action="{{ route('ad_create_post') }}" class="mt-6 space-y-6">
                         @csrf
                         @method('post')
@@ -60,11 +59,10 @@
                         <x-text-input id="place" type="text" name="place" class="block mt-1 w-full"/>
                     </div>
 
-                    <input type="submit" value="feltöltés" class="text-lg bg-white shadow-sm sm:rounded-lg my-2 px-1 py-1">
+                    <input type="submit" value="feltöltés" class="text-lg bg-white shadow-sm sm:rounded-lg my-3 px-1 py-1">
                     </form>
                 </div>
             </div>
         </div>
-    </div>
 </div>
 </x-app-layout>
