@@ -25,7 +25,7 @@
 <div class="bg-purple-800 py-5">
     <div class="pt-4">
         <div class=" max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-slate-400 overflow-hidden shadow-sm sm:rounded-lg my-5">
+            <div class="bg-slate-400 overflow-hidden shadow-sm sm:rounded-lg my-5 grid grid-cols-2">
                 <div class="p-6 text-gray-900">
                     <h1 class="font-extrabold size-4 mb-2">{{$ad->price}}Ft</h1>
                     <h1 class="text-purple-800 font-mono">Leírás:</h1>
@@ -35,6 +35,9 @@
                     <h1>Kerék azonosítója: {{$ad->wheel_id}}</h1>
                     <h1>{{$ad->uploaded_at}}</h1>
                     <h1>Hirdetés:#{{$ad->ad_id}}</h1>
+                </div>
+                <div>
+                    <img src="{{asset('photos/' . $ad->photo)}}" alt="image of the ad" class="mt-10 mb-auto mx-auto h-40 w-auto ">
                 </div>
 
             </div>

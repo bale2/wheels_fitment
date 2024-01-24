@@ -46,6 +46,12 @@ class AdController extends Controller
     }
     public function ad_create_post(Request $request)
     {
+        $newPhotoName = time() . '-' . $request->title . '.' .
+        $request->photo->extension();
+
+        $request->photo->move(public_path('photos'), $newPhotoName);
+
+
         Ad::create([
             'wheel_id'=> $request->wheel_id,
             'title'=>$request->title,
@@ -53,7 +59,8 @@ class AdController extends Controller
             'price'=>$request->price,
             'user_id'=>$request->user_id,
             'place'=>$request->place,
-            'uploaded_at'=>now()
+            'uploaded_at'=>now(),
+            'photo'=>$newPhotoName
         ]);
         return redirect()->action([AdController::class, 'show_ads']);
     }

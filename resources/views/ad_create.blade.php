@@ -26,7 +26,7 @@
         <div class=" max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-slate-400 overflow-hidden shadow-sm sm:rounded-lg my-5 py-1">
                 <div class="px-6 text-gray-900 mx-5">
-                    <form method="post" action="{{ route('ad_create_post') }}" class="mt-6 space-y-6">
+                    <form method="post" action="{{ route('ad_create_post') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
                         @csrf
                         @method('post')
                     {{-- wheel_id --}}
@@ -57,6 +57,11 @@
                     <div class="mt-4">
                         <x-input-label for="place" :value="__('place')" />
                         <x-text-input id="place" type="text" name="place" class="block mt-1 w-full"/>
+                    </div>
+                    {{-- photo --}}
+                    <div class="mt-4">
+                        <x-input-label for="photo" :value="__('place')" />
+                        <x-text-input id="photo" type="file" name="photo" class="block mt-1 w-full"/>
                     </div>
 
                     <input type="submit" value="feltöltés" class="text-lg bg-white shadow-sm sm:rounded-lg my-3 px-1 py-1">
