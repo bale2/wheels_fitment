@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdController;
+use App\Http\Controllers\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -38,8 +41,18 @@ Route::get('/users', function () {
 
 
 
-  Route::get('/ads', function () {
-    return view('ads', [
-      'ads' => App\Models\Ad::get()
-    ]);
-  })->name('ads');
+  Route::get('/ads', [AdController::class, 'show_ads'])->name('ads');
+
+  Route::get('/ads/{id}', [AdController::class, 'show_ad_with_id'])->name('ads_with_id');
+
+//   Route::get('/ads', function () {
+//     return view('ads', [
+//       'ads' => App\Models\Ad::get(),
+//       'users' =>App\Models\User::get()->first()
+
+//     ]);
+//   })->name('ads');
+
+
+
+
