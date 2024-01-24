@@ -9,6 +9,12 @@ class Ad extends Model
 {
     use HasFactory;
     protected $fillable = [
-
+        'wheel_id',
+        'title',
+        'description',
+        'price',
+        'user_id',
+        'place',
+        'uploaded_at'
     ];
 }

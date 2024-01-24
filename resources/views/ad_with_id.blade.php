@@ -18,14 +18,14 @@
                 </h2>
             </div>
             <div>
-                <a href="#"><div class="bg-slate-200 font-semibold text-xl text-gray-800 leading-tight rounded-3xl pl-5 mr-1 text-center">Hirdetésfeladás</div></a>
+                <a href="/ad_create"><div class="bg-slate-200 font-semibold text-xl text-gray-800 leading-tight rounded-3xl pl-5 mr-1 text-center">Hirdetésfeladás</div></a>
             </div>
         </div>
     </x-slot>
-<div class="bg-purple-800">
+<div class="bg-purple-800 py-5">
     <div class="pt-4">
         <div class=" max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-slate-400 overflow-hidden shadow-sm sm:rounded-lg mt-5">
+            <div class="bg-slate-400 overflow-hidden shadow-sm sm:rounded-lg my-5">
                 <div class="p-6 text-gray-900">
                     <h1 class="font-extrabold size-4 mb-2">{{$ad->price}}Ft</h1>
                     <h1 class="text-purple-800 font-mono">Leírás:</h1>

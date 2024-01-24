@@ -5,13 +5,13 @@
                 {{ __('Ads') }}
             </h2>
             <div>
-                <a href="#"><div class="bg-slate-200 font-semibold text-xl text-gray-800 leading-tight rounded-3xl pl-5 mr-1 text-center">Hirdetésfeladás</div></a>
+                <a href="/ad_create"><div class="bg-slate-200 font-semibold text-xl text-gray-800 leading-tight rounded-3xl pl-5 mr-1 text-center">Hirdetésfeladás</div></a>
             </div>
         </div>
     </x-slot>
 <div class="bg-purple-800">
     <div class="pt-4">
-        <div class=" max-w-7xl mx-auto sm:px-6 lg:px-8 bg-yellow-400">
+        <div class=" max-w-7xl mx-auto sm:px-6 lg:px-8 py-5 sm:rounded-lg">
             @foreach ($ads as $ad)
             <a href="ads/{{$ad->ad_id}}"><div class="bg-slate-400 overflow-hidden shadow-sm sm:rounded-lg mt-5">
 

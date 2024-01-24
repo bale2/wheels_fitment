@@ -43,6 +43,9 @@ Route::get('/users', function () {
 
   Route::get('/ads', [AdController::class, 'show_ads'])->name('ads');
 
+  Route::get('/ad_create', [AdController::class, 'ad_create'])->name('ad_create');
+  Route::post('/ad_create', [AdController::class, 'ad_create_post'])->name('ad_create_post');
+
   Route::get('/ads/{id}', [AdController::class, 'show_ad_with_id'])->name('ads_with_id');
 
 //   Route::get('/ads', function () {
