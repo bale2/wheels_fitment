@@ -14,6 +14,11 @@
                         <h1>{{$user->id}}</h1>
                         <h3>{{$user->name}}</h3>
                         <h3>{{$user->email}}</h3>
+                        @if ($user->is_admin)
+                            <h3>Admin</h3>
+                        @else
+                            <h3>Felhasználó</h3>
+                        @endif
                         <h3>{{$user->password}}</h3>
                         <h3>{{$user->created_at}}</h3>
                         <h3>{{$user->updated_at}}</h3>

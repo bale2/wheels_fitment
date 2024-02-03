@@ -11,26 +11,25 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ads', function (Blueprint $table) {
-            $table->id('id');
-            $table->integer('wheel_id');
-            $table->string('title');
-            $table->string('description', 2048);
-            $table->float('price', 8, 2);
+        Schema::create('wheels_to_users', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('user_id')
                     ->constrained()
-                    ->onUpdate('cascade')
-                    ->onDelete('cascade');
-            $table->string('place');
-            $table->string('photo');
+                    ->onupdate('cascade')
+                    ->ondelete('cascade');
+                    $table->foreignId('wheel_id')
+                    ->constrained()
+                    ->onupdate('cascade')
+                    ->ondelete('cascade');
             $table->timestamps();
         });
     }
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('ads');
+        Schema::dropIfExists('wheels_to_users');
     }
 };
