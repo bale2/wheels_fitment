@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ManufacturerController;
+
 
 
 /*
@@ -43,9 +45,8 @@ Route::get('/users', function () {
 
   Route::get('/ads', [AdController::class, 'show_ads'])->name('ads');
 
-  Route::get('/ad_create', [AdController::class, 'ad_create'])->middleware(['auth', 'verified','is_admin'])->name('ad_create');
-  Route::post('/ad_create', [AdController::class, 'ad_create_post'])->middleware(['auth', 'verified','is_admin'])->name('ad_create_post');
-
+  Route::get('/ad_create', [AdController::class, 'ad_create'])->middleware(['auth', 'verified'])->name('ad_create');
+  Route::post('/ad_create', [AdController::class, 'ad_create_post'])->middleware(['auth', 'verified',])->name('ad_create_post');
   Route::get('/ads/{id}', [AdController::class, 'show_ad_with_id'])->name('ads_with_id');
 
 //   Route::get('/ads', function () {
@@ -56,6 +57,10 @@ Route::get('/users', function () {
 //     ]);
 //   })->name('ads');
 
+Route::get('/manufacturers', [ManufacturerController::class, 'show_manufacturers'])->middleware(['auth', 'verified'])->name('manufacturers');
+
+Route::get('/manufacturer_create', [ManufacturerController::class, 'manufacturer_create'])->middleware(['auth', 'verified'])->name('manufacturer_create');
+Route::post('/manufacturer_create', [ManufacturerController::class, 'manufacturer_create_post'])->middleware(['auth', 'verified'])->name('manufacturer_create_post');
 
 
 

@@ -26,6 +26,11 @@
                         {{ __('ads') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('manufacturers')" :active="request()->routeIs('manufacturers')">
+                        {{ __('manufacturers') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
