@@ -18,7 +18,7 @@
                     <div class="p-6 text-gray-900 ">
                         <h1 class="font-semibold text-xl text-gray-800">{{$ad->title}}</h1>
                         <h1>{{$ad->price}} Ft</h1>
-                        <h1>{{$ad->name}}</h1>
+                        <h1>{{$ad->user->name}}</h1>
                         <h1>{{$ad->place}}</h1>
                         <h1>{{$ad->updated_at}}</h1>
                     </div>

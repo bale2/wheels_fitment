@@ -18,4 +18,10 @@ class Ad extends Model
         'uploaded_at',
         'photo'
     ];
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+    public function wheel(){
+        return $this->belongsTo(Wheel::class);
+    }
 }

@@ -23,6 +23,9 @@
                         <h3>{{$user->created_at}}</h3>
                         <h3>{{$user->updated_at}}</h3>
                         <h3>{{$user->phone_number}}</h3>
+                        @foreach ($user->wheels as $wheel)
+                            <h3>{{$wheel->id}}</h3>
+                        @endforeach
                 </div>
 
             </div>

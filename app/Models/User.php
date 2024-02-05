@@ -43,4 +43,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public function ads(){
+        return $this->hasMany(Ad::class);
+    }
+    public function wheels(){
+        return $this->belongsToMany(Wheel::class,'wheels_users');
+    }
 }

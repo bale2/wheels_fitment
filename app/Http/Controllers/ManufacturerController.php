@@ -11,10 +11,8 @@ class ManufacturerController extends Controller
 {
     public function show_manufacturers(): View{
 
-        $manufacturers = DB::table('manufacturers')
-            ->select('manufacturers.*')
-            ->get();
-            return view('manufacturers',['manufacturers' => $manufacturers]);
+
+            return view('manufacturers',['manufacturers' => Manufacturer::all()]);
     }
     public function manufacturer_create(): View
     {

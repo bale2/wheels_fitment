@@ -30,9 +30,9 @@
                     <h1 class="font-extrabold size-4 mb-2">{{$ad->price}}Ft</h1>
                     <h1 class="text-purple-800 font-mono">Leírás:</h1>
                     <h1>{{$ad->description}}</h1>
-                    <h1>Hirdető: {{$ad->name}}</h1>
+                    <h1>Hirdető: {{$ad->user->name}}</h1>
                     <h1>Hely: {{$ad->place}}</h1>
-                    <h1>Kerék azonosítója: {{$ad->wheel_id}}</h1>
+                    <h1>Kerék azonosítója: {{$ad->wheel->model}}</h1>
                     <h1>Létrehozás dátuma: {{$ad->updated_at}}</h1>
                     <h1>Hirdetés:#{{$ad->id}}</h1>
                 </div>

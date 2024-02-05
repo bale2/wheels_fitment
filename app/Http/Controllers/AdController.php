@@ -13,25 +13,29 @@ class AdController extends Controller
 
     public function show_ads(): View
     {
-        $ads = DB::table('users')
-        ->join('ads','users.id', '=', 'ads.user_id')
-        ->select('ads.*','users.name',)
+        // $ads = DB::table('users')
+        // ->join('ads','users.id', '=', 'ads.user_id')
+        // ->select('ads.*','users.name',)
         // ->orderBy('ads.created_at', 'desc')
-        ->get();
+        // ->get();
+
+
+
         return view('ads',[
-            'ads'=> $ads
+            // 'ads'=> $ads
+            'ads'=>Ad::all()
         ]);
     }
 
-    public function show_ad_with_id(string $id): View
+    public function show_ad_with_id(int $id): View
     {
-        $ad = DB::table('users')
-        ->join('ads','users.id', '=', 'ads.user_id')
-        ->select('ads.*','users.name')
-        ->where('ads.id',$id)
-        ->first();
+        // $ad = DB::table('users')
+        // ->join('ads','users.id', '=', 'ads.user_id')
+        // ->select('ads.*','users.name')
+        // ->where('ads.id',$id)
+        // ->first();
         return view('ad_with_id', [
-            'ad' => $ad
+            'ad' =>Ad::find($id)
         ]);
     }
 

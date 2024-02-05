@@ -12,12 +12,12 @@
 <div class="bg-purple-800">
     <div class="pt-4">
         <div class=" max-w-7xl mx-auto sm:px-6 lg:px-8 py-5 sm:rounded-lg">
-            @foreach ($manufacturers as $ad)
-            <a href="ads/{{$ad->id}}">
+            @foreach ($manufacturers as $manufacturer)
+            <a href="manufacturer/{{$manufacturer->id}}">
                 <div class="bg-slate-400 overflow-hidden grid grid-cols-2 shadow-sm sm:rounded-lg mt-5">
                     <div class="p-6 text-gray-900 ">
-                        <h1>{{$ad->manufacturer_name}}</h1>
-                        @if ($ad->only_wheel_maker)
+                        <h1>{{$manufacturer->manufacturer_name}}</h1>
+                        @if ($manufacturer->only_wheel_maker)
                             <h1>Csak kerék gyártó</h1>
                         @else
                             <h1>Autó és kerékgyártó</h1>
