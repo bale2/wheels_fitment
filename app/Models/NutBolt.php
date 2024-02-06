@@ -14,5 +14,6 @@ class NutBolt extends Model
 
     public function wheels(){
         return $this->hasMany(Wheel::class);
+        //nut bolt tartozhat több kerékhez
     }
 }

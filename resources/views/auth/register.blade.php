@@ -50,3 +50,6 @@
         </div>
     </form>
 </x-guest-layout>
+<x-guest-layout>
+    <h1 class="text-fuchsia-600">fsakjfhjs</h1>
+</x-guest-layout>

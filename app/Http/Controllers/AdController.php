@@ -11,7 +11,7 @@ use App\Models\User;
 class AdController extends Controller
 {
 
-    public function show_ads(): View
+    public function ads_show(): View
     {
         // $ads = DB::table('users')
         // ->join('ads','users.id', '=', 'ads.user_id')
@@ -19,15 +19,13 @@ class AdController extends Controller
         // ->orderBy('ads.created_at', 'desc')
         // ->get();
 
-
-
         return view('ads',[
             // 'ads'=> $ads
             'ads'=>Ad::all()
         ]);
     }
 
-    public function show_ad_with_id(int $id): View
+    public function ad_with_id_show(int $id): View
     {
         // $ad = DB::table('users')
         // ->join('ads','users.id', '=', 'ads.user_id')

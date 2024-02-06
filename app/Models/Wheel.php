@@ -41,8 +41,9 @@ class Wheel extends Model
     public function boltPattern(){
         return $this->belongsTo(BoltPattern::class);
     }
-    public function nutBolts(){
+    public function nutBolt(){
         return $this->belongsTo(NutBolt::class);
+        //keréknek van csavarja
     }
 
     public function cars(){
