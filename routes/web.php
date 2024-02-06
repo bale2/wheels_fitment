@@ -58,13 +58,12 @@ Route::get('/users', function () {
 //   })->name('ads');
 
 Route::get('/manufacturers', [ManufacturerController::class, 'show_manufacturers'])->middleware(['auth', 'verified'])->name('manufacturers');
-
 Route::get('/manufacturer_create', [ManufacturerController::class, 'manufacturer_create'])->middleware(['auth', 'verified'])->name('manufacturer_create');
 Route::post('/manufacturer_create', [ManufacturerController::class, 'manufacturer_create_post'])->middleware(['auth', 'verified'])->name('manufacturer_create_post');
 
 //WheelController(show,createform,createpost,{id}page)
 Route::get('/wheels', [WheelController::class, 'wheels_show'])->middleware(['auth', 'verified'])->name('wheels');
-// Route::get('/wheel_create', [WheelController::class, 'show_wheels'])->middleware(['auth', 'verified'])->name('wheels');
-// Route::post('/ad_create', [AdController::class, 'ad_create_post'])->middleware(['auth', 'verified',])->name('ad_create_post');
+Route::get('/wheel_create', [WheelController::class, 'wheel_create'])->middleware(['auth', 'verified'])->name('wheel_create');
+Route::post('/wheel_create', [WheelController::class, 'wheel_create_post'])->middleware(['auth', 'verified',])->name('wheel_create_post');
 Route::get('/wheels/{id}', [WheelController::class, 'wheel_with_id'])->middleware(['auth', 'verified'])->name('wheel_with_id');
 

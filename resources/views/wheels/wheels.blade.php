@@ -5,7 +5,7 @@
                 {{ __('Wheels') }}
             </h2>
             <div class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
-                <a href="/#">Kerék hozzáadása</a>
+                <a href="/wheel_create">Kerék hozzáadása</a>
             </div>
         </div>
     </x-slot>

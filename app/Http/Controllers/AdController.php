@@ -59,6 +59,6 @@ class AdController extends Controller
             'updated_at'=>now(),
             'photo'=>$newPhotoName
         ]);
-        return redirect()->action([AdController::class, 'show_ads']);
+        return redirect()->action([AdController::class, 'ads_show']);
     }
 }

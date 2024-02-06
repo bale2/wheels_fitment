@@ -22,7 +22,7 @@ class Wheel extends Model
         'center_bore',
         'nut_bolt_id',
         'multipiece',
-        'picture',
+        'photo',
         'note'
     ];
     public function ads(){
