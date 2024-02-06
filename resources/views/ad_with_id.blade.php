@@ -13,7 +13,7 @@
                 </svg></a>
             </div>
             <div>
-                <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center">
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center dark:text-gray-200">
                     {{$ad->title}}
                 </h2>
             </div>
@@ -22,13 +22,12 @@
             </div>
         </div>
     </x-slot>
-<div class="bg-purple-800 py-5">
-    <div class="pt-4">
+    <div class="py-12">
         <div class=" max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-slate-400 overflow-hidden shadow-sm sm:rounded-lg my-5 grid grid-cols-2">
-                <div class="p-6 text-gray-900">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg my-5 grid grid-cols-2 dark:bg-gray-800">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
                     <h1 class="font-extrabold size-4 mb-2">{{$ad->price}}Ft</h1>
-                    <h1 class="text-purple-800 font-mono">Leírás:</h1>
+                    <h1 class="text-gray-800 dark:text-gray-200 font-mono">Leírás:</h1>
                     <h1>{{$ad->description}}</h1>
                     <h1>Hirdető: {{$ad->user->name}}</h1>
                     <h1>Hely: {{$ad->place}}</h1>
@@ -39,11 +38,7 @@
                 <div>
                     <img src="{{asset('photos/' . $ad->photo)}}" alt="image of the ad" class="mt-10 mb-auto mx-auto h-40 w-auto ">
                 </div>
-
             </div>
-
-
         </div>
     </div>
-</div>
 </x-app-layout>

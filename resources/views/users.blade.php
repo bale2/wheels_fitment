@@ -1,16 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Ads') }}
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-gray-200">
+            {{ __('Users') }}
         </h2>
     </x-slot>
-
-    <div class="bg-purple-800 py-2">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 ">
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 sm:rounded-lg">
             @foreach ($users as $user)
-            <div class=" overflow-hidden shadow-sm sm:rounded-lg my-4  bg-slate-400 mx-2">
-
-                <div class="p-6 text-gray-900">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg dark:bg-gray-800 mb-12">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
                         <h1>{{$user->id}}</h1>
                         <h3>{{$user->name}}</h3>
                         <h3>{{$user->email}}</h3>
@@ -24,7 +22,7 @@
                         <h3>{{$user->updated_at}}</h3>
                         <h3>{{$user->phone_number}}</h3>
                         @foreach ($user->wheels as $wheel)
-                            <h3>{{$wheel->id}}</h3>
+                            <h3>{{$wheel->model}}</h3>
                         @endforeach
                 </div>
 

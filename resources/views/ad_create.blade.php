@@ -13,7 +13,7 @@
                 </svg></a>
             </div>
             <div>
-                <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center">
+                <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
                     Hirdetés hozzáadása
                 </h2>
             </div>
@@ -22,31 +22,31 @@
             </div>
         </div>
     </x-slot>
-<div class="bg-purple-800 py-2">
+    <div class="py-12">
         <div class=" max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-slate-400 overflow-hidden shadow-sm sm:rounded-lg my-5 py-1">
-                <div class="px-6 text-gray-900 mx-5">
-                    <form method="post" action="{{ route('ad_create_post') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg dark:bg-gray-800">
+                <div class="p-6 text-gray-900 mx-5 ">
+                    <form method="post" action="{{ route('ad_create_post') }}" class="mt-6 space-y-6 " enctype="multipart/form-data">
                         @csrf
                         @method('post')
                     {{-- wheel_id --}}
                     <div class="mt-4">
-                        <x-input-label for="wheel_id" :value="__('wheel_id')" />
+                        <x-input-label for="wheel_id" :value="__('Wheel_id')" class="dark:text-gray-200" />
                         <x-text-input id="wheel_id" type="number" name="wheel_id" class="block mt-1 w-full"/>
                     </div>
                     {{-- title --}}
                     <div class="mt-4">
-                        <x-input-label for="title" :value="__('title')" />
+                        <x-input-label for="title" :value="__('Title')" class="dark:text-gray-200" />
                         <x-text-input id="title" type="text" name="title" class="block mt-1 w-full"/>
                     </div>
                     {{-- description --}}
                     <div class="mt-4">
-                        <x-input-label for="description" :value="__('description')" />
+                        <x-input-label for="description" :value="__('Description')" class="dark:text-gray-200"/>
                         <x-text-input id="description" type="text" name="description" class="block mt-1 w-full"/>
                     </div>
                     {{-- price --}}
                     <div class="mt-4">
-                        <x-input-label for="price" :value="__('price')" />
+                        <x-input-label for="price" :value="__('Price')" class="dark:text-gray-200"/>
                         <x-text-input id="price" type="number" name="price" class="block mt-1 w-full"/>
                     </div>
                     {{-- user_id --}}
@@ -55,19 +55,18 @@
                     </div>
                     {{-- place --}}
                     <div class="mt-4">
-                        <x-input-label for="place" :value="__('place')" />
+                        <x-input-label for="place" :value="__('Place')" class="dark:text-gray-200"/>
                         <x-text-input id="place" type="text" name="place" class="block mt-1 w-full"/>
                     </div>
                     {{-- photo --}}
                     <div class="mt-4">
-                        <x-input-label for="photo" :value="__('place')" />
+                        <x-input-label for="photo" :value="__('Photo')" class="dark:text-gray-200"/>
                         <x-text-input id="photo" type="file" name="photo" class="block mt-1 w-full"/>
                     </div>
-
-                    <input type="submit" value="feltöltés" class="text-lg bg-white shadow-sm sm:rounded-lg my-3 px-1 py-1">
+                    <input type="submit" value="feltöltés" class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
                     </form>
                 </div>
             </div>
         </div>
-</div>
+    </div>
 </x-app-layout>

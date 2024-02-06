@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="grid grid-cols-2">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center">
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
                 {{ __('Manufacturers') }}
             </h2>
             <div>
@@ -9,13 +9,12 @@
             </div>
         </div>
     </x-slot>
-<div class="bg-purple-800">
-    <div class="pt-4">
-        <div class=" max-w-7xl mx-auto sm:px-6 lg:px-8 py-5 sm:rounded-lg">
+    <div class="py-12">
+        <div class=" max-w-7xl mx-auto sm:px-6 lg:px-8 sm:rounded-lg">
             @foreach ($manufacturers as $manufacturer)
             <a href="manufacturer/{{$manufacturer->id}}">
-                <div class="bg-slate-400 overflow-hidden grid grid-cols-2 shadow-sm sm:rounded-lg mt-5">
-                    <div class="p-6 text-gray-900 ">
+                <div class="bg-white overflow-hidden grid grid-cols-2 shadow-sm sm:rounded-lg dark:bg-gray-800 mb-12">
+                    <div class="p-6 text-gray-900 dark:text-gray-100">
                         <h1>{{$manufacturer->manufacturer_name}}</h1>
                         @if ($manufacturer->only_wheel_maker)
                             <h1>Csak kerék gyártó</h1>
@@ -28,5 +27,4 @@
             @endforeach
         </div>
     </div>
-</div>
 </x-app-layout>
