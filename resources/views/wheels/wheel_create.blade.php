@@ -47,12 +47,6 @@
                         <x-text-input id="price" type="number" name="price" class="block mt-1 w-full"/>
                     </div>
                     {{-- wheel_type_id --}}
-
-                    {{-- <div class="mt-4">
-                        <x-input-label for="wheel_type_id" :value="__('Wheel_type_id')" class="dark:text-gray-200"/>
-                        <x-text-input id="wheel_type_id" type="number" name="wheel_type_id" class="block mt-1 w-full"/>
-                    </div> --}}
-
                     <x-input-label for="wheel_type" :value="__('Wheel_type')" class="dark:text-gray-200"/>
                     <select id="wheel_type" name="wheel_type_id" class="field" class="dark:text-gray-200 bg-white dark:bg-gray-800">
                         @foreach ($wheelTypes as $wheelType)
@@ -75,11 +69,6 @@
                         <x-text-input id="ET_number" type="number" name="ET_number" class="block mt-1 w-full"/>
                     </div>
                     {{-- bolt_pattern_id --}}
-                    {{-- <div class="mt-4">
-                        <x-input-label for="bolt_pattern_id" :value="__('Bolt_pattern_id')" class="dark:text-gray-200"/>
-                        <x-text-input id="bolt_pattern_id" type="number" name="bolt_pattern_id" class="block mt-1 w-full"/>
-                    </div> --}}
-
                     <x-input-label for="bolt_pattern" :value="__('Bolt pattern')" class="dark:text-gray-200"/>
                     <select id="bolt_pattern" name="bolt_pattern_id" class="field" class="dark:text-gray-200 bg-white dark:bg-gray-800">
                         @foreach ($boltPatterns as $boltPattern)
@@ -97,11 +86,6 @@
                         <x-text-input id="center_bore" type="number" name="center_bore" class="block mt-1 w-full"/>
                     </div>
                     {{-- nut_bolt_id --}}
-                    {{-- <div class="mt-4">
-                        <x-input-label for="nut_bolt_id" :value="__('nut_bolt_id')" class="dark:text-gray-200"/>
-                        <x-text-input id="nut_bolt_id" type="number" name="nut_bolt_id" class="block mt-1 w-full"/>
-                    </div> --}}
-
                     <x-input-label for="nut_bolt" :value="__('Nut OR Bolt')" class="dark:text-gray-200"/>
                     <select id="nut_bolt" name="nut_bolt_id" class="field" class="dark:text-gray-200 bg-white dark:bg-gray-800">
                         @foreach ($nutBolts as $nutBolt)

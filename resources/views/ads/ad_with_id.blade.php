@@ -31,7 +31,7 @@
                     <h1>{{$ad->description}}</h1>
                     <h1>Hirdető: {{$ad->user->name}}</h1>
                     <h1>Hely: {{$ad->place}}</h1>
-                    <h1>Kerék azonosítója: {{$ad->wheel->model}}</h1>
+                    <h1>Kerék azonosítója: {{$ad->wheel->id}}</h1>
                     <h1>Létrehozás dátuma: {{$ad->updated_at}}</h1>
                     <h1>Hirdetés:#{{$ad->id}}</h1>
                 </div>

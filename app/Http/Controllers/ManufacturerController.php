@@ -12,11 +12,11 @@ class ManufacturerController extends Controller
     public function show_manufacturers(): View{
 
 
-            return view('manufacturers',['manufacturers' => Manufacturer::all()]);
+            return view('manufacturers/manufacturers',['manufacturers' => Manufacturer::all()]);
     }
     public function manufacturer_create(): View
     {
-        return view('manufacturer_create', [
+        return view('manufacturers/manufacturer_create', [
         ]);
     }
     public function manufacturer_create_post(Request $request)

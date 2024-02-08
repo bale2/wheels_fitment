@@ -30,10 +30,17 @@
                         @csrf
                         @method('post')
                     {{-- wheel_id --}}
-                    <div class="mt-4">
+                    {{-- <div class="mt-4">
                         <x-input-label for="wheel_id" :value="__('Wheel_id')" class="dark:text-gray-200" />
                         <x-text-input id="wheel_id" type="number" name="wheel_id" class="block mt-1 w-full"/>
-                    </div>
+                    </div> --}}
+
+                    <x-input-label for="wheel" :value="__('Wheel')" class="dark:text-gray-200" />
+                    <select id="wheel" name="wheel_id" class="field" class="dark:text-gray-200 bg-white dark:bg-gray-800">
+                        @foreach ($wheelModels as $wheelModel)
+                            <option class="dark:text-gray-200 bg-white dark:bg-gray-800"  value={{$wheelModel->id}}>{{$wheelModel->model}}</option>
+                        @endforeach
+                    </select>
                     {{-- title --}}
                     <div class="mt-4">
                         <x-input-label for="title" :value="__('Title')" class="dark:text-gray-200" />

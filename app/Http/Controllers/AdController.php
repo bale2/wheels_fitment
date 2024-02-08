@@ -7,6 +7,8 @@ use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
 use App\Models\Ad;
 use App\Models\User;
+use App\Models\Wheel;
+use App\Models\Manufacturer;
 
 class AdController extends Controller
 {
@@ -19,7 +21,7 @@ class AdController extends Controller
         // ->orderBy('ads.created_at', 'desc')
         // ->get();
 
-        return view('ads',[
+        return view('ads/ads',[
             // 'ads'=> $ads
             'ads'=>Ad::all()
         ]);
@@ -32,14 +34,16 @@ class AdController extends Controller
         // ->select('ads.*','users.name')
         // ->where('ads.id',$id)
         // ->first();
-        return view('ad_with_id', [
+        return view('ads/ad_with_id', [
             'ad' =>Ad::find($id)
         ]);
     }
 
     public function ad_create(): View
     {
-        return view('ad_create', [
+        return view('ads/ad_create', [
+            'wheelModels'=>Wheel::all(),
+            'manufacturerNames'=>Manufacturer::all()
         ]);
     }
 
