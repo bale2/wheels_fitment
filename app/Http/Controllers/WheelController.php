@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
 use App\Models\Wheel;
+use App\Models\Manufacturer;
+use App\Models\WheelType;
+use App\Models\BoltPattern;
+use App\Models\NutBolt;
 
 class WheelController extends Controller
 {
@@ -20,7 +24,12 @@ class WheelController extends Controller
         ]);
     }
     public function wheel_create(): View{
+
         return view('wheels/wheel_create',[
+            'manufacturers'=>Manufacturer::all(),
+            'wheelTypes'=>WheelType::all(),
+            'boltPatterns'=>BoltPattern::all(),
+            'nutBolts'=>NutBolt::all()
         ]);
     }
     public function wheel_create_post(Request $request)

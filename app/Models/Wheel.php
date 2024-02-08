@@ -49,7 +49,4 @@ class Wheel extends Model
     public function cars(){
         return $this->belongsToMany(Car::class,'wheels_cars');
     }
-
-
-
 }

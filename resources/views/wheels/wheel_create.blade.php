@@ -30,10 +30,12 @@
                         @csrf
                         @method('post')
                     {{-- manufacturer_id --}}
-                    <div class="mt-4">
-                        <x-input-label for="manufacturer_id" :value="__('Manufacturer_id')" class="dark:text-gray-200" />
-                        <x-text-input id="manufacturer_id" type="number" name="manufacturer_id" class="block mt-1 w-full"/>
-                    </div>
+                    <x-input-label for="manufacturer" :value="__('Manufacturer')" class="dark:text-gray-200" />
+                    <select id="manufacturer" name="manufacturer_id" class="field" class="dark:text-gray-200 bg-white dark:bg-gray-800">
+                        @foreach ($manufacturers as $manufacturer)
+                            <option class="dark:text-gray-200 bg-white dark:bg-gray-800"  value={{$manufacturer->id}}>{{$manufacturer->manufacturer_name}}</option>
+                        @endforeach
+                    </select>
                     {{-- model --}}
                     <div class="mt-4">
                         <x-input-label for="model" :value="__('Model')" class="dark:text-gray-200" />
@@ -45,10 +47,18 @@
                         <x-text-input id="price" type="number" name="price" class="block mt-1 w-full"/>
                     </div>
                     {{-- wheel_type_id --}}
-                    <div class="mt-4">
+
+                    {{-- <div class="mt-4">
                         <x-input-label for="wheel_type_id" :value="__('Wheel_type_id')" class="dark:text-gray-200"/>
                         <x-text-input id="wheel_type_id" type="number" name="wheel_type_id" class="block mt-1 w-full"/>
-                    </div>
+                    </div> --}}
+
+                    <x-input-label for="wheel_type" :value="__('Wheel_type')" class="dark:text-gray-200"/>
+                    <select id="wheel_type" name="wheel_type_id" class="field" class="dark:text-gray-200 bg-white dark:bg-gray-800">
+                        @foreach ($wheelTypes as $wheelType)
+                            <option class="dark:text-gray-200 bg-white dark:bg-gray-800"  value={{$wheelType->id}}>{{$wheelType->wheel_type}}</option>
+                        @endforeach
+                    </select>
                     {{-- diameter --}}
                     <div class="mt-4">
                         <x-input-label for="diameter" :value="__('Diameter')" class="dark:text-gray-200"/>
@@ -65,10 +75,17 @@
                         <x-text-input id="ET_number" type="number" name="ET_number" class="block mt-1 w-full"/>
                     </div>
                     {{-- bolt_pattern_id --}}
-                    <div class="mt-4">
+                    {{-- <div class="mt-4">
                         <x-input-label for="bolt_pattern_id" :value="__('Bolt_pattern_id')" class="dark:text-gray-200"/>
                         <x-text-input id="bolt_pattern_id" type="number" name="bolt_pattern_id" class="block mt-1 w-full"/>
-                    </div>
+                    </div> --}}
+
+                    <x-input-label for="bolt_pattern" :value="__('Bolt pattern')" class="dark:text-gray-200"/>
+                    <select id="bolt_pattern" name="bolt_pattern_id" class="field" class="dark:text-gray-200 bg-white dark:bg-gray-800">
+                        @foreach ($boltPatterns as $boltPattern)
+                            <option class="dark:text-gray-200 bg-white dark:bg-gray-800"  value={{$boltPattern->id}}>{{$boltPattern->bolt_pattern}}</option>
+                        @endforeach
+                    </select>
                     {{-- kba_number --}}
                     <div class="mt-4">
                         <x-input-label for="kba_number" :value="__('KBA_number')" class="dark:text-gray-200"/>
@@ -80,10 +97,17 @@
                         <x-text-input id="center_bore" type="number" name="center_bore" class="block mt-1 w-full"/>
                     </div>
                     {{-- nut_bolt_id --}}
-                    <div class="mt-4">
+                    {{-- <div class="mt-4">
                         <x-input-label for="nut_bolt_id" :value="__('nut_bolt_id')" class="dark:text-gray-200"/>
                         <x-text-input id="nut_bolt_id" type="number" name="nut_bolt_id" class="block mt-1 w-full"/>
-                    </div>
+                    </div> --}}
+
+                    <x-input-label for="nut_bolt" :value="__('Nut OR Bolt')" class="dark:text-gray-200"/>
+                    <select id="nut_bolt" name="nut_bolt_id" class="field" class="dark:text-gray-200 bg-white dark:bg-gray-800">
+                        @foreach ($nutBolts as $nutBolt)
+                            <option class="dark:text-gray-200 bg-white dark:bg-gray-800"  value={{$nutBolt->id}}>{{$nutBolt->type}}</option>
+                        @endforeach
+                    </select>
                     {{-- multipiece --}}
                     <div class="mt-4">
                         <x-input-label for="multipiece" :value="__('Multipiece')" class="dark:text-gray-200"/>
@@ -97,7 +121,7 @@
                     {{-- note --}}
                     <div class="mt-4">
                         <x-input-label for="note" :value="__('Note')" class="dark:text-gray-200"/>
-                        <x-text-input id="note" type="number" name="note" class="block mt-1 w-full"/>
+                        <x-text-input id="note" type="text" name="note" class="block mt-1 w-full"/>
                     </div>
 
 
