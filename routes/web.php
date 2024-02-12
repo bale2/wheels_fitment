@@ -67,14 +67,14 @@ Route::get('/wheels', [WheelController::class, 'wheels_show'])->middleware(['aut
 Route::get('/wheel_create', [WheelController::class, 'wheel_create'])->middleware(['auth', 'verified'])->name('wheel_create');
 Route::post('/wheel_create', [WheelController::class, 'wheel_create_post'])->middleware(['auth', 'verified',])->name('wheel_create_post');
 
-Route::get('/wheels/wheel_types', [WheelController::class, 'wheel_types'])->middleware(['auth', 'verified'])->name('wheel_types');
-Route::post('/wheels/wheel_type_create', [WheelController::class, 'wheel_type_create_post'])->middleware(['auth', 'verified'])->name('wheel_type_create_post');
+Route::get('wheel_types', [WheelController::class, 'wheel_types'])->middleware(['auth', 'verified'])->name('wheel_types');
+Route::post('wheel_type_create', [WheelController::class, 'wheel_type_create_post'])->middleware(['auth', 'verified'])->name('wheel_type_create_post');
 
-Route::get('/wheels/bolt_patterns', [WheelController::class, 'bolt_patterns'])->middleware(['auth', 'verified'])->name('bolt_patterns');
-Route::post('/wheels/bolt_pattern_create', [WheelController::class, 'bolt_pattern_create_post'])->middleware(['auth', 'verified'])->name('bolt_pattern_create_post');
+Route::get('bolt_patterns', [WheelController::class, 'bolt_patterns'])->middleware(['auth', 'verified'])->name('bolt_patterns');
+Route::post('bolt_pattern_create', [WheelController::class, 'bolt_pattern_create_post'])->middleware(['auth', 'verified'])->name('bolt_pattern_create_post');
 
-Route::get('/wheels/nut_bolts', [WheelController::class, 'nut_bolts'])->middleware(['auth', 'verified'])->name('nut_bolts');
-Route::post('/wheels/nut_bolt_create', [WheelController::class, 'nut_bolts_create_post'])->middleware(['auth', 'verified'])->name('nut_bolts_create_post');
+Route::get('nut_bolts', [WheelController::class, 'nut_bolts'])->middleware(['auth', 'verified'])->name('nut_bolts');
+Route::post('nut_bolt_create', [WheelController::class, 'nut_bolts_create_post'])->middleware(['auth', 'verified'])->name('nut_bolts_create_post');
 
 
 Route::get('/wheels/{id}', [WheelController::class, 'wheel_with_id'])->middleware(['auth', 'verified'])->name('wheel_with_id');
@@ -82,5 +82,6 @@ Route::get('/wheels/{id}', [WheelController::class, 'wheel_with_id'])->middlewar
 //WheelController(datas)
 
 Route::get('/datas', function () {
-    return view('/wheels/wtbpnb');
-    })->middleware(['auth', 'verified'])->name('datas');
+     return view('/wheels/wheelprops');
+     })->middleware(['auth', 'verified'])->name('datas');
+

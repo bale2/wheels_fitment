@@ -23,7 +23,7 @@
             @endforeach
         </div>
         <x-modal name="nut_bolt_create" :show="$errors->userDeletion->isNotEmpty()" focusable>
-            <form method="post" action="{{ route('nut_bolts_create_post') }}" class="mt-2 space-y-2 flex flex-col items-center" enctype="multipart/form-data">
+            <form method="post" action="{{ route('manufacturer_create') }}" class="mt-2 space-y-2 flex flex-col items-center" enctype="multipart/form-data">
                 @csrf
                 @method('post')
                 {{-- type --}}

@@ -61,7 +61,7 @@ class WheelController extends Controller
 
 //wheel_types
     public function wheel_types(): View{
-        return view('wheels/wheel_types/wheel_types',[
+        return view('wheels/wheel_types',[
             'wheel_types'=>WheelType::all()
         ]);
 
@@ -77,7 +77,7 @@ class WheelController extends Controller
     }
 
     public function bolt_patterns(): View{
-        return view('wheels/bolt_patterns/bolt_patterns',[
+        return view('wheels/bolt_patterns',[
             'bolt_patterns'=>BoltPattern::all()
         ]);
     }
