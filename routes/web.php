@@ -60,10 +60,27 @@ Route::get('/users', function () {
 Route::get('/manufacturers', [ManufacturerController::class, 'show_manufacturers'])->middleware(['auth', 'verified'])->name('manufacturers');
 Route::get('/manufacturer_create', [ManufacturerController::class, 'manufacturer_create'])->middleware(['auth', 'verified'])->name('manufacturer_create');
 Route::post('/manufacturer_create', [ManufacturerController::class, 'manufacturer_create_post'])->middleware(['auth', 'verified'])->name('manufacturer_create_post');
+Route::get('/manufacturers/{id}', [ManufacturerController::class, 'manufacturer_with_id'])->middleware(['auth', 'verified'])->name('manufacturer_with_id');
 
 //WheelController(show,createform,createpost,{id}page)
 Route::get('/wheels', [WheelController::class, 'wheels_show'])->middleware(['auth', 'verified'])->name('wheels');
 Route::get('/wheel_create', [WheelController::class, 'wheel_create'])->middleware(['auth', 'verified'])->name('wheel_create');
 Route::post('/wheel_create', [WheelController::class, 'wheel_create_post'])->middleware(['auth', 'verified',])->name('wheel_create_post');
+
+Route::get('/wheels/wheel_types', [WheelController::class, 'wheel_types'])->middleware(['auth', 'verified'])->name('wheel_types');
+Route::post('/wheels/wheel_type_create', [WheelController::class, 'wheel_type_create_post'])->middleware(['auth', 'verified'])->name('wheel_type_create_post');
+
+Route::get('/wheels/bolt_patterns', [WheelController::class, 'bolt_patterns'])->middleware(['auth', 'verified'])->name('bolt_patterns');
+Route::post('/wheels/bolt_pattern_create', [WheelController::class, 'bolt_pattern_create_post'])->middleware(['auth', 'verified'])->name('bolt_pattern_create_post');
+
+Route::get('/wheels/nut_bolts', [WheelController::class, 'nut_bolts'])->middleware(['auth', 'verified'])->name('nut_bolts');
+Route::post('/wheels/nut_bolt_create', [WheelController::class, 'nut_bolts_create_post'])->middleware(['auth', 'verified'])->name('nut_bolts_create_post');
+
+
 Route::get('/wheels/{id}', [WheelController::class, 'wheel_with_id'])->middleware(['auth', 'verified'])->name('wheel_with_id');
 
+//WheelController(datas)
+
+Route::get('/datas', function () {
+    return view('/wheels/wtbpnb');
+    })->middleware(['auth', 'verified'])->name('datas');

@@ -14,11 +14,20 @@ class ManufacturerController extends Controller
 
             return view('manufacturers/manufacturers',['manufacturers' => Manufacturer::all()]);
     }
+
+    public function manufacturer_with_id(int $id): View
+    {
+        return view('manufacturers/manufacturer_with_id', [
+            'manufacturer' =>Manufacturer::find($id)
+        ]);
+    }
+
     public function manufacturer_create(): View
     {
         return view('manufacturers/manufacturer_create', [
         ]);
     }
+
     public function manufacturer_create_post(Request $request)
     {
         $only_wheel_maker = false;

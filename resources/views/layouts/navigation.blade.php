@@ -13,27 +13,32 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Főoldal') }}
+                        {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('users')" :active="request()->routeIs('users')">
-                        {{ __('users') }}
+                        {{ __('Users') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('ads')" :active="request()->routeIs('ads')">
-                        {{ __('ads') }}
+                        {{ __('Ads') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('manufacturers')" :active="request()->routeIs('manufacturers')">
-                        {{ __('manufacturers') }}
+                        {{ __('Manufacturers') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('wheels')" :active="request()->routeIs('wheels')">
-                        {{ __('wheels') }}
+                        {{ __('Wheels') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('datas')" :active="request()->routeIs('datas')">
+                        {{ __('Datas') }}
                     </x-nav-link>
                 </div>
             </div>

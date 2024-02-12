@@ -58,4 +58,51 @@ class WheelController extends Controller
         ]);
         return redirect()->action([WheelController::class, 'wheels_show']);
     }
+
+//wheel_types
+    public function wheel_types(): View{
+        return view('wheels/wheel_types/wheel_types',[
+            'wheel_types'=>WheelType::all()
+        ]);
+
+    }
+
+    public function wheel_type_create_post(Request $request)
+    {
+        WheelType::create([
+            'wheel_type'=>$request->type,
+            'updated_at'=>now()
+        ]);
+    return redirect()->action([WheelController::class, 'wheel_types']);
+    }
+
+    public function bolt_patterns(): View{
+        return view('wheels/bolt_patterns/bolt_patterns',[
+            'bolt_patterns'=>BoltPattern::all()
+        ]);
+    }
+
+    public function bolt_pattern_create_post(Request $request)
+    {
+        BoltPattern::create([
+            'bolt_pattern'=>$request->type,
+            'updated_at'=>now()
+        ]);
+    return redirect()->action([WheelController::class, 'bolt_patterns']);
+    }
+
+    public function nut_bolts(): View{
+        return view('wheels/nut_bolts',[
+            'nut_bolts'=>NutBolt::all()
+        ]);
+    }
+
+    public function nut_bolts_create_post(Request $request)
+    {
+        NutBolt::create([
+            'type'=>$request->type,
+            'updated_at'=>now()
+        ]);
+    return redirect()->action([WheelController::class, 'nut_bolts']);
+    }
 }

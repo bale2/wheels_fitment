@@ -9,7 +9,7 @@ class BoltPattern extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'pattern',
+        'bolt_pattern',
     ];
 
     public function wheels(){

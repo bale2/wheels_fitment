@@ -12,7 +12,7 @@
     <div class="py-12">
         <div class=" max-w-7xl mx-auto sm:px-6 lg:px-8 sm:rounded-lg">
             @foreach ($manufacturers as $manufacturer)
-            <a href="manufacturer/{{$manufacturer->id}}">
+            <a href="manufacturers/{{$manufacturer->id}}">
                 <div class="bg-white overflow-hidden grid grid-cols-2 shadow-sm sm:rounded-lg dark:bg-gray-800 mb-12">
                     <div class="p-6 text-gray-900 dark:text-gray-100">
                         <h1>{{$manufacturer->manufacturer_name}}</h1>
