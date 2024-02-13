@@ -17,9 +17,9 @@
                     Hirdetés hozzáadása
                 </h2>
             </div>
-            <div>
-                &nbsp;
-            </div>
+            <x-primary-button x-data="" x-on:click.prevent="$dispatch('open-modal','wheel_type_create')">
+                Adding a manufacturer
+            </x-primary-button>
         </div>
     </x-slot>
     <div class="py-12">

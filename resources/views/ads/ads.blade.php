@@ -22,10 +22,21 @@
                         <h1>{{$ad->updated_at}}</h1>
                     </div>
                     <div>
-                        <img src="{{asset('photos/' . $ad->photo)}}" alt="image of the ad" class="mt-10 mb-auto mx-auto h-20 w-auto ">
+                        @foreach ($ad->photos() as $photo)
+                        <img src="{{asset('photos/' . $photo)}}" alt="image of the ad" class="mt-10 mb-auto mx-auto h-20 w-auto ">
+                        @endforeach
                     </div>
+                    <form method="post" action="{{ route('ad_delete_post') }}" class="mt-6 space-y-6 ">
+                        @csrf
+                        @method('post')
+                        <input type="hidden" value="{{ $ad->id }}" name="ad_id" class="block mt-1 w-full"/>
+                       <x-primary-button>
+                        Delete
+                    </x-primary-button>
+                    </form>
                 </div>
             </a>
+
             @endforeach
         </div>
 </div>

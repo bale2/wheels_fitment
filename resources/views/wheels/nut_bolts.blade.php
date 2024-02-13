@@ -14,12 +14,12 @@
             </div>
             <div>
                 <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
-                    Hirdetés hozzáadása
+                    Nut Bolts
                 </h2>
             </div>
-            <div>
-                &nbsp;
-            </div>
+            <x-primary-button x-data="" x-on:click.prevent="$dispatch('open-modal','nut_bolt_create')">
+                Adding a manufacturer
+            </x-primary-button>
         </div>
     </x-slot>
     <div class="py-12">
@@ -33,7 +33,7 @@
             @endforeach
         </div>
         <x-modal name="nut_bolt_create" :show="$errors->userDeletion->isNotEmpty()" focusable>
-            <form method="post" action="{{ route('manufacturer_create') }}" class="mt-2 space-y-2 flex flex-col items-center" enctype="multipart/form-data">
+            <form method="post" action="{{ route('nut_bolts_create_post') }}" class="mt-2 space-y-2 flex flex-col items-center" enctype="multipart/form-data">
                 @csrf
                 @method('post')
                 {{-- type --}}

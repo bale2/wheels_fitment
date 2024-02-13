@@ -24,4 +24,9 @@ class Ad extends Model
     public function wheel(){
         return $this->belongsTo(Wheel::class);
     }
+
+    public function photos()
+    {
+        return explode(';', $this->photo);
+    }
 }

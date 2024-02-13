@@ -14,12 +14,12 @@
             </div>
             <div>
                 <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
-                    Hirdetés hozzáadása
+                    Manufacturers
                 </h2>
             </div>
-            <div>
-                &nbsp;
-            </div>
+            <x-primary-button x-data="" x-on:click.prevent="$dispatch('open-modal','manufacturer_create')">
+                Adding a manufacturer
+            </x-primary-button>
         </div>
     </x-slot>
     <div class="py-12">

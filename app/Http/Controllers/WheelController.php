@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\View\View;
-use Illuminate\Support\Facades\DB;
 use App\Models\Wheel;
-use App\Models\Manufacturer;
-use App\Models\WheelType;
-use App\Models\BoltPattern;
 use App\Models\NutBolt;
+use App\Models\WheelType;
+use Illuminate\View\View;
+use App\Models\BoltPattern;
+use Illuminate\Support\Str;
+use App\Models\Manufacturer;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class WheelController extends Controller
 {
@@ -41,6 +42,22 @@ class WheelController extends Controller
 
         $multipiece = $request->multipiece !== null;
 
+        $imagePaths = '';
+
+        $image = array();
+        if($files = $request->file('photo')){
+            foreach($files as $file){
+
+                $path = Str::uuid() . strtolower($file->getClientOriginalExtension());
+
+                $file->move(public_path('photos'), $path);
+
+                $imagePaths = $imagePaths . ';' . $path;
+            }
+        }
+
+        dd($request->photo);
+
         Wheel::create([
             'manufacturer_id'=> $request->manufacturer_id,
             'model'=>$request->model,
@@ -54,7 +71,7 @@ class WheelController extends Controller
             'center_bore'=>$request->center_bore,
             'nut_bolt_id'=>$request->nut_bolt_id,
             'multipiece'=>$multipiece,
-            'photo'=>$newPhotoName,
+            'photo'=>$imagePaths,
             'note'=>$request->note,
             'updated_at'=>now()
         ]);
