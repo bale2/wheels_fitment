@@ -1,12 +1,9 @@
 <x-app-layout>
     <x-slot name="header" >
-        <div class="grid grid-cols-2">
+        <div class="mx-auto">
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
-                {{ __('Datas') }}
+                {{ __('Data') }}
             </h2>
-            <div class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
-                <a href="/wheel_create">Datas</a>
-            </div>
         </div>
     </x-slot>
     <div class="py-12">

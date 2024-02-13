@@ -29,14 +29,9 @@
                     <form method="post" action="{{ route('ad_create_post') }}" class="mt-6 space-y-6 " enctype="multipart/form-data">
                         @csrf
                         @method('post')
-                    {{-- wheel_id --}}
-                    {{-- <div class="mt-4">
-                        <x-input-label for="wheel_id" :value="__('Wheel_id')" class="dark:text-gray-200" />
-                        <x-text-input id="wheel_id" type="number" name="wheel_id" class="block mt-1 w-full"/>
-                    </div> --}}
 
                     <x-input-label for="wheel" :value="__('Wheel')" class="dark:text-gray-200" />
-                    <select id="wheel" name="wheel_id" class="field" class="dark:text-gray-200 bg-white dark:bg-gray-800">
+                    <select id="wheel" name="wheel_id" class="field dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent" >
                         @foreach ($wheelModels as $wheelModel)
                             <option class="dark:text-gray-200 bg-white dark:bg-gray-800"  value={{$wheelModel->id}}>{{$wheelModel->model}}</option>
                         @endforeach

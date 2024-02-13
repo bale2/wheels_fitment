@@ -26,7 +26,13 @@
                         <h1>KBA szám:{{$wheel->kba_number}}</h1>
                         <h1>Középfurat: {{$wheel->center_bore}}</h1>
                         <h1>Felfogatás: {{$wheel->nutBolt->type}}</h1>
-                        <h1>Többrészes: {{$wheel->multipiece}}</h1>
+                        <h1>Felépítés:
+                            @if ($wheel->multipiece == 0)
+                                Egyrészes
+                            @else
+                                Többrészes
+                            @endif
+                        </h1>
                         <h1>Kép: {{$wheel->photo}}</h1>
                     </div>
                     <div>

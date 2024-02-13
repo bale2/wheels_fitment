@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex justify-around ">
             <div class="w-3 ">
-                <a href="/ads" ><svg fill="#000000" class="h-5 w-5" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 26.676 26.676" xml:space="preserve">
+                <a href="/wheels" ><svg fill="#000000" class="h-5 w-5" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 26.676 26.676" xml:space="preserve">
 
                     <g id="SVGRepo_bgCarrier" stroke-width="0"/>
 
@@ -31,7 +31,7 @@
                         @method('post')
                     {{-- manufacturer_id --}}
                     <x-input-label for="manufacturer" :value="__('Manufacturer')" class="dark:text-gray-200" />
-                    <select id="manufacturer" name="manufacturer_id" class="field" class="dark:text-gray-200 bg-white dark:bg-gray-800">
+                    <select id="manufacturer" name="manufacturer_id" class="field dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent">
                         @foreach ($manufacturers as $manufacturer)
                             <option class="dark:text-gray-200 bg-white dark:bg-gray-800"  value={{$manufacturer->id}}>{{$manufacturer->manufacturer_name}}</option>
                         @endforeach
@@ -48,7 +48,7 @@
                     </div>
                     {{-- wheel_type_id --}}
                     <x-input-label for="wheel_type" :value="__('Wheel_type')" class="dark:text-gray-200"/>
-                    <select id="wheel_type" name="wheel_type_id" class="field" class="dark:text-gray-200 bg-white dark:bg-gray-800">
+                    <select id="wheel_type" name="wheel_type_id" class="field dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent">
                         @foreach ($wheelTypes as $wheelType)
                             <option class="dark:text-gray-200 bg-white dark:bg-gray-800"  value={{$wheelType->id}}>{{$wheelType->wheel_type}}</option>
                         @endforeach
@@ -61,7 +61,7 @@
                     {{-- width --}}
                     <div class="mt-4">
                         <x-input-label for="width" :value="__('Width')" class="dark:text-gray-200"/>
-                        <x-text-input id="width" type="number" name="width" class="block mt-1 w-full"/>
+                        <x-text-input id="width" type="number" step="0.5" name="width" class="block mt-1 w-full"/>
                     </div>
                     {{-- ET_number --}}
                     <div class="mt-4">
@@ -70,7 +70,7 @@
                     </div>
                     {{-- bolt_pattern_id --}}
                     <x-input-label for="bolt_pattern" :value="__('Bolt pattern')" class="dark:text-gray-200"/>
-                    <select id="bolt_pattern" name="bolt_pattern_id" class="field" class="dark:text-gray-200 bg-white dark:bg-gray-800">
+                    <select id="bolt_pattern" name="bolt_pattern_id" class="field dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent">
                         @foreach ($boltPatterns as $boltPattern)
                             <option class="dark:text-gray-200 bg-white dark:bg-gray-800"  value={{$boltPattern->id}}>{{$boltPattern->bolt_pattern}}</option>
                         @endforeach
@@ -83,11 +83,11 @@
                     {{-- center_bore --}}
                     <div class="mt-4">
                         <x-input-label for="center_bore" :value="__('Center_bore')" class="dark:text-gray-200"/>
-                        <x-text-input id="center_bore" type="number" name="center_bore" class="block mt-1 w-full"/>
+                        <x-text-input id="center_bore" type="number" step="0.1" name="center_bore" class="block mt-1 w-full"/>
                     </div>
                     {{-- nut_bolt_id --}}
                     <x-input-label for="nut_bolt" :value="__('Nut OR Bolt')" class="dark:text-gray-200"/>
-                    <select id="nut_bolt" name="nut_bolt_id" class="field" class="dark:text-gray-200 bg-white dark:bg-gray-800">
+                    <select id="nut_bolt" name="nut_bolt_id" class="field dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent">
                         @foreach ($nutBolts as $nutBolt)
                             <option class="dark:text-gray-200 bg-white dark:bg-gray-800"  value={{$nutBolt->id}}>{{$nutBolt->type}}</option>
                         @endforeach
@@ -95,7 +95,7 @@
                     {{-- multipiece --}}
                     <div class="mt-4">
                         <x-input-label for="multipiece" :value="__('Multipiece')" class="dark:text-gray-200"/>
-                        <x-text-input id="multipiece" type="number" name="multipiece" class="block mt-1 w-full"/>
+                        <x-text-input id="multipiece" type="checkbox" name="multipiece" class="block mt-1"/>
                     </div>
                     {{-- photo --}}
                     <div class="mt-4">

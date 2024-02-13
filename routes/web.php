@@ -81,7 +81,7 @@ Route::get('/wheels/{id}', [WheelController::class, 'wheel_with_id'])->middlewar
 
 //WheelController(datas)
 
-Route::get('/datas', function () {
+Route::get('/data', function () {
      return view('/wheels/wheelprops');
-     })->middleware(['auth', 'verified'])->name('datas');
+     })->middleware(['auth', 'verified'])->name('data');
 

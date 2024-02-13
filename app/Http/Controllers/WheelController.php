@@ -39,6 +39,8 @@ class WheelController extends Controller
         $request->photo->extension();
         $request->photo->move(public_path('photos'), $newPhotoName);
 
+        $multipiece = $request->multipiece !== null;
+
         Wheel::create([
             'manufacturer_id'=> $request->manufacturer_id,
             'model'=>$request->model,
@@ -51,7 +53,7 @@ class WheelController extends Controller
             'kba_number'=>$request->kba_number,
             'center_bore'=>$request->center_bore,
             'nut_bolt_id'=>$request->nut_bolt_id,
-            'multipiece'=>$request->multipiece,
+            'multipiece'=>$multipiece,
             'photo'=>$newPhotoName,
             'note'=>$request->note,
             'updated_at'=>now()
