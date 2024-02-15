@@ -9,7 +9,7 @@ use Illuminate\View\View;
 use Illuminate\Support\Str;
 use App\Models\Manufacturer;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Policies\AdPolicy;
 
 class AdController extends Controller
 {
@@ -49,7 +49,39 @@ class AdController extends Controller
     }
     public function ad_delete_post(Request $request)
     {
-        Ad::find($request->ad_id)->delete();
+        $ad = Ad::find($request->ad_id);
+        $this->authorize('delete', $ad);
+        $ad->delete();
+        return redirect()->back();
+    }
+
+    public function ad_update_post(Request $request)
+    {
+        $this->authorize('update', $request);
+        $imagePaths = '';
+
+        if($request->hasFile('photo')){
+            $files = $request->file('photo');
+
+            foreach($files as $file){
+
+                 $path = Str::uuid() . '.' . strtolower($file->getClientOriginalExtension());
+
+                $file->move(public_path('photos'), $path);
+
+                $imagePaths = $imagePaths . ';' . $path;
+            }
+        }
+
+        $imagePaths = trim($imagePaths, ';');
+
+        Ad::find($request->ad_id)->update([
+            'title'=>$request->title,
+            'description'=>$request->description,
+            'price' => $request->price,
+            'place' => $request->place,
+            'photo' =>$imagePaths
+        ]);
         return redirect()->back();
     }
 

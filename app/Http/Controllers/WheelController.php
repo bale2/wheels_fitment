@@ -83,7 +83,6 @@ class WheelController extends Controller
         return view('wheels/wheel_types',[
             'wheel_types'=>WheelType::all()
         ]);
-
     }
 
     public function wheel_type_create_post(Request $request)
@@ -123,5 +122,60 @@ class WheelController extends Controller
             'updated_at'=>now()
         ]);
     return redirect()->action([WheelController::class, 'nut_bolts']);
+    }
+
+    public function wheel_delete_post(Request $request)
+    {
+        $wheel = Wheel::find($request->wheel_id);
+        $this->authorize('delete', $wheel);
+        $wheel->delete();
+        return redirect()->back();
+    }
+
+    public function wheel_update_post(Request $request)
+    {
+        $this->authorize('update', $request);
+
+        $newPhotoName = time() . '-' . $request->model . '.' .
+        $request->photo->extension();
+        $request->photo->move(public_path('photos'), $newPhotoName);
+
+        $multipiece = $request->multipiece !== null;
+
+        $imagePaths = '';
+
+        if($request->hasFile('photo')){
+            $files = $request->file('photo');
+
+            foreach($files as $file){
+
+                 $path = Str::uuid() . '.' . strtolower($file->getClientOriginalExtension());
+
+                $file->move(public_path('photos'), $path);
+
+                $imagePaths = $imagePaths . ';' . $path;
+            }
+        }
+
+        $imagePaths = trim($imagePaths, ';');
+
+        Wheel::find($request->wheel_id)->update([
+            'manufacturer_id'=> $request->manufacturer_id,
+            'model'=>$request->model,
+            'price'=>$request->price,
+            'wheel_type_id'=>$request->wheel_type_id,
+            'diameter'=>$request->diameter,
+            'width'=>$request->width,
+            'et_number'=>$request->ET_number,
+            'bolt_pattern_id'=>$request->bolt_pattern_id,
+            'kba_number'=>$request->kba_number,
+            'center_bore'=>$request->center_bore,
+            'nut_bolt_id'=>$request->nut_bolt_id,
+            'multipiece'=>$multipiece,
+            'photo'=>$imagePaths,
+            'note'=>$request->note,
+            'updated_at'=>now()
+        ]);
+        return redirect()->back();
     }
 }

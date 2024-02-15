@@ -48,6 +48,8 @@ Route::get('/users', function () {
   Route::get('/ad_create', [AdController::class, 'ad_create'])->middleware(['auth', 'verified'])->name('ad_create');
   Route::post('/ad_create', [AdController::class, 'ad_create_post'])->middleware(['auth', 'verified',])->name('ad_create_post');
   Route::post('/ad_delete', [AdController::class, 'ad_delete_post'])->middleware(['auth', 'verified',])->name('ad_delete_post');
+  Route::post('/ad_update', [AdController::class, 'ad_update_post'])->middleware(['auth', 'verified',])->name('ad_update_post');
+
   Route::get('/ads/{id}', [AdController::class, 'ad_with_id_show'])->name('ads_with_id');
 
 //   Route::get('/ads', function () {
@@ -67,6 +69,9 @@ Route::get('/manufacturers/{id}', [ManufacturerController::class, 'manufacturer_
 Route::get('/wheels', [WheelController::class, 'wheels_show'])->middleware(['auth', 'verified'])->name('wheels');
 Route::get('/wheel_create', [WheelController::class, 'wheel_create'])->middleware(['auth', 'verified'])->name('wheel_create');
 Route::post('/wheel_create', [WheelController::class, 'wheel_create_post'])->middleware(['auth', 'verified',])->name('wheel_create_post');
+Route::post('/wheel_update', [WheelController::class, 'wheel_update_post'])->middleware(['auth', 'verified',])->name('wheel_update_post');
+Route::post('/wheel_delete', [WheelController::class, 'wheel_delete_post'])->middleware(['auth', 'verified',])->name('wheel_delete_post');
+
 
 Route::get('wheel_types', [WheelController::class, 'wheel_types'])->middleware(['auth', 'verified'])->name('wheel_types');
 Route::post('wheel_type_create', [WheelController::class, 'wheel_type_create_post'])->middleware(['auth', 'verified'])->name('wheel_type_create_post');
