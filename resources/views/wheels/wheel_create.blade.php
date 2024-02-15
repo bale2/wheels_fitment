@@ -100,7 +100,7 @@
                     {{-- photo --}}
                     <div class="mt-4">
                         <x-input-label for="photo" :value="__('Photo')" class="dark:text-gray-200"/>
-                        <x-text-input id="photo" type="file" name="photo" class="block mt-1 w-full"/>
+                        <x-text-input id="photo" type="file" multiple name="photo[]" class="block mt-1 w-full"/>
                     </div>
                     {{-- note --}}
                     <div class="mt-4">

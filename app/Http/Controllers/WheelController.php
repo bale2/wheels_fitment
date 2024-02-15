@@ -36,27 +36,29 @@ class WheelController extends Controller
     public function wheel_create_post(Request $request)
     {
 
-        $newPhotoName = time() . '-' . $request->model . '.' .
-        $request->photo->extension();
-        $request->photo->move(public_path('photos'), $newPhotoName);
+        // $newPhotoName = time() . '-' . $request->model . '.' .
+        // $request->photo->extension();
+        // $request->photo->move(public_path('photos'), $newPhotoName);
 
         $multipiece = $request->multipiece !== null;
 
         $imagePaths = '';
 
-        $image = array();
-        if($files = $request->file('photo')){
+        if($request->hasFile('photo')){
+            $files = $request->file('photo');
+
             foreach($files as $file){
 
-                $path = Str::uuid() . strtolower($file->getClientOriginalExtension());
+                 $path = Str::uuid() . '.' . strtolower($file->getClientOriginalExtension());
 
                 $file->move(public_path('photos'), $path);
 
                 $imagePaths = $imagePaths . ';' . $path;
             }
         }
+        $imagePaths = trim($imagePaths, ';');
 
-        dd($request->photo);
+        dd($imagePaths);
 
         Wheel::create([
             'manufacturer_id'=> $request->manufacturer_id,
@@ -134,11 +136,11 @@ class WheelController extends Controller
 
     public function wheel_update_post(Request $request)
     {
-        $this->authorize('update', $request);
+        // $this->authorize('update', Wheel::find($request->wheel_id));
 
-        $newPhotoName = time() . '-' . $request->model . '.' .
-        $request->photo->extension();
-        $request->photo->move(public_path('photos'), $newPhotoName);
+        // $newPhotoName = time() . '-' . $request->model . '.' .
+        // $request->photo->extension();
+        // $request->photo->move(public_path('photos'), $newPhotoName);
 
         $multipiece = $request->multipiece !== null;
 
@@ -158,7 +160,6 @@ class WheelController extends Controller
         }
 
         $imagePaths = trim($imagePaths, ';');
-
         Wheel::find($request->wheel_id)->update([
             'manufacturer_id'=> $request->manufacturer_id,
             'model'=>$request->model,

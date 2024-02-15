@@ -57,7 +57,7 @@ class AdController extends Controller
 
     public function ad_update_post(Request $request)
     {
-        $this->authorize('update', $request);
+        $this->authorize('update', Ad::find($request->ad_id));
         $imagePaths = '';
 
         if($request->hasFile('photo')){
@@ -103,7 +103,6 @@ class AdController extends Controller
         }
 
         $imagePaths = trim($imagePaths, ';');
-
         Ad::create([
             'wheel_id'=> $request->wheel_id,
             'title'=>$request->title,
