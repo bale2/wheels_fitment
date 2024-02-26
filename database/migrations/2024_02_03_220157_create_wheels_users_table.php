@@ -21,6 +21,7 @@ return new class extends Migration
                     ->constrained()
                     ->onupdate('cascade')
                     ->ondelete('cascade');
+            $table->boolean('accepted')->default(false);
             $table->timestamps();
         });
     }

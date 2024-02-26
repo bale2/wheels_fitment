@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('car_model');
             $table->integer('car_year');
             $table->float('mtsurface_fender_distance');
+            $table->boolean('accepted')->default(false);
             $table->timestamps();
         });
     }

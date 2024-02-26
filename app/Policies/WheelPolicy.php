@@ -37,8 +37,8 @@ class WheelPolicy
      */
     public function update(User $user, Wheel $wheel): bool
     {
-        // return $user->id === $wheel->user_id || $user->is_admin === 1;
-        return true;
+        return $user->id === $wheel->user_id || $user->is_admin === 1;
+        // return true;
     }
 
     /**

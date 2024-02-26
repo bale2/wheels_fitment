@@ -34,11 +34,12 @@ return new class extends Migration
             $table->float('center_bore');
             $table->foreignId('nut_bolt_id')
                     ->constrained()
-                    ->onupdate('cascade') 
+                    ->onupdate('cascade')
                     ->ondelete('cascade');
             $table->boolean('multipiece');
             $table->string('photo');
             $table->string('note', 512);
+            $table->boolean('accepted')->default(false);
             $table->timestamps();
         });
     }

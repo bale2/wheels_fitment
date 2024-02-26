@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('manufacturers', function (Blueprint $table) {
             $table->id();
             $table->string('manufacturer_name',128);
-            $table->boolean('only_wheel_maker');
+            $table->boolean('only_wheel_maker')->default(true);
+            $table->boolean('accepted')->default(false);
             $table->timestamps();
         });
     }

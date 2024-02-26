@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Wheel;
+use App\Models\Ad;
 use App\Models\NutBolt;
-use App\Models\WheelType;
-use Illuminate\View\View;
-use App\Models\BoltPattern;
-use Illuminate\Support\Str;
 use App\Models\Manufacturer;
+use App\Models\BoltPattern;
+use App\Models\WheelType;
+
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
 
 class WheelController extends Controller
@@ -58,7 +60,7 @@ class WheelController extends Controller
         }
         $imagePaths = trim($imagePaths, ';');
 
-        dd($imagePaths);
+        // dd($imagePaths);
 
         Wheel::create([
             'manufacturer_id'=> $request->manufacturer_id,
@@ -177,6 +179,24 @@ class WheelController extends Controller
             'note'=>$request->note,
             'updated_at'=>now()
         ]);
+        return redirect()->back();
+    }
+    public function admin_page(Request $request)
+    {
+        return view('admin_page',[
+            'nut_bolts'=>NutBolt::all(),
+            'bolt_patterns'=>BoltPattern::all(),
+            'wheel_types'=>WheelType::all(),
+            'ads'=>Ad::all(),
+            'wheels'=>Wheel::all(),
+            'manufacturers'=>Manufacturer::all()
+        ]);
+    }
+    public function admin_delete_post(Request $request)
+    {
+        $ad = Ad::find($request->ad_id);
+        $this->authorize('delete', $ad);
+        $ad->delete();
         return redirect()->back();
     }
 }

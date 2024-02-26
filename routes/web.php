@@ -50,6 +50,7 @@ Route::get('/users', function () {
   Route::post('/ad_delete', [AdController::class, 'ad_delete_post'])->middleware(['auth', 'verified',])->name('ad_delete_post');
   Route::post('/ad_update', [AdController::class, 'ad_update_post'])->middleware(['auth', 'verified',])->name('ad_update_post');
 
+
   Route::get('/ads/{id}', [AdController::class, 'ad_with_id_show'])->name('ads_with_id');
 
 //   Route::get('/ads', function () {
@@ -86,6 +87,13 @@ Route::post('nut_bolt_create', [WheelController::class, 'nut_bolts_create_post']
 Route::get('/wheels/{id}', [WheelController::class, 'wheel_with_id'])->middleware(['auth', 'verified'])->name('wheel_with_id');
 
 //WheelController(datas)
+
+// admin page
+
+// Route::get('/admin_page', [WheelController::class, 'admin_page'])->middleware(['auth', 'verified','is_admin'])->name('admin_page');
+// Route::post('/admin_delete', [AdController::class, 'admin_delete_post'])->middleware(['auth', 'verified','is_admin'])->name('admin_delete_post');
+// Route::post('/admin_update', [AdController::class, 'admin_update_post'])->middleware(['auth', 'verified','is_admin'])->name('admin_update_post');
+
 
 Route::get('/data', function () {
      return view('/wheels/wheelprops');

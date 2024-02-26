@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('bolt_patterns', function (Blueprint $table) {
             $table->id();
             $table->string('bolt_pattern', 64);
+            $table->boolean('accepted')->default(false);
             $table->timestamps();
         });
     }

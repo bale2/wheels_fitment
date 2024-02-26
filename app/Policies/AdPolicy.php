@@ -37,7 +37,7 @@ class AdPolicy
      */
     public function update(User $user, Ad $ad): bool
     {
-        return $user->id === $ad->user_id;
+        return $user->id === $ad->user_id || $user->is_admin === 1;
     }
 
     /**

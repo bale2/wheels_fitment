@@ -23,6 +23,7 @@ return new class extends Migration
                     ->onDelete('cascade');
             $table->string('place');
             $table->string('photo');
+            $table->boolean('accepted')->default(0);
             $table->timestamps();
         });
     }

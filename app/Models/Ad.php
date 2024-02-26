@@ -16,7 +16,8 @@ class Ad extends Model
         'user_id',
         'place',
         'uploaded_at',
-        'photo'
+        'photo',
+        'accepted'
     ];
     public function user(){
         return $this->belongsTo(User::class);
