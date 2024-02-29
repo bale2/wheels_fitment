@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ad extends Model
 {
     use HasFactory;
+    protected $connection = 'mysql';
     protected $fillable = [
         'wheel_id',
         'title',
@@ -19,10 +20,12 @@ class Ad extends Model
         'photo',
         'accepted'
     ];
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
-    public function wheel(){
+    public function wheel()
+    {
         return $this->belongsTo(Wheel::class);
     }
 

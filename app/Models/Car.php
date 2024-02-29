@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Car extends Model
 {
+    protected $connection = 'mysql';
     use HasFactory;
     protected $fillable = [
         'manufacturer_id',

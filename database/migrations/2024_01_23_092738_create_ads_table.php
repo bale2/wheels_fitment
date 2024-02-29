@@ -17,10 +17,11 @@ return new class extends Migration
             $table->string('title');
             $table->string('description', 2048);
             $table->float('price', 8, 2);
+            // $table->foreignId('user_id')->references('id')->on('wheels_users.users');
             $table->foreignId('user_id')
-                    ->constrained()
-                    ->onUpdate('cascade')
-                    ->onDelete('cascade');
+                ->constrained('wheels_users.users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->string('place');
             $table->string('photo');
             $table->boolean('accepted')->default(0);

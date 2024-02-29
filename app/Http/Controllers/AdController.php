@@ -60,29 +60,29 @@ class AdController extends Controller
     {
 
         $this->authorize('update', Ad::find($request->ad_id));
-        $imagePaths = '';
+        // $imagePaths = '';
 
-        if ($request->hasFile('photo')) {
-            $files = $request->file('photo');
+        // if ($request->hasFile('photo')) {
+        //     $files = $request->file('photo');
 
-            foreach ($files as $file) {
+        //     foreach ($files as $file) {
 
-                $path = Str::uuid() . '.' . strtolower($file->getClientOriginalExtension());
+        //         $path = Str::uuid() . '.' . strtolower($file->getClientOriginalExtension());
 
-                $file->move(public_path('photos'), $path);
+        //         $file->move(public_path('photos'), $path);
 
-                $imagePaths = $imagePaths . ';' . $path;
-            }
-        }
+        //         $imagePaths = $imagePaths . ';' . $path;
+        //     }
+        // }
 
-        $imagePaths = trim($imagePaths, ';');
+        // $imagePaths = trim($imagePaths, ';');
 
         Ad::find($request->ad_id)->update([
             'title' => $request->title,
             'description' => $request->description,
             'price' => $request->price,
             'place' => $request->place,
-            'photo' => $imagePaths,
+            // 'photo' => $imagePaths,
             'accepted' => $request->accepted == null ? false : true
         ]);
         return redirect()->back();

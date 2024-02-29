@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Wheel extends Model
 {
+    protected $connection = 'mysql';
     use HasFactory;
 
     protected $fillable = [
@@ -25,29 +26,36 @@ class Wheel extends Model
         'photo',
         'note'
     ];
-    public function ads(){
+    public function ads()
+    {
         return $this->hasMany(Ad::class);
     }
-    public function users(){
-        return $this->belongsToMany(User::class,'wheels_users');
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'wheels_users');
     }
 
-    public function manufacturer(){
+    public function manufacturer()
+    {
         return $this->belongsTo(Manufacturer::class);
     }
-    public function wheelType(){
+    public function wheelType()
+    {
         return $this->belongsTo(WheelType::class);
     }
-    public function boltPattern(){
+    public function boltPattern()
+    {
         return $this->belongsTo(BoltPattern::class);
     }
-    public function nutBolt(){
+    public function nutBolt()
+    {
         return $this->belongsTo(NutBolt::class);
         //keréknek van csavarja
     }
 
-    public function cars(){
-        return $this->belongsToMany(Car::class,'wheels_cars');
+    public function cars()
+    {
+        return $this->belongsToMany(Car::class, 'wheels_cars');
     }
     public function photos()
     {

@@ -7,13 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class BoltPattern extends Model
 {
+    protected $connection = 'mysql';
     use HasFactory;
     protected $fillable = [
         'bolt_pattern',
     ];
 
-    public function wheels(){
+    public function wheels()
+    {
         return $this->hasMany(Wheel::class);
     }
-
 }

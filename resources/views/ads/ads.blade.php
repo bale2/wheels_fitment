@@ -106,9 +106,9 @@
                         <x-text-input x-model="place" id="place" name="place" class="field"
                             class="dark:text-gray-200 bg-white dark:bg-gray-800" />
 
-                        <x-input-label for="photo" :value="__('Photo')" class="dark:text-gray-200" />
-                        <x-text-input x-model="photo" id="photo" type="file" multiple name="photo[]"
-                            class="dark:text-gray-200 bg-white dark:bg-gray-800" />
+                        {{-- <x-input-label for="photo" :value="__('Photo')" class="dark:text-gray-200" />
+                        <x-text-input id="photo" type="file" multiple name="photo[]"
+                            class="dark:text-gray-200 bg-white dark:bg-gray-800" /> --}}
 
                         @if (Auth::user()->is_admin == true)
                             <x-input-label for="accepted" :value="__('Accepted')" class="dark:text-gray-200" />

@@ -7,12 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class NutBolt extends Model
 {
+    protected $connection = 'mysql';
     use HasFactory;
     protected $fillable = [
         'type'
     ];
 
-    public function wheels(){
+    public function wheels()
+    {
         return $this->hasMany(Wheel::class);
         //nut bolt tartozhat több kerékhez
     }

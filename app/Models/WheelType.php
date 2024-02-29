@@ -7,11 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class WheelType extends Model
 {
+    protected $connection = 'mysql';
     use HasFactory;
     protected $fillable = [
         'wheel_type'
     ];
-    public function wheels(){
+    public function wheels()
+    {
         return $this->hasMany(Wheel::class);
     }
 }
