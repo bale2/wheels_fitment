@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('manufacturers', function (Blueprint $table) {
-            $table->id();
-            $table->string('manufacturer_name',128);
+            $table->uuid('id')->primary();
+            $table->string('manufacturer_name', 128)->unique();
             $table->boolean('only_wheel_maker')->default(true);
             $table->boolean('accepted')->default(false);
             $table->timestamps();

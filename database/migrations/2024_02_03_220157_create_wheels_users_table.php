@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('wheels_users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')
+            $table->foreignUuid('user_id')
                 ->constrained('wheels_users.users')
                 ->onupdate('cascade')
                 ->ondelete('cascade');
-            $table->foreignId('wheel_id')
+            $table->foreignUuid('wheel_id')
                 ->constrained()
                 ->onupdate('cascade')
                 ->ondelete('cascade');

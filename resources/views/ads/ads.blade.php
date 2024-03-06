@@ -18,6 +18,7 @@
                             <div
                                 class="bg-white overflow-hidden grid grid-cols-2 shadow-sm sm:rounded-lg dark:bg-red-600 ">
                                 <div class="p-6 text-gray-900 dark:text-gray-100">
+                                    {{ $ad->id }}
                                     <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200">
                                         {{ $ad->title }}
                                     </h1>
@@ -40,6 +41,7 @@
                             <div
                                 class="bg-white overflow-hidden grid grid-cols-2 shadow-sm sm:rounded-lg dark:bg-gray-800 ">
                                 <div class="p-6 text-gray-900 dark:text-gray-100">
+                                    {{ $ad->id }}
                                     <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200">
                                         {{ $ad->title }}
                                     </h1>
@@ -87,8 +89,11 @@
                         enctype="multipart/form-data">
                         @csrf
                         @method('post')
-                        {{-- type --}}
+
                         <input type="hidden" x-model="adid" name="ad_id" class="block mt-1 w-full" />
+
+                        <x-text-input x-model="adid" id="title" name="title" class="field"
+                            class="dark:text-gray-200 bg-white dark:bg-gray-800" />
 
                         <x-input-label for="title" :value="__('Title')" class="dark:text-gray-200" />
                         <x-text-input x-model="title" id="title" name="title" class="field"
@@ -112,7 +117,7 @@
 
                         @if (Auth::user()->is_admin == true)
                             <x-input-label for="accepted" :value="__('Accepted')" class="dark:text-gray-200" />
-                            <input type="checkbox" id="accepted" value="1" name="accepted"
+                            <input type="checkbox" id="accepted" @checked($ad->accepted) name="accepted"
                                 class="block mx-auto rounded-2xl dark:text-gray-200 bg-white dark:bg-gray-800" />
                         @endif
 

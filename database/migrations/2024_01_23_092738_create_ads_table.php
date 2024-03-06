@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('ads', function (Blueprint $table) {
-            $table->id('id');
+            $table->uuid('id')->primary();
             $table->integer('wheel_id');
             $table->string('title');
             $table->string('description', 2048);
             $table->float('price', 8, 2);
             // $table->foreignId('user_id')->references('id')->on('wheels_users.users');
-            $table->foreignId('user_id')
+            $table->foreignUuid('user_id')
                 ->constrained('wheels_users.users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');

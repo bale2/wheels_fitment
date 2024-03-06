@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('wheel_types', function (Blueprint $table) {
             $table->id();
-            $table->string('wheel_type', 128);
+            $table->string('wheel_type', 128)->unique();
             $table->boolean('accepted')->default(false);
             $table->timestamps();
         });

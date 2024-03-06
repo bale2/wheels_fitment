@@ -4,9 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class Ad extends Model
 {
+    use HasUuids;
     use HasFactory;
     protected $connection = 'mysql';
     protected $fillable = [

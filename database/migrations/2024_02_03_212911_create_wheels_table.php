@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('wheels', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('manufacturer_id')
-                    ->constrained()
-                    ->onupdate('cascade')
-                    ->ondelete('cascade');
+            $table->uuid('id')->primary();
+            $table->foreignUuid('manufacturer_id')
+                ->constrained()
+                ->onupdate('cascade')
+                ->ondelete('cascade');
             $table->string('model', 255);
             $table->float('price');
             $table->foreignId('wheel_type_id')
@@ -27,15 +27,15 @@ return new class extends Migration
             $table->float('width');
             $table->integer('ET_number');
             $table->foreignId('bolt_pattern_id')
-                    ->constrained()
-                    ->onupdate('cascade')
-                    ->ondelete('cascade');
+                ->constrained()
+                ->onupdate('cascade')
+                ->ondelete('cascade');
             $table->string('kba_number')->nullable();
             $table->float('center_bore');
             $table->foreignId('nut_bolt_id')
-                    ->constrained()
-                    ->onupdate('cascade')
-                    ->ondelete('cascade');
+                ->constrained()
+                ->onupdate('cascade')
+                ->ondelete('cascade');
             $table->boolean('multipiece');
             $table->string('photo');
             $table->string('note', 512);

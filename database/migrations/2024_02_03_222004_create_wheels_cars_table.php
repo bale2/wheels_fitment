@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('wheels_cars', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('car_id')
-                    ->constrained()
-                    ->onupdate('cascade')
-                    ->ondelete('cascade');
-            $table->foreignId('wheel_id')
-                    ->constrained()
-                    ->onupdate('cascade')
-                    ->ondelete('cascade');
+            $table->foreignUuid('car_id')
+                ->constrained()
+                ->onupdate('cascade')
+                ->ondelete('cascade');
+            $table->foreignUuid('wheel_id')
+                ->constrained()
+                ->onupdate('cascade')
+                ->ondelete('cascade');
             $table->timestamps();
         });
     }

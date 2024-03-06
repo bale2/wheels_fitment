@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('cars', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('manufacturer_id')->constrained()->onupdate('cascade')->ondelete('cascade');
+            $table->uuid('id')->primary();
+            $table->foreignUuid('manufacturer_id')->constrained()->onupdate('cascade')->ondelete('cascade');
             $table->string('car_model');
             $table->integer('car_year');
             $table->float('mtsurface_fender_distance');

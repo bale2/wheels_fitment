@@ -16,27 +16,33 @@ use Illuminate\Support\Facades\DB;
 
 class WheelController extends Controller
 {
-    public function wheels_show() : View {
-        return view('wheels/wheels',[
-            'wheels'=>Wheel::all()
+    public function wheels_show(): View
+    {
+        return view('wheels/wheels', [
+            'wheels' => Wheel::all()->whereNotNull('created_at'),
+            'manufacturers' => Manufacturer::all()
         ]);
     }
-    public function wheel_with_id(int $id): View{
-        return view('wheels/wheel_with_id',[
-            'wheel'=>Wheel::find($id)
+    public function wheel_with_id(int $id): View
+    {
+        return view('wheels/wheel_with_id', [
+            'wheel' => Wheel::find($id)
         ]);
     }
-    public function wheel_create(): View{
-
-        return view('wheels/wheel_create',[
-            'manufacturers'=>Manufacturer::all(),
-            'wheelTypes'=>WheelType::all(),
-            'boltPatterns'=>BoltPattern::all(),
-            'nutBolts'=>NutBolt::all()
+    public function wheel_create(): View
+    {
+        return view('wheels/wheel_create', [
+            'manufacturers' => Manufacturer::all(),
+            'wheelTypes' => WheelType::all(),
+            'boltPatterns' => BoltPattern::all(),
+            'nutBolts' => NutBolt::all()
         ]);
     }
     public function wheel_create_post(Request $request)
     {
+        $this->validate($request, [
+            'kba_number' => 'regex:/(KBA[0-9]{2,10})/',
+        ]);
 
         // $newPhotoName = time() . '-' . $request->model . '.' .
         // $request->photo->extension();
@@ -46,12 +52,12 @@ class WheelController extends Controller
 
         $imagePaths = '';
 
-        if($request->hasFile('photo')){
+        if ($request->hasFile('photo')) {
             $files = $request->file('photo');
 
-            foreach($files as $file){
+            foreach ($files as $file) {
 
-                 $path = Str::uuid() . '.' . strtolower($file->getClientOriginalExtension());
+                $path = Str::uuid() . '.' . strtolower($file->getClientOriginalExtension());
 
                 $file->move(public_path('photos'), $path);
 
@@ -63,69 +69,72 @@ class WheelController extends Controller
         // dd($imagePaths);
 
         Wheel::create([
-            'manufacturer_id'=> $request->manufacturer_id,
-            'model'=>$request->model,
-            'price'=>$request->price,
-            'wheel_type_id'=>$request->wheel_type_id,
-            'diameter'=>$request->diameter,
-            'width'=>$request->width,
-            'et_number'=>$request->ET_number,
-            'bolt_pattern_id'=>$request->bolt_pattern_id,
-            'kba_number'=>$request->kba_number,
-            'center_bore'=>$request->center_bore,
-            'nut_bolt_id'=>$request->nut_bolt_id,
-            'multipiece'=>$multipiece,
-            'photo'=>$imagePaths,
-            'note'=>$request->note,
-            'updated_at'=>now()
+            'manufacturer_id' => $request->manufacturer_id,
+            'model' => $request->model,
+            'price' => $request->price,
+            'wheel_type_id' => $request->wheel_type_id,
+            'diameter' => $request->diameter,
+            'width' => $request->width,
+            'et_number' => $request->ET_number,
+            'bolt_pattern_id' => $request->bolt_pattern_id,
+            'kba_number' => $request->kba_number,
+            'center_bore' => $request->center_bore,
+            'nut_bolt_id' => $request->nut_bolt_id,
+            'multipiece' => $multipiece,
+            'photo' => $imagePaths,
+            'note' => $request->note,
+            'updated_at' => now()
         ]);
         return redirect()->action([WheelController::class, 'wheels_show']);
     }
 
-//wheel_types
-    public function wheel_types(): View{
-        return view('wheels/wheel_types',[
-            'wheel_types'=>WheelType::all()
+    //wheel_types
+    public function wheel_types(): View
+    {
+        return view('wheels/wheel_types', [
+            'wheel_types' => WheelType::all()->sortBy('wheel_type')
         ]);
     }
 
     public function wheel_type_create_post(Request $request)
     {
         WheelType::create([
-            'wheel_type'=>$request->type,
-            'updated_at'=>now()
+            'wheel_type' => $request->type,
+            'updated_at' => now()
         ]);
-    return redirect()->action([WheelController::class, 'wheel_types']);
+        return redirect()->action([WheelController::class, 'wheel_types']);
     }
 
-    public function bolt_patterns(): View{
-        return view('wheels/bolt_patterns',[
-            'bolt_patterns'=>BoltPattern::all()
+    public function bolt_patterns(): View
+    {
+        return view('wheels/bolt_patterns', [
+            'bolt_patterns' => BoltPattern::all()
         ]);
     }
 
     public function bolt_pattern_create_post(Request $request)
     {
         BoltPattern::create([
-            'bolt_pattern'=>$request->type,
-            'updated_at'=>now()
+            'bolt_pattern' => $request->type,
+            'updated_at' => now()
         ]);
-    return redirect()->action([WheelController::class, 'bolt_patterns']);
+        return redirect()->action([WheelController::class, 'bolt_patterns']);
     }
 
-    public function nut_bolts(): View{
-        return view('wheels/nut_bolts',[
-            'nut_bolts'=>NutBolt::all()
+    public function nut_bolts(): View
+    {
+        return view('wheels/nut_bolts', [
+            'nut_bolts' => NutBolt::all()->sortBy('type')
         ]);
     }
 
     public function nut_bolts_create_post(Request $request)
     {
         NutBolt::create([
-            'type'=>$request->type,
-            'updated_at'=>now()
+            'type' => $request->type,
+            'updated_at' => now()
         ]);
-    return redirect()->action([WheelController::class, 'nut_bolts']);
+        return redirect()->action([WheelController::class, 'nut_bolts']);
     }
 
     public function wheel_delete_post(Request $request)
@@ -143,53 +152,52 @@ class WheelController extends Controller
         // $newPhotoName = time() . '-' . $request->model . '.' .
         // $request->photo->extension();
         // $request->photo->move(public_path('photos'), $newPhotoName);
-
         $multipiece = $request->multipiece !== null;
 
         $imagePaths = '';
 
-        if($request->hasFile('photo')){
+        if ($request->hasFile('photo')) {
             $files = $request->file('photo');
 
-            foreach($files as $file){
+            foreach ($files as $file) {
 
-                 $path = Str::uuid() . '.' . strtolower($file->getClientOriginalExtension());
+                $path = Str::uuid() . '.' . strtolower($file->getClientOriginalExtension());
 
                 $file->move(public_path('photos'), $path);
 
                 $imagePaths = $imagePaths . ';' . $path;
             }
         }
-
         $imagePaths = trim($imagePaths, ';');
         Wheel::find($request->wheel_id)->update([
-            'manufacturer_id'=> $request->manufacturer_id,
-            'model'=>$request->model,
-            'price'=>$request->price,
-            'wheel_type_id'=>$request->wheel_type_id,
-            'diameter'=>$request->diameter,
-            'width'=>$request->width,
-            'et_number'=>$request->ET_number,
-            'bolt_pattern_id'=>$request->bolt_pattern_id,
-            'kba_number'=>$request->kba_number,
-            'center_bore'=>$request->center_bore,
-            'nut_bolt_id'=>$request->nut_bolt_id,
-            'multipiece'=>$multipiece,
-            'photo'=>$imagePaths,
-            'note'=>$request->note,
-            'updated_at'=>now()
+            'manufacturer_id' => $request->manufacturer_id,
+            'model' => $request->model,
+            'price' => $request->price,
+            'wheel_type_id' => $request->wheel_type_id,
+            'diameter' => $request->diameter,
+            'width' => $request->width,
+            'et_number' => $request->ET_number,
+            'bolt_pattern_id' => $request->bolt_pattern_id,
+            'kba_number' => $request->kba_number,
+            'center_bore' => $request->center_bore,
+            'nut_bolt_id' => $request->nut_bolt_id,
+            'multipiece' => $multipiece,
+            // 'photo' => $imagePaths,
+            'note' => $request->note,
+            'updated_at' => now(),
+            'accepted' => $request->accepted == null ? false : true
         ]);
         return redirect()->back();
     }
     public function admin_page(Request $request)
     {
-        return view('admin_page',[
-            'nut_bolts'=>NutBolt::all(),
-            'bolt_patterns'=>BoltPattern::all(),
-            'wheel_types'=>WheelType::all(),
-            'ads'=>Ad::all(),
-            'wheels'=>Wheel::all(),
-            'manufacturers'=>Manufacturer::all()
+        return view('admin_page', [
+            'nut_bolts' => NutBolt::all(),
+            'bolt_patterns' => BoltPattern::all(),
+            'wheel_types' => WheelType::all(),
+            'ads' => Ad::all(),
+            'wheels' => Wheel::all(),
+            'manufacturers' => Manufacturer::all()
         ]);
     }
     public function admin_delete_post(Request $request)

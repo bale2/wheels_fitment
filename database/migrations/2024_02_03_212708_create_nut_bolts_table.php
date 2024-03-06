@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('nut_bolts', function (Blueprint $table) {
             $table->id();
-            $table->string('type', 128);
+            $table->string('type', 128)->unique();
             $table->boolean('accepted')->default(false);
             $table->timestamps();
         });
