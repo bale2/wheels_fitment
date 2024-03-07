@@ -19,7 +19,7 @@ class WheelController extends Controller
     public function wheels_show(): View
     {
         return view('wheels/wheels', [
-            'wheels' => Wheel::all()->whereNotNull('created_at'),
+            'wheels' => Wheel::all()->whereNotNull('created_at')->toQuery()->paginate(3),
             'manufacturers' => Manufacturer::all()
         ]);
     }
@@ -92,7 +92,8 @@ class WheelController extends Controller
     public function wheel_types(): View
     {
         return view('wheels/wheel_types', [
-            'wheel_types' => WheelType::all()->sortBy('wheel_type')
+            // 'wheel_types' => WheelType::all()->sortBy('wheel_type')
+            'wheel_types' => WheelType::orderBy('wheel_type')->paginate(10)
         ]);
     }
 
@@ -108,7 +109,7 @@ class WheelController extends Controller
     public function bolt_patterns(): View
     {
         return view('wheels/bolt_patterns', [
-            'bolt_patterns' => BoltPattern::all()
+            'bolt_patterns' => BoltPattern::all()->toQuery()->paginate(10)
         ]);
     }
 
@@ -124,7 +125,7 @@ class WheelController extends Controller
     public function nut_bolts(): View
     {
         return view('wheels/nut_bolts', [
-            'nut_bolts' => NutBolt::all()->sortBy('type')
+            'nut_bolts' => NutBolt::orderBy('type')->paginate(10)
         ]);
     }
 

@@ -57,6 +57,7 @@
                     </div>
                 @endif
             @endforeach
+            {{ $bolt_patterns->links() }}
         </div>
         <x-modal name="bolt_pattern_create" :show="$errors->userDeletion->isNotEmpty()" focusable>
             <form method="post" action="{{ route('bolt_pattern_create_post') }}"

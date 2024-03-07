@@ -56,6 +56,7 @@
                     </div>
                 @endif
             @endforeach
+            {{ $wheel_types->links() }}
         </div>
     </div>
     <div class="text-center">

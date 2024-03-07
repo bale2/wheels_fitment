@@ -34,24 +34,19 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
-Route::get('/users', function () {
-    return view('users', [
-      'users' => App\Models\User::get()
-    ]);
-  })->name('users');
-
+Route::get('/users', [ProfileController::class, 'users_show'])->name('users');
 
 //AdController(show,createform,createpost,{id}page)
-  Route::get('/ads', [AdController::class, 'ads_show'])->name('ads');
-  Route::get('/ad_create', [AdController::class, 'ad_create'])->middleware(['auth', 'verified'])->name('ad_create');
-  Route::post('/ad_create', [AdController::class, 'ad_create_post'])->middleware(['auth', 'verified',])->name('ad_create_post');
-  Route::post('/ad_delete', [AdController::class, 'ad_delete_post'])->middleware(['auth', 'verified',])->name('ad_delete_post');
-  Route::post('/ad_update', [AdController::class, 'ad_update_post'])->middleware(['auth', 'verified',])->name('ad_update_post');
+Route::get('/ads', [AdController::class, 'ads_show'])->name('ads');
+Route::get('/ad_create', [AdController::class, 'ad_create'])->middleware(['auth', 'verified'])->name('ad_create');
+Route::post('/ad_create', [AdController::class, 'ad_create_post'])->middleware(['auth', 'verified',])->name('ad_create_post');
+Route::post('/ad_delete', [AdController::class, 'ad_delete_post'])->middleware(['auth', 'verified',])->name('ad_delete_post');
+Route::post('/ad_update', [AdController::class, 'ad_update_post'])->middleware(['auth', 'verified',])->name('ad_update_post');
 
 
-  Route::get('/ads/{id}', [AdController::class, 'ad_with_id_show'])->name('ads_with_id');
+Route::get('/ads/{id}', [AdController::class, 'ad_with_id_show'])->name('ads_with_id');
 
 //   Route::get('/ads', function () {
 //     return view('ads', [
@@ -96,6 +91,5 @@ Route::get('/wheels/{id}', [WheelController::class, 'wheel_with_id'])->middlewar
 
 
 Route::get('/data', function () {
-     return view('/wheels/wheelprops');
-     })->middleware(['auth', 'verified'])->name('data');
-
+    return view('/wheels/wheelprops');
+})->middleware(['auth', 'verified'])->name('data');

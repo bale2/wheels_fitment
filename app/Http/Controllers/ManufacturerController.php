@@ -11,9 +11,7 @@ class ManufacturerController extends Controller
 {
     public function show_manufacturers(): View
     {
-
-
-        return view('manufacturers/manufacturers', ['manufacturers' => Manufacturer::all()->sortBy('manufacturer_name')]);
+        return view('manufacturers/manufacturers', ['manufacturers' => Manufacturer::orderBy('manufacturer_name')->paginate(10)]);
     }
 
     public function manufacturer_create_post(Request $request)

@@ -56,6 +56,7 @@
                     </div>
                 @endif
             @endforeach
+            {{ $nut_bolts->links() }}
         </div>
         <x-modal name="nut_bolt_create" :show="$errors->userDeletion->isNotEmpty()" focusable>
             <form method="post" action="{{ route('nut_bolts_create_post') }}"

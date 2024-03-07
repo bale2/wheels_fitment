@@ -62,6 +62,7 @@
                     </div>
                 @endif
             @endforeach
+            {{ $manufacturers->links() }}
         </div>
     </div>
     <x-modal name="manufacturer_create" :show="$errors->userDeletion->isNotEmpty()" focusable>

@@ -70,6 +70,7 @@
                         </div>
                     @endif
                 @endforeach
+                {{ $wheels->links() }}
             </div>
         </div>
         <div class="text-center">
