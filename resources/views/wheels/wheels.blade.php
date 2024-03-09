@@ -4,9 +4,11 @@
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
                 {{ __('Wheels') }}
             </h2>
-            <div class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
-                <a href="/wheel_create">Kerék hozzáadása</a>
-            </div>
+            @if (Auth::user())
+                <div class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
+                    <a href="/wheel_create">Kerék hozzáadása</a>
+                </div>
+            @endif
         </div>
     </x-slot>
     <div x-data="{ wheel_id: 1, manufacturer_id: 0, manufacturer_name: 0, model: '', price: 0, wheel_type_id: 0, diameter: 0, width: 0, ET_number: 0, bolt_pattern_id: 0, kba_number: '', center_bore: 0, nut_bolt_id: '', multipiece: 0, note: '', accepted: 0 }">
@@ -145,7 +147,7 @@
                         <x-text-input x-model="note" id="note" name="note" type="text"
                             class=" field dark:text-gray-200 bg-white dark:bg-gray-800" />
 
-                        @if (Auth::user()->is_admin == true)
+                        @if (Auth::check() && Auth::user()->is_admin)
                             <x-input-label for="accepted" :value="__('Accepted')" class="dark:text-gray-200" />
                             <input type="checkbox" id="accepted" @checked($wheel->accepted) name="accepted"
                                 class="block mx-auto rounded-2xl dark:text-gray-200 bg-white dark:bg-gray-800" />

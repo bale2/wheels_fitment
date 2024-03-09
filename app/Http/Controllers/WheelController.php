@@ -23,7 +23,7 @@ class WheelController extends Controller
             'manufacturers' => Manufacturer::all()
         ]);
     }
-    public function wheel_with_id(int $id): View
+    public function wheel_with_id(string $id): View
     {
         return view('wheels/wheel_with_id', [
             'wheel' => Wheel::find($id)

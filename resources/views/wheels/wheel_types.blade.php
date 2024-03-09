@@ -36,12 +36,15 @@
             </div>
             <div>
                 <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
-                    Hirdetés hozzáadása
+                    Wheel Types
                 </h2>
             </div>
-            <x-primary-button x-data="" x-on:click.prevent="$dispatch('open-modal','wheel_type_create')">
-                Adding a manufacturer
-            </x-primary-button>
+            @if (Auth::user())
+                <x-primary-button x-data=""
+                    x-on:click.prevent="$dispatch('open-modal','wheel_type_create')">
+                    Adding a manufacturer
+                </x-primary-button>
+            @endif
         </div>
     </x-slot>
     <div class="py-12">

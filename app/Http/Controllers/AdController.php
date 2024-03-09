@@ -30,7 +30,7 @@ class AdController extends Controller
         ]);
     }
 
-    public function ad_with_id_show(int $id): View
+    public function ad_with_id_show(string $id): View
     {
         // $ad = DB::table('users')
         // ->join('ads','users.id', '=', 'ads.user_id')

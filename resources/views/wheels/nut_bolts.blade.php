@@ -39,9 +39,12 @@
                     Nut Bolts
                 </h2>
             </div>
-            <x-primary-button x-data="" x-on:click.prevent="$dispatch('open-modal','nut_bolt_create')">
-                Adding a manufacturer
-            </x-primary-button>
+            @if (Auth::user())
+                <x-primary-button x-data=""
+                    x-on:click.prevent="$dispatch('open-modal','nut_bolt_create')">
+                    Adding a manufacturer
+                </x-primary-button>
+            @endif
         </div>
     </x-slot>
     <div class="py-12">

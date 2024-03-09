@@ -4,24 +4,25 @@
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
                 {{ __('Ads') }}
             </h2>
-            <div class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
-                <a href="/ad_create">Hirdetésfeladás</a>
-            </div>
+            @if (Auth::user())
+                <div class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
+                    <a href="/ad_create">Hirdetésfeladás</a>
+                </div>
+            @endif
         </div>
     </x-slot>
     <div x-data="{ adid: 0, title: '', price: 0, description: '', photo: '', accepted: '0', place: '' }">
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 sm:rounded-lg">
                 @foreach ($ads as $ad)
-                    @if ($ad->accepted == 0)
+                    @if ($ad->accepted == 0 and Auth::user() and ($ad->user_id == auth()->id() or Auth::user()->is_admin))
                         <a href="ads/{{ $ad->id }}">
                             <div
                                 class="bg-white overflow-hidden grid grid-cols-2 shadow-sm sm:rounded-lg dark:bg-red-600 ">
                                 <div class="p-6 text-gray-900 dark:text-gray-100">
                                     {{ $ad->id }}
                                     <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200">
-                                        {{ $ad->title }}
-                                    </h1>
+                                        {{ $ad->title }}</h1>
                                     <h1>{{ $ad->price }} Ft</h1>
                                     <h1>{{ $ad->user->name }}</h1>
                                     <h1>{{ $ad->place }}</h1>
@@ -115,11 +116,11 @@
                         <x-text-input id="photo" type="file" multiple name="photo[]"
                             class="dark:text-gray-200 bg-white dark:bg-gray-800" /> --}}
 
-                        @if (Auth::user()->is_admin == true)
-                            <x-input-label for="accepted" :value="__('Accepted')" class="dark:text-gray-200" />
-                            <input type="checkbox" id="accepted" @checked($ad->accepted) name="accepted"
-                                class="block mx-auto rounded-2xl dark:text-gray-200 bg-white dark:bg-gray-800" />
-                        @endif
+                        {{-- @if (Auth::user()->is_admin == true) --}}
+                        <x-input-label for="accepted" :value="__('Accepted')" class="dark:text-gray-200" />
+                        <input type="checkbox" id="accepted" @checked($ad->accepted) name="accepted"
+                            class="block mx-auto rounded-2xl dark:text-gray-200 bg-white dark:bg-gray-800" />
+                        {{-- @endif --}}
 
                         <input type="submit" value="feltöltés"
                             class="mx-auto block items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
