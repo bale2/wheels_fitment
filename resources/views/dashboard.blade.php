@@ -10,10 +10,6 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __("You're logged in!") }}
                 </div>
-                <div class="mt-4">
-                    <x-input-label for="api" :value="__('Api')" class="dark:text-gray-200" />
-                    <x-text-input id="api" type="text" name="api" class="block mt-1 w-full" />
-                </div>
             </div>
         </div>
     </div>

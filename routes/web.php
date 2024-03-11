@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
 require __DIR__ . '/auth.php';
 
 Route::get('/users', [ProfileController::class, 'users_show'])->name('users');
+Route::get('/users/{id}', [ProfileController::class, 'user_with_id'])->name('user_with_id');
 
 //AdController (show,createform,createpost,{id}page)
 Route::get('/ads', [AdController::class, 'ads_show'])->name('ads');

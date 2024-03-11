@@ -69,4 +69,13 @@ class ProfileController extends Controller
             ]
         );
     }
+    public function user_with_id(string $id): View
+    {
+        return view(
+            'user',
+            [
+                'user' => User::find($id)
+            ]
+        );
+    }
 }
