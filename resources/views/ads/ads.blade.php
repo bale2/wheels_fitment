@@ -11,7 +11,7 @@
             @endif
         </div>
     </x-slot>
-    <div x-data="{ adid: 0, title: '', price: 0, description: '', photo: '', accepted: '0', place: '' }">
+    <div x-data="{ adid: '', title: '', price: 0, description: '', photo: '', accepted: '', place: '' }">
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 sm:rounded-lg">
                 @foreach ($ads as $ad)
@@ -75,7 +75,7 @@
                         @endcan
                         @can('update', $ad)
                             <x-primary-button x-data=""
-                                x-on:click.prevent="$dispatch('open-modal','ad_update_post'),adid={{ $ad->id }},title='{{ $ad->title }}',price={{ $ad->price }},description='{{ $ad->description }}',place='{{ $ad->place }}',accepted='{{ $ad->accepted }}',photo='{{ $ad->photo }}'">
+                                x-on:click.prevent="$dispatch('open-modal','ad_update_post'),adid='{{ $ad->id }}',title='{{ $ad->title }}',price={{ $ad->price }},description='{{ $ad->description }}',place='{{ $ad->place }}',accepted='{{ $ad->accepted }}',photo='{{ $ad->photo }}'">
                                 Update ad
                             </x-primary-button>
                         @endcan

@@ -60,12 +60,10 @@ class ProfileController extends Controller
     }
     public function users_show(): View
     {
-        $users = User::paginate(5);
-
         return view(
             'users',
             [
-                'users' => User::all()->toQuery()->paginate(3)
+                'users' => User::orderBy('name')->paginate(3)
             ]
         );
     }

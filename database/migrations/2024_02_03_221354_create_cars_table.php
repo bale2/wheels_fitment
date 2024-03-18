@@ -15,8 +15,12 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('manufacturer_id')->constrained()->onupdate('cascade')->ondelete('cascade');
             $table->string('car_model');
+            $table->integer('engine_size');
             $table->integer('car_year');
+            $table->float('center_bore');
+            $table->float('thread_size');
             $table->float('mtsurface_fender_distance');
+            $table->foreignId('bolt_pattern_id')->constrained();
             $table->boolean('accepted')->default(false);
             $table->timestamps();
         });

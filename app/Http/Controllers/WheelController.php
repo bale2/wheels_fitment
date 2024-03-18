@@ -208,4 +208,13 @@ class WheelController extends Controller
         $ad->delete();
         return redirect()->back();
     }
+
+    public function wheel_to_user_create_post(Request $request)
+    {
+        WheelType::create([
+            'wheel_type' => $request->type,
+            'updated_at' => now()
+        ]);
+        return redirect()->action([WheelController::class, 'wheel_types']);
+    }
 }

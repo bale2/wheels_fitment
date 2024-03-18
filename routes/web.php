@@ -38,6 +38,7 @@ require __DIR__ . '/auth.php';
 Route::get('/users', [ProfileController::class, 'users_show'])->name('users');
 Route::get('/users/{id}', [ProfileController::class, 'user_with_id'])->name('user_with_id');
 
+
 //AdController (show,createform,createpost,{id}page)
 Route::get('/ads', [AdController::class, 'ads_show'])->name('ads');
 Route::get('/ads/{id}', [AdController::class, 'ad_with_id_show'])->name('ads_with_id');
@@ -79,3 +80,10 @@ Route::get('/wheel_create', [WheelController::class, 'wheel_create'])->middlewar
 Route::post('/wheel_create', [WheelController::class, 'wheel_create_post'])->middleware(['auth', 'verified',])->name('wheel_create_post');
 Route::post('/wheel_update', [WheelController::class, 'wheel_update_post'])->middleware(['auth', 'verified',])->name('wheel_update_post');
 Route::post('/wheel_delete', [WheelController::class, 'wheel_delete_post'])->middleware(['auth', 'verified',])->name('wheel_delete_post');
+
+//cars
+Route::get('/cars', [ManufacturerController::class, 'show_cars'])->name('cars');
+Route::get('/cars/{id}', [ManufacturerController::class, 'car_with_id'])->name('car_with_id');
+Route::get('/car_create', [ManufacturerController::class, 'car_create'])->middleware(['auth', 'verified'])->name('car_create');
+Route::post('/car_create', [ManufacturerController::class, 'car_create_post'])->middleware(['auth', 'verified'])->name('car_create_post');
+Route::post('/car_update', [ManufacturerController::class, 'car_update_post'])->middleware(['auth', 'verified',])->name('car_update_post');

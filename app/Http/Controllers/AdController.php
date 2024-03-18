@@ -59,7 +59,7 @@ class AdController extends Controller
 
     public function ad_update_post(Request $request)
     {
-        dd($request->ad_id);
+        // dd($request->ad_id);
         $this->authorize('update', Ad::find($request->ad_id));
         // $imagePaths = '';
 

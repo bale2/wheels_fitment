@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Car;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
 use App\Models\Manufacturer;
+use App\Models\Wheel;
 
 class ManufacturerController extends Controller
 {
@@ -28,5 +30,27 @@ class ManufacturerController extends Controller
 
         ]);
         return redirect()->action([ManufacturerController::class, 'show_manufacturers']);
+    }
+    public function show_cars()
+    {
+        return view('cars', [
+            'cars' => Car::all()->whereNotNull('created_at')->toQuery()->paginate(3),
+            'manufacturers' => Manufacturer::all()
+        ]);
+    }
+    public function car_create(Request $request)
+    {
+        Car::create([
+            'wheel_type' => $request->type,
+
+
+
+            'updated_at' => now()
+        ]);
+        return redirect()->action([ManufacturerController::class, 'show_cars']);
+    }
+    public function car_update_post(Request $request)
+    {
+        return redirect()->action([ManufacturerController::class, 'show_cars']);
     }
 }

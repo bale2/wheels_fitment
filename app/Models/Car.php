@@ -23,6 +23,11 @@ class Car extends Model
         return $this->belongsTo(Manufacturer::class);
     }
 
+    public function boltPattern()
+    {
+        return $this->belongsTo(BoltPattern::class);
+    }
+
     public function wheels()
     {
         return $this->belongsToMany(Wheel::class, 'wheels_cars');
