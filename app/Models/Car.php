@@ -13,8 +13,13 @@ class Car extends Model
     use HasFactory;
     protected $fillable = [
         'manufacturer_id',
-        'car_make',
         'car_model',
+        'engine_size',
+        'car_year',
+        'center_bore',
+        'thread_size',
+        'mtsurface_fender_distance',
+        'bolt_pattern_id',
         'mtsurface_fender_distance'
     ];
 

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BoltPattern;
 use App\Models\Car;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
 use App\Models\Manufacturer;
+use App\Models\NutBolt;
 use App\Models\Wheel;
 
 class ManufacturerController extends Controller
@@ -35,20 +37,31 @@ class ManufacturerController extends Controller
     {
         return view('cars', [
             'cars' => Car::all()->whereNotNull('created_at')->toQuery()->paginate(3),
-            'manufacturers' => Manufacturer::all()
+            'manufacturers' => Manufacturer::all()->sortBy('manufacturer_name')->where('only_wheel_maker', '=', 0),
+            'boltPatterns' => BoltPattern::all(),
+            'threadSizes' => NutBolt::all()
         ]);
     }
-    public function car_create(Request $request)
+    public function car_create_post(Request $request)
     {
+        // engine_size: 0, center_bore: 0, thread_size: '', mtsurface_fender_distance: 0, bolt_pattern_id: 0, accepted: 0 }">
+        // dd($request);
         Car::create([
-            'wheel_type' => $request->type,
-
-
-
+            'manufacturer_id' => $request->manufacturer_id,
+            'car_model' => $request->car_model,
+            'engine_size' => $request->engine_size,
+            'car_year' => $request->car_year,
+            'center_bore' => $request->center_bore,
+            'thread_size' => $request->thread_size,
+            'mtsurface_fender_distance' => $request->mtsurface_fender_distance,
+            'bolt_pattern_id' => $request->bolt_pattern_id,
+            'accepted' => $request->accepted,
             'updated_at' => now()
+
         ]);
         return redirect()->action([ManufacturerController::class, 'show_cars']);
     }
+
     public function car_update_post(Request $request)
     {
         return redirect()->action([ManufacturerController::class, 'show_cars']);
