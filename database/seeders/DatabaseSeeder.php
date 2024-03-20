@@ -87,7 +87,8 @@ class DatabaseSeeder extends Seeder
         // //wheels insert
 
         $this->call([
-            WheelSeeder::class
+            WheelSeeder::class,
+            CarSeeder::class
         ]);
     }
 }

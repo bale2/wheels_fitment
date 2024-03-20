@@ -17,7 +17,7 @@ class Car extends Model
         'engine_size',
         'car_year',
         'center_bore',
-        'thread_size',
+        'nut_bolt_id',
         'mtsurface_fender_distance',
         'bolt_pattern_id',
         'mtsurface_fender_distance'
@@ -31,6 +31,11 @@ class Car extends Model
     public function boltPattern()
     {
         return $this->belongsTo(BoltPattern::class);
+    }
+
+    public function nutBolt()
+    {
+        return $this->belongsTo(NutBolt::class);
     }
 
     public function wheels()

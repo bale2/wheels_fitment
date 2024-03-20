@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('engine_size');
             $table->integer('car_year');
             $table->float('center_bore');
-            $table->float('thread_size');
+            $table->foreignId('nut_bolt_id')->constrained();
             $table->float('mtsurface_fender_distance');
             $table->foreignId('bolt_pattern_id')->constrained();
             $table->boolean('accepted')->default(false);

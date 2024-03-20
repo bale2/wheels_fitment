@@ -39,12 +39,11 @@ class ManufacturerController extends Controller
             'cars' => Car::all()->whereNotNull('created_at')->toQuery()->paginate(3),
             'manufacturers' => Manufacturer::all()->sortBy('manufacturer_name')->where('only_wheel_maker', '=', 0),
             'boltPatterns' => BoltPattern::all(),
-            'threadSizes' => NutBolt::all()
+            'nutBolts' => NutBolt::all()
         ]);
     }
     public function car_create_post(Request $request)
     {
-        // engine_size: 0, center_bore: 0, thread_size: '', mtsurface_fender_distance: 0, bolt_pattern_id: 0, accepted: 0 }">
         // dd($request);
         Car::create([
             'manufacturer_id' => $request->manufacturer_id,
@@ -52,7 +51,7 @@ class ManufacturerController extends Controller
             'engine_size' => $request->engine_size,
             'car_year' => $request->car_year,
             'center_bore' => $request->center_bore,
-            'thread_size' => $request->thread_size,
+            'nut_bolt_id' => $request->nut_bolt_id,
             'mtsurface_fender_distance' => $request->mtsurface_fender_distance,
             'bolt_pattern_id' => $request->bolt_pattern_id,
             'accepted' => $request->accepted,
@@ -64,6 +63,29 @@ class ManufacturerController extends Controller
 
     public function car_update_post(Request $request)
     {
+
+        // id, manufacturer_id, car_model, engine_size, car_year, center_bore, nut_bolt_id, mtsurface_fender_distance, bolt_pattern_id,
+        //  accepted, created_at, updated_at
+        Car::find($request->id)->update([
+            'manufacturer_id' => $request->manufacturer_id,
+            'car_model' => $request->model,
+            'engine_size' => $request->engine_size,
+            'car_year' => $request->car_year,
+            'center_bore' => $request->center_bore,
+            'nut_bolt_id' => $request->nut_bolt_id,
+            'mtsurface_fender_distance' => $request->mtsurface_fender_distance,
+            'bolt_pattern_id' => $request->bolt_pattern_id,
+            'accepted' => $request->accepted == null ? false : true,
+            'updated_at' => now()
+        ]);
         return redirect()->action([ManufacturerController::class, 'show_cars']);
+    }
+
+    public function car_delete_post(Request $request)
+    {
+        $car = Car::find($request->car_id);
+        $this->authorize('delete', $car);
+        $car->delete();
+        return redirect()->back();
     }
 }
