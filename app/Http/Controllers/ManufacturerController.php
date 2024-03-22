@@ -63,7 +63,9 @@ class ManufacturerController extends Controller
 
     public function car_update_post(Request $request)
     {
-
+        $request->validateWithBag('kuki',  [
+            'car_year' => 'between:1890,' . now()->format('Y'),
+        ]);
         // id, manufacturer_id, car_model, engine_size, car_year, center_bore, nut_bolt_id, mtsurface_fender_distance, bolt_pattern_id,
         //  accepted, created_at, updated_at
         Car::find($request->id)->update([
