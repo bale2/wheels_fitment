@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BoltPattern;
 use App\Models\Car;
+use App\Models\Wheel;
+use App\Models\NutBolt;
+use App\Models\BoltPattern;
+use App\Models\Manufacturer;
+
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
-use App\Models\Manufacturer;
-use App\Models\NutBolt;
-use App\Models\Wheel;
 
 class ManufacturerController extends Controller
 {
@@ -35,7 +36,6 @@ class ManufacturerController extends Controller
     }
     public function show_cars()
     {
-
         return view('cars', [
             'cars' => Car::all()->whereNotNull('created_at')->toQuery()->paginate(3),
             'manufacturers' => Manufacturer::all()->sortBy('manufacturer_name')->where('only_wheel_maker', '=', 0),

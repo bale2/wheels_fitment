@@ -190,24 +190,14 @@ class WheelController extends Controller
         ]);
         return redirect()->back();
     }
-    public function admin_page(Request $request)
-    {
-        return view('admin_page', [
-            'nut_bolts' => NutBolt::all(),
-            'bolt_patterns' => BoltPattern::all(),
-            'wheel_types' => WheelType::all(),
-            'ads' => Ad::all(),
-            'wheels' => Wheel::all(),
-            'manufacturers' => Manufacturer::all()
-        ]);
-    }
-    public function admin_delete_post(Request $request)
-    {
-        $ad = Ad::find($request->ad_id);
-        $this->authorize('delete', $ad);
-        $ad->delete();
-        return redirect()->back();
-    }
+
+    // public function admin_delete_post(Request $request)
+    // {
+    //     $ad = Ad::find($request->ad_id);
+    //     $this->authorize('delete', $ad);
+    //     $ad->delete();
+    //     return redirect()->back();
+    // }
 
     public function wheel_to_user_create_post(Request $request)
     {
