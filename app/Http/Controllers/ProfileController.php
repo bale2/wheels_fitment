@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Wheel;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -67,12 +68,18 @@ class ProfileController extends Controller
             ]
         );
     }
-    public function user_with_id(string $id): View
+    public function user_with_id(Request $request, string $id): View
     {
+        $value = $request->session()->get('key');
+        session()->put('fasz', 10);
+        // $user = $this->users->find($id);
+        $data = $request->session()->get('fasz');
         return view(
             'user',
             [
-                'user' => User::find($id)
+                'user' => User::find($id),
+                'wheels' => Wheel::orderBy('created_at')->paginate(10),
+                'data' => $data
             ]
         );
     }

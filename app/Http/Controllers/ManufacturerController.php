@@ -35,6 +35,7 @@ class ManufacturerController extends Controller
     }
     public function show_cars()
     {
+
         return view('cars', [
             'cars' => Car::all()->whereNotNull('created_at')->toQuery()->paginate(3),
             'manufacturers' => Manufacturer::all()->sortBy('manufacturer_name')->where('only_wheel_maker', '=', 0),
@@ -63,14 +64,20 @@ class ManufacturerController extends Controller
 
     public function car_update_post(Request $request)
     {
+        $car_data = $request->all();
+        // $car_data["accepted"] = $car_data["accepted"] == null ? false : true;
+
+        // dd($request);
+        session()->put('car_data', $car_data);
         $request->validateWithBag('kuki',  [
-            'car_year' => 'between:1890,' . now()->format('Y'),
+            'car_year' => 'before_or_equal:' . now()->format('Y'),
         ]);
-        // id, manufacturer_id, car_model, engine_size, car_year, center_bore, nut_bolt_id, mtsurface_fender_distance, bolt_pattern_id,
-        //  accepted, created_at, updated_at
-        Car::find($request->id)->update([
+        // dd($request->accepted == null ? false : true);
+        session()->forget('car_data');
+
+        Car::find($request->car_id)->update([
             'manufacturer_id' => $request->manufacturer_id,
-            'car_model' => $request->model,
+            'car_model' => $request->car_model,
             'engine_size' => $request->engine_size,
             'car_year' => $request->car_year,
             'center_bore' => $request->center_bore,
@@ -78,8 +85,11 @@ class ManufacturerController extends Controller
             'mtsurface_fender_distance' => $request->mtsurface_fender_distance,
             'bolt_pattern_id' => $request->bolt_pattern_id,
             'accepted' => $request->accepted == null ? false : true,
-            'updated_at' => now()
+            // 'updated_at' => now()
+
+
         ]);
+
         return redirect()->action([ManufacturerController::class, 'show_cars']);
     }
 

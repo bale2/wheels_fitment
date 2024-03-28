@@ -78,11 +78,6 @@
                                 {{ $nutBolt->type }}</option>
                         @endforeach
                     </select>
-
-
-
-
-
                     <input type="submit" value="feltöltés"
                         class="mx-auto block items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
                 </form>
@@ -90,7 +85,22 @@
 
         </div>
     </x-slot>
-    <div x-data="{ car_id: '', manufacturer_id: '', car_model: '', engine_size: '', car_year: 0, center_bore: 0, nut_bolt_id: 0, mtsurface_fender_distance: 0, bolt_pattern_id: 0, accepted: 0 }">
+    @php
+        $car_data = session()->get('car_data', [
+            'car_id' => 0,
+            'manufacturer_id' => '',
+            'car_model' => '',
+            'engine_size' => 0,
+            'car_year' => 0,
+            'center_bore' => 0,
+            'nut_bolt_id' => 1,
+            'mtsurface_fender_distance' => 0,
+            'bolt_pattern_id' => 1,
+            'accepted' => 0,
+            'updated_at' => now(),
+        ]);
+    @endphp
+    <div x-data="{ car_id: '{{ $car_data['car_id'] }}', manufacturer_id: '{{ $car_data['manufacturer_id'] }}', car_model: '{{ $car_data['car_model'] }}', engine_size: '{{ $car_data['engine_size'] }}', car_year: {{ $car_data['car_year'] }}, center_bore: {{ $car_data['center_bore'] }}, nut_bolt_id: {{ $car_data['nut_bolt_id'] }}, mtsurface_fender_distance: {{ $car_data['mtsurface_fender_distance'] }}, bolt_pattern_id: {{ $car_data['bolt_pattern_id'] }}, accepted: {{ $car_data['accepted'] }} }">
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 sm:rounded-lg">
                 @foreach ($cars as $car)
@@ -137,7 +147,7 @@
                                         bolt_pattern_id={{ $car->bolt_pattern_id }},
                                          accepted={{ $car->accepted }}
                                         ">
-                                    Update car
+                                    Update car{{ $car->accepted }}
                                 </x-primary-button>
                             @endcan
                         </div>
@@ -154,7 +164,6 @@
                         class="mt-6 space-y-6 " enctype="multipart/form-data">
                         @csrf
                         @method('post')
-
                         <input type="hidden" x-model="car_id" name="car_id" class="block mt-1 w-full" />
                         <div>
                             <x-input-label for="manufacturer" :value="__('Manufacturer')" class="dark:text-gray-200 pt-3" />
@@ -167,6 +176,9 @@
                                         {{ $manufacturer->manufacturer_name }}</option>
                                 @endforeach
                             </select>
+                            {{-- @foreach ($car_data as $k => $v)
+                                {{ $k }} => {{ $v }} <br>
+                            @endforeach --}}
                         </div>
                         <div>
                             <x-input-label for="car_model" :value="__('Model')" class="dark:text-gray-200" />
@@ -187,7 +199,8 @@
                             </div>
                             <div>
                                 <x-input-label for="center_bore" :value="__('Center bore')" class="dark:text-gray-200" />
-                                <x-text-input id="center_bore" type="number" name="center_bore" x-model="center_bore"
+                                <x-text-input id="center_bore" type="number" step="0.1" name="center_bore"
+                                    x-model="center_bore"
                                     class=" field dark:text-gray-200 bg-white dark:bg-gray-800 w-32" />
                             </div>
                             <div>
@@ -223,11 +236,11 @@
                         <div>
                             @if (Auth::check() && Auth::user()->is_admin)
                                 <x-input-label for="accepted" :value="__('Accepted')" class="dark:text-gray-200" />
-                                <input type="checkbox" id="accepted" @checked($car->accepted) name="accepted"
-                                    x-model="accepted"
+                                <input type="checkbox" name="accepted" id="accepted" @checked($car->accepted)
                                     class="block mx-auto rounded-2xl dark:text-gray-200 bg-white dark:bg-gray-800" />
                             @endif
                         </div>
+                        {{ $car->accepted }}
                         <div>
                             <input type="submit" value="feltöltés"
                                 class="mx-auto block items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">

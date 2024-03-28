@@ -2,11 +2,11 @@
     <x-slot name="header">
         <div class="grid grid-cols-2">
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
-                {{ __('Cars') }}
+                {{ $user->name }}
             </h2>
             @if (Auth::user())
                 <div class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
-                    <a href="/wheel_create">Kerék hozzáadása</a>
+                    <a href="# ">Wheel add to profile</a>
                 </div>
             @endif
         </div>
@@ -51,7 +51,7 @@
                                 </div>
                             </div>
                         </a>
-                        <div class="grid grid-cols-2 text-center">
+                        {{-- <div class="grid grid-cols-2 text-center">
                             @can('delete', $wheel)
                                 <form method="post" action="{{ route('wheel_delete_post') }}">
                                     @csrf
@@ -64,17 +64,19 @@
                                 </form>
                             @endcan
                             @can('update', $wheel)
-                                <x-primary-button x-data="" {{-- x-on:click.prevent="$dispatch('open-modal','wheel_update_post'),wheel_id={{ $wheel->id }},manufacturer_id={{ $wheel->manufacturer->id }},model='{{ $wheel->model }}', price={{ $wheel->price }}, wheel_type_id={{ $wheel->wheel_type_id }}, diameter={{ $wheel->diameter }}, width={{ $wheel->width }}, ET_number={{ $wheel->ET_number }}, bolt_pattern_id={{ $wheel->bolt_pattern_id }}, kba_number='{{ $wheel->kba_number }}', center_bore={{ $wheel->center_bore }}, nut_bolt_id={{ $wheel->nut_bolt_id }}, multipiece={{ $wheel->multipiece }}, note='{{ $wheel->note }}', accepted='{{ $wheel->accepted }}'"> --}}
-                                    x-on:click.prevent="$dispatch('open-modal','wheel_update_post'),wheel_id='{{ $wheel->id }}', manufacturer_id='{{ $wheel->manufacturer_id }}',model='{{ $wheel->model }}',price={{ $wheel->price }},wheel_type_id={{ $wheel->wheel_type_id }},diameter={{ $wheel->diameter }},width={{ $wheel->width }},ET_number={{ $wheel->ET_number }}, bolt_pattern_id={{ $wheel->bolt_pattern_id }}, kba_number='{{ $wheel->kba_number }}', center_bore={{ $wheel->center_bore }}, nut_bolt_id={{ $wheel->nut_bolt_id }}, multipiece={{ $wheel->multipiece }}, note='{{ $wheel->note }}', accepted='{{ $wheel->accepted }}'">
-                                    Update wheel
-                                </x-primary-button>
-                            @endcan
-                        </div>
+
+                        x-on:click.prevent="$dispatch('open-modal','wheel_update_post'),wheel_id='{{ $wheel->id }}', manufacturer_id='{{ $wheel->manufacturer_id }}',model='{{ $wheel->model }}',price={{ $wheel->price }},wheel_type_id={{ $wheel->wheel_type_id }},diameter={{ $wheel->diameter }},width={{ $wheel->width }},ET_number={{ $wheel->ET_number }}, bolt_pattern_id={{ $wheel->bolt_pattern_id }}, kba_number='{{ $wheel->kba_number }}', center_bore={{ $wheel->center_bore }}, nut_bolt_id={{ $wheel->nut_bolt_id }}, multipiece={{ $wheel->multipiece }}, note='{{ $wheel->note }}', accepted='{{ $wheel->accepted }}'">
+                        Update wheel
+                        </x-primary-button>
+                    @endcan
+        </div> --}}
                     @endif
                 @endforeach
                 {{ $wheels->links() }}
             </div>
+            <p>{{ $data }}</p>
         </div>
+        {{--
         <div class="text-center">
             @isset($wheel)
 
@@ -139,25 +141,26 @@
                         <x-text-input type="checkbox" id="multipiece" name="multipiece"
                             class=" field dark:text-gray-200 bg-white dark:bg-gray-800" />
 
-                        {{-- <x-input-label for="photo" :value="__('Photo')" class="dark:text-gray-200" />
+                        <x-input-label for="photo" :value="__('Photo')" class="dark:text-gray-200" />
                     <x-text-input id="photo" name="photo[]" multiple type="file"
-                    class=" field dark:text-gray-200 bg-white dark:bg-gray-800" /> --}}
+                    class=" field dark:text-gray-200 bg-white dark:bg-gray-800" />
 
-                        <x-input-label for="note" :value="__('note')" class="dark:text-gray-200" />
-                        <x-text-input x-model="note" id="note" name="note" type="text"
-                            class=" field dark:text-gray-200 bg-white dark:bg-gray-800" />
+        <x-input-label for="note" :value="__('note')" class="dark:text-gray-200" />
+        <x-text-input x-model="note" id="note" name="note" type="text"
+            class=" field dark:text-gray-200 bg-white dark:bg-gray-800" />
 
-                        @if (Auth::check() && Auth::user()->is_admin)
-                            <x-input-label for="accepted" :value="__('Accepted')" class="dark:text-gray-200" />
-                            <input type="checkbox" id="accepted" @checked($wheel->accepted) name="accepted"
-                                class="block mx-auto rounded-2xl dark:text-gray-200 bg-white dark:bg-gray-800" />
-                        @endif
+        @if (Auth::check() && Auth::user()->is_admin)
+            <x-input-label for="accepted" :value="__('Accepted')" class="dark:text-gray-200" />
+            <input type="checkbox" id="accepted" @checked($wheel->accepted) name="accepted"
+                class="block mx-auto rounded-2xl dark:text-gray-200 bg-white dark:bg-gray-800" />
+        @endif
 
-                        <input type="submit" value="feltöltés"
-                            class="mx-auto block items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
-                    </form>
-                </x-modal>
-            @endisset
-        </div>
+        <input type="submit" value="feltöltés"
+            class="mx-auto block items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
+        </form>
+        </x-modal>
+    @endisset
+</div>
+--}}
     </div>
 </x-app-layout>

@@ -20,7 +20,8 @@ class Car extends Model
         'nut_bolt_id',
         'mtsurface_fender_distance',
         'bolt_pattern_id',
-        'mtsurface_fender_distance'
+        'mtsurface_fender_distance',
+        'accepted'
     ];
 
     public function manufacturer()

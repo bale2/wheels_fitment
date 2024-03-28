@@ -40,11 +40,7 @@ class WheelSeeder extends Seeder
                 'bolt_pattern_id' => 10, 'kba_number' => 'KBA 40078', 'center_bore' => 57.1, 'nut_bolt_id' => 2, 'multipiece' => 0, 'photo' => 'ats_classic.png',
                 'note' => 'ATU CLASSIC 13 wheel', 'accepted' => 1, 'created_at' => date("Y-m-d H:i:s")
             ],
-            [
-                'id' => Str::uuid(), 'manufacturer_id' =>  Manufacturer::where('manufacturer_name', 'ATS')->first()->id, 'model' => 'Papperpot', 'price' => 100000, 'wheel_type_id' => 9, 'diameter' => 13, 'width' => 6, 'ET_number' => 13,
-                'bolt_pattern_id' => 10, 'kba_number' => 'KBA 40361', 'center_bore' => 57.1, 'nut_bolt_id' => 2, 'multipiece' => 0, 'photo' => 'ats_papperpot.jpg',
-                'note' => 'ATU CLASSIC 13 wheel', 'accepted' => 1, 'created_at' => date("Y-m-d H:i:s")
-            ],
+
         ]);
     }
 }
