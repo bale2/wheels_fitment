@@ -14,38 +14,30 @@
     <div x-data="{ wheel_id: '', manufacturer_id: 0, model: '', price: 0, wheel_type_id: 0, diameter: 0, width: 0, ET_number: 0, bolt_pattern_id: 0, kba_number: '', center_bore: 0, nut_bolt_id: 0, multipiece: 0, note: '', accepted: 0 }">
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 sm:rounded-lg">
-                <form method="post" action="{{ route('user_wheel_post') }}" class="mt-6 space-y-6 "
-                    enctype="multipart/form-data">
-                    @csrf
-                    @method('post')
-                    <x-input-label for="wheel_user" :value="__('Select the wheel you want to add to your profile')" class="dark:text-gray-200" />
-                    <select id="wheel_user" name="wheel_id"
-                        class="dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent rounded-lg">
-                        @foreach ($wheels as $wheel)
-                            <option hidden disabled selected value> -- select an option -- </option>
-                            <option class="dark:text-gray-200 bg-white dark:bg-gray-800" value={{ $wheel->id }}
-                                :selected="wheel_id === {{ $wheel->id }}">
-                                {{ $wheel->manufacturer->manufacturer_name }}
-                                {{ $wheel->model }}</option>
-                        @endforeach
-                    </select>
-                    <input type="submit" value="feltöltés"
-                        class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
-                </form>
-                @foreach ($pivot as $piwko)
-                    {{-- <p class="dark:text-white">{{ $piwko->user_id }}</p> --}}
-                    {{-- <p class="dark:text-white">{{ $piwko->model }}</p> --}}
+                @if (Auth::user() and (Auth::user()->is_admin or Auth::user()->id == $user->id))
+                    {{-- @if (Auth::user() and Auth::user()->is_admin or Auth::user() and $id) --}}
+                    <form method="post" action="{{ route('user_wheel_post') }}" class="mt-6 space-y-6 "
+                        enctype="multipart/form-data">
+                        @csrf
+                        @method('post')
+                        <x-input-label for="wheel_user" :value="__('Select the wheel you want to add to your profile')" class="dark:text-gray-200" />
+                        <select id="wheel_user" name="wheel_id"
+                            class="dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent rounded-lg">
+                            @foreach ($wheels as $wheel)
+                                <option hidden disabled selected value> -- select an option -- </option>
+                                <option class="dark:text-gray-200 bg-white dark:bg-gray-800" value={{ $wheel->id }}
+                                    :selected="wheel_id === {{ $wheel->id }}">
+                                    {{ $wheel->manufacturer->manufacturer_name }}
+                                    {{ $wheel->model }}</option>
+                            @endforeach
+                        </select>
+                        <input type="submit" value="feltöltés"
+                            class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
+                    </form>
+                @endif
+                @foreach ($collection as $one)
+                    <h1 class="dark:text-white">{{ $one['manufacturer_name'] . ' ' . $one['model'] }}</h1>
                 @endforeach
-                @foreach ($pivot as $piwko)
-                    {{-- @foreach ($wheels as $wheel) --}}
-                    <p class="dark:text-white">{{ $piwko[0]['manufacturer_id'] }}</p>
-                    <p class="dark:text-white">{{ $piwko[0]['model'] }}</p>
-                    {{-- @endforeach --}}
-                @endforeach
-                {{-- @foreach ($wheels as $wheel)
-                    <p class="dark:text-white">{{ $piwko->user_id }}</p>
-                    <p class="dark:text-white">{{ $wheel->manufacturer->manufacturer_name }} {{ $wheel->model }}</p>
-                @endforeach --}}
                 {{-- @foreach ($wheels as $wheel)
                     @if ($wheel->id != 1)
                         <a href="wheels/{{ $wheel->id }}">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Wheel;
+use App\Models\Manufacturer;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +13,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class ProfileController extends Controller
 {
@@ -72,12 +74,19 @@ class ProfileController extends Controller
     }
     public function user_with_id(Request $request, string $id): View
     {
-        $user = User::find(Auth::user()->id);
-        $pivot = array();
-        foreach ($user->wheels as $wheel) {
-            array_push($pivot, Wheel::find($wheel->pivot));
+        $manufacturer = null;
+        $model = null;
+        $collection = collect();
+        // if ((Auth::user() and Auth::user()->is_admin) or (Auth::user()->id and $id)) {
+        $user = User::find($id);
+        // dd($id, $user);
+        foreach ($user->wheels as $piwko) {
+            // dd($piwko);
+            $manufacturer = Manufacturer::where('id', $piwko['manufacturer_id'])->select('manufacturer_name')->first();
+            $model = Wheel::where('model', $piwko['model'])->select('model')->first();
+            $collection->push($manufacturer, $model);
         }
-        // dd($pivot);
+        // }
         $value = $request->session()->get('key');
         session()->put('fasz', 10);
         // $user = $this->users->find($id);
@@ -88,14 +97,12 @@ class ProfileController extends Controller
                 'user' => User::find($id),
                 'wheels' => Wheel::orderBy('created_at')->paginate(10),
                 'data' => $data,
-                'pivot' => $pivot,
+                'collection' => $collection,
             ]
         );
     }
     public function user_wheel_post(Request $request, User $user)
     {
-        // dd($request, Auth::user());
-        // dd($request);
         $user = User::find(Auth::user()->id);
         $user->wheels()->attach($request->wheel_id);
         return redirect()->back();
