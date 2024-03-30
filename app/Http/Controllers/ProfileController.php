@@ -101,7 +101,7 @@ class ProfileController extends Controller
             ]
         );
     }
-    public function user_wheel_post(Request $request, User $user)
+    public function user_wheel_post(Request $request)
     {
         $user = User::find(Auth::user()->id);
         $user->wheels()->attach($request->wheel_id);

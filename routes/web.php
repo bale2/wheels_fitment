@@ -85,6 +85,7 @@ Route::post('/wheel_delete', [WheelController::class, 'wheel_delete_post'])->mid
 //cars
 Route::get('/cars', [ManufacturerController::class, 'show_cars'])->name('cars');
 Route::get('/cars/{id}', [ManufacturerController::class, 'car_with_id'])->name('car_with_id');
+Route::post('/wheel_car', [ManufacturerController::class, 'car_wheel_post'])->name('car_wheel_post');
 // Route::get('/car_create', [ManufacturerController::class, 'car_create'])->middleware(['auth', 'verified'])->name('car_create');
 Route::post('/car_create', [ManufacturerController::class, 'car_create_post'])->middleware(['auth', 'verified'])->name('car_create_post');
 Route::post('/car_update', [ManufacturerController::class, 'car_update_post'])->middleware(['auth', 'verified',])->name('car_update_post');

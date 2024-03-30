@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="grid grid-cols-2">
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
-                {{ $user->name }}
+                {{ $car->manufacturer->manufacturer_name }} {{ $car->car_model }}
             </h2>
             @if (Auth::user())
                 <div class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
@@ -14,14 +14,14 @@
     <div x-data="{ wheel_id: '', manufacturer_id: 0, model: '', price: 0, wheel_type_id: 0, diameter: 0, width: 0, ET_number: 0, bolt_pattern_id: 0, kba_number: '', center_bore: 0, nut_bolt_id: 0, multipiece: 0, note: '', accepted: 0 }">
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 sm:rounded-lg">
-                @if (Auth::user() and (Auth::user()->is_admin or Auth::user()->id == $user->id))
-                    {{-- @if (Auth::user() and Auth::user()->is_admin or Auth::user() and $id) --}}
-                    <form method="post" action="{{ route('user_wheel_post') }}" class="mt-6 space-y-6 "
+                @if (Auth::user())
+                    <form method="post" action="{{ route('car_wheel_post') }}" class="mt-6 space-y-6 "
                         enctype="multipart/form-data">
                         @csrf
                         @method('post')
-                        <x-input-label for="wheel_user" :value="__('Select the wheel you want to add to your profile')" class="dark:text-gray-200" />
-                        <select id="wheel_user" name="wheel_id"
+                        <input type="hidden" value="{{ $car->id }}" name="car_id" class="block mt-1 w-full" />
+                        <x-input-label for="wheel_car" :value="__('Select the wheel you want to add to the car')" class="dark:text-gray-200" />
+                        <select id="wheel_car" name="wheel_car"
                             class="dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent rounded-lg">
                             @foreach ($wheels as $wheel)
                                 <option hidden disabled selected value> -- select an option -- </option>
@@ -36,7 +36,7 @@
                     </form>
                 @endif
                 @foreach ($collection as $one)
-                    <p class="text-white text-xl">{{ $one['manufacturer_name'] }} {{ $one['model'] }}</p>
+                    <h1 class="dark:text-white">{{ $one['manufacturer_name'] . ' ' . $one['model'] }}</h1>
                 @endforeach
                 {{-- @foreach ($wheels as $wheel)
                     @if ($wheel->id != 1)
@@ -96,7 +96,7 @@
                      </div>
                     @endif
                 @endforeach --}}
-                {{ $wheels->links() }}
+                {{-- {{ $wheels->links() }} --}}
             </div>
             {{-- <p>{{ $data }}</p> --}}
         </div>

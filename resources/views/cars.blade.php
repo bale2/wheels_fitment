@@ -105,7 +105,7 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 sm:rounded-lg">
                 @foreach ($cars as $car)
                     @if ($car->id != 1)
-                        <a href="car/{{ $car->id }}">
+                        <a href="cars/{{ $car->id }}">
                             <div
                                 class="bg-white overflow-hidden grid grid-cols-2 shadow-sm sm:rounded-lg dark:bg-gray-800 mb-12">
                                 <div class="p-6 text-gray-900 dark:text-gray-100">

@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
+use App\Models\User;
 use App\Models\Wheel;
 use App\Models\NutBolt;
 use App\Models\BoltPattern;
 use App\Models\Manufacturer;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
@@ -17,6 +19,48 @@ class ManufacturerController extends Controller
     public function show_manufacturers(): View
     {
         return view('manufacturers/manufacturers', ['manufacturers' => Manufacturer::orderBy('manufacturer_name')->paginate(10)]);
+    }
+    public function car_with_id(Request $request, string $id): View
+    {
+        $manufacturer = null;
+        $model = null;
+        $collection = collect();
+        $car = Car::find($id);
+        // dd($car);
+        // if ((Auth::user() and Auth::user()->is_admin) or (Auth::user()->id and $id)) {
+        //     $user = User::find($id);
+
+        foreach ($car->wheels as $wheel_car) {
+
+            $manufacturer = Manufacturer::where('id', $wheel_car['manufacturer_id'])->select('manufacturer_name')->first();
+            $model = Wheel::where('model', $wheel_car['model'])->select('model')->first();
+            $collection->push($manufacturer, $model);
+        }
+        // }
+        // $value = $request->session()->get('key');
+        // session()->put('fasz', 10);
+        // $user = $this->users->find($id);
+        // $data = $request->session()->get('fasz');
+        return view(
+            'car',
+            [
+                // 'cars' => Car::all()->whereNotNull('created_at')->toQuery()->paginate(3),
+                'car' => Car::find($id),
+                'manufacturer' => Manufacturer::all(),
+                'wheels' => Wheel::all()->toQuery()->paginate(3),
+                'collection' => $collection,
+
+                // 'wheels' => Wheel::orderBy('created_at')->paginate(10),
+                // 'data' => $data,
+            ]
+        );
+    }
+
+    public function car_wheel_post(Request $request)
+    {
+        $car = Car::find($request->car_id);
+        $car->wheels()->attach($request->wheel_car);
+        return redirect()->back();
     }
 
     public function manufacturer_create_post(Request $request)
