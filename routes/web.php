@@ -22,9 +22,13 @@ use App\Http\Controllers\WheelController;
 //     return view('welcome');
 // });
 
-Route::get('/', function () {
-    return view('dashboard');
-})->name('dashboard');
+
+
+// Route::get('/', function () {
+//     return view('dashboard');
+// })->name('dashboard');
+Route::get('/', [ManufacturerController::class, 'dashboard'])->name('dashboard');
+
 
 
 Route::middleware('auth')->group(function () {
@@ -90,3 +94,6 @@ Route::post('/wheel_car', [ManufacturerController::class, 'car_wheel_post'])->na
 Route::post('/car_create', [ManufacturerController::class, 'car_create_post'])->middleware(['auth', 'verified'])->name('car_create_post');
 Route::post('/car_update', [ManufacturerController::class, 'car_update_post'])->middleware(['auth', 'verified',])->name('car_update_post');
 Route::post('/car_delete', [ManufacturerController::class, 'car_delete_post'])->middleware(['auth', 'verified',])->name('car_delete_post');
+
+//calculator
+Route::get('/calculator', [ManufacturerController::class, 'show_cars'])->name('calculator');
