@@ -14,6 +14,26 @@
     <div x-data="{ wheel_id: '', manufacturer_id: 0, model: '', price: 0, wheel_type_id: 0, diameter: 0, width: 0, ET_number: 0, bolt_pattern_id: 0, kba_number: '', center_bore: 0, nut_bolt_id: 0, multipiece: 0, note: '', accepted: 0 }">
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 sm:rounded-lg">
+                <div
+                    class="p-6 text-gray-900 dark:text-gray-100 bg-white overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800">
+                    <h1 class="mb-2">Autó adatai:</h1>
+                    <h1>Gyártó: {{ $car->manufacturer->manufacturer_name }}</h1>
+                    <h1>Model :{{ $car->car_model }}</h1>
+                    <h1>Engine size :{{ $car->engine_size }}</h1>
+                    <h1>Manufactured :{{ $car->car_year }}</h1>
+                    <h1>Space for wheel :{{ $car->mtsurface_fender_distance }}</h1>
+                    <h1>Thread Size :{{ $car->nutBolt->type }}</h1>
+                    <h1>Center Bore :{{ $car->center_bore }}</h1>
+                    <h1>Bolt pattern :{{ $car->boltPattern->bolt_pattern }}</h1>
+                    <h1>ID: {{ $car->id }}</h1>
+                </div>
+                <div
+                    class="p-6 text-gray-900 dark:text-gray-100 bg-white overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800">
+                    <h1>Autóhoz elfogadott kerekek</h1>
+                    @foreach ($collection as $one)
+                        <h1 class="dark:text-white">{{ $one['manufacturer_name'] . ' ' . $one['model'] }}</h1>
+                    @endforeach
+                </div>
                 @if (Auth::user())
                     <form method="post" action="{{ route('car_wheel_post') }}" class="mt-6 space-y-6 "
                         enctype="multipart/form-data">
@@ -35,9 +55,7 @@
                             class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
                     </form>
                 @endif
-                @foreach ($collection as $one)
-                    <h1 class="dark:text-white">{{ $one['manufacturer_name'] . ' ' . $one['model'] }}</h1>
-                @endforeach
+
                 {{-- @foreach ($wheels as $wheel)
                     @if ($wheel->id != 1)
                         <a href="wheels/{{ $wheel->id }}">

@@ -20,7 +20,6 @@
                             <div
                                 class="bg-white overflow-hidden grid grid-cols-2 shadow-sm sm:rounded-lg dark:bg-red-600 ">
                                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                                    {{ $ad->id }}
                                     <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200">
                                         {{ $ad->title }}</h1>
                                     <h1>{{ $ad->price }} Ft</h1>
@@ -28,6 +27,7 @@
                                     <h1>{{ $ad->place }}</h1>
                                     <h1>{{ $ad->updated_at }}</h1>
                                     <h1>{{ $ad->accepted }}</h1>
+                                    {{ $ad->id }}
                                 </div>
                                 <div>
                                     @foreach ($ad->photos() as $photo)
@@ -42,7 +42,6 @@
                             <div
                                 class="bg-white overflow-hidden grid grid-cols-2 shadow-sm sm:rounded-lg dark:bg-gray-800 ">
                                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                                    {{ $ad->id }}
                                     <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200">
                                         {{ $ad->title }}
                                     </h1>
@@ -50,7 +49,6 @@
                                     <h1>{{ $ad->user->name }}</h1>
                                     <h1>{{ $ad->place }}</h1>
                                     <h1>{{ $ad->updated_at }}</h1>
-                                    <h1>{{ $ad->accepted }}</h1>
                                 </div>
                                 <div>
                                     @foreach ($ad->photos() as $photo)
@@ -61,7 +59,7 @@
                             </div>
                         </a>
                     @endif
-                    <div class="grid grid-cols-2 text-center">
+                    <div class="mb-5 grid grid-cols-2 text-center">
                         @can('delete', $ad)
                             <form method="post" action="{{ route('ad_delete_post') }}">
                                 @csrf

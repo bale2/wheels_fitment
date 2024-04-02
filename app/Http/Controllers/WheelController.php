@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Wheel;
 use App\Models\Ad;
+use App\Models\Car;
+use App\Models\Wheel;
 use App\Models\NutBolt;
 use App\Models\Manufacturer;
 use App\Models\BoltPattern;
@@ -25,8 +26,22 @@ class WheelController extends Controller
     }
     public function wheel_with_id(string $id): View
     {
+        $manufacturer = null;
+        $model = null;
+        $collection = collect();
+        $wheel = Wheel::find($id);
+        // dd($wheel->cars);
+        foreach ($wheel->cars as $one) {
+            $manufacturer = Manufacturer::where('id', $one['manufacturer_id'])->select('manufacturer_name')->first();
+            $model = Car::where('car_model', $one['car_model'])->first();
+            $collection->push($manufacturer, $model);
+            // dd($model);
+        }
+
+        // dd($collection);
         return view('wheels/wheel_with_id', [
-            'wheel' => Wheel::find($id)
+            'wheel' => Wheel::find($id),
+            'collection' => $collection,
         ]);
     }
     public function wheel_create(): View

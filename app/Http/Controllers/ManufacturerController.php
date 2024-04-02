@@ -149,9 +149,6 @@ class ManufacturerController extends Controller
         return view('dashboard', [
             'manufacturers' => Manufacturer::where('only_wheel_maker', 0)->orderBy('manufacturer_name')->get(),
             'cars' => Car::all(),
-
-
-            // 'cars' => Car::all(),
         ]);
     }
 }
