@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex justify-around">
             <div class="w-3 ">
-                <a href="/users"><svg fill="#000000" class="h-5 w-5" version="1.1" id="Capa_1"
+                <a href="/cars"><svg fill="#000000" class="h-5 w-5" version="1.1" id="Capa_1"
                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                         viewBox="0 0 26.676 26.676" xml:space="preserve">
 
@@ -31,58 +31,20 @@
                                 <g> </g>
                             </g>
                         </g>
-
                     </svg></a>
             </div>
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
-                {{ $user->name }}
-            </h2>
+            @if (Auth::user())
+                <div class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
+                    <a href="# ">Wheel add to profile</a>
+                </div>
+            @endif
         </div>
     </x-slot>
     <div x-data="{ wheel_id: '', manufacturer_id: 0, model: '', price: 0, wheel_type_id: 0, diameter: 0, width: 0, ET_number: 0, bolt_pattern_id: 0, kba_number: '', center_bore: 0, nut_bolt_id: 0, multipiece: 0, note: '', accepted: 0 }">
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 sm:rounded-lg">
-                <div
-                    class="p-6 text-gray-900 dark:text-gray-100 bg-white overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800">
-                    <div>
-                        <h1 class="text-white text-xl mb-2">{{ $user->name }}'s wheels:</h1>
-                        @foreach ($user->wheels as $one)
-                            <p class=" text-white text-lg">{{ $one->manufacturer->manufacturer_name }}
-                                {{ $one->model }}</p>
-                        @endforeach
-                    </div>
+                <img class="size-1/6" src="{{ asset('photos/ats_cup.png') }}" rel="kep">
 
-                    <div class="text-white text-xl ">
-                        <h1 class="mt-2">{{ $user->name }}'s details:</h1>
-                        <h2>Email: {{ $user->email }}</h2>
-                        <h2>Last logged in:{{ $user->updated_at }}</h2>
-                        <h2>Registered: {{ $user->created_at }}</h2>
-                    </div>
-                </div>
-                @if (Auth::user() and (Auth::user()->is_admin or Auth::user()->id == $user->id))
-                    <div
-                        class="p-6 text-gray-900 dark:text-gray-100 bg-white overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800">
-                        {{-- @if (Auth::user() and Auth::user()->is_admin or Auth::user() and $id) --}}
-                        <form method="post" action="{{ route('user_wheel_post') }}" class="mt-6 space-y-6 "
-                            enctype="multipart/form-data">
-                            @csrf
-                            @method('post')
-                            <x-input-label for="wheel_user" :value="__('Select the wheel you want to add to your profile')" class="dark:text-gray-200" />
-                            <select id="wheel_user" name="wheel_id"
-                                class="dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent rounded-lg">
-                                @foreach (\App\Models\Wheel::all() as $wheel)
-                                    <option hidden disabled selected value> -- select an option -- </option>
-                                    <option class="dark:text-gray-200 bg-white dark:bg-gray-800"
-                                        value={{ $wheel->id }} :selected="wheel_id === {{ $wheel->id }}">
-                                        {{ $wheel->manufacturer->manufacturer_name }}
-                                        {{ $wheel->model }}</option>
-                                @endforeach
-                            </select>
-                            <input type="submit" value="feltöltés"
-                                class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
-                        </form>
-                    </div>
-                @endif
                 {{-- @foreach ($wheels as $wheel)
                     @if ($wheel->id != 1)
                         <a href="wheels/{{ $wheel->id }}">

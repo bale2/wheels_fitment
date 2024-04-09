@@ -74,30 +74,13 @@ class ProfileController extends Controller
     }
     public function user_with_id(Request $request, string $id): View
     {
-        $manufacturer = null;
-        $model = null;
-        $collection = collect();
         // if ((Auth::user() and Auth::user()->is_admin) or (Auth::user()->id and $id)) {
         $user = User::find($id);
-        // dd($id, $user);
-        foreach ($user->wheels as $piwko) {
-            // dd($piwko);
-            $manufacturer = Manufacturer::where('id', $piwko['manufacturer_id'])->select('manufacturer_name')->first();
-            $model = Wheel::where('model', $piwko['model'])->select('model')->first();
-            $collection->push($manufacturer, $model);
-        }
-        // }
-        $value = $request->session()->get('key');
-        session()->put('fasz', 10);
-        // $user = $this->users->find($id);
-        $data = $request->session()->get('fasz');
         return view(
             'user',
             [
                 'user' => User::find($id),
-                'wheels' => Wheel::orderBy('created_at')->paginate(10),
-                'data' => $data,
-                'collection' => $collection,
+                'wheels' => Wheel::all(),
             ]
         );
     }

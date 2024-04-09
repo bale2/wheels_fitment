@@ -151,4 +151,13 @@ class ManufacturerController extends Controller
             'cars' => Car::all(),
         ]);
     }
+    public function calculator()
+    {
+        return view('calculator', [
+            'cars' => Car::all()->whereNotNull('created_at')->toQuery()->paginate(3),
+            'manufacturers' => Manufacturer::all()->sortBy('manufacturer_name')->where('only_wheel_maker', '=', 0),
+            'boltPatterns' => BoltPattern::all(),
+            'nutBolts' => NutBolt::all()
+        ]);
+    }
 }

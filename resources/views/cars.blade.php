@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="grid grid-cols-2" x-data="{ car_id: '', manufacturer_id: '', car_model: '', engine_size: '', car_year: '', center_bore: '', nut_bolt_id: '', mtsurface_fender_distance: '', bolt_pattern_id: 0 }">
+        <div class="flex justify-around" x-data="{ car_id: '', manufacturer_id: '', car_model: '', engine_size: '', car_year: '', center_bore: '', nut_bolt_id: '', mtsurface_fender_distance: '', bolt_pattern_id: 0 }">
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
                 {{ __('Cars') }}
             </h2>

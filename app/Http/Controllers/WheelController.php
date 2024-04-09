@@ -41,6 +41,7 @@ class WheelController extends Controller
         // dd($collection);
         return view('wheels/wheel_with_id', [
             'wheel' => Wheel::find($id),
+            'wheels' => Wheel::all(),
             'collection' => $collection,
         ]);
     }

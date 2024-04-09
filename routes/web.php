@@ -96,4 +96,4 @@ Route::post('/car_update', [ManufacturerController::class, 'car_update_post'])->
 Route::post('/car_delete', [ManufacturerController::class, 'car_delete_post'])->middleware(['auth', 'verified',])->name('car_delete_post');
 
 //calculator
-Route::get('/calculator', [ManufacturerController::class, 'show_cars'])->name('calculator');
+Route::get('/calculator', [ManufacturerController::class, 'calculator'])->name('calculator');
