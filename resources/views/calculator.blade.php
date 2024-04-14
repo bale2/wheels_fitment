@@ -33,17 +33,47 @@
                         </g>
                     </svg></a>
             </div>
-            @if (Auth::user())
-                <div class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
-                    <a href="# ">Wheel add to profile</a>
-                </div>
-            @endif
+            <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
+                Calculator
+            </h1>
         </div>
     </x-slot>
-    <div x-data="{ wheel_id: '', manufacturer_id: 0, model: '', price: 0, wheel_type_id: 0, diameter: 0, width: 0, ET_number: 0, bolt_pattern_id: 0, kba_number: '', center_bore: 0, nut_bolt_id: 0, multipiece: 0, note: '', accepted: 0 }">
+    <div x-data="{ wheel_id: '', model: '', price: 0, wheel_type_id: 0, diameter: 0, width: 0, ET_number: 0, bolt_pattern_id: 0, kba_number: '', center_bore: 0, nut_bolt_id: 0, multipiece: 0, note: '', accepted: 0 }">
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 sm:rounded-lg">
-                <img class="size-1/6" src="{{ asset('photos/ats_cup.png') }}" rel="kep">
+                <div class="flex flex-row gap-0">
+                    <img class="size-1/6 border  border-pink-600" src="{{ asset('line.png') }}" rel="kep">
+                    <img class="size-1/6 border-l-2 ml-[20px] border-red-600" src="{{ asset('tire.png') }}"
+                        rel="kep">
+                </div>
+                <div x-data="{ man_id: 0 }">
+                    <div>
+                        <x-input-label for="manufacturer_id" :value="__('Manufacturer')" class="dark:text-gray-200" />
+                        <select x-model="man_id" id="manufacturer_id" name="manufacturer_id"
+                            class="dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent rounded-lg w-80">
+                            @foreach ($manufacturers as $manufacturer)
+                                <option hidden disabled selected value> -- select an option -- </option>
+                                <option class="dark:text-gray-200 bg-white dark:bg-gray-800"
+                                    value={{ $manufacturer->id }}>
+                                    {{ $manufacturer->manufacturer_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <h1 class="text-white" x-text="man_id"></h1>
+                    <div>
+                        <x-input-label for="model" :value="__('Model')" class="dark:text-gray-200" />
+                        <select :disabled="man_id == 0" id="model" name="manufacturer_id"
+                            class="dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent rounded-lg w-80">
+                            @foreach ($cars as $car)
+                                <option hidden disabled selected value> -- select an option -- </option>
+                                <option class="dark:text-gray-200 bg-white dark:bg-gray-800" value={{ $car->id }}
+                                    :selected="man_id == {{ $manufacturer->id }}">
+                                    {{ $car->car_model }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
 
                 {{-- @foreach ($wheels as $wheel)
                     @if ($wheel->id != 1)
