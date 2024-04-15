@@ -47,31 +47,7 @@
                         rel="kep">
                 </div>
                 <div x-data="{ man_id: 0 }">
-                    <div>
-                        <x-input-label for="manufacturer_id" :value="__('Manufacturer')" class="dark:text-gray-200" />
-                        <select x-model="man_id" id="manufacturer_id" name="manufacturer_id"
-                            class="dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent rounded-lg w-80">
-                            @foreach ($manufacturers as $manufacturer)
-                                <option hidden disabled selected value> -- select an option -- </option>
-                                <option class="dark:text-gray-200 bg-white dark:bg-gray-800"
-                                    value={{ $manufacturer->id }}>
-                                    {{ $manufacturer->manufacturer_name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <h1 class="text-white" x-text="man_id"></h1>
-                    <div>
-                        <x-input-label for="model" :value="__('Model')" class="dark:text-gray-200" />
-                        <select :disabled="man_id == 0" id="model" name="manufacturer_id"
-                            class="dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent rounded-lg w-80">
-                            @foreach ($cars as $car)
-                                <option hidden disabled selected value> -- select an option -- </option>
-                                <option class="dark:text-gray-200 bg-white dark:bg-gray-800" value={{ $car->id }}
-                                    :selected="man_id == {{ $manufacturer->id }}">
-                                    {{ $car->car_model }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                    <livewire:DependentDropdown />
                 </div>
 
 

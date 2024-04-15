@@ -14,7 +14,10 @@
                         {{ __('Log in to access everything!') }}
                     @endif
                     <h1>Search a vehicle to get fitting wheels</h1>
-                    <div class="flex flex-row gap-x-5">
+                    <div>
+                        <livewire:DependentDropdown />
+                    </div>
+                    {{-- <div class="flex flex-row gap-x-5">
                         <div class="mt-5">
                             <x-input-label for="manufacturer_id" :value="__('Manufacturer')" class="dark:text-gray-200" />
                             <select id="manufacturer_id" name="manufacturer_id"
@@ -38,25 +41,22 @@
                                         {{ $car->car_model }}</option>
                                 @endforeach
                             </select>
-                        </div>
-                        <div class="mt-10">
-                            <input type="submit" value="Search"
-                                class="mx-auto block items-center h-10 px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
-                        </div>
-                    </div>
-
+                        </div> --}}
                 </div>
 
-                <div class="p-6 text-gray-900 dark:text-gray-100 w-96 flex flex-row">
-                    <div class="shadow-">
-                        <h1 class="text-white">The site provides a database of rims for cars. Search for a car and find
-                            out
-                            which wheels are right for it. If you can't find the wheel you are looking, use our
-                            calculator
-                            with the wheel's details.</h1>
-                    </div>
+            </div>
+
+
+            <div class="p-6 text-gray-900 dark:text-gray-100 w-96 flex flex-row">
+                <div class="shadow-">
+                    <h1 class="text-white">The site provides a database of rims for cars. Search for a car and find
+                        out
+                        which wheels are right for it. If you can't find the wheel you are looking, use our
+                        calculator
+                        with the wheel's details.</h1>
                 </div>
             </div>
         </div>
     </div>
+
 </x-app-layout>
