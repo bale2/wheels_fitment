@@ -30,5 +30,11 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+    'google' => [
+        'key' => env('GOOGLE_KEY'),
+    ],
+    'api_ninja' => [
+        'key' => env('API_NINJA_KEY'),
+    ],
 
 ];

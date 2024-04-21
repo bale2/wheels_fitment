@@ -46,10 +46,10 @@
 
             </div>
 
-
             <div class="p-6 text-gray-900 dark:text-gray-100 w-96 flex flex-row">
                 <div class="shadow-">
-                    <h1 class="text-white">The site provides a database of rims for cars. Search for a car and find
+                    <h1 class="text-white">The site provides a database of rims for cars. Search for a car and
+                        find
                         out
                         which wheels are right for it. If you can't find the wheel you are looking, use our
                         calculator

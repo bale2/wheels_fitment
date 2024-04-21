@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
         User::factory(10)->create();
 
         // Manufacturers cars
-        $manufacturers = ["Unknown", "Toyota", "Ford", "Honda", "Chevrolet", "BMW", "Volkswagen", "Nissan", "Mercedes-Benz", "Audi", "Hyundai", "Subaru", "Kia", "Tesla", "Fiat", "Jaguar", "Land Rover", "Volvo", "Porsche", "Mazda", "Buick", "GMC", "Cadillac", "Lexus", "Infiniti", "Acura", "Chrysler", "Dodge", "Jeep", "Ram", "Mitsubishi", "Alfa Romeo", "Ferrari", "Lamborghini", "Maserati", "Aston Martin", "Bentley", "Rolls-Royce", "Mini", "Bugatti", "Genesis", "Lotus", "McLaren", "Smart", "Suzuki", "Fisker", "Hennessey", "Karma", "Lucid", "Rivian", "Polestar"];
+        $manufacturers = ["Unknown", "Toyota", "Ford", "Honda", "Chevrolet", "BMW", "Volkswagen", "Nissan", "Mercedes-Benz", "Audi", "Hyundai", "Subaru", "Kia", "Tesla", "Fiat", "Jaguar", "Land Rover", "Volvo", "Porsche", "Mazda", "Buick", "GMC", "Cadillac", "Lexus", "Infiniti", "Acura", "Chrysler", "Dodge", "Jeep", "Ram", "Mitsubishi", "Alfa Romeo", "Ferrari", "Lamborghini", "Maserati", "Aston Martin", "Bentley", "Rolls-Royce", "Mini", "Bugatti", "Genesis", "Lotus", "McLaren", "Smart", "Suzuki", "Fisker", "Hennessey", "Karma", "Lucid", "Rivian", "Polestar", "Peugeot", "Opel"];
         foreach ($manufacturers as $manufacturer) {
             Manufacturer::insert([
                 'id' => Str::uuid(),

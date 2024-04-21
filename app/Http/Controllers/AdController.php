@@ -38,7 +38,8 @@ class AdController extends Controller
         // ->where('ads.id',$id)
         // ->first();
         return view('ads/ad_with_id', [
-            'ad' => Ad::find($id)
+            'ad' => Ad::find($id),
+            'google_api' => config('services.google.key'),
         ]);
     }
 

@@ -9,10 +9,12 @@ use App\Models\NutBolt;
 use App\Models\BoltPattern;
 use App\Models\Manufacturer;
 
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
+use PSpell\Config;
 
 class ManufacturerController extends Controller
 {
@@ -146,6 +148,14 @@ class ManufacturerController extends Controller
     }
     public function dashboard()
     {
+        // $response = Http::withHeaders([
+        //     'X-Api-Key' => config('services.api_ninja.key'),
+        // ])->get('https://api.api-ninjas.com/v1/geocoding?city=
+        // London
+        // &country=
+        // England
+        // ');
+
         return view('dashboard', [
             'manufacturers' => Manufacturer::where('only_wheel_maker', 0)->orderBy('manufacturer_name')->get(),
             'cars' => Car::all(),

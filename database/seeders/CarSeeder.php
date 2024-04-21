@@ -52,7 +52,6 @@ class CarSeeder extends Seeder
                 'mtsurface_fender_distance' => 350, 'bolt_pattern_id' => BoltPattern::where('bolt_pattern', '4x108')->first()->id, 'accepted' => 1,
                 'created_at' => date("Y-m-d H:i:s")
             ],
-            //peugeot szúrd be gyártóként, opelt is!
             [
                 'id' => Str::uuid(), 'manufacturer_id' => Manufacturer::where('manufacturer_name', 'Opel')->first()->id, 'car_model' => 'Vectra B',
                 'engine_size' => 1600, 'car_year' => 1995, 'center_bore' => 56.5, 'nut_bolt_id' => NutBolt::where('type', 'Lug Bolt (M12x1.25)')->first()->id,

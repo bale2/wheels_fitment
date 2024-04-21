@@ -68,18 +68,11 @@
                         class="mt-10 mb-auto mx-auto h-40 w-auto ">
                 </div>
             </div>
-
-            <script async src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=maps&v=beta&callback=initMap">
-            </script>
-
-            <gmp-map style="height: 500px;" center="41.081736,29.009206" zoom="10">
-            </gmp-map>
-
-            <script>
-                function initMap() {
-                    console.log('Maps JavaScript API loaded.');
-                }
-            </script>
+            <iframe width="600" height="450" style="border:0" loading="lazy" allowfullscreen
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps/embed/v1/place?key={{ $google_api }}
+              &q={{ $ad->place }}">
+            </iframe>
         </div>
     </div>
 </x-app-layout>
