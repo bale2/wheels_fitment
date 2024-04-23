@@ -26,8 +26,8 @@ class DependentDropdownForCalculator extends Component
 
     public function updatedSelectedModel($car)
     {
-        $this->cars = Car::where('id', $car)->get();
-        // $this->cars = Car::where('manufacturer_id', $car)->get();
+        // $this->cars = Car::where('id', $car)->get();
+        $this->cars = Car::where('manufacturer_id', $car)->get();
     }
 
     public function render()

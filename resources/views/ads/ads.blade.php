@@ -114,7 +114,7 @@
                         <x-text-input id="photo" type="file" multiple name="photo[]"
                             class="dark:text-gray-200 bg-white dark:bg-gray-800" /> --}}
 
-                        @if (Auth::user()->is_admin == true)
+                        @if (Auth::user() && Auth::user()->is_admin == true)
                             <x-input-label for="accepted" :value="__('Accepted')" class="dark:text-gray-200" />
                             <input type="checkbox" id="accepted" @checked($ad->accepted) name="accepted"
                                 class="block mx-auto rounded-2xl dark:text-gray-200 bg-white dark:bg-gray-800" />
