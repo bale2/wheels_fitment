@@ -37,7 +37,7 @@
     <div class="py-12">
         <div class=" max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div
-                class=" bg-white overflow-hidden shadow-sm sm:rounded-lg flex flex-row flex-wrap-reverse justify-between dark:bg-gray-800">
+                class=" bg-white overflow-hidden shadow-sm sm:rounded-lg flex flex-row flex-wrap-reverse mt-5 justify-between dark:bg-gray-800">
                 <div class=" md:w-3/4 w-full  p-6 text-gray-900 dark:text-gray-100 ">
                     <div class="flex flex-row justify-evenly pb-5 mt-2">
                         <div>
@@ -135,38 +135,23 @@
             </div>
             <div
                 class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
-                <h1>Elfogadott autótípusok:</h1>
-                @foreach ($collection as $one)
+                <h1 class="text-slate-400 text-lg">Elfogadott autótípusok:</h1>
+                @foreach ($wheel->cars as $one)
                     <a href='/cars/{{ $one->id }}'>
-                        <h3 class="dark:text-white">{{ $one['manufacturer_name'] . ' ' . $one['car_model'] }}
+                        <h3 class="dark:text-white pl-5">-{{ $one->manufacturer->manufacturer_name }}
+                            {{ $one->car_model }}
                         </h3>
                     </a>
                 @endforeach
             </div>
             <div
                 class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
-
-                @if (Auth::user())
-                    <form method="post" action="{{ route('car_wheel_post') }}" class="mt-6 space-y-6 "
-                        enctype="multipart/form-data">
-                        @csrf
-                        @method('post')
-                        <input type="hidden" value="{{ $wheel->id }}" name="car_id" class="block mt-1 w-full" />
-                        <x-input-label for="wheel_car" :value="__('Select the wheel you want to add to the car')" class="dark:text-gray-200" />
-                        <select id="wheel_car" name="wheel_car"
-                            class="dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent rounded-lg">
-                            @foreach ($wheels as $wheel)
-                                <option hidden disabled selected value> -- select an option -- </option>
-                                <option class="dark:text-gray-200 bg-white dark:bg-gray-800" value={{ $wheel->id }}
-                                    :selected="wheel_id === {{ $wheel->id }}">
-                                    {{ $wheel->manufacturer->manufacturer_name }}
-                                    {{ $wheel->model }}</option>
-                            @endforeach
-                        </select>
-                        <input type="submit" value="feltöltés"
-                            class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
-                    </form>
-                @endif
+                <h1 class="text-slate-400 text-lg">Add car to the wheel:</h1>
+                <div class="pl-5">
+                    @if (Auth::user())
+                        @livewire('DependentDropdownForWheels', ['wheel_id' => $wheel->id])
+                    @endif
+                </div>
             </div>
         </div>
     </div>

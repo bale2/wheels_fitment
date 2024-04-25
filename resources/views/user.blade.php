@@ -59,6 +59,15 @@
                         <h2>Registered: {{ $user->created_at }}</h2>
                     </div>
                 </div>
+                <div
+                    class="p-6 text-gray-900 dark:text-gray-100 bg-white overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800">
+                    <h1 class="text-white text-xl mb-2">{{ $user->name }}'s ads:</h1>
+                    @foreach ($user->ads as $one)
+                        <p class=" text-white text-lg">{{ $one->title }}</p>
+                        <p>{{ $one->price }}</p>
+                        <p> {{ $one->wheel->model }}</p>
+                    @endforeach
+                </div>
                 @if (Auth::user() and (Auth::user()->is_admin or Auth::user()->id == $user->id))
                     <div
                         class="p-6 text-gray-900 dark:text-gray-100 bg-white overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800">

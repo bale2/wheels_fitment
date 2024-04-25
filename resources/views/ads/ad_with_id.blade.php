@@ -50,29 +50,66 @@
             @endif
         </div>
     </x-slot>
-    <div class="py-12">
-        <div class=" max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg my-5 grid grid-cols-2 dark:bg-gray-800">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <h1 class="font-extrabold size-4 mb-2">{{ $ad->price }}Ft</h1>
-                    <h1 class="text-gray-800 dark:text-gray-200 font-mono">Leírás:</h1>
-                    <h1>{{ $ad->description }}</h1>
-                    <h1>Hirdető: {{ $ad->user->name }}</h1>
-                    <h1>Hely: {{ $ad->place }}</h1>
-                    <h1>Kerék azonosítója: {{ $ad->wheel->id }}</h1>
-                    <h1>Létrehozás dátuma: {{ $ad->updated_at }}</h1>
-                    <h1>Hirdetés:#{{ $ad->id }}</h1>
-                </div>
-                <div>
-                    <img src="{{ asset('photos/' . $ad->photo) }}" alt="image of the ad"
-                        class="mt-10 mb-auto mx-auto h-40 w-auto ">
-                </div>
+    <div class="py-6">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-3xl mx-auto mb-10">
+                @foreach ($ad->photos() as $photo)
+                    <img src="{{ asset('photos/' . $photo) }}" alt="image of the ad"
+                        class="mt-10 mb-auto mx-auto h-20 w-auto ">
+                @endforeach
             </div>
-            <iframe width="600" height="450" style="border:0" loading="lazy" allowfullscreen
-                referrerpolicy="no-referrer-when-downgrade"
-                src="https://www.google.com/maps/embed/v1/place?key={{ $google_api }}
+            <div
+                class=" bg-white overflow-hidden shadow-sm sm:rounded-lg justify-between dark:bg-gray-800 max-w-3xl mx-auto">
+                <div class=" w-full text-gray-900 dark:text-gray-100 ">
+                    <div class=" justify-evenly pb-2 mt-2">
+                        <h1 class="mx-[17%] font-bold text-3xl">{{ $ad->title }}</h1>
+                    </div>
+                    <div>
+                        <h1 class="mx-[17%] font-bold text-xl">{{ $ad->price }}€</h1>
+                    </div>
+                </div>
+                {{--  --}}
+                <div class="flex flex-row justify-start mx-[17%]">
+                    <div class="w-56">
+                        <h1 class="text-slate-400 text-base">Eladó: {{ $ad->user->name }} </h1>
+                        <h1 class="text-lg"></h1>
+                        <hr>
+                    </div>
+                    <div class="w-56
+                            ">
+                        <h1 class="text-slate-400 text-base">Hely: {{ $ad->place }}</h1>
+                        <h1 class="text-lg"></h1>
+                        <hr>
+                    </div>
+                </div>
+                <div class="mx-[17%]">
+                    <div class="max-w-[28rem]">
+                        <h1 class="text-slate-400 text-base">Uploaded: {{ $ad->updated_at }} </h1>
+                        <hr>
+                    </div>
+
+                </div>
+                {{--  --}}
+                <h1 class="mx-[17%] text-slate-400 text-base mb-5">Leírás: </h1>
+                <div class=" mx-[17%] text-base">
+                    <p>{{ $ad->description }}
+                    </p>
+                </div>
+                <h1 class="mt-5 inline-block mx-[17%] text-slate-400 text-base">Wheel associated with ad: </h1>
+                <a href="/wheels/{{ $ad->wheel->id }}">
+                    <p class="inline text-base text-white">{{ $ad->wheel->manufacturer->manufacturer_name }}
+                        {{ $ad->wheel->model }}</p>
+                </a>
+            </div>
+            <div
+                class="border border-green-500 bg-white overflow-hidden shadow-sm sm:rounded-lg justify-between dark:bg-gray-800 max-w-3xl h-[calc(h-[1000px]/2)] mx-auto">
+                <iframe class="w-full h-full" style="border:0" loading="lazy" allowfullscreen
+                    referrerpolicy="no-referrer-when-downgrade"
+                    src="https://www.google.com/maps/embed/v1/place?key={{ $google_api }}
               &q={{ $ad->place }}">
-            </iframe>
+                </iframe>
+            </div>
+
         </div>
     </div>
 </x-app-layout>

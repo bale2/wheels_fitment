@@ -41,6 +41,6 @@ class Car extends Model
 
     public function wheels()
     {
-        return $this->belongsToMany(Wheel::class, 'wheels_cars');
+        return $this->belongsToMany(Wheel::class, 'wheels_cars')->distinct();
     }
 }

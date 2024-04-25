@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
+use Livewire\Attributes\Validate;
 use PSpell\Config;
 
 class ManufacturerController extends Controller
@@ -60,10 +61,12 @@ class ManufacturerController extends Controller
 
     public function car_wheel_post(Request $request)
     {
+        // dd($request);
         $car = Car::find($request->car_id);
         $car->wheels()->attach($request->wheel_car);
         return redirect()->back();
     }
+
 
     public function manufacturer_create_post(Request $request)
     {
@@ -141,6 +144,7 @@ class ManufacturerController extends Controller
 
     public function car_delete_post(Request $request)
     {
+
         $car = Car::find($request->car_id);
         $this->authorize('delete', $car);
         $car->delete();

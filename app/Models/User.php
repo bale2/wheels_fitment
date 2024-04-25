@@ -54,6 +54,6 @@ class User extends Authenticatable
     }
     public function wheels(): BelongsToMany
     {
-        return $this->belongsToMany(Wheel::class, 'wheels_users');
+        return $this->belongsToMany(Wheel::class, 'wheels_users')->distinct();
     }
 }
