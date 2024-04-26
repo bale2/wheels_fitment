@@ -38,21 +38,21 @@
             </h1>
         </div>
     </x-slot>
-    <div class="flex">
+    <div>
         <div>
             <livewire:DependentDropdownForCalculator />
         </div>
-        <div class="flex flex-row justify-evenly" x-data="width = 100, { wheel_id: '', model: '', price: 0, wheel_type_id: 0, diameter: 0, ET_number: 0, bolt_pattern_id: 0, kba_number: '', center_bore: 0, nut_bolt_id: 0, multipiece: 0, note: '', accepted: 0 }">
+        {{-- <div class="flex flex-row justify-evenly" x-data="width = 100, { wheel_id: '', model: '', price: 0, wheel_type_id: 0, diameter: 0, ET_number: 0, bolt_pattern_id: 0, kba_number: '', center_bore: 0, nut_bolt_id: 0, multipiece: 0, note: '', accepted: 0 }">
             <canvas id="canvas" class="bg-white mt-8" width="650" height="500"></canvas>
             <div style="display:none;">
                 <img id="source1" style="z-index: -100;" src="{{ asset('bal_felni.png') }}" />
                 <img id="source2" style="z-index: -100;" src="{{ asset('jobb_felni.png') }}" />
                 <img style="z-index: 100;" id="source3" src="{{ asset('suspension_photoshop2.png') }}" />
             </div>
-        </div>
+        </div> --}}
     </div>
 
-    <script>
+    {{-- <script>
         // bal:7.62+2=9.62, jobb: 7.62-2=5.62
         //  3= 50 4 =66.66  5 = 83.33 6 = 100 7 = 116.667 8 = 133.32 9 = 149.98 10 = 166,64 11= 183.3  12 = 200
         let felniwidth = 150; //6j = 15.24
@@ -123,5 +123,5 @@
         image3.addEventListener("load", (e) => {
             ctx.drawImage(image3, 450, 50, 200, 344);
         });
-    </script>
+    </script> --}}
 </x-app-layout>

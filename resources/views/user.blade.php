@@ -47,27 +47,46 @@
                     <div>
                         <h1 class="text-white text-xl mb-2">{{ $user->name }}'s wheels:</h1>
                         @foreach ($user->wheels as $one)
-                            <p class=" text-white text-lg">{{ $one->manufacturer->manufacturer_name }}
-                                {{ $one->model }}</p>
+                            <a href="/wheels/{{ $one->id }}">
+                                <p class=" text-white text-lg ml-5 mb-1">{{ $one->manufacturer->manufacturer_name }}
+                                    {{ $one->model }}</p>
+                            </a>
                         @endforeach
                     </div>
 
                     <div class="text-white text-xl ">
                         <h1 class="mt-2">{{ $user->name }}'s details:</h1>
-                        <h2>Email: {{ $user->email }}</h2>
-                        <h2>Last logged in:{{ $user->updated_at }}</h2>
-                        <h2>Registered: {{ $user->created_at }}</h2>
+                        <div class="ml-5">
+                            <h2>Email: {{ $user->email }}</h2>
+                            <h2>Last logged in:{{ $user->updated_at }}</h2>
+                            <h2>Registered: {{ $user->created_at }}</h2>
+                        </div>
                     </div>
                 </div>
-                <div
-                    class="p-6 text-gray-900 dark:text-gray-100 bg-white overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800">
-                    <h1 class="text-white text-xl mb-2">{{ $user->name }}'s ads:</h1>
-                    @foreach ($user->ads as $one)
-                        <p class=" text-white text-lg">{{ $one->title }}</p>
-                        <p>{{ $one->price }}</p>
-                        <p> {{ $one->wheel->model }}</p>
-                    @endforeach
-                </div>
+                <h1 class="ml-4 text-white text-xl my-auto">{{ $user->name }}'s ads:</h1>
+                @foreach ($user->ads as $one)
+                    <a href="/ads/{{ $one->id }}">
+                        <div
+                            class=" flex flex-row justify-start p-6 text-gray-900 dark:text-gray-100 bg-white overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800">
+                            <div>
+                                <p class=" text-white text-bold text-lg">{{ $one->title }}</p>
+                                <p class="text-base">{{ $one->price }} €</p>
+                                <p class="text-base">{{ $one->wheel->manufacturer->manufacturer_name }}
+                                    {{ $one->wheel->model }}
+                                </p>
+                            </div>
+                            <div class="pl-[70%]">
+                                @foreach ($one->photos() as $photo)
+                                    <div class="">
+                                        <img src="{{ asset('photos/' . $photo) }}" alt="image of the ad"
+                                            class="mx-auto h-20 w-auto ">
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </a>
+                @endforeach
+
                 @if (Auth::user() and (Auth::user()->is_admin or Auth::user()->id == $user->id))
                     <div
                         class="p-6 text-gray-900 dark:text-gray-100 bg-white overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800">

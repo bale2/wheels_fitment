@@ -102,7 +102,7 @@
                 </a>
             </div>
             <div
-                class="border border-green-500 bg-white overflow-hidden shadow-sm sm:rounded-lg justify-between dark:bg-gray-800 max-w-3xl h-[calc(h-[1000px]/2)] mx-auto">
+                class="border border-green-500 bg-white overflow-hidden shadow-sm sm:rounded-lg justify-between dark:bg-gray-800 max-w-3xl h-[40vh] mx-auto">
                 <iframe class="w-full h-full" style="border:0" loading="lazy" allowfullscreen
                     referrerpolicy="no-referrer-when-downgrade"
                     src="https://www.google.com/maps/embed/v1/place?key={{ $google_api }}
