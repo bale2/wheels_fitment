@@ -22,14 +22,14 @@
                 <form method="post" action="{{ route('car_wheel_post') }}" enctype="multipart/form-data">
                     @csrf
                     @method('post')
-                    <input type="hidden" value="{{ $wheel_id }}" name="wheel_id_wheelpage" class="block w-full" />
+                    <input type="hidden" value="{{ $car_id }}" name="car_id_carpage" class="block w-full" />
                     <select required
                         class="dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent rounded-lg w-80 form-control"
-                        name="car_id">
+                        name="wheel_id">
                         <option value="" selected>Choose product</option>
-                        @if ($cars)
-                            @foreach ($cars as $car)
-                                <option value="{{ $car->id }}">{{ $car->car_model }}</option>
+                        @if ($wheels)
+                            @foreach ($wheels as $wheel)
+                                <option value="{{ $wheel->id }}">{{ $wheel->model }}</option>
                             @endforeach
                         @endif
                     </select>

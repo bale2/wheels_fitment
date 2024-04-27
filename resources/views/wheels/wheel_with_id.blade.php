@@ -23,15 +23,6 @@
                     {{ $wheel->model }}
                 </h2>
             </div>
-            @if (Auth::user())
-                <div>
-                    <a href="/ad_create">
-                        <div
-                            class="bg-slate-200 font-semibold text-xl text-gray-800 leading-tight rounded-3xl pl-5 mr-1 text-center">
-                            Hirdetésfeladás</div>
-                    </a>
-                </div>
-            @endif
         </div>
     </x-slot>
     <div class="py-12">
@@ -40,12 +31,12 @@
                 class=" bg-white overflow-hidden shadow-sm sm:rounded-lg flex flex-row flex-wrap-reverse mt-5 justify-between dark:bg-gray-800">
                 <div class=" md:w-3/4 w-full  p-6 text-gray-900 dark:text-gray-100 ">
                     <div class="flex flex-row justify-evenly pb-5 mt-2">
-                        <div>
-                            <h1 class="text-slate-400 text-base w-52 ">Gyártó:</h1>
+                        <div class="w-52">
+                            <h1 class="text-slate-400 text-base">Gyártó:</h1>
                             <h1 class="font-bold text-3xl"> {{ $wheel->manufacturer->manufacturer_name }}</h1>
                         </div>
-                        <div>
-                            <h1 class="text-slate-400 text-base w-52">Model:</h1>
+                        <div class="w-52">
+                            <h1 class="text-slate-400 text-base">Model:</h1>
                             <h1 class="font-bold text-3xl   "> {{ $wheel->model }}</h1>
                         </div>
                     </div>
@@ -127,8 +118,7 @@
                     <h1 class="text-base mt-10">Feltöltés dátuma: {{ $wheel->created_at }}</h1>
                     <h1 class="text-base">ID: {{ $wheel->id }}</h1>
                 </div>
-                <div class="mx-auto
-                            my-auto">
+                <div class="md:my-auto lg:ml-10 mx-auto">
                     <img src="{{ asset('photos/' . $wheel->photo) }}" alt="image of the wheel" class="h-40 w-auto ">
                 </div>
 

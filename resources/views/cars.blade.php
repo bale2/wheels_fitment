@@ -107,7 +107,7 @@
                     @if ($car->id != 1)
                         <a href="cars/{{ $car->id }}">
                             <div
-                                class="bg-white overflow-hidden flex flex-row shadow-sm sm:rounded-lg dark:bg-gray-800 mb-12">
+                                class="bg-white overflow-hidden flex flex-row shadow-sm sm:rounded-lg dark:bg-gray-800 mb-1">
                                 <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
                                 <svg class="my-auto pl-3" width="100px" height="100px" viewBox="0 0 24 24"
                                     fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -129,20 +129,20 @@
                                 </div>
                             </div>
                         </a>
-                        <div class="grid grid-cols-2 text-center">
+                        <div class="flex justify-evenly text-center mb-5">
                             @can('delete', $car)
                                 <form method="post" action="{{ route('car_delete_post') }}">
                                     @csrf
                                     @method('post')
                                     <input type="hidden" value="{{ $car->id }}" name="car_id"
                                         class="block mt-1 w-full" />
-                                    <x-primary-button>
+                                    <x-primary-button class="w-[20vw]">
                                         Delete car
                                     </x-primary-button>
                                 </form>
                             @endcan
                             @can('update', $car)
-                                <x-primary-button x-data=""
+                                <x-primary-button class="w-[20vw]" x-data=""
                                     x-on:click.prevent="$dispatch('open-modal','car_update_post'),
                                      car_id='{{ $car->id }}',
                                      manufacturer_id='{{ $car->manufacturer_id }}',

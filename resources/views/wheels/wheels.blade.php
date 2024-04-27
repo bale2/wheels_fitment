@@ -18,7 +18,7 @@
                     @if ($wheel->id != 1)
                         <a href="wheels/{{ $wheel->id }}">
                             <div
-                                class="bg-white overflow-hidden grid grid-cols-2 shadow-sm sm:rounded-lg dark:bg-gray-800 mb-12">
+                                class="bg-white overflow-hidden grid grid-cols-2 shadow-sm sm:rounded-lg dark:bg-gray-800 mb-1">
                                 <div class="p-6 text-gray-900 dark:text-gray-100">
                                     {{-- <h1>ID: {{ $wheel->id }}</h1> --}}
                                     <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200">
@@ -52,20 +52,20 @@
                                 </div>
                             </div>
                         </a>
-                        <div class="grid grid-cols-2 text-center">
+                        <div class="flex justify-evenly text-center mb-5">
                             @can('delete', $wheel)
                                 <form method="post" action="{{ route('wheel_delete_post') }}">
                                     @csrf
                                     @method('post')
                                     <input type="hidden" value="{{ $wheel->id }}" name="wheel_id"
                                         class="block mt-1 w-full" />
-                                    <x-primary-button>
+                                    <x-primary-button class="w-[20vw]">
                                         Delete wheel
                                     </x-primary-button>
                                 </form>
                             @endcan
                             @can('update', $wheel)
-                                <x-primary-button x-data="" {{-- x-on:click.prevent="$dispatch('open-modal','wheel_update_post'),wheel_id={{ $wheel->id }},manufacturer_id={{ $wheel->manufacturer->id }},model='{{ $wheel->model }}', price={{ $wheel->price }}, wheel_type_id={{ $wheel->wheel_type_id }}, diameter={{ $wheel->diameter }}, width={{ $wheel->width }}, ET_number={{ $wheel->ET_number }}, bolt_pattern_id={{ $wheel->bolt_pattern_id }}, kba_number='{{ $wheel->kba_number }}', center_bore={{ $wheel->center_bore }}, nut_bolt_id={{ $wheel->nut_bolt_id }}, multipiece={{ $wheel->multipiece }}, note='{{ $wheel->note }}', accepted='{{ $wheel->accepted }}'"> --}}
+                                <x-primary-button class="w-[20vw]" x-data="" {{-- x-on:click.prevent="$dispatch('open-modal','wheel_update_post'),wheel_id={{ $wheel->id }},manufacturer_id={{ $wheel->manufacturer->id }},model='{{ $wheel->model }}', price={{ $wheel->price }}, wheel_type_id={{ $wheel->wheel_type_id }}, diameter={{ $wheel->diameter }}, width={{ $wheel->width }}, ET_number={{ $wheel->ET_number }}, bolt_pattern_id={{ $wheel->bolt_pattern_id }}, kba_number='{{ $wheel->kba_number }}', center_bore={{ $wheel->center_bore }}, nut_bolt_id={{ $wheel->nut_bolt_id }}, multipiece={{ $wheel->multipiece }}, note='{{ $wheel->note }}', accepted='{{ $wheel->accepted }}'"> --}}
                                     x-on:click.prevent="$dispatch('open-modal','wheel_update_post'),wheel_id='{{ $wheel->id }}', manufacturer_id='{{ $wheel->manufacturer_id }}',model='{{ $wheel->model }}',price={{ $wheel->price }},wheel_type_id={{ $wheel->wheel_type_id }},diameter={{ $wheel->diameter }},width={{ $wheel->width }},ET_number={{ $wheel->ET_number }}, bolt_pattern_id={{ $wheel->bolt_pattern_id }}, kba_number='{{ $wheel->kba_number }}', center_bore={{ $wheel->center_bore }}, nut_bolt_id={{ $wheel->nut_bolt_id }}, multipiece={{ $wheel->multipiece }}, note='{{ $wheel->note }}', accepted='{{ $wheel->accepted }}'">
                                     Update wheel
                                 </x-primary-button>

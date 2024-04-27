@@ -62,8 +62,14 @@ class ManufacturerController extends Controller
     public function car_wheel_post(Request $request)
     {
         // dd($request);
-        $car = Car::find($request->car_id);
-        $car->wheels()->attach($request->wheel_car);
+        if ($request->has("wheel_id_wheelpage")) {
+            $wheel = Wheel::find($request->wheel_id_wheelpage);
+            $wheel->cars()->attach($request->car_id);
+        } else {
+            // car_id_carpage
+            $car = Car::find($request->car_id_carpage);
+            $car->wheels()->attach($request->wheel_id);
+        }
         return redirect()->back();
     }
 
