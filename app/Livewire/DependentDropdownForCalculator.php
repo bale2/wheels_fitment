@@ -29,7 +29,6 @@ class DependentDropdownForCalculator extends Component
         // $this->cars = Car::where('id', $car)->get();
         $this->cars = Car::where('manufacturer_id', $car)->get();
     }
-
     public function render()
     {
         return view('livewire.dependent-dropdown-for-calculator');
