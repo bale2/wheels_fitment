@@ -79,6 +79,7 @@
                         @endcan
                     </div>
                 @endforeach
+                {{ $ads->links() }}
             </div>
         </div>
         <div class="text-center">

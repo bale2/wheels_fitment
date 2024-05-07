@@ -51,12 +51,14 @@
         <div class=" max-w-7xl mx-auto sm:px-6 lg:px-8 sm:rounded-lg">
             @foreach ($nut_bolts as $nut_bolt)
                 @if ($nut_bolt->type != 'Unknown')
-                    <div
-                        class="bg-white overflow-hidden grid grid-cols-2 shadow-sm sm:rounded-lg dark:bg-gray-800 mb-12">
-                        <div class="p-6 text-gray-900 dark:text-gray-100">
-                            <h1>{{ $nut_bolt->type }}</h1>
+                    <a href="/nut_bolts/{{ $nut_bolt->id }}">
+                        <div
+                            class="bg-white overflow-hidden grid grid-cols-2 shadow-sm sm:rounded-lg dark:bg-gray-800 mb-12">
+                            <div class="p-6 text-gray-900 dark:text-gray-100">
+                                <h1>{{ $nut_bolt->type }}</h1>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 @endif
             @endforeach
             {{ $nut_bolts->links() }}

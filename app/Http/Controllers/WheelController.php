@@ -6,14 +6,17 @@ use App\Models\Ad;
 use App\Models\Car;
 use App\Models\Wheel;
 use App\Models\NutBolt;
-use App\Models\Manufacturer;
-use App\Models\BoltPattern;
 use App\Models\WheelType;
-
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
+
+use App\Models\BoltPattern;
+use Illuminate\Support\Str;
+use App\Models\Manufacturer;
+use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\DB;
+use function Laravel\Prompts\error;
+use Spatie\FlareClient\Http\Response;
 
 class WheelController extends Controller
 {
@@ -104,55 +107,9 @@ class WheelController extends Controller
         return redirect()->action([WheelController::class, 'wheels_show']);
     }
 
-    //wheel_types
-    public function wheel_types(): View
-    {
-        return view('wheels/wheel_types', [
-            // 'wheel_types' => WheelType::all()->sortBy('wheel_type')
-            'wheel_types' => WheelType::orderBy('wheel_type')->paginate(10)
-        ]);
-    }
 
-    public function wheel_type_create_post(Request $request)
-    {
-        WheelType::create([
-            'wheel_type' => $request->type,
-            'updated_at' => now()
-        ]);
-        return redirect()->action([WheelController::class, 'wheel_types']);
-    }
 
-    public function bolt_patterns(): View
-    {
-        return view('wheels/bolt_patterns', [
-            'bolt_patterns' => BoltPattern::all()->toQuery()->paginate(10)
-        ]);
-    }
-
-    public function bolt_pattern_create_post(Request $request)
-    {
-        BoltPattern::create([
-            'bolt_pattern' => $request->type,
-            'updated_at' => now()
-        ]);
-        return redirect()->action([WheelController::class, 'bolt_patterns']);
-    }
-
-    public function nut_bolts(): View
-    {
-        return view('wheels/nut_bolts', [
-            'nut_bolts' => NutBolt::orderBy('type')->paginate(10)
-        ]);
-    }
-
-    public function nut_bolts_create_post(Request $request)
-    {
-        NutBolt::create([
-            'type' => $request->type,
-            'updated_at' => now()
-        ]);
-        return redirect()->action([WheelController::class, 'nut_bolts']);
-    }
+    
 
     public function wheel_delete_post(Request $request)
     {

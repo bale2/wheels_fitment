@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Car;
 use App\Models\User;
 use App\Models\Wheel;
+use App\Models\WheelType;
 use App\Models\NutBolt;
 use App\Models\BoltPattern;
 use App\Models\Manufacturer;
@@ -23,6 +24,18 @@ class ManufacturerController extends Controller
     {
         return view('manufacturers/manufacturers', ['manufacturers' => Manufacturer::orderBy('manufacturer_name')->paginate(10)]);
     }
+
+    public function manufacturer_with_id($manufacturer): View
+    {
+        // dd(
+        //     $manufacturer,
+        //     Wheel::join('manufacturers', 'manufacturers.id', '=', 'wheels.manufacturer_id')->where('manufacturers.id', $manufacturer)->paginate(10)
+        // );
+        return view('wheels/datas', [
+            'wheels' => Wheel::where('manufacturer_id', $manufacturer)->paginate(10)
+        ]);
+    }
+
     public function car_with_id(Request $request, string $id): View
     {
         $manufacturer = null;
@@ -100,7 +113,7 @@ class ManufacturerController extends Controller
     }
     public function car_create_post(Request $request)
     {
-        // dd($request);
+        dd($request);
         Car::create([
             'manufacturer_id' => $request->manufacturer_id,
             'car_model' => $request->car_model,
@@ -179,5 +192,112 @@ class ManufacturerController extends Controller
             'boltPatterns' => BoltPattern::all(),
             'nutBolts' => NutBolt::all()
         ]);
+    }
+
+    // public function datas(Request $request): View
+    // {
+
+    //     $previousUrl = $request->headers->get('referer');
+    //     $URL_explode = explode('/', $previousUrl);
+    //     $previousUrl = end($URL_explode);
+
+    //     switch ($previousUrl) {
+    //         case 'wheel_types':
+    //             return view('wheels/datas', [
+    //                 // 'wheel_types' => WheelType::all()->sortBy('wheel_type')
+    //                 // 'wheels' => Wheel::paginate(10)
+    //             ]);
+    //             break;
+    //         case 'bolt_patterns':
+    //             dd($request);
+    //             break;
+    //         case 'nut_bolts':
+    //             dd("megy 3");
+    //             break;
+    //         case 'manufacturers':
+    //             dd("megy 4");
+    //             break;
+    //         default:
+    //             abort(404);
+    //     }
+    //     return view('wheels/datas', [
+    //         // 'wheel_types' => WheelType::all()->sortBy('wheel_type')
+    //         'wheels' => Wheel::paginate(10)
+    //     ]);
+    // }
+
+    //wheel_types
+    public function wheel_types(): View
+    {
+        return view('wheels/wheel_types', [
+            // 'wheel_types' => WheelType::all()->sortBy('wheel_type')
+            'wheel_types' => WheelType::orderBy('wheel_type')->paginate(10)
+        ]);
+    }
+
+    public function wheel_types_with_id($wheel_types): View
+    {
+        // dd($wheel_types);
+        return view('wheels/datas', [
+            'wheels' => Wheel::where('wheel_type_id', $wheel_types)->paginate(10)
+        ]);
+    }
+
+    public function wheel_type_create_post(Request $request)
+    {
+        WheelType::create([
+            'wheel_type' => $request->type,
+            'updated_at' => now()
+        ]);
+        return redirect()->action([WheelController::class, 'wheel_types']);
+    }
+
+    public function bolt_patterns(): View
+    {
+        return view('wheels/bolt_patterns', [
+            'bolt_patterns' => BoltPattern::all()->toQuery()->paginate(10)
+        ]);
+    }
+
+
+    public function bolt_patterns_with_id($bolt_pattern): View
+    {
+
+        return view('wheels/datas', [
+            'wheels' => Wheel::where('bolt_pattern_id', $bolt_pattern)->paginate(10)
+        ]);
+    }
+
+
+    public function bolt_pattern_create_post(Request $request)
+    {
+        BoltPattern::create([
+            'bolt_pattern' => $request->type,
+            'updated_at' => now()
+        ]);
+        return redirect()->action([WheelController::class, 'bolt_patterns']);
+    }
+
+    public function nut_bolts(): View
+    {
+        return view('wheels/nut_bolts', [
+            'nut_bolts' => NutBolt::orderBy('type')->paginate(10)
+        ]);
+    }
+
+    public function nut_bolts_with_id($nut_bolts): View
+    {
+        return view('wheels/datas', [
+            'wheels' => Wheel::where('nut_bolt_id', $nut_bolts)->paginate(10)
+        ]);
+    }
+
+    public function nut_bolts_create_post(Request $request)
+    {
+        NutBolt::create([
+            'type' => $request->type,
+            'updated_at' => now()
+        ]);
+        return redirect()->action([WheelController::class, 'nut_bolts']);
     }
 }

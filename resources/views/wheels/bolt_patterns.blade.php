@@ -48,15 +48,30 @@
         </div>
     </x-slot>
     <div class="py-12">
+
+        {{-- <form method="post" action="{{ route('datas') }}" class="mt-2 space-y-2 flex flex-col items-center"
+            enctype="multipart/form-data">
+            @csrf
+            @method('get')
+            <input type="hidden" value="semmi" name="info" id="info">
+            <x-input-label for="type" :value="__('Bolt Pattern')" class="dark:text-gray-200" />
+            <x-text-input id="type" name="type" class="field"
+                class="dark:text-gray-200 bg-white dark:bg-gray-800" />
+            <input type="submit" value="feltöltés"
+                class=" block items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
+        </form> --}}
+
         <div class=" max-w-7xl mx-auto sm:px-6 lg:px-8 sm:rounded-lg">
             @foreach ($bolt_patterns as $bolt_pattern)
                 @if ($bolt_pattern->bolt_pattern != 'Unknown')
-                    <div
-                        class="bg-white overflow-hidden grid grid-cols-2 shadow-sm sm:rounded-lg dark:bg-gray-800 mb-12">
-                        <div class="p-6 text-gray-900 dark:text-gray-100">
-                            <h1>{{ $bolt_pattern->bolt_pattern }}</h1>
+                    <a href="/bolt_patterns/{{ $bolt_pattern->id }}" id="form">
+                        <div
+                            class="bg-white overflow-hidden grid grid-cols-2 shadow-sm sm:rounded-lg dark:bg-gray-800 mb-12">
+                            <div class="p-6 text-gray-900 dark:text-gray-100">
+                                <h1 id="a_tag">{{ $bolt_pattern->bolt_pattern }}</h1>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 @endif
             @endforeach
             {{ $bolt_patterns->links() }}
@@ -74,5 +89,21 @@
                     class=" block items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
             </form>
         </x-modal>
-
+        {{-- <form id="form">
+            <input type="hidden" value="semmi" id="info">
+        </form> --}}
+        {{-- <script>
+            const form = document.getElementById('form');
+            const info = document.getElementById('info');
+            const a = document.getElementById('a_tag');
+            console.log(a_tag[0].inne0, rHTML);
+            console.log(a_tag);
+            form.addEventListener('click', function(e) {
+                e.preventDefault();
+                const a_value = a.value;
+                console.log(a_value);
+                localStorage.setItem('a', a_value);
+            })
+            // localStorage.removeItem("info");
+        </script> --}}
 </x-app-layout>

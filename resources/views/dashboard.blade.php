@@ -13,9 +13,15 @@
                     @else
                         {{ __('Log in to access everything!') }}
                     @endif
-                    <h1>Search a vehicle to get fitting wheels</h1>
-                    <div>
-                        <livewire:DependentDropdown />
+                    <div class="flex justify-evenly">
+                        <div>
+                            <h1>Search a vehicle to get fitting wheels </h1>
+                            <livewire:DependentDropdown />
+                        </div>
+                        <div>
+                            <h1>Search a Wheel to get fitting cars </h1>
+                            <livewire:DependentDropdownC />
+                        </div>
                     </div>
                     {{-- <div class="flex flex-row gap-x-5">
                         <div class="mt-5">

@@ -6,7 +6,7 @@ use App\Models\Wheel;
 use App\Models\Manufacturer;
 use Livewire\Component;
 
-class DependentDropdownForCars extends Component
+class DependentDropdownC extends Component
 {
     public $manufacturers;
     public $wheels;
@@ -16,7 +16,7 @@ class DependentDropdownForCars extends Component
 
     public function mount()
     {
-        $this->manufacturers = Manufacturer::all()->sortBy("manufacturer_name ");
+        $this->manufacturers = Manufacturer::all()->sortBy("manufacturer_name");
     }
 
     public function updatedSelectedManufacturer($manufacturer)
@@ -26,6 +26,6 @@ class DependentDropdownForCars extends Component
 
     public function render()
     {
-        return view('livewire.dependent-dropdown-for-cars');
+        return view('livewire.dependent-dropdown-C');
     }
 }

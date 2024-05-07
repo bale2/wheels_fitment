@@ -25,7 +25,7 @@ class AdController extends Controller
 
         return view('ads/ads', [
             // 'ads'=> $ads
-            'ads' => Ad::orderBy('updated_at')->paginate(5)
+            'ads' => Ad::orderBy('updated_at')->paginate(3),
 
         ]);
     }

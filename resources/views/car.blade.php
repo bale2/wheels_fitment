@@ -297,15 +297,15 @@
                     </a>
                 @endforeach
             </div>
-            <div
-                class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
-                <h1 class="text-slate-400 text-lg">Add wheel to the car:</h1>
-                <div class="pl-5">
-                    @if (Auth::user())
+            @if (Auth::user())
+                <div
+                    class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
+                    <h1 class="text-slate-400 text-lg">Add wheel to the car:</h1>
+                    <div class="pl-5">
                         @livewire('DependentDropdownForCars', ['car_id' => $car->id])
-                    @endif
+                    </div>
                 </div>
-            </div>
+            @endif
         </div>
     </div>
 </x-app-layout>
