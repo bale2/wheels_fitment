@@ -1,0 +1,14 @@
+.slider {
+    position: relative;
+    overflow: hidden;
+}
+
+.slider img {
+    display: none;
+}
+
+img.displaySlide {
+    display: block;
+}
+
+

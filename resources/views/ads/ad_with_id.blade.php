@@ -1,5 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
+
         <div class="flex justify-around ">
             <div class="w-3 ">
                 <a href="/ads"><svg fill="#000000" class="h-5 w-5" version="1.1" id="Capa_1"
@@ -52,14 +53,20 @@
     </x-slot>
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="max-w-3xl mx-auto mb-10">
-                @foreach ($ad->photos() as $photo)
-                    <img src="{{ asset('photos/' . $photo) }}" alt="image of the ad"
-                        class="mt-10 mb-auto mx-auto h-20 w-auto ">
-                @endforeach
+            <div class="slider max-w-3xl mx-auto mb-10">
+                <div class="slides">
+                    @foreach ($ad->photos() as $photo)
+                        <img src="{{ asset('photos/' . $photo) }}" alt="image of the ad"
+                            class="slide mt-10 mb-auto mx-auto h-20 w-auto">
+                    @endforeach
+                </div>
+                <button class="previous absolute top-1/2 left-0 w-8" onclick="previousSlide()">&#10094</button>
+                <button class="next absolute top-1/2 right-0 w-8" onclick="nextSlide()">&#10095</button>
             </div>
             <div
-                class=" bg-white overflow-hidden shadow-sm sm:rounded-lg justify-between dark:bg-gray-800 max-w-3xl mx-auto">
+                class="
+                    bg-white overflow-hidden shadow-sm sm:rounded-lg justify-between dark:bg-gray-800 max-w-3xl
+                    mx-auto">
                 <div class=" w-full text-gray-900 dark:text-gray-100 ">
                     <div class=" justify-evenly pb-2 mt-2">
                         <h1 class="mx-[17%] font-bold text-3xl">{{ $ad->title }}</h1>
@@ -112,4 +119,49 @@
 
         </div>
     </div>
+    <script>
+        const slides = document.querySelectorAll(".slides img");
+        let slideIndex = 0;
+        let intervalId = null;
+
+        document.addEventListener("DOMContentLoaded", initializeSlider)
+
+        // initializeSlider();
+
+        function initializeSlider() {
+
+
+
+
+            if (slides.length > 0) {
+                slides[slideIndex].classList.add("displaySlide");
+                intervalId = setInterval(nextSlide, 5000);
+            }
+        }
+
+        function showSlide(index) {
+
+            if (index >= slides.length) {
+                slideIndex = 0;
+            } else if (index < 0) {
+                slideIndex = slides.length - 1;
+            }
+
+            slides.forEach(slide => {
+                slide.classList.remove("displaySlide");
+            });
+            slides[slideIndex].classList.add("displaySlide");
+        }
+
+        function previousSlide() {
+            clearInterval(intervalId);
+            slideIndex--;
+            showSlide(slideIndex);
+        }
+
+        function nextSlide() {
+            slideIndex++;
+            showSlide(slideIndex);
+        }
+    </script>
 </x-app-layout>

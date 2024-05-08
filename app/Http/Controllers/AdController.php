@@ -25,7 +25,7 @@ class AdController extends Controller
 
         return view('ads/ads', [
             // 'ads'=> $ads
-            'ads' => Ad::orderBy('updated_at')->paginate(3),
+            'ads' => Ad::orderBy('updated_at')->paginate(10),
 
         ]);
     }
@@ -37,6 +37,7 @@ class AdController extends Controller
         // ->select('ads.*','users.name')
         // ->where('ads.id',$id)
         // ->first();
+
         return view('ads/ad_with_id', [
             'ad' => Ad::find($id),
             'google_api' => config('services.google.key'),
