@@ -229,7 +229,7 @@
                 <div class=" md:w-3/4 w-full  p-6 text-gray-900 dark:text-gray-100 ">
                     <div class="flex flex-row justify-evenly pb-5 mt-2">
                         <div class="w-52">
-                            <h1 class="text-slate-400 text-base">Gyártó:</h1>
+                            <h1 class="text-slate-400 text-base">Manufacturer:</h1>
                             <h1 class="font-bold text-3xl"> {{ $car->manufacturer->manufacturer_name }}</h1>
                         </div>
                         <div class="w-52">
@@ -275,7 +275,7 @@
                         </div>
                     </div>
 
-                    <h1 class="text-base mt-10">Feltöltés dátuma: {{ $car->created_at }}</h1>
+                    <h1 class="text-base mt-10">Date of upload: {{ $car->created_at }}</h1>
                     <h1 class="text-base">ID: {{ $car->id }}</h1>
                 </div>
                 <svg class="md:my-auto lg:ml-10 mx-auto" width="100px" height="100px" viewBox="0 0 24 24"
@@ -290,7 +290,7 @@
                 class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
                 <h1 class="text-slate-400 text-lg">Accepted wheels:</h1>
                 @foreach ($car->wheels as $one)
-                    <a href='/cars/{{ $one->id }}'>
+                    <a href='/wheels/{{ $one->id }}'>
                         <h3 class="dark:text-white pl-5">-{{ $one->manufacturer->manufacturer_name }}
                             {{ $one->model }}
                         </h3>

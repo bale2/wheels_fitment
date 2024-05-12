@@ -6,7 +6,7 @@
             </h2>
             @if (Auth::user())
                 <div class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
-                    <a href="/ad_create">Hirdetésfeladás</a>
+                    <a href="/ad_create">Post an ad</a>
                 </div>
             @endif
         </div>
@@ -51,10 +51,9 @@
                                     <h1>{{ $ad->updated_at }}</h1>
                                 </div>
                                 <div>
-                                    @foreach ($ad->photos() as $photo)
-                                        <img src="{{ asset('photos/' . $photo) }}" alt="image of the ad"
-                                            class="mt-10 mb-auto mx-auto h-20 w-auto ">
-                                    @endforeach
+                                    {{-- {{ $ad->photos()[0] }} --}}
+                                    <img src="{{ asset('photos/' . $ad->photos()[0]) }}" alt="image of the ad"
+                                        class="mt-10 mb-auto mx-auto h-20 w-auto ">
                                 </div>
                             </div>
                         </a>

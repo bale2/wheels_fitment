@@ -21,13 +21,13 @@
                                     <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200">
                                         {{ $wheel->title }}
                                     </h1>
-                                    <h1>Gyártó: {{ $wheel->manufacturer->manufacturer_name }}</h1>
+                                    <h1>Manufacturer: {{ $wheel->manufacturer->manufacturer_name }}</h1>
                                     <h1>Model :{{ $wheel->model }}</h1>
                                     {{-- <h1>Típus: {{ $wheel->wheelType->wheel_type }}</h1> --}}
                                     {{-- <h1>Szélesség: {{ $wheel->width }}</h1> --}}
                                     {{-- <h1>ET szám: {{ $wheel->ET_number }} --}}
-                                    <h1>Osztókör:{{ $wheel->boltPattern->bolt_pattern }}</h1>
-                                    <h1>Átmérő: {{ $wheel->diameter }} &emsp; Szélesség: {{ $wheel->width }}</h1>
+                                    <h1>Bolt pattern:{{ $wheel->boltPattern->bolt_pattern }}</h1>
+                                    <h1>Diameter: {{ $wheel->diameter }} &emsp; Width: {{ $wheel->width }}</h1>
                                     {{-- <h1>Osztókör:{{ $wheel->boltPattern->bolt_pattern }}</h1> --}}
                                     {{-- <h1>KBA szám:{{ $wheel->kba_number }}</h1> --}}
                                     {{-- <h1>Középfurat: {{ $wheel->center_bore }}</h1> --}}
@@ -42,10 +42,8 @@
                                     {{-- <h1>Kép: {{ $wheel->photo }}</h1> --}}
                                 </div>
                                 <div>
-                                    @foreach ($wheel->photos() as $photo)
-                                        <img src="{{ asset('photos/' . $photo) }}" alt="image of the ad"
-                                            class="mt-10 mb-auto mx-auto h-20 w-auto ">
-                                    @endforeach
+                                    <img src="{{ asset('photos/' . $wheel->photos()[0]) }}" alt="image of the ad"
+                                        class="mt-10 mb-auto mx-auto h-20 w-auto ">
                                 </div>
                             </div>
                         </a>

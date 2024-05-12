@@ -60,7 +60,15 @@ class WheelController extends Controller
     public function wheel_create_post(Request $request)
     {
         $this->validate($request, [
-            'kba_number' => 'regex:/(KBA[0-9]{2,10})/',
+            'model' => ['required', 'size:255'],
+            'price' => ['require', 'min_digits:2', 'max_digits:8'],
+            'diameter' => ['required', 'lte:30', 'gte:5'],
+            'width' => ['required', 'lte:20', 'gte:3'],
+            'ET_number' => ['required', 'lte:100', 'gte:-100'],
+            // 'kba_number' => 'regex:/(KBA[0-9]{2,10})/',
+            'kba_number' => ['require', 'numeric', 'min_digits:2', 'max_digits:8'],
+            'center_bore' => ['required', 'lte:100', 'gte:20'],
+            'note' => ['require', 'size:512']
         ]);
 
         // $newPhotoName = time() . '-' . $request->model . '.' .
@@ -109,7 +117,7 @@ class WheelController extends Controller
 
 
 
-    
+
 
     public function wheel_delete_post(Request $request)
     {

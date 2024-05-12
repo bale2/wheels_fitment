@@ -6,7 +6,7 @@
             </h2>
             @if (Auth::user())
                 <x-primary-button x-data="" x-on:click.prevent="$dispatch('open-modal','car_create')">
-                    Adding a car
+                    Add car
                 </x-primary-button>
             @endif
             {{-- Create Modal --}}
@@ -78,7 +78,7 @@
                                 {{ $nutBolt->type }}</option>
                         @endforeach
                     </select>
-                    <input type="submit" value="feltöltés"
+                    <input type="submit" value="upload"
                         class="mx-auto block items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
                 </form>
             </x-modal>
@@ -117,7 +117,7 @@
                                         stroke-linejoin="round" />
                                 </svg>
                                 <div class="p-6 pl-3 text-gray-900 dark:text-gray-100">
-                                    <h1>Gyártó: {{ $car->manufacturer->manufacturer_name }}</h1>
+                                    <h1>Manufacturer: {{ $car->manufacturer->manufacturer_name }}</h1>
                                     <h1>Model :{{ $car->car_model }}</h1>
                                     <h1>Engine size :{{ $car->engine_size }}</h1>
                                     <h1>Manufactured :{{ $car->car_year }}</h1>
@@ -155,7 +155,7 @@
                                         bolt_pattern_id={{ $car->bolt_pattern_id }},
                                          accepted={{ $car->accepted }}
                                         ">
-                                    Update car{{ $car->accepted }}
+                                    Update car
                                 </x-primary-button>
                             @endcan
                         </div>

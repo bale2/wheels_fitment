@@ -1,8 +1,8 @@
 <div class="flex flex-row">
     <div>
         <div class="form-group row">
-            <label for="category"
-                class="col-md-4 text-md-right dark:text-gray-200 text-white"><strong>Manufacturer</strong></label>
+            <label for="category" class="col-md-4 text-md-right dark:text-gray-200 text-white"><strong>Manufacturer
+                    (Car)</strong></label>
             <div class="col-md-6">
                 <select id="man_id" wire:model.live="selectedManufacturerCar"
                     class="dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent rounded-lg w-80 form-control">
@@ -38,8 +38,8 @@
     {{-- wheels --}}
     <div>
         <div class="form-group row">
-            <label for="category"
-                class="col-md-4 text-md-right dark:text-gray-200 text-white"><strong>Manufacturer</strong></label>
+            <label for="category" class="col-md-4 text-md-right dark:text-gray-200 text-white"><strong>Manufacturer
+                    (Wheel)</strong></label>
             <div class="col-md-6">
                 <select id="man_id" wire:model.live="selectedManufacturerWheel"
                     class="dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent rounded-lg w-80 form-control">

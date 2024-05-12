@@ -76,12 +76,8 @@
                                 </p>
                             </div>
                             <div class="pl-[70%]">
-                                @foreach ($one->photos() as $photo)
-                                    <div class="">
-                                        <img src="{{ asset('photos/' . $photo) }}" alt="image of the ad"
-                                            class="mx-auto h-20 w-auto ">
-                                    </div>
-                                @endforeach
+                                <img src="{{ asset('photos/' . $one->photos()[0]) }}" alt="image of the ad"
+                                    class="mx-auto h-20 w-auto ">
                             </div>
                         </div>
                     </a>

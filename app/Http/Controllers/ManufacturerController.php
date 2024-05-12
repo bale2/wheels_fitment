@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redis;
 use Livewire\Attributes\Validate;
 use PSpell\Config;
 
@@ -235,9 +236,15 @@ class ManufacturerController extends Controller
         ]);
     }
 
-    public function wheel_types_with_id($wheel_types): View
+    public function wheel_types_with_id($wheel_types, Request $request): View
     {
-        // dd($wheel_types);
+
+        $previousUrl = $request->headers->get('referer');
+        $URL_explode = explode('/', $previousUrl);
+        $previousUrl = end($URL_explode);
+        dd($request);
+        //localStoragebe tárold el honnan jöttél előző elötti link majd ezt nézd  meg és azt a viewt add vissza ami kereket/autót ad
+        //miután visszaadtad töröld ki a localStorageből
         return view('wheels/datas', [
             'wheels' => Wheel::where('wheel_type_id', $wheel_types)->paginate(10)
         ]);

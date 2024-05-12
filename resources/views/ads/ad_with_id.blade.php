@@ -44,8 +44,8 @@
                 <div>
                     <a href="/ad_create">
                         <div
-                            class="bg-slate-200 font-semibold text-xl text-gray-800 leading-tight rounded-3xl pl-5 mr-1 text-center">
-                            Hirdetésfeladás</div>
+                            class="bg-slate-200 font-semibold text-xl text-gray-800 leading-tight rounded-3xl px-5 text-center">
+                            Post an ad</div>
                     </a>
                 </div>
             @endif
@@ -78,13 +78,13 @@
                 {{--  --}}
                 <div class="flex flex-row justify-start mx-[17%]">
                     <div class="w-56">
-                        <h1 class="text-slate-400 text-base">Eladó: {{ $ad->user->name }} </h1>
+                        <h1 class="text-slate-400 text-base">Seller: {{ $ad->user->name }} </h1>
                         <h1 class="text-lg"></h1>
                         <hr>
                     </div>
                     <div class="w-56
                             ">
-                        <h1 class="text-slate-400 text-base">Hely: {{ $ad->place }}</h1>
+                        <h1 class="text-slate-400 text-base">Place: {{ $ad->place }}</h1>
                         <h1 class="text-lg"></h1>
                         <hr>
                     </div>
@@ -97,7 +97,7 @@
 
                 </div>
                 {{--  --}}
-                <h1 class="mx-[17%] text-slate-400 text-base mb-5">Leírás: </h1>
+                <h1 class="mx-[17%] text-slate-400 text-base mb-5">Note: </h1>
                 <div class=" mx-[17%] text-base">
                     <p>{{ $ad->description }}
                     </p>
@@ -121,6 +121,7 @@
     </div>
     <script>
         const slides = document.querySelectorAll(".slides img");
+        const buttons = document.querySelectorAll(".slider button");
         let slideIndex = 0;
         let intervalId = null;
 
@@ -129,14 +130,11 @@
         // initializeSlider();
 
         function initializeSlider() {
-
-
-
-
             if (slides.length > 0) {
                 slides[slideIndex].classList.add("displaySlide");
                 intervalId = setInterval(nextSlide, 5000);
             }
+
         }
 
         function showSlide(index) {

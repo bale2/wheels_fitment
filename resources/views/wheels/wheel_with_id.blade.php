@@ -29,10 +29,10 @@
         <div class=" max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div
                 class=" bg-white overflow-hidden shadow-sm sm:rounded-lg flex flex-row flex-wrap-reverse mt-5 justify-between dark:bg-gray-800">
-                <div class=" md:w-3/4 w-full  p-6 text-gray-900 dark:text-gray-100 ">
+                <div class="md:w-3/4 w-full  p-6 text-gray-900 dark:text-gray-100 ">
                     <div class="flex flex-row justify-evenly pb-5 mt-2">
                         <div class="w-52">
-                            <h1 class="text-slate-400 text-base">Gyártó:</h1>
+                            <h1 class="text-slate-400 text-base">Manufacturer:</h1>
                             <h1 class="font-bold text-3xl"> {{ $wheel->manufacturer->manufacturer_name }}</h1>
                         </div>
                         <div class="w-52">
@@ -42,37 +42,37 @@
                     </div>
                     <div class="flex flex-row justify-evenly">
                         <div class=" w-52">
-                            <h1 class="text-slate-400 text-base">Osztókör: </h1>
+                            <h1 class="text-slate-400 text-base">Bolt Pattern: </h1>
                             <h1 class="text-lg">{{ $wheel->boltPattern->bolt_pattern }}</h1>
                             <hr>
                         </div>
                         <div class="
                                 w-52">
-                            <h1 class="text-slate-400 text-base">Középfurat: </h1>
+                            <h1 class="text-slate-400 text-base">Center Bore: </h1>
                             <h1 class="text-lg">{{ $wheel->center_bore }}</h1>
                             <hr>
                         </div>
                     </div>
                     <div class="flex flex-row justify-evenly">
                         <div class="w-52">
-                            <h1 class="text-slate-400 text-base">Átmérő: </h1>
+                            <h1 class="text-slate-400 text-base">Diameter: </h1>
                             <h1 class="text-lg">{{ $wheel->diameter }}</h1>
                             <hr>
                         </div>
                         <div class="w-52">
-                            <h1 class="text-slate-400 text-base"> Szélesség: </h1>
+                            <h1 class="text-slate-400 text-base"> Width: </h1>
                             <h1 class="text-lg">{{ $wheel->width }}</h1>
                             <hr>
                         </div>
                     </div>
                     <div class="flex flex-row justify-evenly">
                         <div class=" w-52">
-                            <h1 class="text-slate-400 text-base">ET szám: </h1>
+                            <h1 class="text-slate-400 text-base">ET number: </h1>
                             <h1 class="text-lg">{{ $wheel->ET_number }} </h1>
                             <hr>
                         </div>
                         <div class="w-52">
-                            <h1 class="text-slate-400 text-base"> KBA szám: </h1>
+                            <h1 class="text-slate-400 text-base"> KBA number: </h1>
                             <h1 class="text-lg">{{ $wheel->kba_number }}</h1>
                             <hr>
                         </div>
@@ -80,52 +80,64 @@
 
                     <div class="flex flex-row justify-evenly">
                         <div class=" w-52">
-                            <h1 class="text-slate-400 text-base">Felfogatás: </h1>
+                            <h1 class="text-slate-400 text-base">Mounting type: </h1>
                             <h1 class="text-lg">{{ $wheel->nutBolt->type }}</h1>
                             <hr>
                         </div>
                         <div class=" w-52">
-                            <h1 class="text-slate-400 text-base">Felépítés:</h1>
+                            <h1 class="text-slate-400 text-base">Wheel design:</h1>
                             @if ($wheel->multipiece == 0)
-                                <h1 class="text-lg"> Egyrészes</h1>
+                                <h1 class="text-lg"> One piece</h1>
                                 <hr>
                             @else
-                                <h1 class="text-lg"> Többrészes</h1>
+                                <h1 class="text-lg"> Multipiece</h1>
                                 <hr>
                             @endif
                         </div>
                     </div>
                     <div class="flex flex-row justify-evenly mb-5">
                         <div class="w-52">
-                            <h1 class="text-slate-400 text-base">Típusa: </h1>
+                            <h1 class="text-slate-400 text-base">Type: </h1>
                             <h1 class="text-lg">{{ $wheel->wheelType->wheel_type }}</h1>
                             <hr>
                         </div>
                         <div class="w-52">
-                            <h1 class="text-slate-400 text-base">Becsült ár:</h1>
+                            <h1 class="text-slate-400 text-base">Estimated price:</h1>
                             <h1 class="text-lg">{{ $wheel->price }}</h1>
                             <hr>
                         </div>
                     </div>
-                    <h1 class="mx-[17%] text-slate-400 text-base">Megjegyzés: </h1>
+                    <h1 class="mx-[17%] text-slate-400 text-base">Note: </h1>
                     <div class=" mx-[17%]">
                         <div class="flex flex-wrap text-base">
                             <p>{{ $wheel->note }}</p>
                         </div>
-
                     </div>
 
-                    <h1 class="text-base mt-10">Feltöltés dátuma: {{ $wheel->created_at }}</h1>
+                    <h1 class="text-base mt-10">Date of upload: {{ $wheel->created_at }}</h1>
                     <h1 class="text-base">ID: {{ $wheel->id }}</h1>
                 </div>
-                <div class="md:my-auto lg:ml-10 mx-auto">
-                    <img src="{{ asset('photos/' . $wheel->photo) }}" alt="image of the wheel" class="h-40 w-auto ">
+                {{-- kép --}}
+                <div class="slider md:-ml-10  md:w-1/4 md:my-auto mx-auto mt-5">
+                    <div class="slides md:my-auto">
+                        @foreach ($wheel->photos() as $photo)
+                            <a href="{{ asset('photos/' . $photo) }}" target="_blank"><img
+                                    src="{{ asset('photos/' . $photo) }}" alt="image of the wheel"
+                                    class="slide h-40 w-40 object-cover mx-auto">
+                            </a>
+                        @endforeach
+                    </div>
+                    <div class="buttons flex justify-between">
+                        <button id="prev" class="previous relative top-1/2 left-0 w-8"
+                            onclick="previousSlide()">&#10094</button>
+                        <button id="next" class="next relative right-0 w-8" onclick="nextSlide()">&#10095</button>
+                    </div>
                 </div>
 
             </div>
             <div
                 class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
-                <h1 class="text-slate-400 text-lg">Elfogadott autótípusok:</h1>
+                <h1 class="text-slate-400 text-lg">Accepted cars:</h1>
                 @foreach ($wheel->cars as $one)
                     <a href='/cars/{{ $one->id }}'>
                         <h3 class="dark:text-white pl-5">-{{ $one->manufacturer->manufacturer_name }}
@@ -145,4 +157,56 @@
             @endif
         </div>
     </div>
+    <script>
+        const slides = document.querySelectorAll(".slides img");
+        const prevbutton = document.getElementById("prev");
+        const nextbutton = document.getElementById("next");
+        let slideIndex = 0;
+        let intervalId = null;
+
+        document.addEventListener("DOMContentLoaded", initializeSlider);
+
+        console.log(slides.length);
+
+        function initializeSlider() {
+            if (slides.length == 1) {
+                console.log("length = 1");
+                slides[slideIndex].classList.add("displaySlide");
+                prevbutton.style.display = "none";
+                nextbutton.style.display = "none";
+
+            }
+            if (slides.length > 1) {
+                console.log("length > 1");
+                slides[slideIndex].classList.add("displaySlide");
+                intervalId = setInterval(nextSlide, 5000);
+            }
+
+        }
+
+        function showSlide(index) {
+
+            if (index >= slides.length) {
+                slideIndex = 0;
+            } else if (index < 0) {
+                slideIndex = slides.length - 1;
+            }
+
+            slides.forEach(slide => {
+                slide.classList.remove("displaySlide");
+            });
+            slides[slideIndex].classList.add("displaySlide");
+        }
+
+        function previousSlide() {
+            clearInterval(intervalId);
+            slideIndex--;
+            showSlide(slideIndex);
+        }
+
+        function nextSlide() {
+            slideIndex++;
+            showSlide(slideIndex);
+        }
+    </script>
 </x-app-layout>
