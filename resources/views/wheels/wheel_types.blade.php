@@ -56,6 +56,7 @@
                             class="bg-white overflow-hidden grid grid-cols-2 shadow-sm sm:rounded-lg dark:bg-gray-800 mb-12">
                             <div class="p-6 text-gray-900 dark:text-gray-100">
                                 <h1>{{ $wheel_type->wheel_type }}</h1>
+                                {{-- <h1>{{ $prev_url }}</h1> --}}
                             </div>
                         </div>
                     </a>

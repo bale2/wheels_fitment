@@ -9,7 +9,7 @@ use App\Models\WheelType;
 use App\Models\NutBolt;
 use App\Models\BoltPattern;
 use App\Models\Manufacturer;
-
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -228,23 +228,24 @@ class ManufacturerController extends Controller
     // }
 
     //wheel_types
-    public function wheel_types(): View
+
+    public function wheel_types(Request $request): View
     {
+        $previousUrl = $request->headers->get('referer');
+        $URL_explode = explode('/', $previousUrl);
+        $previousUrl = end($URL_explode);
+        // dd($previousUrl);
+        session()->put('prev_url', $previousUrl);
         return view('wheels/wheel_types', [
             // 'wheel_types' => WheelType::all()->sortBy('wheel_type')
-            'wheel_types' => WheelType::orderBy('wheel_type')->paginate(10)
+            'wheel_types' => WheelType::orderBy('wheel_type')->paginate(10),
         ]);
     }
 
     public function wheel_types_with_id($wheel_types, Request $request): View
     {
-
-        $previousUrl = $request->headers->get('referer');
-        $URL_explode = explode('/', $previousUrl);
-        $previousUrl = end($URL_explode);
-        dd($request);
-        //localStoragebe tárold el honnan jöttél előző elötti link majd ezt nézd  meg és azt a viewt add vissza ami kereket/autót ad
-        //miután visszaadtad töröld ki a localStorageből
+        // dd($request);
+        $variablesess = $request->session()->get('prev_url');
         return view('wheels/datas', [
             'wheels' => Wheel::where('wheel_type_id', $wheel_types)->paginate(10)
         ]);
@@ -259,20 +260,37 @@ class ManufacturerController extends Controller
         return redirect()->action([WheelController::class, 'wheel_types']);
     }
 
-    public function bolt_patterns(): View
+    public function bolt_patterns(Request $request): View
     {
+        $previousUrl = $request->headers->get('referer');
+        $URL_explode = explode('/', $previousUrl);
+        $previousUrl = end($URL_explode);
+
+        session()->put('prev_page', $previousUrl);
+
         return view('wheels/bolt_patterns', [
-            'bolt_patterns' => BoltPattern::all()->toQuery()->paginate(10)
+            'bolt_patterns' => BoltPattern::all()->toQuery()->paginate(10),
+            'prev_page' => $previousUrl,
         ]);
     }
 
 
-    public function bolt_patterns_with_id($bolt_pattern): View
+    public function bolt_patterns_with_id($bolt_pattern, Request $request): View
     {
-
-        return view('wheels/datas', [
-            'wheels' => Wheel::where('bolt_pattern_id', $bolt_pattern)->paginate(10)
-        ]);
+        $prev_page = $request->session()->get('prev_page');
+        if ($prev_page == "wheels") {
+            return view('wheels/datas', [
+                'wheels' => Wheel::where('bolt_pattern_id', $bolt_pattern)->paginate(10)
+            ]);
+        } elseif ($prev_page == "cars") {
+            return view('wheels/datasC', [
+                'cars' => Car::where('bolt_pattern_id', $bolt_pattern)->paginate(10)
+            ]);
+        } else {
+            return view('wheels/datas', [
+                'wheels' => Wheel::where('bolt_pattern_id', $bolt_pattern)->paginate(10)
+            ]);
+        }
     }
 
 

@@ -17,29 +17,14 @@
                             <div
                                 class="bg-white overflow-hidden grid grid-cols-2 shadow-sm sm:rounded-lg dark:bg-gray-800 mb-1">
                                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                                    {{-- <h1>ID: {{ $wheel->id }}</h1> --}}
                                     <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200">
                                         {{ $wheel->title }}
                                     </h1>
+                                    <h1>{{ session()->get('prev_url') }}</h1>
                                     <h1>Manufacturer: {{ $wheel->manufacturer->manufacturer_name }}</h1>
                                     <h1>Model :{{ $wheel->model }}</h1>
-                                    {{-- <h1>Típus: {{ $wheel->wheelType->wheel_type }}</h1> --}}
-                                    {{-- <h1>Szélesség: {{ $wheel->width }}</h1> --}}
-                                    {{-- <h1>ET szám: {{ $wheel->ET_number }} --}}
                                     <h1>Bolt pattern:{{ $wheel->boltPattern->bolt_pattern }}</h1>
                                     <h1>Diameter: {{ $wheel->diameter }} &emsp; Width: {{ $wheel->width }}</h1>
-                                    {{-- <h1>Osztókör:{{ $wheel->boltPattern->bolt_pattern }}</h1> --}}
-                                    {{-- <h1>KBA szám:{{ $wheel->kba_number }}</h1> --}}
-                                    {{-- <h1>Középfurat: {{ $wheel->center_bore }}</h1> --}}
-                                    {{-- <h1>Felfogatás: {{ $wheel->nutBolt->type }}</h1> --}}
-                                    {{-- <h1>Felépítés:
-                                        @if ($wheel->multipiece == 0)
-                                            Egyrészes
-                                        @else
-                                            Többrészes
-                                        @endif
-                                    </h1> --}}
-                                    {{-- <h1>Kép: {{ $wheel->photo }}</h1> --}}
                                 </div>
                                 <div>
                                     <img src="{{ asset('photos/' . $wheel->photos()[0]) }}" alt="image of the ad"
