@@ -20,7 +20,6 @@
                                     <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200">
                                         {{ $wheel->title }}
                                     </h1>
-                                    <h1>{{ session()->get('prev_url') }}</h1>
                                     <h1>Manufacturer: {{ $wheel->manufacturer->manufacturer_name }}</h1>
                                     <h1>Model :{{ $wheel->model }}</h1>
                                     <h1>Bolt pattern:{{ $wheel->boltPattern->bolt_pattern }}</h1>

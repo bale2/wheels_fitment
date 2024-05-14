@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
 use function Laravel\Prompts\error;
+use Illuminate\Validation\Rules\File;
 use Spatie\FlareClient\Http\Response;
 
 class WheelController extends Controller
@@ -51,7 +52,7 @@ class WheelController extends Controller
     public function wheel_create(): View
     {
         return view('wheels/wheel_create', [
-            'manufacturers' => Manufacturer::all(),
+            'manufacturers' => Manufacturer::all()->sortBy('manufacturer_name'),
             'wheelTypes' => WheelType::all(),
             'boltPatterns' => BoltPattern::all(),
             'nutBolts' => NutBolt::all()
@@ -60,21 +61,21 @@ class WheelController extends Controller
     public function wheel_create_post(Request $request)
     {
         $this->validate($request, [
-            'model' => ['required', 'size:255'],
-            'price' => ['require', 'min_digits:2', 'max_digits:8'],
+            'manufacturer_id' => ['required'],
+            'model' => ['required', 'max:255'],
+            'price' => ['required', 'min_digits:2', 'max_digits:8'],
             'diameter' => ['required', 'lte:30', 'gte:5'],
             'width' => ['required', 'lte:20', 'gte:3'],
             'ET_number' => ['required', 'lte:100', 'gte:-100'],
-            // 'kba_number' => 'regex:/(KBA[0-9]{2,10})/',
-            'kba_number' => ['require', 'numeric', 'min_digits:2', 'max_digits:8'],
+            'kba_number' => ['required', 'numeric', 'min_digits:2', 'max_digits:8'],
             'center_bore' => ['required', 'lte:100', 'gte:20'],
-            'note' => ['require', 'size:512']
+            'wheel_type_id' => ['required'],
+            'bolt_pattern_id' => ['required'],
+            'nut_bolt_id' => ['required'],
+            'photo' => ['required'],
+            'photo.*' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:4096'],
+            'note' => ['required', 'max:255'],
         ]);
-
-        // $newPhotoName = time() . '-' . $request->model . '.' .
-        // $request->photo->extension();
-        // $request->photo->move(public_path('photos'), $newPhotoName);
-
         $multipiece = $request->multipiece !== null;
 
         $imagePaths = '';
@@ -92,8 +93,6 @@ class WheelController extends Controller
             }
         }
         $imagePaths = trim($imagePaths, ';');
-
-        // dd($imagePaths);
 
         Wheel::create([
             'manufacturer_id' => $request->manufacturer_id,
@@ -114,10 +113,6 @@ class WheelController extends Controller
         ]);
         return redirect()->action([WheelController::class, 'wheels_show']);
     }
-
-
-
-
 
     public function wheel_delete_post(Request $request)
     {
