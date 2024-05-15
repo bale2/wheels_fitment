@@ -46,6 +46,8 @@ class AdController extends Controller
 
     public function ad_create(): View
     {
+
+
         return view('ads/ad_create', [
             'wheelModels' => Wheel::all(),
             'manufacturerNames' => Manufacturer::all()
@@ -61,6 +63,7 @@ class AdController extends Controller
 
     public function ad_update_post(Request $request)
     {
+        // dd($request);
         // dd($request->ad_id);
         $this->authorize('update', Ad::find($request->ad_id));
         // $imagePaths = '';
@@ -86,13 +89,25 @@ class AdController extends Controller
             'price' => $request->price,
             'place' => $request->place,
             // 'photo' => $imagePaths,
-            'accepted' => $request->accepted == null ? false : true
+            'accepted' => $request->accepted,
+            // 'accepted' => $request->accepted == null ? false : true
         ]);
         return redirect()->back();
     }
 
     public function ad_create_post(Request $request)
     {
+        // dd($request);
+        $this->validate($request, [
+            'wheel_id' => ['required'],
+            'title' => ['required', 'max:255'],
+            'description' => ['required', 'max:255'],
+            'price' => ['required', 'numeric', 'min:0', 'max:99999'],
+            'place' => ['required'],
+            'photo' => ['required'],
+            'photo.*' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:4096'],
+        ]);
+
         $imagePaths = '';
 
         if ($request->hasFile('photo')) {

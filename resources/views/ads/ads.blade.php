@@ -110,15 +110,26 @@
                         <x-text-input x-model="place" id="place" name="place" class="field"
                             class="dark:text-gray-200 bg-white dark:bg-gray-800" />
 
-                        {{-- <x-input-label for="photo" :value="__('Photo')" class="dark:text-gray-200" />
+                        <x-input-label for="photo" :value="__('Photo')" class="dark:text-gray-200" />
                         <x-text-input id="photo" type="file" multiple name="photo[]"
-                            class="dark:text-gray-200 bg-white dark:bg-gray-800" /> --}}
+                            class="dark:text-gray-200 bg-white dark:bg-gray-800" />
 
-                        @if (Auth::user() && Auth::user()->is_admin == true)
-                            <x-input-label for="accepted" :value="__('Accepted')" class="dark:text-gray-200" />
-                            <input type="checkbox" id="accepted" @checked($ad->accepted) name="accepted"
-                                class="block mx-auto rounded-2xl dark:text-gray-200 bg-white dark:bg-gray-800" />
-                        @endif
+                        <div class="flex justify-center border border-yellow-200">
+                            <div class="flex items-center mb-4">
+                                <label for="accepted-1"
+                                    class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-1 border border-red-600">Accepted</label>
+                                <input id="accepted-1" type="radio" value="1" name="accepted" x-model="accepted"
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            </div>
+                            <div class="flex items-center">
+                                <label for="accepted-2"
+                                    class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-1 border border-red-600">Not
+                                    Accepted</label>
+                                <input checked id="accepted-2" type="radio" value="0" name="accepted"
+                                    x-model="accepted"
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            </div>
+                        </div>
 
                         <input type="submit" value="feltöltés"
                             class="mx-auto block items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">

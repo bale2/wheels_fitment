@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use PSpell\Config;
 use App\Models\Car;
 use App\Models\User;
 use App\Models\Wheel;
-use App\Models\WheelType;
 use App\Models\NutBolt;
+use App\Models\WheelType;
+use Illuminate\View\View;
 use App\Models\BoltPattern;
 use App\Models\Manufacturer;
-use Illuminate\Contracts\Session\Session;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redis;
 use Livewire\Attributes\Validate;
-use PSpell\Config;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Redis;
+use Illuminate\Contracts\Session\Session;
 
 class ManufacturerController extends Controller
 {
@@ -90,6 +90,7 @@ class ManufacturerController extends Controller
 
     public function manufacturer_create_post(Request $request)
     {
+
         $only_wheel_maker = false;
         if ($request->only_wheel_maker == 'on') {
             $only_wheel_maker = 1;
@@ -114,7 +115,24 @@ class ManufacturerController extends Controller
     }
     public function car_create_post(Request $request)
     {
-        dd($request);
+
+        $this->validate($request, [
+            'manufacturer_id' => ['required'],
+            'car_model' => ['required', 'max:255'],
+            'engine_size' => ['required', 'numeric', 'between:100,15000'],
+            'car_year' => ['required', 'numeric', 'between:1900,' . (date('Y'))],
+            'center_bore' => ['required', 'numeric', 'between:20,200'],
+            'nut_bolt_id' => ['required'],
+            'mtsurface_fender_distance' => ['required', 'numeric', 'between:0,200'],
+            'bolt_pattern_id' => ['required'],
+
+        ]);
+        $accept = $request->accepted;
+        if ($accept == "on") {
+            $accept = 1;
+        } else {
+            $accept = 0;
+        }
         Car::create([
             'manufacturer_id' => $request->manufacturer_id,
             'car_model' => $request->car_model,
@@ -124,7 +142,7 @@ class ManufacturerController extends Controller
             'nut_bolt_id' => $request->nut_bolt_id,
             'mtsurface_fender_distance' => $request->mtsurface_fender_distance,
             'bolt_pattern_id' => $request->bolt_pattern_id,
-            'accepted' => $request->accepted,
+            'accepted' => $accept,
             'updated_at' => now()
 
         ]);
