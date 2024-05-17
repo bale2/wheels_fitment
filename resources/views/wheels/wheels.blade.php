@@ -54,7 +54,7 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="bolt_patterns">
+                        <a href="bolt_patterns/wheels">
                             <div class="flex flex-row sm:rounded-lg text-center  mb-2 bg-gray-800">
                                 <?xml version="1.0" standalone="no"?>
                                 <!DOCTYPE svg
@@ -169,7 +169,7 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="/manufacturers">
+                        <a href="manufacturers/wheels">
                             <div class="flex flex-row text-center sm:rounded-lg  mb-2 bg-gray-800">
                                 <?xml version="1.0" ?>
 

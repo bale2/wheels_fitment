@@ -53,7 +53,7 @@
                             <x-input-label for="mtsurface_fender_distance" :value="__('Wheel-Fender Gap')"
                                 class="dark:text-gray-200" />
                             <x-text-input id="mtsurface_fender_distance" type="number" name="mtsurface_fender_distance"
-                                x-model="mtsurface_fender_distance"
+                                x-model="mtsurface_fender_distance" step="0.1"
                                 class=" field dark:text-gray-200 bg-white dark:bg-gray-800 w-32" />
                             @error('mtsurface_fender_distance')
                                 <small class="text-red-600 max-w-32">{{ $message }}</small>
@@ -77,7 +77,8 @@
                         </div>
                         <div class="flex flex-col">
                             <x-input-label for="center_bore" :value="__('Center_bore')" class="dark:text-gray-200" />
-                            <x-text-input id="center_bore" type="number" name="center_bore" x-model="center_bore"
+                            <x-text-input id="center_bore" type="number" name="center_bore" step="0.1"
+                                x-model="center_bore"
                                 class=" field dark:text-gray-200 bg-white dark:bg-gray-800  w-32" />
                             @error('center_bore')
                                 <small class="text-red-600">{{ $message }}</small>
@@ -111,16 +112,27 @@
                     @error('nut_bolt_id')
                         <small class="text-red-600">{{ $message }}</small>
                     @enderror
-                    {{-- itt még kell javítás --}}
                     @if (Auth::check() && Auth::user()->is_admin)
-                        <div class="w-72 max-sm:mx-auto">
-                            <x-input-label for="accepted" :value="__('Accepted')" class="dark:text-gray-200" />
-                            <input id="accepted" @checked(old('accepted')) type="checkbox" name="accepted"
-                                class="block mt-1 mx-auto w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <div class="flex justify-center gap-8 mt-5">
+                            <div class="flex items-center">
+                                <label for="accepted-1"
+                                    class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-1 ">Accepted</label>
+                                <input id="accepted-1" type="radio" value="1" name="accepted" x-model="accepted"
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            </div>
+                            <div class="flex items-center">
+                                <label for="accepted-2"
+                                    class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-1 ">Not
+                                    Accepted</label>
+                                <input checked id="accepted-2" type="radio" value="0" name="accepted"
+                                    x-model="accepted"
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            </div>
                         </div>
+                    @elseif (Auth::check() && !Auth::user()->is_admin)
+                        <x-text-input id="accepted" type="hidden" value=0 name="accepted"
+                            class="block mt-1 mx-52" />
                     @endif
-
-
                     <input type="submit" value="upload"
                         class="mx-auto block items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
                 </form>
@@ -150,7 +162,7 @@
                 <h1 class="dark:text-white font-semibold text-xl text-center mb-5">Filters</h1>
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 sm:rounded-lg mb-10">
                     <div class="overflow-hidden shadow-sm">
-                        <a href="bolt_patterns">
+                        <a href="bolt_patterns/cars">
                             <div class="flex flex-row sm:rounded-lg text-center  mb-2 bg-gray-800">
                                 <?xml version="1.0" standalone="no"?>
                                 <!DOCTYPE svg
@@ -246,7 +258,7 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="/manufacturers">
+                        <a href="manufacturers/cars">
                             <div class="flex flex-row text-center sm:rounded-lg  mb-2 bg-gray-800">
                                 <?xml version="1.0" ?>
 
@@ -288,10 +300,10 @@
             <div class="w-3/4 mx-auto sm:px-6 lg:px-8 sm:rounded-lg">
                 <h1 class="dark:text-white font-semibold text-xl text-center mb-5">Cars</h1>
                 @foreach ($cars as $car)
-                    @if ($car->id != 1)
-                        <a href="cars/{{ $car->id }}">
+                    @if ($car->car_id != 1)
+                        <a href="cars/{{ $car->car_id }}">
                             <div
-                                class="bg-white overflow-hidden flex flex-row shadow-sm sm:rounded-lg dark:bg-gray-800 mb-1">
+                                class="bg-white overflow-hidden flex flex-row shadow-sm sm:rounded-lg  {{ $car->CA == 0 ? 'dark:bg-red-600' : 'dark:bg-gray-800' }} mb-1">
                                 <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
                                 <svg class="my-auto pl-3" width="100px" height="100px" viewBox="0 0 24 24"
                                     fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -301,30 +313,31 @@
                                         stroke-linejoin="round" />
                                 </svg>
                                 <div class="p-6 pl-3 text-gray-900 dark:text-gray-100">
-                                    <h1>Manufacturer: {{ $car->manufacturer->manufacturer_name }}</h1>
+                                    <h1>Manufacturer: {{ $car->manufacturer_name }}</h1>
                                     <h1>Model :{{ $car->car_model }}</h1>
                                     <h1>Engine size :{{ $car->engine_size }}</h1>
                                     <h1>Manufactured :{{ $car->car_year }}</h1>
+                                    <h1>Accepted:{{ $car->CA }}</h1>
                                 </div>
                             </div>
-
                         </a>
-                        <div class="flex justify-evenly text-center mb-5">
-                            @can('delete', $car)
-                                <form method="post" action="{{ route('car_delete_post') }}">
-                                    @csrf
-                                    @method('post')
-                                    <input type="hidden" value="{{ $car->id }}" name="car_id"
-                                        class="block mt-1 w-full" />
-                                    <x-primary-button class="w-[20vw]">
-                                        Delete car
-                                    </x-primary-button>
-                                </form>
-                            @endcan
-                            @can('update', $car)
-                                <x-primary-button class="w-[20vw]" x-data=""
-                                    x-on:click.prevent="$dispatch('open-modal','car_update_post'),
-                                     car_id='{{ $car->id }}',
+                    @endif
+                    <div class="flex justify-evenly text-center mb-5">
+                        @can('delete', $car)
+                            <form method="post" action="{{ route('car_delete_post') }}">
+                                @csrf
+                                @method('post')
+                                <input type="hidden" value="{{ $car->car_id }}" name="car_id"
+                                    class="block mt-1 w-full" />
+                                <x-primary-button class="w-[20vw]">
+                                    Delete car
+                                </x-primary-button>
+                            </form>
+                        @endcan
+                        @can('update', $car)
+                            <x-primary-button class="w-[20vw]" x-data=""
+                                x-on:click.prevent="$dispatch('open-modal','car_update_post'),
+                                     car_id='{{ $car->car_id }}',
                                      manufacturer_id='{{ $car->manufacturer_id }}',
                                      car_model='{{ $car->car_model }}',
                                     engine_size={{ $car->engine_size }},
@@ -333,13 +346,12 @@
                                        nut_bolt_id={{ $car->nut_bolt_id }},
                                         mtsurface_fender_distance={{ $car->mtsurface_fender_distance }},
                                         bolt_pattern_id={{ $car->bolt_pattern_id }},
-                                         accepted={{ $car->accepted }}
+                                         accepted={{ $car->CA }}
                                         ">
-                                    Update car
-                                </x-primary-button>
-                            @endcan
-                        </div>
-                    @endif
+                                Update car
+                            </x-primary-button>
+                        @endcan
+                    </div>
                 @endforeach
                 {{ $cars->links() }}
             </div>
@@ -423,12 +435,25 @@
                         </div>
                         <div>
                             @if (Auth::check() && Auth::user()->is_admin)
-                                <x-input-label for="accepted" :value="__('Accepted')" class="dark:text-gray-200" />
-                                <input type="checkbox" name="accepted" id="accepted" @checked($car->accepted)
-                                    class="block mx-auto rounded-2xl dark:text-gray-200 bg-white dark:bg-gray-800" />
+                                <div class="flex justify-center gap-8 mt-5">
+                                    <div class="flex items-center">
+                                        <label for="accepted-1"
+                                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-1 ">Accepted</label>
+                                        <input id="accepted-1" type="radio" value="1" name="accepted"
+                                            x-model="accepted"
+                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                    </div>
+                                    <div class="flex items-center">
+                                        <label for="accepted-2"
+                                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-1 ">Not
+                                            Accepted</label>
+                                        <input checked id="accepted-2" type="radio" value="0" name="accepted"
+                                            x-model="accepted"
+                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                    </div>
+                                </div>
                             @endif
                         </div>
-                        {{ $car->accepted }}
                         <div>
                             <input type="submit" value="feltöltés"
                                 class="mx-auto block items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">

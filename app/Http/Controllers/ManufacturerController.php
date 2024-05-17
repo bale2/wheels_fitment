@@ -21,20 +21,43 @@ use Illuminate\Contracts\Session\Session;
 
 class ManufacturerController extends Controller
 {
-    public function show_manufacturers(): View
+    public function show_manufacturers($type): View
     {
-        return view('manufacturers/manufacturers', ['manufacturers' => Manufacturer::orderBy('manufacturer_name')->paginate(10)]);
+
+        // $previousUrl = $request->headers->get('referer');
+        // $URL_explode = explode('/', $previousUrl);
+        // $previousUrl = end($URL_explode);
+        // dd($previousUrl);
+        if ($type == "cars") {
+            return view(
+                'manufacturers/manufacturers',
+                [
+                    'manufacturers' => Manufacturer::orderBy('manufacturer_name')->where('only_wheel_maker', 0)->paginate(10),
+                    'type' => $type,
+                ],
+
+            );
+        } elseif ($type == "wheels") {
+            return view('manufacturers/manufacturers', ['manufacturers' => Manufacturer::orderBy('manufacturer_name')->paginate(10), 'type' => $type,]);
+        }
     }
 
-    public function manufacturer_with_id($manufacturer): View
+    public function manufacturer_with_id($type, $manufacturer): View
     {
         // dd(
         //     $manufacturer,
         //     Wheel::join('manufacturers', 'manufacturers.id', '=', 'wheels.manufacturer_id')->where('manufacturers.id', $manufacturer)->paginate(10)
         // );
-        return view('wheels/datas', [
-            'wheels' => Wheel::where('manufacturer_id', $manufacturer)->paginate(10)
-        ]);
+        // dd($manufacturer);
+        if ($type == "wheels") {
+            return view('wheels/datas', [
+                'wheels' => Wheel::where('manufacturer_id', $manufacturer)->paginate(10)
+            ]);
+        } elseif ($type == "cars") {
+            return view('wheels/datasC', [
+                'cars' => Car::where('manufacturer_id', $manufacturer)->paginate(10)
+            ]);
+        }
     }
 
     public function car_with_id(Request $request, string $id): View
@@ -43,7 +66,6 @@ class ManufacturerController extends Controller
         $model = null;
         $collection = collect();
         $car = Car::find($id);
-        // dd($car);
         // if ((Auth::user() and Auth::user()->is_admin) or (Auth::user()->id and $id)) {
         //     $user = User::find($id);
 
@@ -106,8 +128,17 @@ class ManufacturerController extends Controller
     }
     public function show_cars()
     {
+        $isAdmin = Auth::user() && Auth()->user()->is_admin;
+        // dd($isAdmin);
+        if ($isAdmin == 1) {
+            $cars = Car::join('manufacturers', 'cars.manufacturer_id', '=', 'manufacturers.id')->select('*', 'cars.accepted AS CA', 'cars.id AS car_id')->whereNotNull('cars.created_at')->orderBy('cars.accepted', 'desc')->orderBy('manufacturers.manufacturer_name')->paginate(3);
+        } else {
+            $cars = Car::join('manufacturers', 'cars.manufacturer_id', '=', 'manufacturers.id')->where('cars.accepted', '=', 1)->select('*', 'cars.accepted AS CA', 'cars.id AS car_id')->whereNotNull('cars.created_at')->orderBy('cars.accepted', 'desc')->orderBy('manufacturers.manufacturer_name')->paginate(3);
+        }
+        // dd($cars);
+        // dd($cars);
         return view('cars', [
-            'cars' => Car::all()->whereNotNull('created_at')->toQuery()->paginate(3),
+            'cars' => $cars,
             'manufacturers' => Manufacturer::all()->sortBy('manufacturer_name')->where('only_wheel_maker', '=', 0),
             'boltPatterns' => BoltPattern::all(),
             'nutBolts' => NutBolt::all()
@@ -115,7 +146,7 @@ class ManufacturerController extends Controller
     }
     public function car_create_post(Request $request)
     {
-
+        // dd($request);
         $this->validate($request, [
             'manufacturer_id' => ['required'],
             'car_model' => ['required', 'max:255'],
@@ -127,12 +158,12 @@ class ManufacturerController extends Controller
             'bolt_pattern_id' => ['required'],
 
         ]);
-        $accept = $request->accepted;
-        if ($accept == "on") {
-            $accept = 1;
-        } else {
-            $accept = 0;
-        }
+        // $accept = $request->accepted;
+        // if ($accept == "on") {
+        //     $accept = 1;
+        // } else {
+        //     $accept = 0;
+        // }
         Car::create([
             'manufacturer_id' => $request->manufacturer_id,
             'car_model' => $request->car_model,
@@ -142,7 +173,7 @@ class ManufacturerController extends Controller
             'nut_bolt_id' => $request->nut_bolt_id,
             'mtsurface_fender_distance' => $request->mtsurface_fender_distance,
             'bolt_pattern_id' => $request->bolt_pattern_id,
-            'accepted' => $accept,
+            'accepted' => $request->accepted,
             'updated_at' => now()
 
         ]);
@@ -171,8 +202,7 @@ class ManufacturerController extends Controller
             'nut_bolt_id' => $request->nut_bolt_id,
             'mtsurface_fender_distance' => $request->mtsurface_fender_distance,
             'bolt_pattern_id' => $request->bolt_pattern_id,
-            'accepted' => $request->accepted == null ? false : true,
-            // 'updated_at' => now()
+            'accepted' => $request->accepted
 
 
         ]);
@@ -278,38 +308,34 @@ class ManufacturerController extends Controller
         return redirect()->action([WheelController::class, 'wheel_types']);
     }
 
-    public function bolt_patterns(Request $request): View
+    public function bolt_patterns($type): View
     {
-        $previousUrl = $request->headers->get('referer');
-        $URL_explode = explode('/', $previousUrl);
-        $previousUrl = end($URL_explode);
+        // $previousUrl = $request->headers->get('referer');
+        // $URL_explode = explode('/', $previousUrl);
+        // $previousUrl = end($URL_explode);
 
-        session()->put('prev_page', $previousUrl);
+        // session()->put('prev_page', $previousUrl);
 
         return view('wheels/bolt_patterns', [
             'bolt_patterns' => BoltPattern::all()->toQuery()->paginate(10),
-            'prev_page' => $previousUrl,
+            'type' => $type,
         ]);
     }
 
 
-    public function bolt_patterns_with_id($bolt_pattern, Request $request): View
+    public function bolt_patterns_with_id($type, $bolt_pattern): View
     {
-        $prev_page = $request->session()->get('prev_page');
-        if ($prev_page == "wheels") {
+        if ($type == "wheels") {
             return view('wheels/datas', [
                 'wheels' => Wheel::where('bolt_pattern_id', $bolt_pattern)->paginate(10)
             ]);
-        } elseif ($prev_page == "cars") {
+        } elseif ($type == "cars") {
             return view('wheels/datasC', [
                 'cars' => Car::where('bolt_pattern_id', $bolt_pattern)->paginate(10)
             ]);
-        } else {
-            return view('wheels/datas', [
-                'wheels' => Wheel::where('bolt_pattern_id', $bolt_pattern)->paginate(10)
-            ]);
         }
     }
+
 
 
     public function bolt_pattern_create_post(Request $request)

@@ -64,7 +64,7 @@
         <div class=" max-w-7xl mx-auto sm:px-6 lg:px-8 sm:rounded-lg">
             @foreach ($bolt_patterns as $bolt_pattern)
                 @if ($bolt_pattern->bolt_pattern != 'Unknown')
-                    <a href="/bolt_patterns/{{ $bolt_pattern->id }}" id="form">
+                    <a href="/bolt_patterns/{{ $type }}/{{ $bolt_pattern->id }}" id="form">
                         <div
                             class="bg-white overflow-hidden grid grid-cols-2 shadow-sm sm:rounded-lg dark:bg-gray-800 mb-12">
                             <div class="p-6 text-gray-900 dark:text-gray-100">

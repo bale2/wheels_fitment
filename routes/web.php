@@ -70,18 +70,16 @@ Route::get('wheel_types', [ManufacturerController::class, 'wheel_types'])->name(
 Route::get('wheel_types/{id}', [ManufacturerController::class, 'wheel_types_with_id'])->name('wheel_types');
 Route::post('wheel_type_create', [ManufacturerController::class, 'wheel_type_create_post'])->middleware(['auth', 'verified'])->name('wheel_type_create_post');
 
-Route::get('bolt_patterns', [ManufacturerController::class, 'bolt_patterns'])->name('bolt_patterns');
-Route::get('bolt_patterns/{id}', [ManufacturerController::class, 'bolt_patterns_with_id'])->name('bolt_patterns');
+Route::get('bolt_patterns/{type}', [ManufacturerController::class, 'bolt_patterns'])->name('bolt_patterns');
+Route::get('bolt_patterns/{type}/{id}', [ManufacturerController::class, 'bolt_patterns_with_id'])->name('bolt_patterns');
 Route::post('bolt_pattern_create', [ManufacturerController::class, 'bolt_pattern_create_post'])->middleware(['auth', 'verified'])->name('bolt_pattern_create_post');
 
 Route::get('nut_bolts', [ManufacturerController::class, 'nut_bolts'])->name('nut_bolts');
 Route::get('nut_bolts/{id}', [ManufacturerController::class, 'nut_bolts_with_id'])->name('nut_bolts');
 Route::post('nut_bolt_create', [ManufacturerController::class, 'nut_bolts_create_post'])->middleware(['auth', 'verified'])->name('nut_bolts_create_post');
 
-
-//ezt írd át wheelre is csináld meg
-Route::get('/manufacturers', [ManufacturerController::class, 'show_manufacturers'])->name('manufacturers');
-Route::get('/manufacturers/{id}', [ManufacturerController::class, 'manufacturer_with_id'])->name('manufacturer_with_id');
+Route::get('/manufacturers/{type}', [ManufacturerController::class, 'show_manufacturers'])->name('manufacturers');
+Route::get('/manufacturers/{type}/{id}', [ManufacturerController::class, 'manufacturer_with_id'])->name('manufacturer_with_id');
 Route::get('/manufacturer_create', [ManufacturerController::class, 'manufacturer_create'])->middleware(['auth', 'verified'])->name('manufacturer_create');
 Route::post('/manufacturer_create', [ManufacturerController::class, 'manufacturer_create_post'])->middleware(['auth', 'verified'])->name('manufacturer_create_post');
 
