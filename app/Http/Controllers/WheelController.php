@@ -31,6 +31,18 @@ class WheelController extends Controller
             'boltPatterns' => BoltPattern::all(),
         ]);
     }
+    public function compare(): View
+    {
+        return view('compare', [
+            'wheels' => Wheel::all()->whereNotNull('created_at')->toQuery()->paginate(10),
+            'manufacturers' => Manufacturer::all(),
+            'nutBolts' => NutBolt::all(),
+            'wheelTypes' => WheelType::all(),
+            'boltPatterns' => BoltPattern::all(),
+        ]);
+    }
+
+
     public function wheel_with_id(string $id): View
     {
         $manufacturer = null;

@@ -91,6 +91,9 @@ Route::post('/wheel_create', [WheelController::class, 'wheel_create_post'])->mid
 Route::post('/wheel_update', [WheelController::class, 'wheel_update_post'])->middleware(['auth', 'verified',])->name('wheel_update_post');
 Route::post('/wheel_delete', [WheelController::class, 'wheel_delete_post'])->middleware(['auth', 'verified',])->name('wheel_delete_post');
 
+Route::get('/compare', [WheelController::class, 'compare'])->name('compare');
+
+
 //cars
 Route::get('/cars', [ManufacturerController::class, 'show_cars'])->name('cars');
 Route::get('/cars/{id}', [ManufacturerController::class, 'car_with_id'])->name('car_with_id');
