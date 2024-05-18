@@ -138,6 +138,8 @@ class WheelController extends Controller
         // $newPhotoName = time() . '-' . $request->model . '.' .
         // $request->photo->extension();
         // $request->photo->move(public_path('photos'), $newPhotoName);
+
+        // dd($request->accepted);
         $multipiece = $request->multipiece !== null;
 
         $imagePaths = '';
@@ -171,7 +173,7 @@ class WheelController extends Controller
             // 'photo' => $imagePaths,
             'note' => $request->note,
             'updated_at' => now(),
-            'accepted' => $request->accepted == null ? false : true
+            'accepted' => $request->accepted,
         ]);
         return redirect()->back();
     }

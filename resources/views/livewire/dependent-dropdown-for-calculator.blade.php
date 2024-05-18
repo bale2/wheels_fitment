@@ -94,14 +94,14 @@
     <script>
         function stock() {
             if (felniET == 0) {} else if (felniET > 0) {
-                felnibal = felnibal - felniET; //44
-                felnijobb = felnijobb + felniET; //84
-
                 //pozitív ET
+                felnibal = felnibal - felniET;
+                felnijobb = felnijobb + felniET;
+
             } else if (felniET < 0) { //-20-as ET mellett
-                felnibal = felnibal - felniET; //84 50+20 = 70
-                felnijobb = felnijobb + felniET; //44 50-20 = 30
                 //negatív ET
+                felnibal = felnibal - felniET;
+                felnijobb = felnijobb + felniET;
             }
 
             //csak bal oldalt értinti
@@ -153,9 +153,23 @@
             ctx.beginPath();
             ctx.moveTo(450, 200);
             ctx.lineTo(450, 430);
-            ctx.strokeStyle = '#ff0000';
+            ctx.strokeStyle = 'red';
             ctx.stroke();
             //Felfekvési pont
+
+
+            ctx.beginPath();
+            ctx.moveTo(402.5, 200);
+            ctx.lineTo(402.5, 430);
+            ctx.strokeStyle = 'orange';
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(572.5, 200);
+            ctx.lineTo(572.5, 430);
+            ctx.strokeStyle = 'green';
+            ctx.stroke();
+            //teszt
 
             ctx.beginPath();
             ctx.moveTo(balposition + felniwidth / 2, 200);
@@ -207,7 +221,13 @@
         }
 
         function szamolas() {
+            felniwidth = 25;
+            felniwidth = jswheel.width * 25;
+            felnibal = felniwidth / 2;
+            felnijobb = felniwidth / 2;
             if (felniET == 0) {} else if (felniET > 0) {
+
+                console.log(felnibal);
                 felnibal = felnibal - felniET; //44
                 felnijobb = felnijobb + felniET; //84
 
@@ -234,8 +254,6 @@
             rajzolj();
         }
 
-
-
         function change_car() {
             jscar = document.getElementById('car_id').value;
             jscar = JSON.parse(jscar);
@@ -248,9 +266,9 @@
         function change_wheel() {
             jswheel = document.getElementById('wheel_id').value;
             jswheel = JSON.parse(jswheel);
-            felniwidth = jswheel.width * 16.67;
-            felnibal = felniwidth / 2;
-            felnijobb = felniwidth / 2;
+            // felniwidth = jswheel.width * 25;
+            // felnibal = felniwidth / 2;
+            // felnijobb = felniwidth / 2;
             felniET = jswheel.ET_number;
             ctx.reset();
             szamolas();
@@ -262,7 +280,7 @@
 
         // bal:7.62+2=9.62, jobb: 7.62-2=5.62
         //  3= 50 4 =66.66  5 = 83.33 6 = 100 7 = 116.667 8 = 133.32 9 = 149.98 10 = 166,64 11= 183.3  12 = 200
-        let felniwidth = 100; //6j = 15.24
+        let felniwidth = 25; //6j = 15.24
         let felnibal = felniwidth / 2; //50 7.62
         let felnijobb = felniwidth / 2; //50 7.62
         let felniET = 0; //-20
@@ -277,7 +295,7 @@
         const image1 = document.getElementById("source1");
         const image2 = document.getElementById("source2");
         const image3 = document.getElementById("source3");
-        stock();
+        // szamolas();
     </script>
     <h1 class="text-white">lila: sárvédő</h1>
     <h1 class="text-white">kék: felni középvonala</h1>

@@ -355,8 +355,8 @@
                         </div>
                         <div>
 
-                            <x-input-label for="nut_bolt" :value="__('Nut OR Bolt')" class="dark:text-gray-200" />
-                            <select required id="nut_bolt" name="nut_bolt_id" x-model="nut_bolt_id"
+                            <x-input-label for="wheel_type_id" :value="__('Wheel Type')" class="dark:text-gray-200" />
+                            <select required id="wheel_type_id" name="wheel_type_id" x-model="wheel_type_id"
                                 class="field dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent w-80">
                                 @foreach ($wheelTypes as $wheelType)
                                     <option class="dark:text-gray-200 bg-white dark:bg-gray-800 w-80"
@@ -402,7 +402,7 @@
                                     <label for="accepted-1"
                                         class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-1 ">Accepted
                                     </label>
-                                    <input required id="accepted-1" type="radio" value="1" name="accepted"
+                                    <input id="accepted-1" type="radio" value="1" name="accepted"
                                         x-model="accepted"
                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                 </div>
@@ -411,7 +411,7 @@
                                         class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-1 ">Not
                                         accepted
                                     </label>
-                                    <input id="accepted-2" type="radio" value="0" name="accepted"
+                                    <input required id="accepted-2" type="radio" value="0" name="accepted"
                                         x-model="accepted"
                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                 </div>
