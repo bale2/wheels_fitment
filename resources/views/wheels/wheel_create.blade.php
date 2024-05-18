@@ -56,7 +56,8 @@
                         <div class="sm:flex sm:justify-evenly mb-5">
                             <div class="w-72 max-sm:mx-auto ">
                                 <x-input-label for="manufacturer" :value="__('Manufacturer')" class="dark:text-gray-200" />
-                                <select id="manufacturer" name="manufacturer_id" value="{{ old('manufacturer_id') }}"
+                                <select required id="manufacturer" name="manufacturer_id"
+                                    value="{{ old('manufacturer_id') }}"
                                     class="w-72 field dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent">
                                     <option hidden disabled selected> -- select an option -- </option>
                                     @foreach ($manufacturers as $manufacturer)
@@ -72,8 +73,8 @@
                             </div>
                             <div class="w-72 max-sm:mx-auto">
                                 <x-input-label for="model" :value="__('Model')" class="dark:text-gray-200 " />
-                                <x-text-input id="model" value="{{ old('model') }}" type="text" name="model"
-                                    class="block mt-1 w-full" />
+                                <x-text-input required id="model" value="{{ old('model') }}" type="text"
+                                    name="model" class="block mt-1 w-full" />
                                 @error('model')
                                     <small class="text-red-600">{{ $message }}</small>
                                 @enderror
@@ -82,7 +83,7 @@
                         <div class="sm:flex  sm:justify-evenly">
                             <div class="w-72 max-sm:mx-auto">
                                 <x-input-label for="diameter" :value="__('Diameter')" class="dark:text-gray-200" />
-                                <x-text-input id="diameter" type="number" value="{{ old('diameter') }}"
+                                <x-text-input required id="diameter" type="number" value="{{ old('diameter') }}"
                                     name="diameter" class="block mt-1 w-full" />
                                 @error('diameter')
                                     <small class="text-red-600">{{ $message }}</small>
@@ -91,7 +92,7 @@
                             </div>
                             <div class="w-72 max-sm:mx-auto">
                                 <x-input-label for="width" :value="__('Width')" class="dark:text-gray-200" />
-                                <x-text-input id="width" type="number" step="0.5" name="width"
+                                <x-text-input required id="width" type="number" step="0.5" name="width"
                                     value="{{ old('width') }}" class="block mt-1 w-full" />
                                 @error('width')
                                     <small class="text-red-600">{{ $message }}</small>
@@ -102,7 +103,7 @@
                         <div class="sm:flex  sm:justify-evenly">
                             <div class=" w-72 max-sm:mx-auto">
                                 <x-input-label for="ET_number" :value="__('ET_number')" class="dark:text-gray-200" />
-                                <x-text-input id="ET_number" value="{{ old('ET_number') }}" type="number"
+                                <x-text-input required id="ET_number" value="{{ old('ET_number') }}" type="number"
                                     name="ET_number" class="block mt-1 w-full" />
                                 @error('ET_number')
                                     <small class="text-red-600">{{ $message }}</small>
@@ -111,7 +112,7 @@
                             </div>
                             <div class=" w-72 max-sm:mx-auto">
                                 <x-input-label for="center_bore" :value="__('Center_bore')" class="dark:text-gray-200" />
-                                <x-text-input id="center_bore" value="{{ old('center_bore') }}" type="number"
+                                <x-text-input required id="center_bore" value="{{ old('center_bore') }}" type="number"
                                     step="0.1" name="center_bore" class="block mt-1 w-full" />
                                 @error('center_bore')
                                     <small class="text-red-600">{{ $message }}</small>
@@ -121,16 +122,16 @@
                         <div class="sm:flex  sm:justify-evenly ">
                             <div class=" w-72 max-sm:mx-auto">
                                 <x-input-label for="price" :value="__('Estimated price')" class="dark:text-gray-200" />
-                                <x-text-input id="price" value="{{ old('price') }}" type="number" name="price"
-                                    class="block-1 mt-1 w-full" />
+                                <x-text-input required id="price" value="{{ old('price') }}" type="number"
+                                    name="price" class="block-1 mt-1 w-full" />
                                 @error('price')
                                     <small class="text-red-600">{{ $message }}</small>
                                 @enderror
                             </div>
                             <div class=" w-72 max-sm:mx-auto">
                                 <x-input-label for="kba_number" :value="__('KBA number')" class="dark:text-gray-200" />
-                                <x-text-input id="kba_number" value="{{ old('kba_number') }}" type="number"
-                                    name="kba_number" class="block mt-1 w-full" />
+                                <x-text-input required id="kba_number" value="{{ old('kba_number') }}"
+                                    type="number" name="kba_number" class="block mt-1 w-full" />
                                 @error('kba_number')
                                     <small class="text-red-600">{{ $message }}</small>
                                 @enderror
@@ -141,7 +142,7 @@
                             <div class="
                                 w-72 max-sm:mx-auto">
                                 <x-input-label for="wheel_type" :value="__('Wheel type')" class="dark:text-gray-200" />
-                                <select id="wheel_type" name="wheel_type_id"
+                                <select required id="wheel_type" name="wheel_type_id"
                                     class="field w-72 dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent">
                                     <option hidden disabled selected> -- select an option -- </option>
                                     @foreach ($wheelTypes as $wheelType)
@@ -158,7 +159,7 @@
 
                             <div class="w-72 max-sm:mx-auto">
                                 <x-input-label for="bolt_pattern" :value="__('Bolt pattern')" class="dark:text-gray-200" />
-                                <select id="bolt_pattern" name="bolt_pattern_id"
+                                <select required id="bolt_pattern" name="bolt_pattern_id"
                                     class="field w-72 dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent">
                                     <option hidden disabled selected> -- select an option -- </option>
                                     @foreach ($boltPatterns as $boltPattern)
@@ -179,7 +180,7 @@
                         <div class="sm:flex  sm:justify-evenly mb-5">
                             <div class="w-72 max-sm:mx-auto">
                                 <x-input-label for="nut_bolt" :value="__('Mounting hardware')" class="dark:text-gray-200" />
-                                <select id="nut_bolt" name="nut_bolt_id"
+                                <select required id="nut_bolt" name="nut_bolt_id"
                                     class="field w-72 dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent">
                                     <option hidden disabled selected> -- select an option -- </option>
                                     @foreach ($nutBolts as $nutBolt)
@@ -196,16 +197,15 @@
                             </div>
                             <div class="w-72 max-sm:mx-auto">
                                 <x-input-label for="multipiece" :value="__('Multipiece')" class="dark:text-gray-200" />
-                                <input id="multipiece" @checked(old('multipiece')) type="checkbox" name="multipiece"
+                                <input required id="multipiece" @checked(old('multipiece')) type="checkbox"
+                                    name="multipiece"
                                     class="block mt-1 mx-auto w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
 
                             </div>
                         </div>
                         <div class="sm:mx-[17%] ">
                             <x-input-label for="note" :value="__('Note')" class="dark:text-gray-200" />
-                            {{-- <x-text-input id="note" value="{{ old('note') }}" type="text" name="note"
-                                class="block mt-1 w-full h-60" /> --}}
-                            <textarea id="note" type="text" name="note"
+                            <textarea required id="note" type="text" name="note"
                                 class="sm:w-[100%] w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">{{ old('note') }}</textarea>
                             @error('note')
                                 <small class="text-red-600">{{ $message }}</small>
@@ -213,8 +213,8 @@
                         </div>
                         <div class="sm:mx-[17%] w-72 max-sm:mx-auto">
                             <x-input-label for="photo" :value="__('Photo')" class="dark:text-gray-200" />
-                            <x-text-input id="photo" value="{{ old('photo[]') }}" type="file" multiple
-                                name="photo[]" class="block mt-1 w-full" />
+                            <x-text-input required id="photo" value="{{ old('photo[]') }}" type="file"
+                                multiple name="photo[]" class="block mt-1 w-full" />
                             @error('photo')
                                 <small class="text-red-600">{{ $message }}</small>
                             @enderror
@@ -233,7 +233,7 @@
                                 <label for="accepted-1"
                                     class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-1 ">Accepted
                                 </label>
-                                <input id="accepted-1" type="radio" value="1" name="accepted"
+                                <input required id="accepted-1" type="radio" value="1" name="accepted"
                                     x-model="accepted"
                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                             </div>
@@ -252,8 +252,7 @@
                             class="block mt-1 mx-52" />
                     @endif
                     <div class=" max-sm:mx-auto">
-                        {{-- kép --}}
-                        <input type="submit" value="feltöltés"
+                        <input type="submit" value="upload"
                             class="mx-[17%] inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
                     </div>
                 </form>

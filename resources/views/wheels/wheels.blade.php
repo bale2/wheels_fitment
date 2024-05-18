@@ -286,7 +286,7 @@
 
                         <div>
                             <x-input-label for="manufacturer" :value="__('Manufacturer')" class="dark:text-gray-200 pt-3" />
-                            <select id="manufacturer" name="manufacturer_id", x-model="manufacturer_id"
+                            <select required id="manufacturer" name="manufacturer_id", x-model="manufacturer_id"
                                 class="dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent rounded-lg w-80">
                                 @foreach ($manufacturers as $manufacturer)
                                     <option class="dark:text-gray-200 bg-white dark:bg-gray-800 w-80"
@@ -299,39 +299,39 @@
 
                         <div>
                             <x-input-label for="model" :value="__('Model')" class="dark:text-gray-200" />
-                            <x-text-input x-model="model" id="model" name="model" class="field"
+                            <x-text-input required x-model="model" id="model" name="model" class="field"
                                 class="dark:text-gray-200 bg-white dark:bg-gray-800 w-80" />
                         </div>
                         <div class="flex flex-wrap justify-between max-w-80 gap-y-4">
                             <div>
                                 <x-input-label for="price" :value="__('Price')" class="dark:text-gray-200" />
-                                <x-text-input x-model="price" id="price" name="price" class="field"
+                                <x-text-input required x-model="price" id="price" name="price" class="field"
                                     type="number" class="dark:text-gray-200 bg-white dark:bg-gray-800 w-32" />
                             </div>
                             <div>
                                 <x-input-label for="diameter" :value="__('Diameter')" class="dark:text-gray-200" />
-                                <x-text-input x-model="diameter" id="diameter" name="diameter" class="field"
+                                <x-text-input required x-model="diameter" id="diameter" name="diameter" class="field"
                                     class="dark:text-gray-200 bg-white dark:bg-gray-800 w-32" />
                             </div>
                             <div>
                                 <x-input-label for="width" :value="__('Width')" class="dark:text-gray-200" />
-                                <x-text-input x-model="width" id="width" type="number" name="width"
+                                <x-text-input required x-model="width" id="width" type="number" name="width"
                                     class="dark:text-gray-200 bg-white dark:bg-gray-800 w-32" />
                             </div>
                             <div>
                                 <x-input-label for="ET_number" :value="__('ET_number')" class="dark:text-gray-200" />
-                                <x-text-input x-model="ET_number" id="ET_number" type="number" name="ET_number"
-                                    class="dark:text-gray-200 bg-white dark:bg-gray-800 w-32" />
+                                <x-text-input required x-model="ET_number" id="ET_number" type="number"
+                                    name="ET_number" class="dark:text-gray-200 bg-white dark:bg-gray-800 w-32" />
                             </div>
 
                             <div>
                                 <x-input-label for="kba_number" :value="__('KBA number')" class="dark:text-gray-200" />
-                                <x-text-input x-model="kba_number" id="kba_number" name="kba_number"
+                                <x-text-input required x-model="kba_number" id="kba_number" name="kba_number"
                                     class=" field dark:text-gray-200 bg-white dark:bg-gray-800 w-32" />
                             </div>
                             <div>
                                 <x-input-label for="center_bore" :value="__('Centerbore')" class="dark:text-gray-200" />
-                                <x-text-input x-model="center_bore" id="center_bore" name="center_bore"
+                                <x-text-input required x-model="center_bore" id="center_bore" name="center_bore"
                                     class=" field dark:text-gray-200 bg-white dark:bg-gray-800 w-32" />
                             </div>
                             <div class="flex justify-center gap-8 w-80">
@@ -339,7 +339,7 @@
                                     <label for="multipiece-0"
                                         class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-1 ">Single
                                         Piece</label>
-                                    <input id="multipiece-1" type="radio" value="0" name="multipiece"
+                                    <input required id="multipiece-1" type="radio" value="0" name="multipiece"
                                         x-model="multipiece"
                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                 </div>
@@ -356,7 +356,7 @@
                         <div>
 
                             <x-input-label for="nut_bolt" :value="__('Nut OR Bolt')" class="dark:text-gray-200" />
-                            <select id="nut_bolt" name="nut_bolt_id" x-model="nut_bolt_id"
+                            <select required id="nut_bolt" name="nut_bolt_id" x-model="nut_bolt_id"
                                 class="field dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent w-80">
                                 @foreach ($wheelTypes as $wheelType)
                                     <option class="dark:text-gray-200 bg-white dark:bg-gray-800 w-80"
@@ -368,7 +368,7 @@
 
                         <div>
                             <x-input-label for="bolt_pattern" :value="__('Bolt pattern')" class="dark:text-gray-200" />
-                            <select id="bolt_pattern" name="bolt_pattern_id" x-model="bolt_pattern_id"
+                            <select required id="bolt_pattern" name="bolt_pattern_id" x-model="bolt_pattern_id"
                                 class="field dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent w-80">
                                 @foreach ($boltPatterns as $boltPattern)
                                     <option class="dark:text-gray-200 bg-white dark:bg-gray-800 w-80"
@@ -380,7 +380,7 @@
 
                         <div>
                             <x-input-label for="nut_bolt" :value="__('Nut OR Bolt')" class="dark:text-gray-200" />
-                            <select id="nut_bolt" name="nut_bolt_id" x-model="nut_bolt_id"
+                            <select required id="nut_bolt" name="nut_bolt_id" x-model="nut_bolt_id"
                                 class="field dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent w-80">
                                 @foreach ($nutBolts as $nutBolt)
                                     <option class="dark:text-gray-200 bg-white dark:bg-gray-800 w-80"
@@ -389,14 +389,12 @@
                                 @endforeach
                             </select>
                         </div>
-
-
-
-
-
-                        <x-input-label for="note" :value="__('note')" class="dark:text-gray-200" />
-                        <x-text-input x-model="note" id="note" name="note" type="text"
-                            class=" field dark:text-gray-200 bg-white dark:bg-gray-800" />
+                        <x-input-label for="note" :value="__('Note')" class="dark:text-gray-200 mt-5" />
+                        <textarea required id="note" type="text" value="{{ old('note') }}" x-model="note" name="note"
+                            class="w-80 resize-y border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm ">{{ old('description') }}</textarea>
+                        @error('note')
+                            <small class="text-red-600">{{ $message }}</small>
+                        @enderror
 
                         @if (Auth::check() && Auth::user()->is_admin)
                             <div class="flex justify-center gap-8 mt-5">
@@ -404,7 +402,7 @@
                                     <label for="accepted-1"
                                         class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-1 ">Accepted
                                     </label>
-                                    <input id="accepted-1" type="radio" value="1" name="accepted"
+                                    <input required id="accepted-1" type="radio" value="1" name="accepted"
                                         x-model="accepted"
                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                 </div>

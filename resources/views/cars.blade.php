@@ -10,7 +10,7 @@
                 </x-primary-button>
             @endif
             {{-- Create Modal --}}
-            <x-modal name="car_create" :show="$errors->isNotEmpty()" focusable>
+            <x-modal name="car_create" :show="$errors->create_bag->isNotEmpty()" focusable>
                 <form method="post" action="{{ route('car_create_post') }}"
                     class="mt-6 flex items-center flex-col gap-y-4" enctype="multipart/form-data">
                     @csrf
@@ -20,7 +20,7 @@
                     <div class="flex flex-col">
 
                         <x-input-label for="manufacturer" :value="__('Manufacturer')" class="dark:text-gray-200" />
-                        <select id="manufacturer" name="manufacturer_id", x-model="manufacturer_id"
+                        <select required id="manufacturer" name="manufacturer_id", x-model="manufacturer_id"
                             class="dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent rounded-lg  w-80">
                             <option hidden disabled selected value=""> -- select an option -- </option>
                             @foreach ($manufacturers as $manufacturer)
@@ -30,21 +30,16 @@
                                     {{ $manufacturer->manufacturer_name }}</option>
                             @endforeach
                         </select>
-
-                        @error('manufacturer_id')
-                            <small class="text-red-600">{{ $message }}</small>
-                        @enderror
+                        <x-input-error :messages="$errors->create_bag->get('manufacturer_id')" class="mt-2" />
                     </div>
                     <div class="flex flex-col">
                         <div>
                             <x-input-label for="car_model" :value="__('Model')" class="dark:text-gray-200" />
-                            <x-text-input id="car_model" name="car_model" class="field" x-model="car_model"
+                            <x-text-input required id="car_model" name="car_model" class="field" x-model="car_model"
                                 class="dark:text-gray-200 bg-white dark:bg-gray-800  w-80" />
                         </div>
                         <div>
-                            @error('car_model')
-                                <small class="text-red-600">{{ $message }}</small>
-                            @enderror
+                            <x-input-error :messages="$errors->create_bag->get('car_model')" class="mt-2" />
                         </div>
                     </div>
 
@@ -52,43 +47,36 @@
                         <div class="flex flex-col">
                             <x-input-label for="mtsurface_fender_distance" :value="__('Wheel-Fender Gap')"
                                 class="dark:text-gray-200" />
-                            <x-text-input id="mtsurface_fender_distance" type="number" name="mtsurface_fender_distance"
-                                x-model="mtsurface_fender_distance" step="0.1"
+                            <x-text-input required id="mtsurface_fender_distance" type="number"
+                                name="mtsurface_fender_distance" x-model="mtsurface_fender_distance" step="0.1"
                                 class=" field dark:text-gray-200 bg-white dark:bg-gray-800 w-32" />
-                            @error('mtsurface_fender_distance')
-                                <small class="text-red-600 max-w-32">{{ $message }}</small>
-                            @enderror
+                            <x-input-error :messages="$errors->create_bag->get('mtsurface_fender_distance')" class="mt-2 w-32" />
                         </div>
                         <div class="flex flex-col">
                             <x-input-label for="engine_size" :value="__('Engine size')" class="dark:text-gray-200" />
-                            <x-text-input id="engine_size" type="number" name="engine_size" x-model="engine_size"
+                            <x-text-input required id="engine_size" type="number" name="engine_size"
+                                x-model="engine_size"
                                 class=" field dark:text-gray-200 bg-white dark:bg-gray-800  w-32" />
-                            @error('engine_size')
-                                <small class="text-red-600 w-32">{{ $message }}</small>
-                            @enderror
+                            <x-input-error :messages="$errors->create_bag->get('engine_size')" class="mt-2 w-32" />
                         </div>
                         <div class="flex flex-col">
                             <x-input-label for="car_year" :value="__('Manufacturing year')" class="dark:text-gray-200" />
-                            <x-text-input id="car_year" type="number" name="car_year" x-model="car_year"
+                            <x-text-input required id="car_year" type="number" name="car_year" x-model="car_year"
                                 class=" field dark:text-gray-200 bg-white dark:bg-gray-800  w-32" />
-                            @error('car_year')
-                                <small class="text-red-600 w-32">{{ $message }}</small>
-                            @enderror
+                            <x-input-error :messages="$errors->create_bag->get('car_year')" class="mt-2 w-32" />
                         </div>
                         <div class="flex flex-col">
                             <x-input-label for="center_bore" :value="__('Center_bore')" class="dark:text-gray-200" />
-                            <x-text-input id="center_bore" type="number" name="center_bore" step="0.1"
+                            <x-text-input required id="center_bore" type="number" name="center_bore" step="0.1"
                                 x-model="center_bore"
                                 class=" field dark:text-gray-200 bg-white dark:bg-gray-800  w-32" />
-                            @error('center_bore')
-                                <small class="text-red-600">{{ $message }}</small>
-                            @enderror
+                            <x-input-error :messages="$errors->create_bag->get('center_bore')" class="mt-2 w-32" />
                         </div>
                     </div>
 
 
                     <x-input-label for="bolt_pattern" :value="__('Bolt pattern')" class="dark:text-gray-200" />
-                    <select id="bolt_pattern" name="bolt_pattern_id" x-model="bolt_pattern_id"
+                    <select required id="bolt_pattern" name="bolt_pattern_id" x-model="bolt_pattern_id"
                         class="field dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent w-80">
                         <option hidden disabled selected value=""> -- select an option -- </option>
                         @foreach ($boltPatterns as $boltPattern)
@@ -96,12 +84,10 @@
                                 {{ $boltPattern->bolt_pattern }}</option>
                         @endforeach
                     </select>
-                    @error('bolt_pattern_id')
-                        <small class="text-red-600">{{ $message }}</small>
-                    @enderror
+                    <x-input-error :messages="$errors->create_bag->get('bolt_pattern_id')" class="mt-2" />
 
                     <x-input-label for="nut_bolt" :value="__('Nut OR Bolt')" class="dark:text-gray-200" />
-                    <select id="nut_bolt" name="nut_bolt_id" x-model="nut_bolt_id"
+                    <select required id="nut_bolt" name="nut_bolt_id" x-model="nut_bolt_id"
                         class="field dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent w-80">
                         <option hidden disabled selected value=""> -- select an option -- </option>
                         @foreach ($nutBolts as $nutBolt)
@@ -109,25 +95,28 @@
                                 {{ $nutBolt->type }}</option>
                         @endforeach
                     </select>
-                    @error('nut_bolt_id')
-                        <small class="text-red-600">{{ $message }}</small>
-                    @enderror
+                    <x-input-error :messages="$errors->create_bag->get('nut_bolt_id')" class="mt-2" />
+
                     @if (Auth::check() && Auth::user()->is_admin)
-                        <div class="flex justify-center gap-8 mt-5">
-                            <div class="flex items-center">
-                                <label for="accepted-1"
-                                    class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-1 ">Accepted</label>
-                                <input id="accepted-1" type="radio" value="1" name="accepted" x-model="accepted"
-                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <div class="flex flex-col">
+                            <div class="flex justify-center gap-8">
+                                <div class="flex items-center w-32">
+                                    <label for="accepted-1"
+                                        class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-1 ">Accepted</label>
+                                    <input required id="accepted-1" type="radio" value="1" name="accepted"
+                                        x-model="accepted"
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                </div>
+                                <div class="flex items-center w-32">
+                                    <label for="accepted-2"
+                                        class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-1 ">Not
+                                        Accepted</label>
+                                    <input id="accepted-2" type="radio" value="0" name="accepted"
+                                        x-model="accepted"
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                </div>
                             </div>
-                            <div class="flex items-center">
-                                <label for="accepted-2"
-                                    class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-1 ">Not
-                                    Accepted</label>
-                                <input id="accepted-2" type="radio" value="0" name="accepted"
-                                    x-model="accepted"
-                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            </div>
+                            <x-input-error :messages="$errors->create_bag->get('accepted')" class="mt-2 text-center" />
                         </div>
                     @elseif (Auth::check() && !Auth::user()->is_admin)
                         <x-text-input id="accepted" type="hidden" value=0 name="accepted"
@@ -359,7 +348,7 @@
         <div>
             @isset($car)
                 {{-- Update Modal --}}
-                <x-modal name="car_update_post" :show="$errors->kuki->isNotEmpty()" focusable>
+                <x-modal name="car_update_post" :show="$errors->update_bag->isNotEmpty()" focusable>
                     <form class="flex items-center flex-col gap-y-4" method="post"
                         action="{{ route('car_update_post') }}" class="mt-6 space-y-6 " enctype="multipart/form-data">
                         @csrf
@@ -376,36 +365,42 @@
                                         {{ $manufacturer->manufacturer_name }}</option>
                                 @endforeach
                             </select>
+                            <x-input-error :messages="$errors->update_bag->get('manufacturer_id')" class="mt-2 text-center" />
                         </div>
                         <div>
                             <x-input-label for="car_model" :value="__('Model')" class="dark:text-gray-200" />
-                            <x-text-input id="car_model" name="car_model" class="field" x-model="car_model"
+                            <x-text-input required id="car_model" name="car_model" class="field" x-model="car_model"
                                 class="dark:text-gray-200 bg-white dark:bg-gray-800 w-80" />
+                            <x-input-error :messages="$errors->update_bag->get('car_model')" class="mt-2 text-center" />
                         </div>
                         <div class="flex flex-wrap justify-between max-w-80 gap-y-4">
                             <div>
                                 <x-input-label for="engine_size" :value="__('Engine size')" class="dark:text-gray-200" />
-                                <x-text-input id="engine_size" type="number" name="engine_size" x-model="engine_size"
+                                <x-text-input required id="engine_size" type="number" name="engine_size"
+                                    x-model="engine_size"
                                     class=" field dark:text-gray-200 bg-white dark:bg-gray-800 w-32" />
+                                <x-input-error :messages="$errors->update_bag->get('engine_size')" class="mt-2 w-32" />
                             </div>
                             <div class="max-w-32">
                                 <x-input-label for="car_year" :value="__('Manufacturing year')" class="dark:text-gray-200" />
-                                <x-text-input id="car_year" type="number" name="car_year" x-model="car_year"
+                                <x-text-input required id="car_year" type="number" name="car_year" x-model="car_year"
                                     class=" field dark:text-gray-200 bg-white dark:bg-gray-800 w-32" />
-                                <x-input-error :messages="$errors->kuki->get('car_year')" class="mt-2" />
+                                <x-input-error :messages="$errors->update_bag->get('car_year')" class="mt-2 w-32" />
                             </div>
                             <div>
                                 <x-input-label for="center_bore" :value="__('Center bore')" class="dark:text-gray-200" />
-                                <x-text-input id="center_bore" type="number" step="0.1" name="center_bore"
+                                <x-text-input required id="center_bore" type="number" step="0.1" name="center_bore"
                                     x-model="center_bore"
                                     class=" field dark:text-gray-200 bg-white dark:bg-gray-800 w-32" />
+                                <x-input-error :messages="$errors->update_bag->get('center_bore')" class="mt-2 w-32" />
                             </div>
                             <div>
                                 <x-input-label for="mtsurface_fender_distance" :value="__('Wheel-Fender Gap')"
                                     class="dark:text-gray-200" />
-                                <x-text-input id="mtsurface_fender_distance" type="number"
+                                <x-text-input required id="mtsurface_fender_distance" type="number"
                                     name="mtsurface_fender_distance" x-model="mtsurface_fender_distance"
                                     class=" field dark:text-gray-200 bg-white dark:bg-gray-800 w-32" />
+                                <x-input-error :messages="$errors->update_bag->get('mtsurface_fender_distance')" class="mt-2 w-32" />
                             </div>
                         </div>
                         <div>
@@ -418,6 +413,7 @@
                                         {{ $boltPattern->bolt_pattern }}</option>
                                 @endforeach
                             </select>
+                            <x-input-error :messages="$errors->update_bag->get('bolt_pattern_id')" class="mt-2 w-32" />
                         </div>
                         <div>
                             <x-input-label for="nut_bolt" :value="__('Nut OR Bolt')" class="dark:text-gray-200" />
@@ -429,6 +425,7 @@
                                         {{ $nutBolt->type }}</option>
                                 @endforeach
                             </select>
+                            <x-input-error :messages="$errors->update_bag->get('nut_bolt_id')" class="mt-2 w-32" />
                         </div>
                         <div>
                             @if (Auth::check() && Auth::user()->is_admin)
@@ -448,11 +445,12 @@
                                             x-model="accepted"
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                     </div>
+                                    <x-input-error :messages="$errors->update_bag->get('accepted')" class="mt-2 w-32" />
                                 </div>
                             @endif
                         </div>
                         <div>
-                            <input type="submit" value="feltöltés"
+                            <input type="submit" value="upload"
                                 class="mx-auto block items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
                         </div>
                     </form>

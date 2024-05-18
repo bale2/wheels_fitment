@@ -147,7 +147,21 @@ class ManufacturerController extends Controller
     public function car_create_post(Request $request)
     {
         // dd($request->multipiece);
-        $this->validate($request, [
+        // $this->validate($request, [
+        //     'manufacturer_id' => ['required'],
+        //     'car_model' => ['required', 'max:255'],
+        //     'engine_size' => ['required', 'numeric', 'between:100,15000'],
+        //     'car_year' => ['required', 'numeric', 'between:1900,' . (date('Y'))],
+        //     'center_bore' => ['required', 'numeric', 'between:20,200'],
+        //     'nut_bolt_id' => ['required'],
+        //     'mtsurface_fender_distance' => ['required', 'numeric', 'between:0,200'],
+        //     'bolt_pattern_id' => ['required'],
+        //     'accepted' => ['required'],
+
+        // ]);
+        $car_data = $request->all();
+        session()->put('car_data', $car_data);
+        $request->validateWithBag('create_bag',  [
             'manufacturer_id' => ['required'],
             'car_model' => ['required', 'max:255'],
             'engine_size' => ['required', 'numeric', 'between:100,15000'],
@@ -157,8 +171,8 @@ class ManufacturerController extends Controller
             'mtsurface_fender_distance' => ['required', 'numeric', 'between:0,200'],
             'bolt_pattern_id' => ['required'],
             'accepted' => ['required'],
-
         ]);
+        session()->forget('car_data');
         // $accept = $request->accepted;
         // if ($accept == "on") {
         //     $accept = 1;
@@ -184,14 +198,19 @@ class ManufacturerController extends Controller
     public function car_update_post(Request $request)
     {
         $car_data = $request->all();
-        // $car_data["accepted"] = $car_data["accepted"] == null ? false : true;
-
-        // dd($request);
         session()->put('car_data', $car_data);
-        $request->validateWithBag('kuki',  [
-            'car_year' => 'before_or_equal:' . now()->format('Y'),
+        $request->validateWithBag('update_bag',  [
+            'manufacturer_id' => ['required'],
+            'car_model' => ['required', 'max:255'],
+            'engine_size' => ['required', 'numeric', 'between:100,15000'],
+            'car_year' => ['required', 'numeric', 'between:1900,' . (date('Y'))],
+            'center_bore' => ['required', 'numeric', 'between:20,200'],
+            'nut_bolt_id' => ['required'],
+            'mtsurface_fender_distance' => ['required', 'numeric', 'between:0,200'],
+            'bolt_pattern_id' => ['required'],
+            'accepted' => ['required'],
         ]);
-        // dd($request->accepted == null ? false : true);
+
         session()->forget('car_data');
 
         Car::find($request->car_id)->update([
