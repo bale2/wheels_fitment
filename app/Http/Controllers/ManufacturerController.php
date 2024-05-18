@@ -146,7 +146,7 @@ class ManufacturerController extends Controller
     }
     public function car_create_post(Request $request)
     {
-        // dd($request);
+        // dd($request->multipiece);
         $this->validate($request, [
             'manufacturer_id' => ['required'],
             'car_model' => ['required', 'max:255'],
@@ -156,6 +156,7 @@ class ManufacturerController extends Controller
             'nut_bolt_id' => ['required'],
             'mtsurface_fender_distance' => ['required', 'numeric', 'between:0,200'],
             'bolt_pattern_id' => ['required'],
+            'accepted' => ['required'],
 
         ]);
         // $accept = $request->accepted;

@@ -27,7 +27,8 @@ class Wheel extends Model
         'nut_bolt_id',
         'multipiece',
         'photo',
-        'note'
+        'note',
+        'accepted'
     ];
     public function ads()
     {

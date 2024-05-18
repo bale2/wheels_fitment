@@ -24,8 +24,11 @@ class WheelController extends Controller
     public function wheels_show(): View
     {
         return view('wheels/wheels', [
-            'wheels' => Wheel::all()->whereNotNull('created_at')->toQuery()->paginate(3),
-            'manufacturers' => Manufacturer::all()
+            'wheels' => Wheel::all()->whereNotNull('created_at')->toQuery()->paginate(10),
+            'manufacturers' => Manufacturer::all(),
+            'nutBolts' => NutBolt::all(),
+            'wheelTypes' => WheelType::all(),
+            'boltPatterns' => BoltPattern::all(),
         ]);
     }
     public function wheel_with_id(string $id): View
@@ -72,11 +75,16 @@ class WheelController extends Controller
             'wheel_type_id' => ['required'],
             'bolt_pattern_id' => ['required'],
             'nut_bolt_id' => ['required'],
+            'multipiece' => ['required'],
+            'accepted' => ['required'],
             'photo' => ['required'],
             'photo.*' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:4096'],
             'note' => ['required', 'max:255'],
         ]);
-        $multipiece = $request->multipiece !== null;
+        $multipiece = 0;
+        if (($request->multipiece) == "on") {
+            $multipiece = 1;
+        }
 
         $imagePaths = '';
 
@@ -109,6 +117,7 @@ class WheelController extends Controller
             'multipiece' => $multipiece,
             'photo' => $imagePaths,
             'note' => $request->note,
+            'accepted' => $request->accepted,
             'updated_at' => now()
         ]);
         return redirect()->action([WheelController::class, 'wheels_show']);

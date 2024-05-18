@@ -227,6 +227,30 @@
                             {{-- <x-input-error class="mt-2" :messages="$errors->any()" /> --}}
                         </div>
                     </div>
+                    @if (Auth::check() && Auth::user()->is_admin)
+                        <div class="flex justify-center gap-8 mt-5">
+                            <div class="flex items-center">
+                                <label for="accepted-1"
+                                    class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-1 ">Accepted
+                                </label>
+                                <input id="accepted-1" type="radio" value="1" name="accepted"
+                                    x-model="accepted"
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            </div>
+                            <div class="flex items-center">
+                                <label for="accepted-0"
+                                    class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-1 ">Not
+                                    accepted
+                                </label>
+                                <input id="accepted-0" type="radio" value="0" name="accepted"
+                                    x-model="accepted"
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            </div>
+                        </div>
+                    @elseif (Auth::check() && !Auth::user()->is_admin)
+                        <x-text-input id="accepted" type="hidden" value=0 name="accepted"
+                            class="block mt-1 mx-52" />
+                    @endif
                     <div class=" max-sm:mx-auto">
                         {{-- kép --}}
                         <input type="submit" value="feltöltés"
