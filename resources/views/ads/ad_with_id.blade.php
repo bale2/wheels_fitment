@@ -44,7 +44,7 @@
                 <div>
                     <a href="/ad_create">
                         <div
-                            class="bg-slate-200 font-semibold text-xl text-gray-800 leading-tight rounded-3xl px-5 text-center">
+                            class="bg-slate-200 font-semibold text-xl text-gray-800 leading-tight rounded-3xl px-5 text-center max-w-fit mx-auto">
                             Post an ad</div>
                     </a>
                 </div>
@@ -54,62 +54,153 @@
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="slider max-w-3xl mx-auto mb-10">
-                <div class="slides">
+                <div class="slides" onclick="stopPropagation(event)">
                     @foreach ($ad->photos() as $photo)
-                        <img src="{{ asset('photos/' . $photo) }}" alt="image of the ad"
-                            class="slide mt-10 mb-auto mx-auto h-20 w-auto">
+                        <a href="{{ asset('photos/' . $photo) }}" target="_blank">
+                            <img src="{{ asset('photos/' . $photo) }}" alt="image of the ad"
+                                class="slide mt-10 mb-auto mx-auto h-20 w-auto">
+                        </a>
                     @endforeach
                 </div>
-                <button class="previous absolute top-1/2 left-0 w-8" onclick="previousSlide()">&#10094</button>
-                <button class="next absolute top-1/2 right-0 w-8" onclick="nextSlide()">&#10095</button>
+                <button class="previous absolute top-1/2 left-0 w-8" onclick="previousSlide(event)">&#10094</button>
+                <button class="next absolute top-1/2 right-0 w-8" onclick="nextSlide(event)">&#10095</button>
+
             </div>
             <div
                 class="
                     bg-white overflow-hidden shadow-sm sm:rounded-lg justify-between dark:bg-gray-800 max-w-3xl
-                    mx-auto">
+                    mx-auto pb-5">
                 <div class=" w-full text-gray-900 dark:text-gray-100 ">
                     <div class=" justify-evenly pb-2 mt-2">
                         <h1 class="mx-[17%] font-bold text-3xl">{{ $ad->title }}</h1>
                     </div>
                     <div>
-                        <h1 class="mx-[17%] font-bold text-xl">{{ $ad->price }}€</h1>
+                        <h1 class="mx-[17%] font-bold text-xl mb-5">{{ $ad->price }}€</h1>
                     </div>
                 </div>
                 {{--  --}}
                 <div class="flex flex-row justify-start mx-[17%]">
-                    <div class="w-56">
-                        <h1 class="text-slate-400 text-base">Seller: {{ $ad->user->name }} </h1>
-                        <h1 class="text-lg"></h1>
-                        <hr>
-                    </div>
-                    <div class="w-56
+                    <a href="/users/{{ $ad->user->id }}">
+                        <div class="w-56">
+                            <h1 class="text-slate-400 text-base">Seller: {{ $ad->user->name }} </h1>
+                            <h1 class="text-lg"></h1>
+
+                        </div>
+                    </a>
+                    <a href="https://www.google.com/maps/search/?api=1&query={{ $ad->place }}" target="_blank">
+                        <div class="w-56
                             ">
-                        <h1 class="text-slate-400 text-base">Place: {{ $ad->place }}</h1>
-                        <h1 class="text-lg"></h1>
-                        <hr>
+                            <h1 class="text-slate-400 text-base">Place: {{ $ad->place }}</h1>
+                            <h1 class="text-lg"></h1>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="w-full pt-0 px-6 text-gray-900 dark:text-gray-100 ">
+                    <h1 class="mx-[17%] mb-0 mt-5 text-3xl">Information about the wheel:</h1>
+                    <div class="flex flex-row justify-evenly mt-2">
+                        <div class="w-52">
+                            <h1 class="text-slate-400 text-base">Manufacturer:</h1>
+                            <h1 class="font-bold text-lg"> {{ $ad->wheel->manufacturer->manufacturer_name }}</h1>
+                            <hr>
+                        </div>
+                        <div class="w-52">
+                            <h1 class="text-slate-400 text-base">Model:</h1>
+                            <h1 class="font-bold text-lg   "> {{ $ad->wheel->model }}</h1>
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="flex flex-row justify-evenly">
+                        <div class=" w-52">
+                            <h1 class="text-slate-400 text-base">Bolt Pattern: </h1>
+                            <h1 class="text-lg">{{ $ad->wheel->boltPattern->bolt_pattern }}</h1>
+                            <hr>
+                        </div>
+                        <div class="
+                                w-52">
+                            <h1 class="text-slate-400 text-base">Center Bore: </h1>
+                            <h1 class="text-lg">{{ $ad->wheel->center_bore }}</h1>
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="flex flex-row justify-evenly">
+                        <div class="w-52">
+                            <h1 class="text-slate-400 text-base">Diameter: </h1>
+                            <h1 class="text-lg">{{ $ad->wheel->diameter }}</h1>
+                            <hr>
+                        </div>
+                        <div class="w-52">
+                            <h1 class="text-slate-400 text-base"> Width: </h1>
+                            <h1 class="text-lg">{{ $ad->wheel->width }}</h1>
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="flex flex-row justify-evenly">
+                        <div class=" w-52">
+                            <h1 class="text-slate-400 text-base">ET number: </h1>
+                            <h1 class="text-lg">{{ $ad->wheel->ET_number }} </h1>
+                            <hr>
+                        </div>
+                        <div class="w-52">
+                            <h1 class="text-slate-400 text-base"> KBA number: </h1>
+                            <h1 class="text-lg">{{ $ad->wheel->kba_number }}</h1>
+                            <hr>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-row justify-evenly">
+                        <div class=" w-52">
+                            <h1 class="text-slate-400 text-base">Mounting type: </h1>
+                            <h1 class="text-lg">{{ $ad->wheel->nutBolt->type }}</h1>
+                            <hr>
+                        </div>
+                        <div class=" w-52">
+                            <h1 class="text-slate-400 text-base">Wheel design:</h1>
+                            @if ($ad->wheel->multipiece == 0)
+                                <h1 class="text-lg"> One piece</h1>
+                                <hr>
+                            @else
+                                <h1 class="text-lg"> Multipiece</h1>
+                                <hr>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="flex flex-row justify-evenly mb-5">
+                        <div class="w-52">
+                            <h1 class="text-slate-400 text-base">Type: </h1>
+                            <h1 class="text-lg">{{ $ad->wheel->wheelType->wheel_type }}</h1>
+                            <hr>
+                        </div>
+                        <div class="w-52">
+                            <h1 class="text-slate-400 text-base">Estimated price:</h1>
+                            <h1 class="text-lg">{{ $ad->wheel->price }}</h1>
+                            <hr>
+                        </div>
                     </div>
                 </div>
                 <div class="mx-[17%]">
                     <div class="max-w-[28rem]">
-                        <h1 class="text-slate-400 text-base">Uploaded: {{ $ad->updated_at }} </h1>
-                        <hr>
+                        <h1 class="mt-1 inline-block text-slate-400 text-base">Wheel associated with ad: </h1>
+                        <a href="/wheels/{{ $ad->wheel->id }}">
+                            <p class="inline text-base text-white">{{ $ad->wheel->manufacturer->manufacturer_name }}
+                                {{ $ad->wheel->model }}</p>
+                        </a>
                     </div>
 
                 </div>
                 {{--  --}}
-                <h1 class="mx-[17%] text-slate-400 text-base mb-5">Note: </h1>
+                <h1 class="mx-[17%] text-slate-400 text-base">Note: </h1>
                 <div class=" mx-[17%] text-base">
-                    <p>{{ $ad->description }}
+                    <p class="dark:text-white mb-10">{{ $ad->description }}
                     </p>
                 </div>
-                <h1 class="mt-5 inline-block mx-[17%] text-slate-400 text-base">Wheel associated with ad: </h1>
-                <a href="/wheels/{{ $ad->wheel->id }}">
-                    <p class="inline text-base text-white">{{ $ad->wheel->manufacturer->manufacturer_name }}
-                        {{ $ad->wheel->model }}</p>
-                </a>
+                <div class=" mx-[17%] text-base">
+                    <h1 class="text-slate-400 text-base">Uploaded: {{ $ad->updated_at }} </h1>
+                </div>
             </div>
+
             <div
-                class="border border-green-500 bg-white overflow-hidden shadow-sm sm:rounded-lg justify-between dark:bg-gray-800 max-w-3xl h-[40vh] mx-auto">
+                class=" bg-white overflow-hidden shadow-sm sm:rounded-lg justify-between dark:bg-gray-800 max-w-3xl h-[40vh] mx-auto">
                 <iframe class="w-full h-full" style="border:0" loading="lazy" allowfullscreen
                     referrerpolicy="no-referrer-when-downgrade"
                     src="https://www.google.com/maps/embed/v1/place?key={{ $google_api }}
@@ -128,6 +219,20 @@
         document.addEventListener("DOMContentLoaded", initializeSlider)
 
         // initializeSlider();
+
+        function stopPropagation(event) {
+            event.stopPropagation();
+        }
+
+        function previousSlide(event) {
+            // Add your previous slide logic here
+            event.stopPropagation();
+        }
+
+        function nextSlide(event) {
+            // Add your next slide logic here
+            event.stopPropagation();
+        }
 
         function initializeSlider() {
             if (slides.length > 0) {

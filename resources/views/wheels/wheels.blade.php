@@ -18,7 +18,7 @@
                 <h1 class="dark:text-white font-semibold text-xl text-center mb-5">Compare</h1>
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 sm:rounded-lg mb-10">
                     <div class="overflow-hidden shadow-sm">
-                        <a href="wheel_types">
+                        <a href="/compare">
                             <div class="flex flex-row flex-wrap text-center  sm:rounded-lg  mb-2 bg-gray-800">
                                 <?xml version="1.0" encoding="iso-8859-1"?>
                                 <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->

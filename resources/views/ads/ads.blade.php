@@ -5,7 +5,8 @@
                 {{ __('Ads') }}
             </h2>
             @if (Auth::user())
-                <div class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
+                <div
+                    class="bg-slate-200 font-semibold text-xl text-gray-800 leading-tight rounded-3xl px-5 text-center max-w-fit mx-auto">
                     <a href="/ad_create">Post an ad</a>
                 </div>
             @endif
