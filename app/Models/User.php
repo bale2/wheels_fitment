@@ -56,4 +56,8 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Wheel::class, 'wheels_users')->distinct();
     }
+    public function cars(): BelongsToMany
+    {
+        return $this->belongsToMany(Car::class, 'cars_users')->distinct();
+    }
 }

@@ -49,7 +49,63 @@
                         @foreach ($user->wheels as $one)
                             <a href="/wheels/{{ $one->id }}">
                                 <p class=" text-white text-lg ml-5 mb-1">{{ $one->manufacturer->manufacturer_name }}
-                                    {{ $one->model }}</p>
+                                    {{ $one->model }}
+                                </p>
+                                <form method="post" action="{{ route('user_wheel_post_delete') }}"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    @method('post')
+                                    <input type="hidden" value="{{ $user->id }}" name="user_id_userpage"
+                                        class="block w-full" />
+                                    <input type="hidden" value="{{ $one->id }}" name="wheel_id_userpage"
+                                        class="block w-full" />
+                                    {{-- <select required
+                                        class="dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent rounded-lg w-80 form-control"
+                                        name="car_id">
+                                        <option value="" selected>Choose product</option>
+                                        @if ($cars)
+                                            @foreach ($cars as $car)
+                                                <option value="{{ $car->id }}">{{ $car->car_model }}</option>
+                                            @endforeach
+                                        @endif
+                                    </select> --}}
+
+                                    <input type="submit" value="delete"
+                                        class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
+                                </form>
+                            </a>
+                        @endforeach
+                    </div>
+                    <div>
+                        <h1 class="text-white text-xl mb-2">{{ $user->name }}'s cars:</h1>
+                        @foreach ($user->cars as $one)
+                            <a href="/cars/{{ $one->id }}" class="w-fit">
+                                <p class=" text-white text-lg ml-5 mb-1 border border-yellow-300 w-fit">
+                                    {{ $one->manufacturer->manufacturer_name }}
+                                    {{ $one->car_model }}
+                                </p>
+                                <form method="post" action="{{ route('user_car_post_delete') }}"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    @method('post')
+                                    <input type="hidden" value="{{ $user->id }}" name="user_id_userpage"
+                                        class="block w-full" />
+                                    <input type="hidden" value="{{ $one->id }}" name="car_id_userpage"
+                                        class="block w-full" />
+                                    {{-- <select required
+                                        class="dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent rounded-lg w-80 form-control"
+                                        name="car_id">
+                                        <option value="" selected>Choose product</option>
+                                        @if ($cars)
+                                            @foreach ($cars as $car)
+                                                <option value="{{ $car->id }}">{{ $car->car_model }}</option>
+                                            @endforeach
+                                        @endif
+                                    </select> --}}
+
+                                    <input type="submit" value="delete"
+                                        class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
+                                </form>
                             </a>
                         @endforeach
                     </div>
@@ -84,9 +140,9 @@
                 @endforeach
 
                 @if (Auth::user() and (Auth::user()->is_admin or Auth::user()->id == $user->id))
-                    <div
+                    {{-- <div
                         class="p-6 text-gray-900 dark:text-gray-100 bg-white overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800">
-                        {{-- @if (Auth::user() and Auth::user()->is_admin or Auth::user() and $id) --}}
+                        {{-- @if (Auth::user() and Auth::user()->is_admin or Auth::user() and $id)
                         <form method="post" action="{{ route('user_wheel_post') }}" class="mt-6 space-y-6 "
                             enctype="multipart/form-data">
                             @csrf
@@ -105,6 +161,20 @@
                             <input type="submit" value="feltöltés"
                                 class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
                         </form>
+                    </div> --}}
+                    <div
+                        class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
+                        <h1 class="text-slate-400 text-lg">Add wheel to the user:</h1>
+                        <div class="pl-5">
+                            @livewire('DependentDropdownForUsersWheels', ['user_id' => $user->id])
+                        </div>
+                    </div>
+                    <div
+                        class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
+                        <h1 class="text-slate-400 text-lg">Add car to the user:</h1>
+                        <div class="pl-5">
+                            @livewire('DependentDropdownForUsersCars', ['user_id' => $user->id])
+                        </div>
                     </div>
                 @endif
                 {{-- @foreach ($wheels as $wheel)

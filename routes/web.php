@@ -42,6 +42,9 @@ require __DIR__ . '/auth.php';
 Route::get('/users', [ProfileController::class, 'users_show'])->name('users');
 Route::get('/users/{id}', [ProfileController::class, 'user_with_id'])->name('user_with_id');
 Route::post('/wheel_user', [ProfileController::class, 'user_wheel_post'])->name('user_wheel_post');
+Route::post('/wheel_user_delet', [ProfileController::class, 'user_wheel_post_delete'])->name('user_wheel_post_delete');
+Route::post('/car_user', [ProfileController::class, 'user_car_post'])->name('user_car_post');
+Route::post('/car_user_delete', [ProfileController::class, 'user_car_post_delete'])->name('user_car_post_delete');
 
 
 //AdController (show,createform,createpost,{id}page)

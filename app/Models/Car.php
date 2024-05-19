@@ -43,4 +43,8 @@ class Car extends Model
     {
         return $this->belongsToMany(Wheel::class, 'wheels_cars')->distinct();
     }
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'cars_users')->distinct();
+    }
 }

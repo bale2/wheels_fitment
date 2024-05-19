@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Support\Facades\Redis;
 
 class ProfileController extends Controller
 {
@@ -84,10 +85,35 @@ class ProfileController extends Controller
             ]
         );
     }
+    // public function user_wheel_post(Request $request)
+    // {
+    //     $user = User::find(Auth::user()->id);
+    //     $user->wheels()->attach($request->wheel_id);
+    //     return redirect()->back();
+    // }
     public function user_wheel_post(Request $request)
     {
-        $user = User::find(Auth::user()->id);
+        $user = User::find($request->user_id_userpage);
         $user->wheels()->attach($request->wheel_id);
+        return redirect()->back();
+    }
+    public function user_wheel_post_delete(Request $request)
+    {
+        $user = User::find($request->user_id_userpage);
+        $user->wheels()->detach($request->wheel_id_userpage);
+        return redirect()->back();
+    }
+
+    public function user_car_post(Request $request)
+    {
+        $user = User::find($request->user_id_userpage);
+        $user->cars()->attach($request->car_id);
+        return redirect()->back();
+    }
+    public function user_car_post_delete(Request $request)
+    {
+        $user = User::find($request->user_id_userpage);
+        $user->cars()->detach($request->car_id_userpage);
         return redirect()->back();
     }
 }
