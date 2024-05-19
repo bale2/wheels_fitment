@@ -15,6 +15,45 @@
         <div class="flex flex-row flex-wrap-reverse py-12 justify-center">
             <div class="md:w-1/4 md:border-r-2 border-white">
                 {{-- md:érték -> md mérettől felfelé alkalmazza --}}
+                <h1 class="dark:text-white font-semibold text-xl text-center mb-5">Compare</h1>
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 sm:rounded-lg mb-10">
+                    <div class="overflow-hidden shadow-sm">
+                        <a href="wheel_types">
+                            <div class="flex flex-row flex-wrap text-center  sm:rounded-lg  mb-2 bg-gray-800">
+                                <?xml version="1.0" encoding="iso-8859-1"?>
+                                <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+                                <svg class="mt-2 w-1/4 pr-0 " xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px"
+                                    viewBox="0 0 256 256" enable-background="new 0 0 256 256" xml:space="preserve">
+                                    <metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon </metadata>
+                                    <g>
+                                        <g>
+                                            <g>
+                                                <path fill="#000000"
+                                                    d="M120.6,42.3c-5,1.3-8,3.1-12,7c-6.8,6.7-9.7,16.4-7.5,25.3c1.7,7.2,7.5,14.6,13.9,17.8c15.5,7.8,33.7-0.3,38.6-17.1c1.2-4.1,1.1-10.6-0.2-14.7c-1.4-4.5-4.2-8.8-7.5-12c-3.7-3.4-6.8-5.1-11.6-6.3C129.5,41.1,125.2,41.1,120.6,42.3z" />
+                                                <path fill="#000000"
+                                                    d="M197.7,79.4v24.1h24.1H246V79.4V55.3h-24.1h-24.1V79.4z" />
+                                                <path fill="#000000"
+                                                    d="M22.7,79.5c-7.1,13-12.8,23.8-12.7,23.9c0.1,0.1,12,0.1,26.3,0.1l26-0.1l-13-23.8c-7.2-13-13.2-23.8-13.3-23.8C35.8,55.8,29.9,66.5,22.7,79.5z" />
+                                                <path fill="#000000"
+                                                    d="M113.9,107.2c-7.5,1.7-14.8,6-19.8,11.7c-1.6,1.8-8.4,9.8-15.1,17.8c-6.7,8-12.3,14.5-12.5,14.6c-0.2,0-3.3-6.6-7-14.7c-3.6-8.2-7.6-16.9-8.9-19.2l-2.3-4.3H32.7H17.1l-1.4,1.6c-1.6,1.8-1.8,3.7-0.6,5.9c1.3,2.5,3,2.8,12.4,2.8h8.4l0.6,1.3c0.3,0.8,5.1,11.4,10.5,23.7c5.4,12.3,10.2,22.9,10.7,23.6c1.8,2.8,6.8,3.9,10,2.3c1-0.5,4.5-4.3,9.7-10.4c4.4-5.3,8.2-9.6,8.2-9.5c0.1,0.1,2.1,12.9,4.5,28.6c2.4,15.6,4.5,29.2,4.6,30l0.3,1.6h32.5c17.9,0,32.5-0.1,32.5-0.2c0-0.9,9.2-59.8,9.4-60c0.1-0.1,3.1,3.2,6.6,7.4c10.4,12.5,11.3,13.2,14.9,13.2c2.6,0,5.1-1.2,6.5-3.1c0.6-0.8,5.7-12.1,11.4-25l10.3-23.5l9.2-0.1c9.9-0.1,10.5-0.3,12-2.8c1.7-2.9,0.3-6.2-3-7.2c-1.2-0.3-7-0.5-16.2-0.4l-14.4,0.1l-1.4,2.6c-0.8,1.4-4.8,10-8.8,19c-4,9-7.5,16.4-7.8,16.4c-0.2,0-6.5-7.1-13.8-15.8c-7.3-8.8-14.8-17.2-16.6-18.9c-3.8-3.5-8.7-6.4-14-8.3c-3.8-1.3-4.2-1.3-15.7-1.4C119.9,106.6,116.1,106.7,113.9,107.2z" />
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                                {{-- <metadata xmlns="http://www.w3.org/2000/svg"> Svg Vector Icons :
+                                    http://www.onlinewebfonts.com/icon </metadata> --}}
+
+                                <div class=" w-3/4 my-auto py-6 pl-0 text-gray-900 dark:text-gray-100">
+                                    <h1 class=" font-semibold text-xl text-gray-800 dark:text-gray-200">
+                                        Compare
+                                    </h1>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
                 <h1 class="dark:text-white font-semibold text-xl text-center mb-5">Filters</h1>
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 sm:rounded-lg mb-10">
                     <div class="overflow-hidden shadow-sm">
@@ -48,8 +87,9 @@
                                     </g>
                                 </svg>
 
-                                <div class="w-3/4 p-6 pl-0 text-gray-900 dark:text-gray-100">
-                                    <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200">Wheel Types
+                                <div class=" w-3/4 p-6 pl-0 text-gray-900 dark:text-gray-100">
+                                    <h1 class=" font-semibold text-xl text-gray-800 dark:text-gray-200">
+                                        Wheel Types
                                     </h1>
                                 </div>
                             </div>
