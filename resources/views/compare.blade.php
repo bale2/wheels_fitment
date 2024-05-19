@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex justify-around">
             <div class="w-3 ">
-                <a href="#"><svg fill="#000000" class="h-5 w-5" version="1.1" id="Capa_1"
+                <a href="/wheels"><svg fill="#000000" class="h-5 w-5" version="1.1" id="Capa_1"
                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                         viewBox="0 0 26.676 26.676" xml:space="preserve">
 
