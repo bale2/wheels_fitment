@@ -11,37 +11,33 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <div class="hidden space-x-8 sm:-my-px sm:ms-5 md:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <div class="hidden space-x-8 sm:-my-px sm:ms-5 md:ms-10 sm:flex">
                     <x-nav-link :href="route('users')" :active="request()->routeIs('users')">
                         {{ __('Users') }}
                     </x-nav-link>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <div class="hidden space-x-8 sm:-my-px sm:ms-5 md:ms-10 sm:flex">
                     <x-nav-link :href="route('ads')" :active="request()->routeIs('ads')">
                         {{ __('Ads') }}
                     </x-nav-link>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <div class="hidden space-x-8 sm:-my-px sm:ms-5 md:ms-10 sm:flex">
                     <x-nav-link :href="route('wheels')" :active="request()->routeIs('wheels')">
                         {{ __('Wheels') }}
                     </x-nav-link>
                 </div>
-                {{-- <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('data')" :active="request()->routeIs('data')">
-                        {{ __('Data') }}
-                    </x-nav-link>
-                </div> --}}
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-5 md:ms-10 sm:flex">
                     <x-nav-link :href="route('cars')" :active="request()->routeIs('cars')">
                         {{ __('Cars') }}
                     </x-nav-link>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <div class="hidden space-x-8 sm:-my-px sm:ms-5 md:ms-10 sm:flex">
                     <x-nav-link :href="route('calculator')" :active="request()->routeIs('calculator')">
                         {{ __('Calculator') }}
                     </x-nav-link>
@@ -166,6 +162,12 @@
             </div>
 
             <div class="mt-3 space-y-1">
+                @if (Auth::user())
+                    <x-responsive-nav-link :href="route('user_with_id', Auth::user()->id)">
+                        {{ __('Own page') }}
+                    </x-responsive-nav-link>
+                @endif
+
                 <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>

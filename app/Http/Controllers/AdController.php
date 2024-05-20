@@ -18,16 +18,17 @@ class AdController extends Controller
 
     public function ads_show(): View
     {
-        // $ads = DB::table('users')
-        // ->join('ads','users.id', '=', 'ads.user_id')
-        // ->select('ads.*','users.name',)
-        // ->orderBy('ads.created_at', 'desc')
-        // ->get();
+
+        $ads = Ad::orderBy('updated_at');
+
+        if (request()->has('search')) {
+            $ads = $ads->where('title', 'like', '%' . request()->get('search', '') . "%")->orWhere('description', 'like', '%' . request()->get('search', '') . "%")->orWhere('place', 'like', '%' . request()->get('search', '') . "%");
+        }
 
         return view('ads/ads', [
             // 'ads'=> $ads
-            'ads' => Ad::orderBy('updated_at')->paginate(10),
-
+            // 'ads' => Ad::orderBy('updated_at')->paginate(10),
+            'ads' => $ads->paginate(10),
         ]);
     }
 

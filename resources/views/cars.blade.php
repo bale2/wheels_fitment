@@ -148,9 +148,11 @@
         <div class="flex flex-row flex-wrap-reverse py-12 justify-center">
             <div class="md:w-1/4 md:border-r-2 border-white">
                 {{-- md:érték -> md mérettől felfelé alkalmazza --}}
+
                 <h1 class="dark:text-white font-semibold text-xl text-center mb-5">Filters</h1>
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 sm:rounded-lg mb-10">
                     <div class="overflow-hidden shadow-sm">
+                        @include('components.search-bar')
                         <a href="bolt_patterns/cars">
                             <div class="flex flex-row sm:rounded-lg text-center  mb-2 bg-gray-800">
                                 <?xml version="1.0" standalone="no"?>
@@ -287,6 +289,8 @@
                 </div>
             </div>
             <div class="w-3/4 mx-auto sm:px-6 lg:px-8 sm:rounded-lg">
+                <div class="mb-5 -mt-4">
+                </div>
                 <h1 class="dark:text-white font-semibold text-xl text-center mb-5">Cars</h1>
                 @foreach ($cars as $car)
                     @if ($car->car_id != 1)

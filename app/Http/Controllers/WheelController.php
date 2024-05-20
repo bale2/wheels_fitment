@@ -23,8 +23,14 @@ class WheelController extends Controller
 {
     public function wheels_show(): View
     {
+        $wheels = Wheel::whereNotNull('created_at')->orderBy('created_at', 'DESC');
+
+        if (request()->has('search')) {
+            $wheels = $wheels->where('model', 'like', '%' . request()->get('search', '') . "%")->orWhere('note', 'like', '%' . request()->get('search', '') . "%");
+        }
         return view('wheels/wheels', [
-            'wheels' => Wheel::all()->whereNotNull('created_at')->toQuery()->paginate(10),
+            // 'wheels' => Wheel::all()->whereNotNull('created_at')->toQuery()->paginate(10),
+            'wheels' => $wheels->paginate(10),
             'manufacturers' => Manufacturer::all(),
             'nutBolts' => NutBolt::all(),
             'wheelTypes' => WheelType::all(),

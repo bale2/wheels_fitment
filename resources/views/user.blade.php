@@ -47,10 +47,13 @@
                     <div>
                         <h1 class="text-white text-xl mb-2">{{ $user->name }}'s wheels:</h1>
                         @foreach ($user->wheels as $one)
-                            <a href="/wheels/{{ $one->id }}">
-                                <p class=" text-white text-lg ml-5 mb-1">{{ $one->manufacturer->manufacturer_name }}
-                                    {{ $one->model }}
-                                </p>
+                            <div class="flex flex-row">
+                                <a href="/wheels/{{ $one->id }}">
+                                    <p class=" text-white text-lg ml-5 mb-1 pr-5">
+                                        {{ $one->manufacturer->manufacturer_name }}
+                                        {{ $one->model }}
+                                    </p>
+                                </a>
                                 <form method="post" action="{{ route('user_wheel_post_delete') }}"
                                     enctype="multipart/form-data">
                                     @csrf
@@ -61,19 +64,22 @@
                                         class="block w-full" />
 
                                     <input type="submit" value="delete"
-                                        class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
+                                        class="inline-flex items-center px-2 py-1 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
                                 </form>
-                            </a>
+                            </div>
                         @endforeach
                     </div>
                     <div>
                         <h1 class="text-white text-xl mb-2">{{ $user->name }}'s cars:</h1>
                         @foreach ($user->cars as $one)
-                            <a href="/cars/{{ $one->id }}" class="w-fit">
-                                <p class=" text-white text-lg ml-5 mb-1 border border-yellow-300 w-fit">
-                                    {{ $one->manufacturer->manufacturer_name }}
-                                    {{ $one->car_model }}
-                                </p>
+                            <div class="flex flex-row">
+
+                                <a href="/cars/{{ $one->id }}" class="w-fit pr-5">
+                                    <p class=" text-white text-lg ml-5 mb-1 w-fit">
+                                        {{ $one->manufacturer->manufacturer_name }}
+                                        {{ $one->car_model }}
+                                    </p>
+                                </a>
                                 <form method="post" action="{{ route('user_car_post_delete') }}"
                                     enctype="multipart/form-data">
                                     @csrf
@@ -84,9 +90,9 @@
                                         class="block w-full" />
 
                                     <input type="submit" value="delete"
-                                        class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
+                                        class="inline-flex items-center px-2 py-1 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
                                 </form>
-                            </a>
+                            </div>
                         @endforeach
                     </div>
                     <div class="text-white text-xl ">
@@ -110,9 +116,9 @@
                                     {{ $one->wheel->model }}
                                 </p>
                             </div>
-                            <div class="pl-[70%]">
+                            <div class="pl-[70%] my-auto">
                                 <img src="{{ asset('photos/' . $one->photos()[0]) }}" alt="image of the ad"
-                                    class="mx-auto h-20 w-auto ">
+                                    class="mx-auto h-20 object-scale-down">
                             </div>
                         </div>
                     </a>

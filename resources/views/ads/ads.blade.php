@@ -12,8 +12,11 @@
             @endif
         </div>
     </x-slot>
+    <div class="w-1/2 lg:w-1/3 xl:w-1/4 mx-auto mb-0">
+        @include('components.search-bar')
+    </div>
     <div x-data="{ adid: '', title: '', price: 0, description: '', photo: '', accepted: '', place: '' }">
-        <div class="py-12">
+        <div class="pb-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 sm:rounded-lg">
                 @foreach ($ads as $ad)
                     @if ($ad->accepted == 0 and Auth::user() and ($ad->user_id == auth()->id() or Auth::user()->is_admin))

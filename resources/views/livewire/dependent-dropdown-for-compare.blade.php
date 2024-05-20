@@ -1,6 +1,6 @@
-<div class="flex flex-col 2xl:flex-row "> {{-- külső --}}
-    <div class="w-1/2 text-white">
-        <div class="flex flex-row flex-wrap ml-2 px-2  sm:rounded-lg mt-10 mb-2 bg-gray-800">
+<div class="flex flex-col lg:flex-row "> {{-- külső --}}
+    <div class="lg:w-1/2 text-white">
+        <div class="flex flex-row flex-wrap mx-2 px-2 py-2  sm:rounded-lg mt-10 mb-2 bg-gray-800">
             <h1 class="text-3xl font-bold text-center pt-2 mx-auto">Welcome to our Wheel Comparison Page!</h1>
             <p class="mb-4">Here, you can easily compare different wheels to find the perfect match for your vehicle.
                 Our
@@ -26,16 +26,16 @@
                 comparing now and drive away with confidence!</p>
         </div>
     </div>
-    <div class="w-1/2 ">
-        <div class="flex flex-row ml-[10%]  mt-2 "> {{-- 4 formot összefogó --}}
-            <div class=""> {{-- első felnit összefogó 2 lista --}}
+    <div class="lg:w-1/2">
+        <div class="flex flex-col xl:flex-row  mt-2 "> {{-- 4 formot összefogó --}}
+            <div class="mx-auto"> {{-- első felnit összefogó 2 lista --}}
                 <div class="form-group mr-2">
                     <label for="category"
                         class="col-md-4 text-md-right dark:text-gray-200 text-white"><strong>Manufacturer
                             (Wheel1)</strong></label>
                     <div class="col-md-6">
                         <select id="man_id1" wire:model.live="selectedManufacturerWheel1"
-                            class="dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent rounded-lg w-80 form-control">
+                            class="dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent rounded-lg w-64 form-control">
                             <option value="" selected>Select category</option>
                             @foreach ($manufacturersWheel1 as $manufacturer1)
                                 <option class="dark:text-gray-200 bg-white dark:bg-gray-800"
@@ -54,7 +54,7 @@
 
                             <select wire:model.live="selectedModelWheel1"
                                 class="dark:text-gray-200
-                        bg-white dark:bg-gray-800 border-transparent rounded-lg w-80 form-control"
+                        bg-white dark:bg-gray-800 border-transparent rounded-lg w-64 form-control"
                                 name="wheel_id1" id="wheel_id1">
                                 <option value="" selected>Choose product</option>
                                 @if ($wheels1)
@@ -67,14 +67,14 @@
                     </div>
                 @endif
             </div>
-            <div class="mb-10">
+            <div class="mb-10 mx-auto">
                 <div class="form-group row">
                     <label for="category"
                         class="col-md-4 text-md-right dark:text-gray-200 text-white"><strong>Manufacturer
                             (Wheel2)</strong></label>
                     <div class="col-md-6">
                         <select id="man_id2" wire:model.live="selectedManufacturerWheel2"
-                            class="dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent rounded-lg w-80 form-control">
+                            class="dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent rounded-lg w-64 form-control">
                             <option value="" selected>Select category</option>
                             @foreach ($manufacturersWheel2 as $manufacturer2)
                                 <option class="dark:text-gray-200 bg-white dark:bg-gray-800"
@@ -93,7 +93,7 @@
 
                             <select wire:model.live="selectedModelWheel2"
                                 class="dark:text-gray-200
-                        bg-white dark:bg-gray-800 border-transparent rounded-lg w-80 form-control"
+                        bg-white dark:bg-gray-800 border-transparent rounded-lg w-64 form-control"
                                 name="wheel_id2" id="wheel_id2">
                                 <option value="" selected>Choose product</option>
                                 @if ($wheels2)
@@ -107,9 +107,9 @@
                 @endif
             </div>
         </div>
-        <div class="2xl:w-1/2 mt-5 mx-auto">
+        <div class="sm:w-1/2 mt-5 mx-auto">
             @if (!is_null($selectedModelWheel1) && !is_null($selectedModelWheel2))
-                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <div class="relative mx-auto shadow-md sm:rounded-lg">
                     <table
                         class="border border-solid border-white text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
@@ -209,9 +209,11 @@
                             <tr>
                                 <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800"></td>
                                 <td class="px-6 py-4"><img src="{{ asset('photos/' . $wh1->photos()[0]) }}"
-                                        alt="image of the ad" class="mt-10 mb-auto mx-auto h-20 w-auto "></td>
+                                        alt="image of the wheel" class="my-auto mx-auto h-20 w-auto object-cover">
+                                </td>
                                 <td class="px-6 py-4"><img src="{{ asset('photos/' . $wh2->photos()[0]) }}"
-                                        alt="image of the ad" class="mt-10 mb-auto mx-auto h-20 w-auto "></td>
+                                        alt="image of the wheel" class="my-auto mx-auto h-20 w-auto object-cover">
+                                </td>
                             </tr>
                         </tbody>
                     </table>

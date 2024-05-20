@@ -131,14 +131,15 @@ class ManufacturerController extends Controller
         $isAdmin = Auth::user() && Auth()->user()->is_admin;
         // dd($isAdmin);
         if ($isAdmin == 1) {
-            $cars = Car::join('manufacturers', 'cars.manufacturer_id', '=', 'manufacturers.id')->select('*', 'cars.accepted AS CA', 'cars.id AS car_id')->whereNotNull('cars.created_at')->orderBy('cars.accepted', 'desc')->orderBy('manufacturers.manufacturer_name')->paginate(3);
+            $cars = Car::join('manufacturers', 'cars.manufacturer_id', '=', 'manufacturers.id')->select('*', 'cars.accepted AS CA', 'cars.id AS car_id')->whereNotNull('cars.created_at')->orderBy('cars.accepted', 'desc')->orderBy('manufacturers.manufacturer_name');
         } else {
-            $cars = Car::join('manufacturers', 'cars.manufacturer_id', '=', 'manufacturers.id')->where('cars.accepted', '=', 1)->select('*', 'cars.accepted AS CA', 'cars.id AS car_id')->whereNotNull('cars.created_at')->orderBy('cars.accepted', 'desc')->orderBy('manufacturers.manufacturer_name')->paginate(3);
+            $cars = Car::join('manufacturers', 'cars.manufacturer_id', '=', 'manufacturers.id')->where('cars.accepted', '=', 1)->select('*', 'cars.accepted AS CA', 'cars.id AS car_id')->whereNotNull('cars.created_at')->orderBy('cars.accepted', 'desc')->orderBy('manufacturers.manufacturer_name');
         }
-        // dd($cars);
-        // dd($cars);
+        if (request()->has('search')) {
+            $cars = $cars->where('car_model', 'like', '%' . request()->get('search', '') . "%");
+        }
         return view('cars', [
-            'cars' => $cars,
+            'cars' => $cars->paginate(3),
             'manufacturers' => Manufacturer::all()->sortBy('manufacturer_name')->where('only_wheel_maker', '=', 0),
             'boltPatterns' => BoltPattern::all(),
             'nutBolts' => NutBolt::all()

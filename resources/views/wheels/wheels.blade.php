@@ -15,6 +15,7 @@
         <div class="flex flex-row flex-wrap-reverse py-12 justify-center">
             <div class="md:w-1/4 md:border-r-2 border-white">
                 {{-- md:érték -> md mérettől felfelé alkalmazza --}}
+                @include('components.search-bar')
                 <h1 class="dark:text-white font-semibold text-xl text-center mb-5">Compare</h1>
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 sm:rounded-lg mb-10">
                     <div class="overflow-hidden shadow-sm">

@@ -13,12 +13,12 @@
                     @else
                         {{ __('Log in to access everything!') }}
                     @endif
-                    <div class="flex justify-evenly">
-                        <div>
+                    <div class="flex flex-col md:flex-row md:justify-evenly">
+                        <div class="mx-auto">
                             <h1>Search a vehicle to get fitting wheels </h1>
                             <livewire:DependentDropdown />
                         </div>
-                        <div>
+                        <div class="mx-auto">
                             <h1>Search a Wheel to get fitting cars </h1>
                             <livewire:DependentDropdownC />
                         </div>

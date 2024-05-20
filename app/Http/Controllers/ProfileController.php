@@ -66,10 +66,15 @@ class ProfileController extends Controller
     }
     public function users_show(): View
     {
+        $users = User::orderBy('name');
+
+        if (request()->has('search')) {
+            $users = $users->where('name', 'like', '%' . request()->get('search', '') . "%");
+        }
         return view(
             'users',
             [
-                'users' => User::orderBy('name')->paginate(3)
+                'users' => $users->paginate(3)
             ]
         );
     }

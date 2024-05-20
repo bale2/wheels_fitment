@@ -47,8 +47,8 @@
     <div class="py-12">
         <div class=" max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg dark:bg-gray-800">
-                <div class="flex flex-row p-6 text-gray-900 mx-5 ">
-                    <div class="w-1/2 dark:text-white pr-10">
+                <div class="flex flex-col md:flex-row p-6 text-gray-900 mx-5 ">
+                    <div class="md:w-1/2 dark:text-white pr-10">
                         <h1 class="text-xl">Wheel select:</h1>
                         <ul class="list-disc pl-4">
                             <li>To post an ad you have to choose a manufacturer first and then a model from our database
@@ -99,7 +99,7 @@
                         </ul>
                     </div>
                     <div
-                        class="w-1/2 p-6 bg-white overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
+                        class="md:w-1/2 p-6 bg-white overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
                         <h1 class="text-slate-400 text-lg">Assign a wheel to the ad:</h1>
                         <div class="pl-5">
                             @livewire('DependentDropdownForAds')

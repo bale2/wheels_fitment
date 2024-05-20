@@ -87,7 +87,7 @@
         <div style="display:none;">
             <img id="source1" src="{{ asset('bal_felni.png') }}" />
             <img id="source2" src="{{ asset('jobb_felni.png') }}" />
-            <img style="z-index: 100;" id="source3" src="{{ asset('suspension_photoshop2.png') }}" />
+            <img style="z-index: 100;" id="source3" src="{{ asset('suspension_photoshop3.png') }}" />
         </div>
     </div>
     {{-- script --}}
