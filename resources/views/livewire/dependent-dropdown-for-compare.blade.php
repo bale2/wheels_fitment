@@ -1,4 +1,4 @@
-<div class="flex flex-row "> {{-- külső --}}
+<div class="flex flex-col 2xl:flex-row "> {{-- külső --}}
     <div class="w-1/2 text-white">
         <div class="flex flex-row flex-wrap ml-2 px-2  sm:rounded-lg mt-10 mb-2 bg-gray-800">
             <h1 class="text-3xl font-bold text-center pt-2 mx-auto">Welcome to our Wheel Comparison Page!</h1>
@@ -107,7 +107,7 @@
                 @endif
             </div>
         </div>
-        <div class="w-1/2 mt-5 mx-auto">
+        <div class="2xl:w-1/2 mt-5 mx-auto">
             @if (!is_null($selectedModelWheel1) && !is_null($selectedModelWheel2))
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table

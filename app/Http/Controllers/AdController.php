@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Ad;
 use App\Models\User;
 use App\Models\Wheel;
-use App\Models\Manufacturer;
+use Livewire\Livewire;
 use Illuminate\View\View;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use App\Policies\AdPolicy;
+use Illuminate\Support\Str;
+use App\Models\Manufacturer;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AdController extends Controller
@@ -46,8 +47,6 @@ class AdController extends Controller
 
     public function ad_create(): View
     {
-
-
         return view('ads/ad_create', [
             'wheelModels' => Wheel::all(),
             'manufacturerNames' => Manufacturer::all()
@@ -97,6 +96,8 @@ class AdController extends Controller
 
     public function ad_create_post(Request $request)
     {
+        // dd($request);
+
         // dd($request);
         $this->validate($request, [
             'wheel_id' => ['required'],

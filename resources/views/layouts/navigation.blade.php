@@ -71,7 +71,7 @@
 
                         <x-slot name="content">
                             <x-dropdown-link :href="route('user_with_id', Auth::user()->id)">
-                                {{ __('Own Wheels') }}
+                                {{ __('Own page') }}
                             </x-dropdown-link>
                             <x-dropdown-link :href="route('profile.edit')">
                                 {{ __('Profile') }}
