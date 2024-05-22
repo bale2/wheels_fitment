@@ -15,7 +15,7 @@
                     @if ($wheel->id != 1)
                         <a href="/wheels/{{ $wheel->id }}">
                             <div
-                                class="bg-white overflow-hidden grid grid-cols-2 shadow-sm sm:rounded-lg dark:bg-gray-800 mb-1">
+                                class="bg-white overflow-hidden grid grid-cols-2 shadow-sm sm:rounded-lg dark:bg-gray-800 dark:hover:bg-blue-900 mb-1">
                                 <div class="p-6 text-gray-900 dark:text-gray-100">
                                     <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200">
                                         {{ $wheel->title }}

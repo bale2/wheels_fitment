@@ -29,7 +29,6 @@ class WheelController extends Controller
             $wheels = $wheels->where('model', 'like', '%' . request()->get('search', '') . "%")->orWhere('note', 'like', '%' . request()->get('search', '') . "%");
         }
         return view('wheels/wheels', [
-            // 'wheels' => Wheel::all()->whereNotNull('created_at')->toQuery()->paginate(10),
             'wheels' => $wheels->paginate(10),
             'manufacturers' => Manufacturer::all(),
             'nutBolts' => NutBolt::all(),
@@ -141,10 +140,23 @@ class WheelController extends Controller
         return redirect()->action([WheelController::class, 'wheels_show']);
     }
 
+
+    // $manufacturer = Manufacturer::find($request->man_id);  //ez a wheel most
+    // $this->authorize('delete', $manufacturer);
+    // $wheels = Wheel::where('manufacturer_id', $request->man_id)->get(); //$kerekek = azok ahol a gyártóóid -> előbb kigyűjtöttel
+    // foreach ($wheels as $wheel) {
+    //     $wheel->users()->detach();
+    //     $wheel->cars()->detach();
+    //     $wheel->delete();
+    // }
+    // $manufacturer->delete();
+
     public function wheel_delete_post(Request $request)
     {
         $wheel = Wheel::find($request->wheel_id);
         $this->authorize('delete', $wheel);
+        $wheel->users()->where('wheel_id', $request->wheel_id)->detach();
+        $wheel->cars()->where('wheel_id', $request->wheel_id)->detach();
         $wheel->delete();
         return redirect()->back();
     }

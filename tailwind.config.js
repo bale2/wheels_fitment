@@ -11,10 +11,20 @@ export default {
 
     theme: {
         extend: {
+            colors: {
+                transparent: 'transparent',
+                current: 'currentColor',
+                'deep-sky-blue': '#2ec0f9ff',
+                'ruddy-blue': '#67aaf9ff',
+                'jordy-blue': '#9bbdf9ff',
+                'columbia-blue': '#c4e0f9ff',
+                'mulberry': '#b95f89ff',
+            },
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
         },
+
     },
 
     plugins: [forms],

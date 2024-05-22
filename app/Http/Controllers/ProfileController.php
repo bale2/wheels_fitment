@@ -58,6 +58,10 @@ class ProfileController extends Controller
         Auth::logout();
 
         $user->delete();
+        //pivot table deletes
+        $user->wheels()->where('user_id', $user)->detach();
+        $user->cars()->where('user_id', $user)->detach();
+        //
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();

@@ -39,7 +39,7 @@
                     Wheel Types
                 </h2>
             </div>
-            @if (Auth::user())
+            @if (Auth::user() && Auth::user()->is_admin)
                 <x-primary-button x-data=""
                     x-on:click.prevent="$dispatch('open-modal','wheel_type_create')">
                     Add wheel type
@@ -53,7 +53,7 @@
                 @if ($wheel_type->wheel_type != 'Unknown')
                     <a href="/wheel_types/{{ $wheel_type->id }}">
                         <div
-                            class="bg-white overflow-hidden grid grid-cols-2 shadow-sm sm:rounded-lg dark:bg-gray-800 mb-12">
+                            class="bg-white overflow-hidden grid grid-cols-2 shadow-sm sm:rounded-lg dark:bg-gray-800 dark:hover:bg-blue-900 mb-12">
                             <div class="p-6 text-gray-900 dark:text-gray-100">
                                 <h1>{{ $wheel_type->wheel_type }}</h1>
                                 {{-- <h1>{{ $prev_url }}</h1> --}}

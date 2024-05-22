@@ -23,11 +23,7 @@ class ManufacturerController extends Controller
 {
     public function show_manufacturers($type): View
     {
-        // dd($type);
-        // $previousUrl = $request->headers->get('referer');
-        // $URL_explode = explode('/', $previousUrl);
-        // $previousUrl = end($URL_explode);
-        // dd($previousUrl);
+
         if ($type == "cars") {
             return view(
                 'manufacturers/manufacturers',
@@ -44,11 +40,6 @@ class ManufacturerController extends Controller
 
     public function manufacturer_with_id($type, $manufacturer): View
     {
-        // dd(
-        //     $manufacturer,
-        //     Wheel::join('manufacturers', 'manufacturers.id', '=', 'wheels.manufacturer_id')->where('manufacturers.id', $manufacturer)->paginate(10)
-        // );
-        // dd($manufacturer);
         if ($type == "wheels") {
             return view('wheels/datas', [
                 'wheels' => Wheel::where('manufacturer_id', $manufacturer)->paginate(10)
@@ -66,8 +57,7 @@ class ManufacturerController extends Controller
         $model = null;
         $collection = collect();
         $car = Car::find($id);
-        // if ((Auth::user() and Auth::user()->is_admin) or (Auth::user()->id and $id)) {
-        //     $user = User::find($id);
+
 
         foreach ($car->wheels as $wheel_car) {
 
@@ -75,22 +65,14 @@ class ManufacturerController extends Controller
             $model = Wheel::where('model', $wheel_car['model'])->select('model')->first();
             $collection->push($manufacturer, $model);
         }
-        // }
-        // $value = $request->session()->get('key');
-        // session()->put('fasz', 10);
-        // $user = $this->users->find($id);
-        // $data = $request->session()->get('fasz');
+
         return view(
             'car',
             [
-                // 'cars' => Car::all()->whereNotNull('created_at')->toQuery()->paginate(3),
                 'car' => Car::find($id),
                 'manufacturer' => Manufacturer::all(),
                 'wheels' => Wheel::all()->toQuery()->paginate(3),
                 'collection' => $collection,
-
-                // 'wheels' => Wheel::orderBy('created_at')->paginate(10),
-                // 'data' => $data,
             ]
         );
     }
@@ -134,6 +116,11 @@ class ManufacturerController extends Controller
             $manufacturer = Manufacturer::find($request->man_id);
             $this->authorize('delete', $manufacturer);
             $wheels = Wheel::where('manufacturer_id', $request->man_id)->get();
+            $cars = Car::where('manufacturer_id', $request->man_id)->get();
+            // dd($cars);
+            foreach ($cars as $car) {
+                $car->delete();
+            }
             foreach ($wheels as $wheel) {
                 $wheel->users()->detach();
                 $wheel->cars()->detach();
@@ -148,7 +135,6 @@ class ManufacturerController extends Controller
         }
         return redirect()->back();
     }
-
 
     public function manufacturer_create_post(Request $request)
     {
@@ -189,19 +175,6 @@ class ManufacturerController extends Controller
     }
     public function car_create_post(Request $request)
     {
-        // dd($request->multipiece);
-        // $this->validate($request, [
-        //     'manufacturer_id' => ['required'],
-        //     'car_model' => ['required', 'max:255'],
-        //     'engine_size' => ['required', 'numeric', 'between:100,15000'],
-        //     'car_year' => ['required', 'numeric', 'between:1900,' . (date('Y'))],
-        //     'center_bore' => ['required', 'numeric', 'between:20,200'],
-        //     'nut_bolt_id' => ['required'],
-        //     'mtsurface_fender_distance' => ['required', 'numeric', 'between:0,200'],
-        //     'bolt_pattern_id' => ['required'],
-        //     'accepted' => ['required'],
-
-        // ]);
         $car_data = $request->all();
         session()->put('car_data', $car_data);
         $request->validateWithBag('create_bag',  [
@@ -216,12 +189,7 @@ class ManufacturerController extends Controller
             'accepted' => ['required'],
         ]);
         session()->forget('car_data');
-        // $accept = $request->accepted;
-        // if ($accept == "on") {
-        //     $accept = 1;
-        // } else {
-        //     $accept = 0;
-        // }
+
         Car::create([
             'manufacturer_id' => $request->manufacturer_id,
             'car_model' => $request->car_model,
@@ -266,8 +234,6 @@ class ManufacturerController extends Controller
             'mtsurface_fender_distance' => $request->mtsurface_fender_distance,
             'bolt_pattern_id' => $request->bolt_pattern_id,
             'accepted' => $request->accepted
-
-
         ]);
 
         return redirect()->action([ManufacturerController::class, 'show_cars']);
@@ -276,21 +242,17 @@ class ManufacturerController extends Controller
     public function car_delete_post(Request $request)
     {
 
+
+
         $car = Car::find($request->car_id);
         $this->authorize('delete', $car);
+        $car->wheels()->where('car_id', $request->$car)->detach();
+        $car->users()->where('car_id', $request->$car)->detach();
         $car->delete();
         return redirect()->back();
     }
     public function dashboard()
     {
-        // $response = Http::withHeaders([
-        //     'X-Api-Key' => config('services.api_ninja.key'),
-        // ])->get('https://api.api-ninjas.com/v1/geocoding?city=
-        // London
-        // &country=
-        // England
-        // ');
-
         return view('dashboard', [
             'manufacturers' => Manufacturer::where('only_wheel_maker', 0)->orderBy('manufacturer_name')->get(),
             'cars' => Car::all(),
@@ -335,7 +297,7 @@ class ManufacturerController extends Controller
             'wheel_type' => $request->type,
             'updated_at' => now()
         ]);
-        return redirect()->action([WheelController::class, 'wheel_types']);
+        return redirect()->back();
     }
 
     public function bolt_patterns($type): View
@@ -374,7 +336,7 @@ class ManufacturerController extends Controller
             'bolt_pattern' => $request->type,
             'updated_at' => now()
         ]);
-        return redirect()->action([WheelController::class, 'bolt_patterns']);
+        return redirect()->back();
     }
 
     public function nut_bolts(): View
@@ -397,6 +359,6 @@ class ManufacturerController extends Controller
             'type' => $request->type,
             'updated_at' => now()
         ]);
-        return redirect()->action([WheelController::class, 'nut_bolts']);
+        return redirect()->back();
     }
 }

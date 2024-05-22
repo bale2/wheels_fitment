@@ -39,7 +39,7 @@
                     Mounting type
                 </h2>
             </div>
-            @if (Auth::user())
+            @if (Auth::user() && Auth::user()->is_admin)
                 <x-primary-button x-data=""
                     x-on:click.prevent="$dispatch('open-modal','nut_bolt_create')">
                     Add mounting type
@@ -53,7 +53,7 @@
                 @if ($nut_bolt->type != 'Unknown')
                     <a href="/nut_bolts/{{ $nut_bolt->id }}">
                         <div
-                            class="bg-white overflow-hidden grid grid-cols-2 shadow-sm sm:rounded-lg dark:bg-gray-800 mb-12">
+                            class="bg-white overflow-hidden grid grid-cols-2 shadow-sm sm:rounded-lg dark:bg-gray-800 dark:hover:bg-blue-900 mb-12">
                             <div class="p-6 text-gray-900 dark:text-gray-100">
                                 <h1>{{ $nut_bolt->type }}</h1>
                             </div>

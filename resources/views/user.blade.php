@@ -108,7 +108,7 @@
                 @foreach ($user->ads as $one)
                     <a href="/ads/{{ $one->id }}">
                         <div
-                            class=" flex flex-row justify-start p-6 text-gray-900 dark:text-gray-100 bg-white overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800">
+                            class=" flex flex-row justify-start p-6 text-gray-900 dark:text-gray-100 dark:hover:bg-blue-900 bg-white overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800">
                             <div>
                                 <p class=" text-white text-bold text-lg">{{ $one->title }}</p>
                                 <p class="text-base">{{ $one->price }} €</p>
@@ -118,7 +118,8 @@
                             </div>
                             <div class="pl-[70%] my-auto">
                                 <img src="{{ asset('photos/' . $one->photos()[0]) }}" alt="image of the ad"
-                                    class="mx-auto h-20 object-scale-down">
+                                    class="mx-auto h-20 w-auto">
+                                {{-- mt-10 mb-auto mx-auto h-20 w-auto  --}}
                             </div>
                         </div>
                     </a>

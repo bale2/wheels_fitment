@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="grid grid-cols-2">
+        <div class="grid grid-cols-2 ">
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
                 {{ __('Wheels Page') }}
             </h2>
@@ -23,37 +23,17 @@
                             <div
                                 class="bg-white overflow-hidden grid grid-cols-2 shadow-sm sm:rounded-lg dark:bg-gray-800 mb-1 dark:hover:bg-blue-900">
                                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                                    {{-- <h1>ID: {{ $wheel->id }}</h1> --}}
                                     <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200">
                                         {{ $wheel->title }}
                                     </h1>
                                     <h1>Manufacturer: {{ $wheel->manufacturer->manufacturer_name }}</h1>
                                     <h1>Model :{{ $wheel->model }}</h1>
-                                    {{-- <h1>Típus: {{ $wheel->wheelType->wheel_type }}</h1> --}}
-                                    {{-- <h1>Szélesség: {{ $wheel->width }}</h1> --}}
-                                    {{-- <h1>ET szám: {{ $wheel->ET_number }} --}}
                                     <h1>Bolt pattern:{{ $wheel->boltPattern->bolt_pattern }}</h1>
                                     <h1>Diameter: {{ $wheel->diameter }} &emsp; Width: {{ $wheel->width }}</h1>
-                                    <h1>accepted {{ $wheel->accepted }}</h1>
-                                    <h1>multipiece {{ $wheel->multipiece ? 'multipiece' : 'single piece' }}</h1>
-                                    {{-- <h1>Osztókör:{{ $wheel->boltPattern->bolt_pattern }}</h1> --}}
-                                    {{-- <h1>KBA szám:{{ $wheel->kba_number }}</h1> --}}
-                                    {{-- <h1>Középfurat: {{ $wheel->center_bore }}</h1> --}}
-                                    {{-- <h1>Felfogatás: {{ $wheel->nutBolt->type }}</h1> --}}
-                                    {{-- <h1>Felépítés:
-                                        @if ($wheel->multipiece == 0)
-                                            Egyrészes
-                                        @else
-                                            Többrészes
-                                        @endif
-                                    </h1> --}}
-                                    {{-- <h1>Kép: {{ $wheel->photo }}</h1> --}}
                                 </div>
                                 <div>
-                                    {{-- @foreach ($wheel->photos() as $photo) --}}
                                     <img src="{{ asset('photos/' . $wheel->photos()[0]) }}" alt="image of the ad"
                                         class="mt-10 mb-auto mx-auto h-20 w-auto ">
-                                    {{-- @endforeachc --}}
                                 </div>
                             </div>
                         </a>
@@ -224,8 +204,6 @@
                                 </div>
                             </div>
                         @endif
-
-
                         <input type="submit" value="upload"
                             class="mx-auto block items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
                     </form>

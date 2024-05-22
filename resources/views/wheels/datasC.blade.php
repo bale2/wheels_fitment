@@ -14,7 +14,7 @@
                     @if ($car->id != 1)
                         <a href="/cars/{{ $car->id }}">
                             <div
-                                class="bg-white overflow-hidden flex flex-row shadow-sm sm:rounded-lg dark:bg-gray-800 mb-1">
+                                class="bg-white overflow-hidden flex flex-row shadow-sm sm:rounded-lg dark:bg-gray-800 dark:hover:bg-blue-900 mb-1">
                                 <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
                                 <svg class="my-auto pl-3" width="100px" height="100px" viewBox="0 0 24 24"
                                     fill="none" xmlns="http://www.w3.org/2000/svg">

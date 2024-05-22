@@ -16,7 +16,7 @@ class DependentDropdownForAds extends Component
 
     public function mount()
     {
-        $this->manufacturers = Manufacturer::all()->sortBy("manufacturer_name ");
+        $this->manufacturers = Manufacturer::all()->sortBy("manufacturer_name");
     }
 
     public function updatedSelectedManufacturer($manufacturer)

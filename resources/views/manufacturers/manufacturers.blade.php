@@ -65,7 +65,7 @@
                             <div class="my-auto">
 
                                 {{-- @if ($manufacturer->accepted == 0) --}}
-                                @if (Auth::user()->is_admin)
+                                @if (Auth::user() && Auth::user()->is_admin)
                                     <form method="post" action="{{ route('manufacturer_update_post') }}"
                                         class="flex items-center flex-col gap-y-4">
                                         @csrf
