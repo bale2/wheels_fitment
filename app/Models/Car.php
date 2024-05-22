@@ -41,10 +41,10 @@ class Car extends Model
 
     public function wheels()
     {
-        return $this->belongsToMany(Wheel::class, 'wheels_cars')->distinct();
+        return $this->belongsToMany(Wheel::class, 'wheels_cars', 'car_id', 'wheel_id')->withPivot('accepted')->distinct();
     }
     public function users()
     {
-        return $this->belongsToMany(User::class, 'cars_users')->distinct();
+        return $this->belongsToMany(User::class, 'wheels_fitment.cars_users', 'car_id', 'user_id')->distinct();
     }
 }

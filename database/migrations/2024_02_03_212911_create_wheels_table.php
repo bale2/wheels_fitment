@@ -15,28 +15,48 @@ return new class extends Migration
     {
         Schema::create('wheels', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('manufacturer_id')
-                ->constrained()
-                ->onupdate('cascade')
+            $table->foreignUuid('manufacturer_id');
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('manufacturer_id')
+                // ->constrained()
+                ->references('id')->on('manufacturers')
+                // ->onupdate('cascade')
                 ->ondelete('cascade');
             $table->string('model', 255);
             $table->float('price');
-            $table->foreignId('wheel_type_id')
-                ->constrained()
-                ->onupdate('cascade')
+
+            $table->foreignId('wheel_type_id');
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
+            $table->foreign('wheel_type_id')
+                // ->constrained()
+                ->references('id')->on('wheel_types')
+                // ->onupdate('cascade')
                 ->ondelete('cascade');
             $table->integer('diameter');
             $table->float('width');
             $table->integer('ET_number');
-            $table->foreignId('bolt_pattern_id')
-                ->constrained()
-                ->onupdate('cascade')
+
+            $table->foreignId('bolt_pattern_id');
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
+            $table->foreign('bolt_pattern_id')
+                // ->constrained()
+                ->references('id')->on('bolt_patterns')
+                // ->onupdate('cascade')
                 ->ondelete('cascade');
             $table->string('kba_number')->nullable();
             $table->float('center_bore');
-            $table->foreignId('nut_bolt_id')
-                ->constrained()
-                ->onupdate('cascade')
+
+
+            $table->foreignId('nut_bolt_id');
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
+
+            $table->foreign('nut_bolt_id')
+                // ->constrained()
+                ->references('id')->on('nut_bolts')
+                // ->onupdate('cascade')
                 ->ondelete('cascade');
             $table->boolean('multipiece');
             $table->string('photo');

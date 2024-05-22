@@ -38,8 +38,8 @@
 
                 <div class="mt-4">
                     <x-input-label for="title" :value="__('Title')" class="dark:text-gray-200" />
-                    <x-text-input id="title" type="text" value="{{ old('title') }}" name="title"
-                        class="block mt-1 w-full" />
+                    <x-text-input placeholder="title" id="title" type="text" value="{{ old('title') }}"
+                        name="title" class="block mt-1 w-full" />
                     @error('title')
                         <small class="text-red-600">{{ $message }}</small>
                     @enderror
@@ -47,7 +47,8 @@
                 {{-- description --}}
                 <div class="mt-4">
                     <x-input-label for="description" :value="__('Description')" class="dark:text-gray-200" />
-                    <textarea id="description" type="text" value="{{ old('description') }}" name="description"
+                    <textarea placeholder="Write a detailed description of the wheel.Highlights key features, benefits, and uses"
+                        id="description" type="text" value="{{ old('description') }}" name="description"
                         class="sm:w-[100%] w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">{{ old('description') }}</textarea>
                     @error('description')
                         <small class="text-red-600">{{ $message }}</small>
@@ -56,8 +57,8 @@
                 {{-- price --}}
                 <div class="mt-4">
                     <x-input-label for="price" :value="__('Price')" class="dark:text-gray-200" />
-                    <x-text-input id="price" type="number" value="{{ old('price') }}" name="price"
-                        class="block mt-1 w-full" />
+                    <x-text-input placeholder="price in €" id="price" type="number" value="{{ old('price') }}"
+                        name="price" class="block mt-1 w-full" />
                     @error('price')
                         <small class="text-red-600">{{ $message }}</small>
                     @enderror
@@ -70,8 +71,8 @@
                 {{-- place --}}
                 <div class="mt-4">
                     <x-input-label for="place" :value="__('Place')" class="dark:text-gray-200" />
-                    <x-text-input id="place" type="text" value="{{ old('place') }}" name="place"
-                        class="block mt-1 w-full" />
+                    <x-text-input placeholder="location" id="place" type="text" value="{{ old('place') }}"
+                        name="place" class="block mt-1 w-full" />
                     @error('place')
                         <small class="text-red-600">{{ $message }}</small>
                     @enderror

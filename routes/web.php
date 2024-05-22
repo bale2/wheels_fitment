@@ -85,6 +85,7 @@ Route::get('/manufacturers/{type}', [ManufacturerController::class, 'show_manufa
 Route::get('/manufacturers/{type}/{id}', [ManufacturerController::class, 'manufacturer_with_id'])->name('manufacturer_with_id');
 Route::get('/manufacturer_create', [ManufacturerController::class, 'manufacturer_create'])->middleware(['auth', 'verified'])->name('manufacturer_create');
 Route::post('/manufacturer_create', [ManufacturerController::class, 'manufacturer_create_post'])->middleware(['auth', 'verified'])->name('manufacturer_create_post');
+Route::post('/manufacturer_update_post', [ManufacturerController::class, 'manufacturer_update_post'])->middleware(['auth', 'verified', 'is_admin'])->name('manufacturer_update_post');
 
 //WheelController(show,createform,createpost,{id}page)
 Route::get('/wheels', [WheelController::class, 'wheels_show'])->name('wheels');
@@ -101,6 +102,7 @@ Route::get('/compare', [WheelController::class, 'compare'])->name('compare');
 Route::get('/cars', [ManufacturerController::class, 'show_cars'])->name('cars');
 Route::get('/cars/{id}', [ManufacturerController::class, 'car_with_id'])->name('car_with_id');
 Route::post('/wheel_car', [ManufacturerController::class, 'car_wheel_post'])->name('car_wheel_post');
+Route::post('/wheel_car_update', [ManufacturerController::class, 'car_wheel_update_post'])->name('car_wheel_update_post');
 // Route::get('/car_create', [ManufacturerController::class, 'car_create'])->middleware(['auth', 'verified'])->name('car_create');
 Route::post('/car_create', [ManufacturerController::class, 'car_create_post'])->middleware(['auth', 'verified'])->name('car_create_post');
 Route::post('/car_update', [ManufacturerController::class, 'car_update_post'])->middleware(['auth', 'verified',])->name('car_update_post');

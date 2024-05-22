@@ -49,7 +49,7 @@
                         @foreach ($user->wheels as $one)
                             <div class="flex flex-row">
                                 <a href="/wheels/{{ $one->id }}">
-                                    <p class=" text-white text-lg ml-5 mb-1 pr-5">
+                                    <p class="underline underline-offset-2 text-white text-lg ml-5 mb-1 pr-5">
                                         {{ $one->manufacturer->manufacturer_name }}
                                         {{ $one->model }}
                                     </p>
@@ -75,7 +75,7 @@
                             <div class="flex flex-row">
 
                                 <a href="/cars/{{ $one->id }}" class="w-fit pr-5">
-                                    <p class=" text-white text-lg ml-5 mb-1 w-fit">
+                                    <p class="underline underline-offset-2 text-white text-lg ml-5 mb-1 w-fit">
                                         {{ $one->manufacturer->manufacturer_name }}
                                         {{ $one->car_model }}
                                     </p>
@@ -124,18 +124,18 @@
                     </a>
                 @endforeach
                 @if (Auth::user() and (Auth::user()->is_admin or Auth::user()->id == $user->id))
-                    <div class="flex flex-row">
+                    <div class="flex flex-col lg:flex-row ">
                         <div
-                            class="p-6 w-1/2 bg-white overflow-hidden shadow-sm  my-5 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
+                            class="max-lg:rounded-lg lg:rounded-l-lg mx-auto p-6 w-full md:w-1/2 bg-white overflow-hidden shadow-sm  my-5 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
                             <h1 class="text-slate-400 text-lg">Add wheel to the user:</h1>
-                            <div class="pl-5">
+                            <div class="pl-1 lg:pl-5">
                                 @livewire('DependentDropdownForUsersWheels', ['user_id' => $user->id])
                             </div>
                         </div>
                         <div
-                            class="p-6 w-1/2 bg-white overflow-hidden shadow-sm  my-5 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
+                            class="max-lg:rounded-lg lg:rounded-r-lg mx-auto p-6 w-full md:w-1/2 bg-white overflow-hidden shadow-sm  my-5 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
                             <h1 class="text-slate-400 text-lg">Add car to the user:</h1>
-                            <div class="pl-5">
+                            <div class="pl-1 lg:pl-5">
                                 @livewire('DependentDropdownForUsersCars', ['user_id' => $user->id])
                             </div>
                         </div>

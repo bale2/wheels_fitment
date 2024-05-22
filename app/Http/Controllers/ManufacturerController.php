@@ -23,7 +23,7 @@ class ManufacturerController extends Controller
 {
     public function show_manufacturers($type): View
     {
-
+        // dd($type);
         // $previousUrl = $request->headers->get('referer');
         // $URL_explode = explode('/', $previousUrl);
         // $previousUrl = end($URL_explode);
@@ -108,6 +108,46 @@ class ManufacturerController extends Controller
         }
         return redirect()->back();
     }
+    public function car_wheel_update_post(Request $request)
+    {
+        if ($request->accept) {
+            if ($request->has("car_id")) {
+                $car = Car::find($request->car_id);
+                $wheel = Wheel::find($request->wheel_id);
+                // dd($wheel, $car);
+                $car->wheels()->updateExistingPivot($wheel, ['accepted' => 1]);
+            }
+        } elseif (!$request->accept) {
+            if ($request->has("car_id")) {
+                $car = Car::find($request->car_id);
+                $wheel = Wheel::find($request->wheel_id);
+                $car->wheels()->detach($wheel);
+            }
+        }
+        return redirect()->back();
+    }
+
+    public function manufacturer_update_post(Request $request)
+    {
+        // dd($request->accept);
+        if ($request->accept == 0) {
+            $manufacturer = Manufacturer::find($request->man_id);
+            $this->authorize('delete', $manufacturer);
+            $wheels = Wheel::where('manufacturer_id', $request->man_id)->get();
+            foreach ($wheels as $wheel) {
+                $wheel->users()->detach();
+                $wheel->cars()->detach();
+                $wheel->delete();
+            }
+            $manufacturer->delete();
+        } else {
+
+            Manufacturer::find($request->man_id)->update([
+                'accepted' => 1,
+            ]);
+        }
+        return redirect()->back();
+    }
 
 
     public function manufacturer_create_post(Request $request)
@@ -119,12 +159,14 @@ class ManufacturerController extends Controller
         } else {
             $only_wheel_maker = 0;
         }
+        $accepted = Auth::user()->is_admin ? 1 : 0;
+        // dd($accepted);
         Manufacturer::create([
             'manufacturer_name' => $request->manufacturer_name,
-            'only_wheel_maker' => $only_wheel_maker
-
+            'only_wheel_maker' => $only_wheel_maker,
+            'accepted' => $accepted,
         ]);
-        return redirect()->action([ManufacturerController::class, 'show_manufacturers']);
+        return redirect()->back();
     }
     public function show_cars()
     {
@@ -263,39 +305,6 @@ class ManufacturerController extends Controller
             'nutBolts' => NutBolt::all()
         ]);
     }
-
-    // public function datas(Request $request): View
-    // {
-
-    //     $previousUrl = $request->headers->get('referer');
-    //     $URL_explode = explode('/', $previousUrl);
-    //     $previousUrl = end($URL_explode);
-
-    //     switch ($previousUrl) {
-    //         case 'wheel_types':
-    //             return view('wheels/datas', [
-    //                 // 'wheel_types' => WheelType::all()->sortBy('wheel_type')
-    //                 // 'wheels' => Wheel::paginate(10)
-    //             ]);
-    //             break;
-    //         case 'bolt_patterns':
-    //             dd($request);
-    //             break;
-    //         case 'nut_bolts':
-    //             dd("megy 3");
-    //             break;
-    //         case 'manufacturers':
-    //             dd("megy 4");
-    //             break;
-    //         default:
-    //             abort(404);
-    //     }
-    //     return view('wheels/datas', [
-    //         // 'wheel_types' => WheelType::all()->sortBy('wheel_type')
-    //         'wheels' => Wheel::paginate(10)
-    //     ]);
-    // }
-
     //wheel_types
 
     public function wheel_types(Request $request): View
@@ -314,7 +323,7 @@ class ManufacturerController extends Controller
     public function wheel_types_with_id($wheel_types, Request $request): View
     {
         // dd($request);
-        $variablesess = $request->session()->get('prev_url');
+
         return view('wheels/datas', [
             'wheels' => Wheel::where('wheel_type_id', $wheel_types)->paginate(10)
         ]);

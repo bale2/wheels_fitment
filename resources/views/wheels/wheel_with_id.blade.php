@@ -135,7 +135,7 @@
                 </div>
 
             </div>
-            <div
+            {{-- <div
                 class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
                 <h1 class="text-slate-400 text-lg">Accepted cars:</h1>
                 @foreach ($wheel->cars as $one)
@@ -145,7 +145,8 @@
                         </h3>
                     </a>
                 @endforeach
-            </div>
+            </div> --}}
+            @include('components.wheels_cars')
             @if (Auth::user())
                 <div
                     class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800 text-gray-900 dark:text-gray-100">

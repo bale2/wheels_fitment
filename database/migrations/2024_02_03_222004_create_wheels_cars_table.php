@@ -13,14 +13,26 @@ return new class extends Migration
     {
         Schema::create('wheels_cars', function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid('car_id')
-                ->constrained()
-                ->onupdate('cascade')
+
+            $table->foreignUuid('car_id');
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
+
+            $table->foreign('car_id')
+                // ->constrained()
+                ->references('id')->on('cars')
+                // ->onupdate('cascade')
                 ->ondelete('cascade');
-            $table->foreignUuid('wheel_id')
-                ->constrained()
-                ->onupdate('cascade')
+
+
+            $table->foreignUuid('wheel_id');
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
+            $table->foreign('wheel_id')
+                ->references('id')->on('wheels')
+                // ->onupdate('cascade')
                 ->ondelete('cascade');
+            $table->boolean('accepted')->default(false);
             $table->timestamps();
         });
     }

@@ -18,9 +18,13 @@ return new class extends Migration
             $table->string('description', 2048);
             $table->float('price', 8, 2);
             // $table->foreignId('user_id')->references('id')->on('wheels_users.users');
-            $table->foreignUuid('user_id')
-                ->constrained('wheels_users.users')
-                ->onUpdate('cascade')
+            $table->foreignUuid('user_id');
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')
+                // ->constrained('wheels_users.users')
+                ->references('id')
+                ->on('wheels_users.users')
+                // ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->string('place');
             $table->string('photo');

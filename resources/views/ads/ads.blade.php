@@ -22,7 +22,7 @@
                     @if ($ad->accepted == 0 and Auth::user() and ($ad->user_id == auth()->id() or Auth::user()->is_admin))
                         <a href="ads/{{ $ad->id }}">
                             <div
-                                class="bg-white overflow-hidden grid grid-cols-2 shadow-sm sm:rounded-lg dark:bg-red-600 ">
+                                class="bg-white overflow-hidden grid grid-cols-2 shadow-sm sm:rounded-lg dark:bg-red-600 dark:hover:bg-red-700">
                                 <div class="p-6 text-gray-900 dark:text-gray-100">
                                     <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200">
                                         {{ $ad->title }}</h1>
@@ -44,7 +44,7 @@
                     @elseif ($ad->accepted == 1)
                         <a href="ads/{{ $ad->id }}">
                             <div
-                                class="bg-white overflow-hidden grid grid-cols-2 shadow-sm sm:rounded-lg dark:bg-gray-800 ">
+                                class="bg-white overflow-hidden grid grid-cols-2 shadow-sm sm:rounded-lg dark:bg-gray-800 dark:hover:bg-blue-900">
                                 <div class="p-6 text-gray-900 dark:text-gray-100">
                                     <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200">
                                         {{ $ad->title }}

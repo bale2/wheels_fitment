@@ -13,7 +13,8 @@ class Manufacturer extends Model
     use HasFactory;
     protected $fillable = [
         'manufacturer_name',
-        'only_wheel_maker'
+        'only_wheel_maker',
+        'accepted'
     ];
 
     public function wheels()

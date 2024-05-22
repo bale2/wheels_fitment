@@ -36,7 +36,7 @@ class Wheel extends Model
     }
     public function users()
     {
-        return $this->belongsToMany(User::class, 'wheels_users')->distinct();
+        return $this->belongsToMany(User::class, 'wheels_fitment.wheels_users', 'wheel_id', 'user_id')->distinct();
     }
 
     public function manufacturer()
@@ -59,7 +59,7 @@ class Wheel extends Model
 
     public function cars()
     {
-        return $this->belongsToMany(Car::class, 'wheels_cars')->distinct();
+        return $this->belongsToMany(Car::class, 'wheels_cars', 'wheel_id', 'car_id')->withPivot('accepted')->distinct();
     }
     public function photos()
     {

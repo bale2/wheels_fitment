@@ -13,14 +13,44 @@ return new class extends Migration
     {
         Schema::create('cars', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('manufacturer_id')->constrained()->onupdate('cascade')->ondelete('cascade');
+
+
+            $table->foreignUuid('manufacturer_id');
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
+            $table->foreign('manufacturer_id')
+                ->references('id')
+                ->on('manufacturers')
+                // ->onupdate('cascade')
+                ->ondelete('cascade');
             $table->string('car_model');
             $table->integer('engine_size');
             $table->integer('car_year');
             $table->float('center_bore');
-            $table->foreignId('nut_bolt_id')->constrained();
+
+
+
+            $table->foreignId('nut_bolt_id');
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
+
+            $table->foreign('nut_bolt_id')
+                ->references('id')
+                ->on('nut_bolts')
+                // ->onupdate('cascade')
+                ->ondelete('cascade');
             $table->float('mtsurface_fender_distance');
-            $table->foreignId('bolt_pattern_id')->constrained();
+
+
+
+            $table->foreignId('bolt_pattern_id');
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
+            $table->foreign('bolt_pattern_id')
+                ->references('id')
+                ->on('bolt_patterns')
+                // ->onupdate('cascade')
+                ->ondelete('cascade');
             $table->boolean('accepted')->default(false);
             $table->timestamps();
         });
