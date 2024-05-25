@@ -62,8 +62,10 @@
                         </a>
                     @endforeach
                 </div>
-                <button class="previous absolute top-1/2 left-0 w-8" onclick="previousSlide(event)">&#10094</button>
-                <button class="next absolute top-1/2 right-0 w-8" onclick="nextSlide(event)">&#10095</button>
+                <button class="previous absolute top-1/2 dark:text-white left-0 w-8"
+                    onclick="previousSlide(event)">&#10094</button>
+                <button class="next absolute top-1/2 right-0 w-8 dark:text-white"
+                    onclick="nextSlide(event)">&#10095</button>
 
             </div>
             <div
@@ -189,7 +191,7 @@
 
                 </div>
                 {{--  --}}
-                <h1 class="mx-[17%] text-slate-400 text-base">Note: </h1>
+                <h1 class="mx-[17%] text-slate-400 text-base">Description: </h1>
                 <div class=" mx-[17%] text-base">
                     <p class="dark:text-white mb-10">{{ $ad->description }}
                     </p>

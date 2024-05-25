@@ -8,18 +8,18 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    @if (Auth::user())
+                    {{-- @if (Auth::user())
                         {{ __("You're logged in!") }}
                     @else
                         {{ __('Log in to access everything!') }}
-                    @endif
+                    @endif --}}
                     <div class="flex flex-col md:flex-row md:justify-evenly">
                         <div class="mx-auto">
-                            <h1>Search a vehicle to get fitting wheels </h1>
+                            <h1>Search a vehicle to get information about is and fitting wheels </h1>
                             <livewire:DependentDropdown />
                         </div>
                         <div class="mx-auto">
-                            <h1>Search a Wheel to get fitting cars </h1>
+                            <h1>Search a Wheel to get information about is and fitting cars </h1>
                             <livewire:DependentDropdownC />
                         </div>
                     </div>

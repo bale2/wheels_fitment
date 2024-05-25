@@ -1,93 +1,153 @@
-<div class="flex flex-row">
-    <div>
-        <div class="form-group row">
-            <label for="category" class="col-md-4 text-md-right dark:text-gray-200 text-white"><strong>Manufacturer
-                    (Car)</strong></label>
-            <div class="col-md-6">
-                <select id="man_id" wire:model.live="selectedManufacturerCar"
-                    class="dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent rounded-lg w-80 form-control">
-                    <option value="" selected>Select category</option>
-                    @foreach ($manufacturersCar as $manufacturer)
-                        <option class="dark:text-gray-200 bg-white dark:bg-gray-800" value="{{ $manufacturer->id }}">
-                            {{ $manufacturer->manufacturer_name }}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-
-        @if (!is_null($selectedManufacturerCar))
-            <div class="form-group row">
-                <label for="model" class="col-md-4 text-md-right text-white">Model</label>
-
-                <div class="col-md-6">
-                    <select onchange="change_car()"
-                        class="dark:text-gray-200
-                        bg-white dark:bg-gray-800 border-transparent rounded-lg w-80 form-control"
-                        name="car_id" id="car_id">
-                        <option value="" selected>Choose product</option>
-                        @if ($cars)
-                            @foreach ($cars as $car)
-                                <option value= "{{ $car }}">{{ $car->car_model }}</option>
-                            @endforeach
-                        @endif
-                    </select>
+<div> {{-- egész oldal --}}
+    <div class="flex flex-row"> {{-- megjelenített részeket --}}
+        <div class="lg:w-1/3 text-white"> {{-- bal szöveg --}}
+            <div class="flex flex-row flex-wrap mx-2 px-2 py-2  sm:rounded-lg mt-5 mb-2 bg-gray-800">
+                <h1 class="text-3xl font-bold text-center pt-2 mx-auto">See how your wheels will fit!</h1>
+                <p class="mb-4">This visualizer helps you see how much space there will be between your fender and your
+                    wheels. Just choose both the wheel and cars and we'll show you a simulated the fender clearances.
+                </p>
+                <p class="mb-2">This is a visual estimate and may not perfectly reflect the exact fit on your car. It's
+                    always recommended to consult a professional or try a test fit before making any modifications.</p>
+                <div class="space-y-2">
+                    <div class="flex items-center space-x-4 ">
+                        <div class="w-4 h-8 bg-red-600 rounded-full"></div>
+                        <span class="text-lg font-semibold text-gray-500">wheel contact plane</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="w-4 h-8 bg-blue-700 rounded-full"></div>
+                        <span class="text-lg font-semibold text-gray-500 ">rim centerline</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="w-4 h-8 bg-green-600 rounded-full"></div>
+                        <span class="text-lg font-semibold text-gray-500">distance of the fender from the contact
+                            plane</span>
+                    </div>
                 </div>
             </div>
-        @endif
-    </div>
-    {{-- wheels --}}
-    <div>
-        <div class="form-group row">
-            <label for="category" class="col-md-4 text-md-right dark:text-gray-200 text-white"><strong>Manufacturer
-                    (Wheel)</strong></label>
-            <div class="col-md-6">
-                <select id="man_id" wire:model.live="selectedManufacturerWheel"
-                    class="dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent rounded-lg w-80 form-control">
-                    <option value="" selected>Select category</option>
-                    @foreach ($manufacturersWheel as $manufacturer)
-                        <option class="dark:text-gray-200 bg-white dark:bg-gray-800" value="{{ $manufacturer->id }}">
-                            {{ $manufacturer->manufacturer_name }}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-
-        @if (!is_null($selectedManufacturerWheel))
-            <div class="form-group row">
-                <label for="model" class="col-md-4 text-md-right text-white">Model</label>
-
-                <div class="col-md-6">
-
-                    <select onchange="change_wheel()"
-                        class="dark:text-gray-200
-                        bg-white dark:bg-gray-800 border-transparent rounded-lg w-80 form-control"
-                        name="wheel_id" id="wheel_id">
-                        <option value="" selected>Choose product</option>
-                        @if ($wheels)
-                            @foreach ($wheels as $wheel)
-                                <option value= "{{ $wheel }}">{{ $wheel->model }}</option>
-                            @endforeach
-                        @endif
-                    </select>
+            {{-- car data --}}
+            <div class="flex flex-row flex-wrap mx-2 px-2 py-2  sm:rounded-lg mt-5 mb-2 bg-gray-800">
+                <h1 class="text-3xl font-bold text-center pt-2 mx-auto">Wheel's attributes!</h1>
+                <div
+                    class=" bg-white overflow-hidden shadow-sm sm:rounded-lg flex flex-row flex-wrap-reverse mt-5 justify-between dark:bg-gray-800">
+                    <div class="md:w-3/4 w-full  mx-auto text-gray-900 dark:text-gray-100 ">
+                        <div class="flex flex-row justify-evenly">
+                            <div class="w-52">
+                                <h1 class="text-slate-400 text-base"> Width: </h1>
+                                <h1 id="wheel_width" class="text-lg"></h1>
+                                <hr>
+                            </div>
+                            <div class=" w-52">
+                                <h1 class="text-slate-400 text-base">ET number: </h1>
+                                <h1 id="wheel_et" class="text-lg"></h1>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="flex flex-row justify-evenly">
+                            <div class=" w-52">
+                                <h1 class="text-slate-400 text-base">Inner space needed: </h1>
+                                <h1 id="inner_space" class="text-lg"></h1>
+                                <hr>
+                            </div>
+                            <div class="w-52">
+                                <h1 class="text-slate-400 text-base"> Outer space needed: </h1>
+                                <h1 id="outer_space" class="text-lg"></h1>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        @endif
-    </div>
-    <div>
-        {{-- <h1 class="text-white text-base" id=wheel_manufacturer></h1> --}}
-        <h1 class="text-white text-base" id=wheel_model></h1>
-        <h1 class="text-white text-base" id=wheel_width></h1>
-        <h1 class="text-white text-base" id=wheel_ET></h1>
-    </div>
+        </div>
+        <div class="flex-col mx-auto lg:w-2/3 mt-4"> {{-- dropdownok + canvas --}}
+            <div class="flex flex-row"> {{-- dropdownok --}}
+                <div class="mx-auto"> {{-- első dropdown CAR!  --}}
+                    <div class="mx-auto">
+                        <label for="category"
+                            class="col-md-4 text-md-right dark:text-gray-200 text-white"><strong>Manufacturer
+                                (Car)</strong></label>
+                        <div class="col-md-6">
+                            <select id="man_id" wire:model.live="selectedManufacturerCar"
+                                class="dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent rounded-lg w-80 form-control">
+                                <option value="" selected>Select category</option>
+                                @foreach ($manufacturersCar as $manufacturer)
+                                    <option class="dark:text-gray-200 bg-white dark:bg-gray-800"
+                                        value="{{ $manufacturer->id }}">
+                                        {{ $manufacturer->manufacturer_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
 
+                    @if (!is_null($selectedManufacturerCar))
+                        <div>
+                            <label for="model" class="col-md-4 text-md-right text-white">Model</label>
 
+                            <div class="col-md-6">
+                                <select onchange="change_car()"
+                                    class="dark:text-gray-200
+                        bg-white dark:bg-gray-800 border-transparent rounded-lg w-80 form-control"
+                                    name="car_id" id="car_id">
+                                    <option value="" selected>Choose product</option>
+                                    @if ($cars)
+                                        @foreach ($cars as $car)
+                                            <option value= "{{ $car }}">{{ $car->car_model }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
+                    @endif
+                </div>
+                {{-- második dropdown CAR!  --}}
 
-    <div class="flex flex-row justify-evenly" x-data="width = 100, { wheel_id: '', model: '', price: 0, wheel_type_id: 0, diameter: 0, ET_number: 0, bolt_pattern_id: 0, kba_number: '', center_bore: 0, nut_bolt_id: 0, multipiece: 0, note: '', accepted: 0 }">
-        <canvas id="canvas" class="bg-white mt-8" width="650" height="500"></canvas>
-        <div style="display:none;">
-            <img id="source1" src="{{ asset('bal_felni.png') }}" />
-            <img id="source2" src="{{ asset('jobb_felni.png') }}" />
-            <img style="z-index: 100;" id="source3" src="{{ asset('suspension_photoshop3.png') }}" />
+                <div class="mx-auto">
+                    <div class="form-group row">
+                        <label for="category"
+                            class="col-md-4 text-md-right dark:text-gray-200 text-white"><strong>Manufacturer
+                                (Wheel)</strong></label>
+                        <div class="col-md-6">
+                            <select id="man_id" wire:model.live="selectedManufacturerWheel"
+                                class="dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent rounded-lg w-80 form-control">
+                                <option value="" selected>Select category</option>
+                                @foreach ($manufacturersWheel as $manufacturer)
+                                    <option class="dark:text-gray-200 bg-white dark:bg-gray-800"
+                                        value="{{ $manufacturer->id }}">
+                                        {{ $manufacturer->manufacturer_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    @if (!is_null($selectedManufacturerWheel))
+                        <div class="form-group row">
+                            <label for="model" class="col-md-4 text-md-right text-white">Model</label>
+
+                            <div class="col-md-6">
+
+                                <select onchange="change_wheel()"
+                                    class="dark:text-gray-200
+                        bg-white dark:bg-gray-800 border-transparent rounded-lg w-80 form-control"
+                                    name="wheel_id" id="wheel_id">
+                                    <option value="" selected>Choose product</option>
+                                    @if ($wheels)
+                                        @foreach ($wheels as $wheel)
+                                            <option value= "{{ $wheel }}">{{ $wheel->model }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
+                    @endif
+                </div>
+            </div>
+            <div class="flex flex-row justify-evenly" x-data="width = 100, { wheel_id: '', model: '', price: 0, wheel_type_id: 0, diameter: 0, ET_number: 0, bolt_pattern_id: 0, kba_number: '', center_bore: 0, nut_bolt_id: 0, multipiece: 0, note: '', accepted: 0 }">
+                <canvas id="canvas" class="bg-white mt-8" width="650" height="500"></canvas>
+                <div style="display:none;">
+                    <img id="source1" src="{{ asset('bal_felni.png') }}" />
+                    <img id="source2" src="{{ asset('jobb_felni.png') }}" />
+                    <img style="z-index: 100;" id="source3" src="{{ asset('suspension_photoshop3.png') }}" />
+                </div>
+            </div>
         </div>
     </div>
     {{-- script --}}
@@ -130,7 +190,7 @@
             ctx.beginPath();
             ctx.moveTo(450 - felnidistance, 200);
             ctx.lineTo(450 - felnidistance, 430);
-            ctx.strokeStyle = 'purple';
+            ctx.strokeStyle = 'green';
             ctx.stroke();
             image1.addEventListener("load", (e) => {
                 ctx.drawImage(image1, balposition, 221, felnibal, 200);
@@ -157,20 +217,6 @@
             ctx.stroke();
             //Felfekvési pont
 
-
-            ctx.beginPath();
-            ctx.moveTo(402.5, 200);
-            ctx.lineTo(402.5, 430);
-            ctx.strokeStyle = 'orange';
-            ctx.stroke();
-
-            ctx.beginPath();
-            ctx.moveTo(572.5, 200);
-            ctx.lineTo(572.5, 430);
-            ctx.strokeStyle = 'green';
-            ctx.stroke();
-            //teszt
-
             ctx.beginPath();
             ctx.moveTo(balposition + felniwidth / 2, 200);
             ctx.lineTo(balposition + felniwidth / 2, 430);
@@ -181,7 +227,7 @@
             ctx.beginPath();
             ctx.moveTo(450 - felnidistance, 200);
             ctx.lineTo(450 - felnidistance, 430);
-            ctx.strokeStyle = 'purple';
+            ctx.strokeStyle = 'green';
             ctx.stroke();
 
             let helyzetWheel = document.getElementById('wheel_id');
@@ -246,11 +292,9 @@
             } else {
                 balposition = 400 + (50 - felnibal);
             }
+            document.getElementById('inner_space').innerHTML = felnijobb;
+            document.getElementById('outer_space').innerHTML = felnibal;
             console.log(jswheel);
-            // document.getElementById("wheel_manufacturer").innerHTML = (jswheel.manufacturer_id);
-            document.getElementById("wheel_model").innerHTML = (jswheel.model);
-            document.getElementById("wheel_width").innerHTML = (jswheel.width);
-            document.getElementById("wheel_ET").innerHTML = (jswheel.ET_number);
             rajzolj();
         }
 
@@ -258,7 +302,7 @@
             jscar = document.getElementById('car_id').value;
             jscar = JSON.parse(jscar);
             felnidistance = jscar.mtsurface_fender_distance;
-            // console.log(jscar);
+            document.getElementById('')
             ctx.reset();
             szamolas();
         }
@@ -269,6 +313,8 @@
             // felniwidth = jswheel.width * 25;
             // felnibal = felniwidth / 2;
             // felnijobb = felniwidth / 2;
+            document.getElementById('wheel_width').innerHTML = jswheel.width;
+            document.getElementById('wheel_et').innerHTML = jswheel.ET_number;
             felniET = jswheel.ET_number;
             ctx.reset();
             szamolas();
@@ -297,7 +343,7 @@
         const image3 = document.getElementById("source3");
         // szamolas();
     </script>
-    <h1 class="text-white">lila: sárvédő</h1>
+    {{-- <h1 class="text-white">lila: sárvédő</h1>
     <h1 class="text-white">kék: felni középvonala</h1>
-    <h1 class="text-white">piros: felfelkvési sík</h1>
+    <h1 class="text-white">piros: felfelkvési sík</h1> --}}
 </div>

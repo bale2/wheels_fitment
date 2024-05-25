@@ -32,17 +32,14 @@ class AdPolicy
     //     return true;
     // }
 
-    /**
-     * Determine whether the user can update the model.
-     */
+
+     //Determine whether the user can update the model.
     public function update(User $user, Ad $ad): bool
     {
         return $user->id === $ad->user_id || $user->is_admin === 1;
     }
 
-    /**
-     * Determine whether the user can delete the model.
-     */
+     // Determine whether the user can delete the model.
     public function delete(User $user, Ad $ad): bool
     {
         return $user->id === $ad->user_id || $user->is_admin === 1;

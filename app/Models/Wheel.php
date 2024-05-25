@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-
 class Wheel extends Model
 {
     use HasUuids;
@@ -54,9 +53,7 @@ class Wheel extends Model
     public function nutBolt()
     {
         return $this->belongsTo(NutBolt::class);
-        //keréknek van csavarja
     }
-
     public function cars()
     {
         return $this->belongsToMany(Car::class, 'wheels_cars', 'wheel_id', 'car_id')->withPivot('accepted')->distinct();

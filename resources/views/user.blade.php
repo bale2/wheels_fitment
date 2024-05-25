@@ -54,18 +54,20 @@
                                         {{ $one->model }}
                                     </p>
                                 </a>
-                                <form method="post" action="{{ route('user_wheel_post_delete') }}"
-                                    enctype="multipart/form-data">
-                                    @csrf
-                                    @method('post')
-                                    <input type="hidden" value="{{ $user->id }}" name="user_id_userpage"
-                                        class="block w-full" />
-                                    <input type="hidden" value="{{ $one->id }}" name="wheel_id_userpage"
-                                        class="block w-full" />
+                                @if (Auth::user() and (Auth::user()->is_admin or Auth::user()->id == $user->id))
+                                    <form method="post" action="{{ route('user_wheel_post_delete') }}"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        @method('post')
+                                        <input type="hidden" value="{{ $user->id }}" name="user_id_userpage"
+                                            class="block w-full" />
+                                        <input type="hidden" value="{{ $one->id }}" name="wheel_id_userpage"
+                                            class="block w-full" />
 
-                                    <input type="submit" value="delete"
-                                        class="inline-flex items-center px-2 py-1 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
-                                </form>
+                                        <input type="submit" value="delete"
+                                            class="inline-flex items-center px-2 py-1 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
+                                    </form>
+                                @endif
                             </div>
                         @endforeach
                     </div>
@@ -80,18 +82,20 @@
                                         {{ $one->car_model }}
                                     </p>
                                 </a>
-                                <form method="post" action="{{ route('user_car_post_delete') }}"
-                                    enctype="multipart/form-data">
-                                    @csrf
-                                    @method('post')
-                                    <input type="hidden" value="{{ $user->id }}" name="user_id_userpage"
-                                        class="block w-full" />
-                                    <input type="hidden" value="{{ $one->id }}" name="car_id_userpage"
-                                        class="block w-full" />
+                                @if (Auth::user() and (Auth::user()->is_admin or Auth::user()->id == $user->id))
+                                    <form method="post" action="{{ route('user_car_post_delete') }}"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        @method('post')
+                                        <input type="hidden" value="{{ $user->id }}" name="user_id_userpage"
+                                            class="block w-full" />
+                                        <input type="hidden" value="{{ $one->id }}" name="car_id_userpage"
+                                            class="block w-full" />
 
-                                    <input type="submit" value="delete"
-                                        class="inline-flex items-center px-2 py-1 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
-                                </form>
+                                        <input type="submit" value="delete"
+                                            class="inline-flex items-center px-2 py-1 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
+                                    </form>
+                                @endif
                             </div>
                         @endforeach
                     </div>
@@ -107,21 +111,22 @@
                 <h1 class="ml-4 text-white text-xl my-auto">{{ $user->name }}'s ads:</h1>
                 @foreach ($user->ads as $one)
                     <a href="/ads/{{ $one->id }}">
-                        <div
-                            class=" flex flex-row justify-start p-6 text-gray-900 dark:text-gray-100 dark:hover:bg-blue-900 bg-white overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800">
-                            <div>
-                                <p class=" text-white text-bold text-lg">{{ $one->title }}</p>
-                                <p class="text-base">{{ $one->price }} €</p>
-                                <p class="text-base">{{ $one->wheel->manufacturer->manufacturer_name }}
-                                    {{ $one->wheel->model }}
-                                </p>
+                        @if ($one->accepted or !$one->accepted and Auth::user()->id == $one->user_id or Auth::user() && Auth::user()->is_admin)
+                            <div
+                                class=" grid grid-cols-2 p-6 text-gray-900 dark:text-gray-100 dark:hover:bg-blue-900 bg-white overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800">
+                                <div>
+                                    <p class=" text-white text-bold text-lg">{{ $one->title }}</p>
+                                    <p class="text-base">{{ $one->price }} €</p>
+                                    <p class="text-base">{{ $one->wheel->manufacturer->manufacturer_name }}
+                                        {{ $one->wheel->model }}
+                                    </p>
+                                </div>
+                                <div class="-mt-5">
+                                    <img src="{{ asset('photos/' . $one->photos()[0]) }}" alt="image of the ad"
+                                        class="mt-10 mb-auto mx-auto h-20 w-auto">
+                                </div>
                             </div>
-                            <div class="pl-[70%] my-auto">
-                                <img src="{{ asset('photos/' . $one->photos()[0]) }}" alt="image of the ad"
-                                    class="mx-auto h-20 w-auto">
-                                {{-- mt-10 mb-auto mx-auto h-20 w-auto  --}}
-                            </div>
-                        </div>
+                        @endif
                     </a>
                 @endforeach
                 @if (Auth::user() and (Auth::user()->is_admin or Auth::user()->id == $user->id))

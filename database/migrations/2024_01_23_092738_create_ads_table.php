@@ -1,14 +1,11 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+     // Run the migrations.
     public function up(): void
     {
         Schema::create('ads', function (Blueprint $table) {
@@ -17,14 +14,10 @@ return new class extends Migration
             $table->string('title');
             $table->string('description', 2048);
             $table->float('price', 8, 2);
-            // $table->foreignId('user_id')->references('id')->on('wheels_users.users');
             $table->foreignUuid('user_id');
-            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('user_id')
-                // ->constrained('wheels_users.users')
                 ->references('id')
                 ->on('wheels_users.users')
-                // ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->string('place');
             $table->string('photo');
@@ -32,9 +25,7 @@ return new class extends Migration
             $table->timestamps();
         });
     }
-    /**
-     * Reverse the migrations.
-     */
+     //Reverse the migrations.
     public function down(): void
     {
         Schema::dropIfExists('ads');

@@ -15,10 +15,8 @@ use Illuminate\Support\Facades\Auth;
 
 class AdController extends Controller
 {
-
     public function ads_show(): View
     {
-
         $ads = Ad::orderBy('updated_at');
 
         if (request()->has('search')) {
@@ -26,20 +24,12 @@ class AdController extends Controller
         }
 
         return view('ads/ads', [
-            // 'ads'=> $ads
-            // 'ads' => Ad::orderBy('updated_at')->paginate(10),
             'ads' => $ads->paginate(10),
         ]);
     }
 
     public function ad_with_id_show(string $id): View
     {
-        // $ad = DB::table('users')
-        // ->join('ads','users.id', '=', 'ads.user_id')
-        // ->select('ads.*','users.name')
-        // ->where('ads.id',$id)
-        // ->first();
-
         return view('ads/ad_with_id', [
             'ad' => Ad::find($id),
             'google_api' => config('services.google.key'),
@@ -63,43 +53,19 @@ class AdController extends Controller
 
     public function ad_update_post(Request $request)
     {
-        // dd($request);
-        // dd($request->ad_id);
         $this->authorize('update', Ad::find($request->ad_id));
-        // $imagePaths = '';
-
-        // if ($request->hasFile('photo')) {
-        //     $files = $request->file('photo');
-
-        //     foreach ($files as $file) {
-
-        //         $path = Str::uuid() . '.' . strtolower($file->getClientOriginalExtension());
-
-        //         $file->move(public_path('photos'), $path);
-
-        //         $imagePaths = $imagePaths . ';' . $path;
-        //     }
-        // }
-
-        // $imagePaths = trim($imagePaths, ';');
-
         Ad::find($request->ad_id)->update([
             'title' => $request->title,
             'description' => $request->description,
             'price' => $request->price,
             'place' => $request->place,
-            // 'photo' => $imagePaths,
             'accepted' => $request->accepted,
-            // 'accepted' => $request->accepted == null ? false : true
         ]);
         return redirect()->back();
     }
 
     public function ad_create_post(Request $request)
     {
-        // dd($request);
-
-        // dd($request);
         $this->validate($request, [
             'wheel_id' => ['required'],
             'title' => ['required', 'max:255'],
@@ -116,11 +82,8 @@ class AdController extends Controller
             $files = $request->file('photo');
 
             foreach ($files as $file) {
-
                 $path = Str::uuid() . '.' . strtolower($file->getClientOriginalExtension());
-
                 $file->move(public_path('photos'), $path);
-
                 $imagePaths = $imagePaths . ';' . $path;
             }
         }

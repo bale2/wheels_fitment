@@ -167,7 +167,7 @@ class ManufacturerController extends Controller
             $cars = $cars->where('car_model', 'like', '%' . request()->get('search', '') . "%");
         }
         return view('cars', [
-            'cars' => $cars->paginate(3),
+            'cars' => $cars->paginate(10),
             'manufacturers' => Manufacturer::all()->sortBy('manufacturer_name')->where('only_wheel_maker', '=', 0),
             'boltPatterns' => BoltPattern::all(),
             'nutBolts' => NutBolt::all()
@@ -184,12 +184,12 @@ class ManufacturerController extends Controller
             'car_year' => ['required', 'numeric', 'between:1900,' . (date('Y'))],
             'center_bore' => ['required', 'numeric', 'between:20,200'],
             'nut_bolt_id' => ['required'],
-            'mtsurface_fender_distance' => ['required', 'numeric', 'between:0,200'],
+            'mtsurface_fender_distance' => ['required', 'numeric', 'between:0,700'],
             'bolt_pattern_id' => ['required'],
             'accepted' => ['required'],
         ]);
         session()->forget('car_data');
-
+        // dd($request);
         Car::create([
             'manufacturer_id' => $request->manufacturer_id,
             'car_model' => $request->car_model,
@@ -200,8 +200,7 @@ class ManufacturerController extends Controller
             'mtsurface_fender_distance' => $request->mtsurface_fender_distance,
             'bolt_pattern_id' => $request->bolt_pattern_id,
             'accepted' => $request->accepted,
-            'updated_at' => now()
-
+            'updated_at' => now(),
         ]);
         return redirect()->action([ManufacturerController::class, 'show_cars']);
     }
@@ -235,15 +234,11 @@ class ManufacturerController extends Controller
             'bolt_pattern_id' => $request->bolt_pattern_id,
             'accepted' => $request->accepted
         ]);
-
         return redirect()->action([ManufacturerController::class, 'show_cars']);
     }
 
     public function car_delete_post(Request $request)
     {
-
-
-
         $car = Car::find($request->car_id);
         $this->authorize('delete', $car);
         $car->wheels()->where('car_id', $request->$car)->detach();
