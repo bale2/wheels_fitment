@@ -64,8 +64,8 @@
                                         <input type="hidden" value="{{ $one->id }}" name="wheel_id_userpage"
                                             class="block w-full" />
 
-                                        <input type="submit" value="delete"
-                                            class="inline-flex items-center px-2 py-1 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
+                                        <input type="submit" value="DELETE"
+                                        class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-2.5 py-1 me-2 mt-1 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
                                     </form>
                                 @endif
                             </div>
@@ -92,8 +92,8 @@
                                         <input type="hidden" value="{{ $one->id }}" name="car_id_userpage"
                                             class="block w-full" />
 
-                                        <input type="submit" value="delete"
-                                            class="inline-flex items-center px-2 py-1 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
+                                        <input type="submit" value="DELETE"
+                                        class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-2.5 py-1 me-2 mt-1 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
                                     </form>
                                 @endif
                             </div>

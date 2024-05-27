@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
 
-        <div class="flex justify-around ">
-            <div class="w-3 ">
+        <div class="flex justify-around">
+            <div class="w-3 mx-auto">
                 <a href="/ads"><svg fill="#000000" class="h-5 w-5" version="1.1" id="Capa_1"
                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                         viewBox="0 0 26.676 26.676" xml:space="preserve">
@@ -35,20 +35,15 @@
 
                     </svg></a>
             </div>
-            <div>
+            <div class="mx-auto">
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center dark:text-gray-200">
                     {{ $ad->title }}
                 </h2>
             </div>
-            @if (Auth::user())
-                <div>
-                    <a href="/ad_create">
-                        <div
-                            class="bg-slate-200 font-semibold text-xl text-gray-800 leading-tight rounded-3xl px-5 text-center max-w-fit mx-auto">
-                            Post an ad</div>
-                    </a>
-                </div>
-            @endif
+            <div class="mx-auto">
+                <a class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-md p-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                    href="/ad_create">Post an ad</a>
+            </div>
         </div>
     </x-slot>
     <div class="py-6">
@@ -84,7 +79,8 @@
                 <div class="flex flex-row justify-start mx-[17%]">
                     <a href="/users/{{ $ad->user->id }}">
                         <div class="w-56">
-                            <h1 class="text-slate-400 text-base">Seller: {{ $ad->user->name }} </h1>
+                            <h1 class="text-slate-400 text-base underline underline-offset-2">Seller:
+                                {{ $ad->user->name }} </h1>
                             <h1 class="text-lg"></h1>
 
                         </div>
@@ -92,7 +88,8 @@
                     <a href="https://www.google.com/maps/search/?api=1&query={{ $ad->place }}" target="_blank">
                         <div class="w-56
                             ">
-                            <h1 class="text-slate-400 text-base">Place: {{ $ad->place }}</h1>
+                            <h1 class="text-slate-400 text-base underline underline-offset-2">Place: {{ $ad->place }}
+                            </h1>
                             <h1 class="text-lg"></h1>
                         </div>
                     </a>
@@ -103,7 +100,9 @@
                     <div class="flex flex-row justify-evenly mt-2">
                         <div class="w-52">
                             <h1 class="text-slate-400 text-base">Manufacturer:</h1>
-                            <h1 class="font-bold text-lg"> {{ $ad->wheel->manufacturer->manufacturer_name }}</h1>
+                            <a href="/manufacturers/wheels/{{ $ad->wheel->manufacturer->id }}">
+                                <h1 class="font-bold text-lg"> {{ $ad->wheel->manufacturer->manufacturer_name }}</h1>
+                            </a>
                             <hr>
                         </div>
                         <div class="w-52">
@@ -121,19 +120,19 @@
                         <div class="
                                 w-52">
                             <h1 class="text-slate-400 text-base">Center Bore: </h1>
-                            <h1 class="text-lg">{{ $ad->wheel->center_bore }}</h1>
+                            <h1 class="text-lg">{{ $ad->wheel->center_bore }} cm</h1>
                             <hr>
                         </div>
                     </div>
                     <div class="flex flex-row justify-evenly">
                         <div class="w-52">
                             <h1 class="text-slate-400 text-base">Diameter: </h1>
-                            <h1 class="text-lg">{{ $ad->wheel->diameter }}</h1>
+                            <h1 class="text-lg">{{ $ad->wheel->diameter }} inch</h1>
                             <hr>
                         </div>
                         <div class="w-52">
                             <h1 class="text-slate-400 text-base"> Width: </h1>
-                            <h1 class="text-lg">{{ $ad->wheel->width }}</h1>
+                            <h1 class="text-lg">{{ $ad->wheel->width }} inch</h1>
                             <hr>
                         </div>
                     </div>
@@ -184,7 +183,8 @@
                     <div class="max-w-[28rem]">
                         <h1 class="mt-1 inline-block text-slate-400 text-base">Wheel associated with ad: </h1>
                         <a href="/wheels/{{ $ad->wheel->id }}">
-                            <p class="inline text-base text-white">{{ $ad->wheel->manufacturer->manufacturer_name }}
+                            <p class="inline text-base text-white underline underline-offset-2">
+                                {{ $ad->wheel->manufacturer->manufacturer_name }}
                                 {{ $ad->wheel->model }}</p>
                         </a>
                     </div>

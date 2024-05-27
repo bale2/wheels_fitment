@@ -1,13 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="grid grid-cols-2 ">
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
+            <h2 class="my-auto font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
                 {{ __('Wheels Page') }}
             </h2>
             @if (Auth::user())
-                <div
-                    class="bg-slate-200 font-semibold text-xl text-gray-800 leading-tight rounded-3xl px-5 text-center max-w-fit mx-auto">
-                    <a href="/wheel_create">Add wheel</a>
+                <div class="mx-auto">
+                    <a class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-md p-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                        href="/ad_create">Add wheel</a>
                 </div>
             @endif
         </div>
@@ -21,7 +21,7 @@
                     @if ($wheel->id != 1)
                         <a href="wheels/{{ $wheel->id }}">
                             <div
-                                class="bg-white overflow-hidden grid grid-cols-2 shadow-sm sm:rounded-lg dark:bg-gray-800 mb-1 dark:hover:bg-blue-900">
+                                class="bg-white overflow-hidden grid grid-cols-2 shadow-sm sm:rounded-lg {{ $wheel->accepted ? 'dark:bg-gray-800 dark:hover:bg-blue-900' : 'dark:bg-red-600 dark:hover:bg-red-700' }} mb-1 ">
                                 <div class="p-6 text-gray-900 dark:text-gray-100">
                                     <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200">
                                         {{ $wheel->title }}
@@ -44,13 +44,17 @@
                                     @method('post')
                                     <input type="hidden" value="{{ $wheel->id }}" name="wheel_id"
                                         class="block mt-1 w-full" />
-                                    <x-primary-button class="w-[20vw]">
+                                    <x-primary-button
+                                        class="w-[20vw] dark:bg-blue-700 dark:hover:bg-blue-800 dark:text-white">
                                         Delete wheel
                                     </x-primary-button>
+                                    {{-- class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-md p-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" --}}
+
                                 </form>
                             @endcan
                             @can('update', $wheel)
-                                <x-primary-button class="w-[20vw]" x-data="" {{-- x-on:click.prevent="$dispatch('open-modal','wheel_update_post'),wheel_id={{ $wheel->id }},manufacturer_id={{ $wheel->manufacturer->id }},model='{{ $wheel->model }}', price={{ $wheel->price }}, wheel_type_id={{ $wheel->wheel_type_id }}, diameter={{ $wheel->diameter }}, width={{ $wheel->width }}, ET_number={{ $wheel->ET_number }}, bolt_pattern_id={{ $wheel->bolt_pattern_id }}, kba_number='{{ $wheel->kba_number }}', center_bore={{ $wheel->center_bore }}, nut_bolt_id={{ $wheel->nut_bolt_id }}, multipiece={{ $wheel->multipiece }}, note='{{ $wheel->note }}', accepted='{{ $wheel->accepted }}'"> --}}
+                                <x-primary-button class="w-[20vw] dark:bg-blue-700 dark:hover:bg-blue-800 dark:text-white"
+                                    x-data="" {{-- x-on:click.prevent="$dispatch('open-modal','wheel_update_post'),wheel_id={{ $wheel->id }},manufacturer_id={{ $wheel->manufacturer->id }},model='{{ $wheel->model }}', price={{ $wheel->price }}, wheel_type_id={{ $wheel->wheel_type_id }}, diameter={{ $wheel->diameter }}, width={{ $wheel->width }}, ET_number={{ $wheel->ET_number }}, bolt_pattern_id={{ $wheel->bolt_pattern_id }}, kba_number='{{ $wheel->kba_number }}', center_bore={{ $wheel->center_bore }}, nut_bolt_id={{ $wheel->nut_bolt_id }}, multipiece={{ $wheel->multipiece }}, note='{{ $wheel->note }}', accepted='{{ $wheel->accepted }}'"> --}}
                                     x-on:click.prevent="$dispatch('open-modal','wheel_update_post'),wheel_id='{{ $wheel->id }}', manufacturer_id='{{ $wheel->manufacturer_id }}',model='{{ $wheel->model }}',price={{ $wheel->price }},wheel_type_id={{ $wheel->wheel_type_id }},diameter={{ $wheel->diameter }},width={{ $wheel->width }},ET_number={{ $wheel->ET_number }}, bolt_pattern_id={{ $wheel->bolt_pattern_id }}, kba_number='{{ $wheel->kba_number }}', center_bore={{ $wheel->center_bore }}, nut_bolt_id={{ $wheel->nut_bolt_id }}, multipiece={{ $wheel->multipiece }}, note='{{ $wheel->note }}', accepted='{{ $wheel->accepted }}'">
                                     Update wheel
                                 </x-primary-button>
@@ -145,7 +149,7 @@
                             <x-input-label for="wheel_type_id" :value="__('Wheel Type')" class="dark:text-gray-200" />
                             <select required id="wheel_type_id" name="wheel_type_id" x-model="wheel_type_id"
                                 class="field dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent w-80">
-                                @foreach ($wheelTypes as $wheelType)
+                                @foreach ($wheel_types as $wheelType)
                                     <option class="dark:text-gray-200 bg-white dark:bg-gray-800 w-80"
                                         value={{ $wheelType->id }}>
                                         {{ $wheelType->wheel_type }}</option>
@@ -157,7 +161,7 @@
                             <x-input-label for="bolt_pattern" :value="__('Bolt pattern')" class="dark:text-gray-200" />
                             <select required id="bolt_pattern" name="bolt_pattern_id" x-model="bolt_pattern_id"
                                 class="field dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent w-80">
-                                @foreach ($boltPatterns as $boltPattern)
+                                @foreach ($bolt_patterns as $boltPattern)
                                     <option class="dark:text-gray-200 bg-white dark:bg-gray-800 w-80"
                                         value={{ $boltPattern->id }}>
                                         {{ $boltPattern->bolt_pattern }}</option>

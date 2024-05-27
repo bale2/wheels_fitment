@@ -1,13 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex justify-around" x-data="{ car_id: '', manufacturer_id: '', car_model: '', engine_size: '', car_year: '', center_bore: '', nut_bolt_id: '', mtsurface_fender_distance: '', bolt_pattern_id: '' }">
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
+        <div class="grid grid-cols-2" x-data="{ car_id: '', manufacturer_id: '', car_model: '', engine_size: '', car_year: '', center_bore: '', nut_bolt_id: '', mtsurface_fender_distance: '', bolt_pattern_id: '' }">
+            <h2 class="my-auto font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
                 {{ __('Cars') }}
             </h2>
             @if (Auth::user())
-                <x-primary-button x-data="" x-on:click.prevent="$dispatch('open-modal','car_create')">  
-                    Add car
-                </x-primary-button>
+            <div class="mx-auto">
+                <a class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-md p-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                    href="/ad_create">Add a car</a>
+            </div>
             @endif
             {{-- Create Modal --}}
             <x-modal name="car_create" :show="$errors->create_bag->isNotEmpty()" focusable>
@@ -35,7 +36,8 @@
                     <div class="flex flex-col">
                         <div>
                             <x-input-label for="car_model" :value="__('Model')" class="dark:text-gray-200" />
-                            <x-text-input required id="car_model" name="car_model" class="field" x-model="car_model"
+                            <x-text-input placeholder="Model like: Golf, Corolla" required id="car_model"
+                                name="car_model" class="field" x-model="car_model"
                                 class="dark:text-gray-200 bg-white dark:bg-gray-800  w-80" />
                         </div>
                         <div>
@@ -47,28 +49,30 @@
                         <div class="flex flex-col">
                             <x-input-label for="mtsurface_fender_distance" :value="__('Wheel-Fender Gap')"
                                 class="dark:text-gray-200" />
-                            <x-text-input required id="mtsurface_fender_distance" type="number"
+                            <x-text-input placeholder="gap in mm" required id="mtsurface_fender_distance" type="number"
                                 name="mtsurface_fender_distance" x-model="mtsurface_fender_distance" step="0.1"
                                 class=" field dark:text-gray-200 bg-white dark:bg-gray-800 w-32" />
                             <x-input-error :messages="$errors->create_bag->get('mtsurface_fender_distance')" class="mt-2 w-32" />
                         </div>
+
                         <div class="flex flex-col">
                             <x-input-label for="engine_size" :value="__('Engine size')" class="dark:text-gray-200" />
-                            <x-text-input required id="engine_size" type="number" name="engine_size"
-                                x-model="engine_size"
+                            <x-text-input placeholder="size in cm3" required id="engine_size" type="number"
+                                name="engine_size" x-model="engine_size"
                                 class=" field dark:text-gray-200 bg-white dark:bg-gray-800  w-32" />
                             <x-input-error :messages="$errors->create_bag->get('engine_size')" class="mt-2 w-32" />
                         </div>
+
                         <div class="flex flex-col">
                             <x-input-label for="car_year" :value="__('Manufacturing year')" class="dark:text-gray-200" />
-                            <x-text-input required id="car_year" type="number" name="car_year" x-model="car_year"
-                                class=" field dark:text-gray-200 bg-white dark:bg-gray-800  w-32" />
+                            <x-text-input placeholder="Year" required id="car_year" type="number" name="car_year"
+                                x-model="car_year" class=" field dark:text-gray-200 bg-white dark:bg-gray-800  w-32" />
                             <x-input-error :messages="$errors->create_bag->get('car_year')" class="mt-2 w-32" />
                         </div>
                         <div class="flex flex-col">
-                            <x-input-label for="center_bore" :value="__('Center_bore')" class="dark:text-gray-200" />
-                            <x-text-input required id="center_bore" type="number" name="center_bore" step="0.1"
-                                x-model="center_bore"
+                            <x-input-label for="center_bore" :value="__('Center bore')" class="dark:text-gray-200" />
+                            <x-text-input placeholder="in cm" required id="center_bore" type="number"
+                                name="center_bore" step="0.1" x-model="center_bore"
                                 class=" field dark:text-gray-200 bg-white dark:bg-gray-800  w-32" />
                             <x-input-error :messages="$errors->create_bag->get('center_bore')" class="mt-2 w-32" />
                         </div>
@@ -79,7 +83,7 @@
                     <select required id="bolt_pattern" name="bolt_pattern_id" x-model="bolt_pattern_id"
                         class="field dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent w-80">
                         <option hidden disabled selected value=""> -- select an option -- </option>
-                        @foreach ($boltPatterns as $boltPattern)
+                        @foreach ($bolt_patterns as $boltPattern)
                             <option class="dark:text-gray-200 bg-white dark:bg-gray-800" value={{ $boltPattern->id }}>
                                 {{ $boltPattern->bolt_pattern }}</option>
                         @endforeach
@@ -154,7 +158,7 @@
                     @if ($car->car_id != 1)
                         <a href="cars/{{ $car->car_id }}">
                             <div
-                                class="bg-white overflow-hidden flex flex-row shadow-sm sm:rounded-lg  {{ $car->CA == 0 ? 'dark:bg-red-600' : 'dark:bg-gray-800' }} dark:hover:bg-blue-900 mb-1">
+                                class="bg-white overflow-hidden flex flex-row shadow-sm sm:rounded-lg  {{ $car->CA == 0 ? 'dark:bg-red-600 dark:hover:bg-red-700' : 'dark:bg-gray-800 dark:hover:bg-blue-900' }}  mb-1">
                                 <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
                                 <svg class="my-auto pl-3" width="100px" height="100px" viewBox="0 0 24 24"
                                     fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -166,9 +170,8 @@
                                 <div class="p-6 pl-3 text-gray-900 dark:text-gray-100">
                                     <h1>Manufacturer: {{ $car->manufacturer_name }}</h1>
                                     <h1>Model :{{ $car->car_model }}</h1>
-                                    <h1>Engine size :{{ $car->engine_size }}</h1>
+                                    <h1>Engine size :{{ $car->engine_size }} cm3</h1>
                                     <h1>Manufactured :{{ $car->car_year }}</h1>
-                                    <h1>Accepted:{{ $car->CA }}</h1>
                                 </div>
                             </div>
                         </a>
@@ -180,13 +183,13 @@
                                 @method('post')
                                 <input type="hidden" value="{{ $car->car_id }}" name="car_id"
                                     class="block mt-1 w-full" />
-                                <x-primary-button class="w-[20vw]">
+                                <x-primary-button class="w-[20vw] dark:bg-blue-700 dark:hover:bg-blue-800 dark:text-white">
                                     Delete car
                                 </x-primary-button>
                             </form>
                         @endcan
                         @can('update', $car)
-                            <x-primary-button class="w-[20vw]" x-data=""
+                            <x-primary-button class="w-[20vw] dark:bg-blue-700 dark:hover:bg-blue-800 dark:text-white" x-data=""
                                 x-on:click.prevent="$dispatch('open-modal','car_update_post'),
                                      car_id='{{ $car->car_id }}',
                                      manufacturer_id='{{ $car->manufacturer_id }}',
@@ -269,7 +272,7 @@
                             <x-input-label for="bolt_pattern" :value="__('Bolt pattern')" class="dark:text-gray-200" />
                             <select id="bolt_pattern" name="bolt_pattern_id" x-model="bolt_pattern_id"
                                 class="field dark:text-gray-200 bg-white dark:bg-gray-800 border-transparent w-80">
-                                @foreach ($boltPatterns as $boltPattern)
+                                @foreach ($bolt_patterns as $boltPattern)
                                     <option class="dark:text-gray-200 bg-white dark:bg-gray-800 w-80"
                                         value={{ $boltPattern->id }}>
                                         {{ $boltPattern->bolt_pattern }}</option>

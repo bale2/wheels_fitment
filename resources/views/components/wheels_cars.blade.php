@@ -8,7 +8,7 @@
                     <a href='/wheels/{{ $one->id }}'>
                         <h3 class="dark:text-white px-5 underline underline-offset-2">
                             -{{ $one->manufacturer->manufacturer_name }}
-                            {{ $one->model }} {{ $one->car_model }} {{ $one->pivot->accepted }}
+                            {{ $one->model }} {{ $one->car_model }}
                         </h3>
                     </a>
                 </div>

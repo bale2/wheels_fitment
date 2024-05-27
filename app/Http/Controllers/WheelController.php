@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
 use function Laravel\Prompts\error;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\File;
 use Spatie\FlareClient\Http\Response;
 
@@ -23,17 +24,36 @@ class WheelController extends Controller
 {
     public function wheels_show(): View
     {
-        $wheels = Wheel::whereNotNull('created_at')->orderBy('created_at', 'DESC');
+        $wheels = null;
+        if (Auth::check() && Auth::user()->is_admin) {
+            $wheels = Wheel::whereNotNull('created_at')->orderBy('created_at', 'DESC');
+        }
+        if (Auth::check() && !Auth::user()->is_admin || !Auth::check()) {
+            $wheels = Wheel::where('accepted', 1)->whereNotNull('created_at')->orderBy('created_at', 'DESC');
+        }
 
         if (request()->has('search')) {
             $wheels = $wheels->where('model', 'like', '%' . request()->get('search', '') . "%")->orWhere('note', 'like', '%' . request()->get('search', '') . "%");
         }
+        if (request()->has('manufacturer_input')) {
+            $wheels = $wheels->where('wheels.manufacturer_id', request()->get('manufacturer_input', ''));
+        }
+        if (request()->has('wheel_type_input')) {
+            $wheels = $wheels->where('wheels.wheel_type_id', request()->get('wheel_type_input', ''));
+        }
+        if (request()->has('bolt_pattern_input')) {
+            $wheels = $wheels->where('wheels.bolt_pattern_id', request()->get('bolt_pattern_input', ''));
+        }
+
+        if (request()->has('nut_input')) {
+            $wheels = $wheels->where('wheels.nut_bolt_id', request()->get('nut_input', ''));
+        }
         return view('wheels/wheels', [
             'wheels' => $wheels->paginate(10),
-            'manufacturers' => Manufacturer::all(),
+            'manufacturers' => Manufacturer::orderBy('manufacturer_name')->get(),
             'nutBolts' => NutBolt::all(),
-            'wheelTypes' => WheelType::all(),
-            'boltPatterns' => BoltPattern::all(),
+            'wheel_types' => WheelType::all(),
+            'bolt_patterns' => BoltPattern::all(),
         ]);
     }
     public function compare(): View

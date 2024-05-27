@@ -33,7 +33,9 @@
                     <div class="flex flex-row justify-evenly pb-5 mt-2">
                         <div class="w-52">
                             <h1 class="text-slate-400 text-base">Manufacturer:</h1>
-                            <h1 class="font-bold text-3xl"> {{ $wheel->manufacturer->manufacturer_name }}</h1>
+                            <a href="/manufacturers/wheels/{{ $wheel->manufacturer->id }}">
+                                <h1 class="font-bold text-3xl"> {{ $wheel->manufacturer->manufacturer_name }}</h1>
+                            </a>
                         </div>
                         <div class="w-52">
                             <h1 class="text-slate-400 text-base">Model:</h1>
@@ -49,19 +51,19 @@
                         <div class="
                                 w-52">
                             <h1 class="text-slate-400 text-base">Center Bore: </h1>
-                            <h1 class="text-lg">{{ $wheel->center_bore }}</h1>
+                            <h1 class="text-lg">{{ $wheel->center_bore }} cm</h1>
                             <hr>
                         </div>
                     </div>
                     <div class="flex flex-row justify-evenly">
                         <div class="w-52">
                             <h1 class="text-slate-400 text-base">Diameter: </h1>
-                            <h1 class="text-lg">{{ $wheel->diameter }}</h1>
+                            <h1 class="text-lg">{{ $wheel->diameter }} inch</h1>
                             <hr>
                         </div>
                         <div class="w-52">
                             <h1 class="text-slate-400 text-base"> Width: </h1>
-                            <h1 class="text-lg">{{ $wheel->width }}</h1>
+                            <h1 class="text-lg">{{ $wheel->width }} inch</h1>
                             <hr>
                         </div>
                     </div>
@@ -135,17 +137,6 @@
                 </div>
 
             </div>
-            {{-- <div
-                class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
-                <h1 class="text-slate-400 text-lg">Accepted cars:</h1>
-                @foreach ($wheel->cars as $one)
-                    <a href='/cars/{{ $one->id }}'>
-                        <h3 class="dark:text-white pl-5">-{{ $one->manufacturer->manufacturer_name }}
-                            {{ $one->car_model }}
-                        </h3>
-                    </a>
-                @endforeach
-            </div> --}}
             @include('components.wheels_cars')
             @if (Auth::user())
                 <div
@@ -154,6 +145,14 @@
                     <div class="pl-5">
                         @livewire('DependentDropdownForWheels', ['wheel_id' => $wheel->id])
                     </div>
+                </div>
+            @elseif (!Auth::user())
+                <div
+                    class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
+                    <h1 class="text-slate-400 text-lg">To add compatible cars to this wheel, please <a href="/login"
+                            class="underline underline-offset-2">
+                            log in</a> or <a href="/register" class="underline underline-offset-2">register</a>
+                    </h1>
                 </div>
             @endif
         </div>

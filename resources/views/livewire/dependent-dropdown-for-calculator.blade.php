@@ -292,8 +292,8 @@
             } else {
                 balposition = 400 + (50 - felnibal);
             }
-            document.getElementById('inner_space').innerHTML = felnijobb;
-            document.getElementById('outer_space').innerHTML = felnibal;
+            document.getElementById('inner_space').innerHTML = felnijobb + " cm";
+            document.getElementById('outer_space').innerHTML = felnibal + " cm";
             console.log(jswheel);
             rajzolj();
         }
@@ -313,7 +313,7 @@
             // felniwidth = jswheel.width * 25;
             // felnibal = felniwidth / 2;
             // felnijobb = felniwidth / 2;
-            document.getElementById('wheel_width').innerHTML = jswheel.width;
+            document.getElementById('wheel_width').innerHTML = jswheel.width + " inch";
             document.getElementById('wheel_et').innerHTML = jswheel.ET_number;
             felniET = jswheel.ET_number;
             ctx.reset();

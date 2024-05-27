@@ -135,16 +135,16 @@
                                 <td
                                     class="px-6 py-4 bg-gray-50 {{ $wh1->diameter == $wh2->diameter ? 'bg-green-700' : 'dark:bg-gray-800' }}">
                                     Diameter</td>
-                                <td class="px-6 py-4">{{ $wh1->diameter }}</td>
-                                <td class="px-6 py-4">{{ $wh2->diameter }}</td>
+                                <td class="px-6 py-4">{{ $wh1->diameter }} inch</td>
+                                <td class="px-6 py-4">{{ $wh2->diameter }} inch</td>
                             </tr>
                             <tr class="border-b border-gray-200 dark:border-gray-700">
                                 <td
                                     class="px-6 py-4 bg-gray-50 {{ $wh1->width == $wh2->width ? 'bg-green-700' : 'dark:bg-gray-800' }}">
                                     Width</td>
                                 <td class="px-6 py-4 ">
-                                    {{ $wh1->width }}</td>
-                                <td class="px-6 py-4">{{ $wh2->width }}</td>
+                                    {{ $wh1->width }} inch</td>
+                                <td class="px-6 py-4">{{ $wh2->width }} inch</td>
                             </tr>
                             <tr class="border-b border-gray-200 dark:border-gray-700">
                                 <td
@@ -157,8 +157,8 @@
                                 <td
                                     class="px-6 py-4 bg-gray-50 {{ $wh1->center_bore == $wh2->center_bore ? 'bg-green-700' : 'dark:bg-gray-800' }}">
                                     Center bore</td>
-                                <td class="px-6 py-4">{{ $wh1->center_bore }}</td>
-                                <td class="px-6 py-4">{{ $wh2->center_bore }}</td>
+                                <td class="px-6 py-4">{{ $wh1->center_bore }} cm</td>
+                                <td class="px-6 py-4">{{ $wh2->center_bore }} cm</td>
                             </tr>
                             <tr class="border-b border-gray-200 dark:border-gray-700">
                                 <td

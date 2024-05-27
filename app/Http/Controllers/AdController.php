@@ -5,11 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Ad;
 use App\Models\User;
 use App\Models\Wheel;
-use Livewire\Livewire;
-use Illuminate\View\View;
-use App\Policies\AdPolicy;
-use Illuminate\Support\Str;
+use App\Models\WheelType;
+use App\Models\NutBolt;
+use App\Models\BoltPattern;
 use App\Models\Manufacturer;
+
+use Livewire\Livewire;
+use App\Policies\AdPolicy;
+
+use Illuminate\View\View;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,14 +22,32 @@ class AdController extends Controller
 {
     public function ads_show(): View
     {
-        $ads = Ad::orderBy('updated_at');
+        $ads = Ad::join('wheels', 'ads.wheel_id', '=', 'wheels.id')->select('*', 'ads.id AS ad_id', 'wheels.id AS wheel_id', 'ads.price AS ad_price', 'wheels.price AS wheel_price', 'ads.accepted AS ad_accepted', 'wheels.accepted AS wheel_accepted')->orderBy('ads.updated_at');
 
         if (request()->has('search')) {
             $ads = $ads->where('title', 'like', '%' . request()->get('search', '') . "%")->orWhere('description', 'like', '%' . request()->get('search', '') . "%")->orWhere('place', 'like', '%' . request()->get('search', '') . "%");
         }
+        if (request()->has('manufacturer_input')) {
+            $ads = $ads->where('wheels.manufacturer_id', request()->get('manufacturer_input', ''));
+        }
+        // dd(request()->get('bolt_pattern_input'));
+        if (request()->has('bolt_pattern_input')) {
+            $ads = $ads->where('wheels.bolt_pattern_id', request()->get('bolt_pattern_input', ''));
+        }
+        // dd(request()->get('wheel_type_input'));
+        if (request()->has('wheel_type_input')) {
+            $ads = $ads->where('wheels.wheel_type_id', request()->get('wheel_type_input', ''));
+        }
+        if (request()->has('nut_input')) {
+            $ads = $ads->where('wheels.nut_bolt_id', request()->get('nut_input', ''));
+        }
 
         return view('ads/ads', [
             'ads' => $ads->paginate(10),
+            'manufacturers' => Manufacturer::orderBy('manufacturer_name')->get(),
+            'bolt_patterns' => BoltPattern::all(),
+            'wheel_types' => WheelType::all(),
+            'nutBolts' => NutBolt::all(),
         ]);
     }
 
@@ -54,6 +77,7 @@ class AdController extends Controller
     public function ad_update_post(Request $request)
     {
         $this->authorize('update', Ad::find($request->ad_id));
+        // dd($request->ad_id, $request);
         Ad::find($request->ad_id)->update([
             'title' => $request->title,
             'description' => $request->description,

@@ -156,6 +156,17 @@ class ManufacturerController extends Controller
     }
     public function show_cars()
     {
+        // $ads = Ad::join('wheels', 'ads.wheel_id', '=', 'wheels.id')->join('bolt_patterns', 'wheels.bolt_pattern_id', '=', 'bolt_patterns.id')->select('*', 'ads.id AS ad_id', 'wheels.id AS wheel_id', 'bolt_patterns.id AS bolt_pattern_id', 'ads.price AS ad_price', 'wheels.price AS wheel_price', 'bolt_patterns.accepted AS bolt_pattern_accepted', 'ads.accepted AS ad_accepted', 'wheels.accepted AS wheel_accepted')->orderBy('ads.updated_at');
+        // if (request()->has('search')) {
+        //     $ads = $ads->where('title', 'like', '%' . request()->get('search', '') . "%")->orWhere('description', 'like', '%' . request()->get('search', '') . "%")->orWhere('place', 'like', '%' . request()->get('search', '') . "%");
+        // }
+        // if (request()->has('manufacturer_input')) {
+        //     $ads = $ads->where('wheels.manufacturer_id', request()->get('manufacturer_input', ''));
+        // }
+        // // dd(request()->get('bolt_pattern_input'));
+        // if (request()->has('bolt_pattern_input')) {
+        //     $ads = $ads->where('wheels.bolt_pattern_id', request()->get('bolt_pattern_input', ''));
+        // }
         $isAdmin = Auth::user() && Auth()->user()->is_admin;
         // dd($isAdmin);
         if ($isAdmin == 1) {
@@ -166,10 +177,17 @@ class ManufacturerController extends Controller
         if (request()->has('search')) {
             $cars = $cars->where('car_model', 'like', '%' . request()->get('search', '') . "%");
         }
+        if (request()->has('manufacturer_input')) {
+            $cars = $cars->where('cars.manufacturer_id', request()->get('manufacturer_input', ''));
+        }
+        if (request()->has('bolt_pattern_input')) {
+            $cars = $cars->where('cars.bolt_pattern_id', request()->get('bolt_pattern_input', ''));
+        }
+
         return view('cars', [
             'cars' => $cars->paginate(10),
             'manufacturers' => Manufacturer::all()->sortBy('manufacturer_name')->where('only_wheel_maker', '=', 0),
-            'boltPatterns' => BoltPattern::all(),
+            'bolt_patterns' => BoltPattern::all(),
             'nutBolts' => NutBolt::all()
         ]);
     }
