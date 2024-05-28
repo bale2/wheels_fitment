@@ -28,53 +28,53 @@
     <div class="py-12">
         <div class=" max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div
-                class=" bg-white overflow-hidden shadow-sm sm:rounded-lg flex flex-row flex-wrap-reverse mt-5 justify-between dark:bg-gray-800">
+                class=" bg-jordy-blue overflow-hidden shadow-sm sm:rounded-lg flex flex-row flex-wrap-reverse mt-5 justify-between dark:bg-gray-800">
                 <div class=" md:w-3/4 w-full  p-6 text-gray-900 dark:text-gray-100 ">
                     <div class="flex flex-row justify-evenly pb-5 mt-2">
                         <div class="w-52">
-                            <h1 class="text-slate-400 text-base">Manufacturer:</h1>
+                            <h1 class="dark:text-slate-400 text-base">Manufacturer:</h1>
                             <a href="/manufacturers/cars/{{ $car->manufacturer->id }}">
                                 <h1 class="font-bold text-3xl"> {{ $car->manufacturer->manufacturer_name }}</h1>
                             </a>
                         </div>
                         <div class="w-52">
-                            <h1 class="text-slate-400 text-base">Model:</h1>
+                            <h1 class="dark:text-slate-400 text-base">Model:</h1>
                             <h1 class="font-bold text-3xl   "> {{ $car->car_model }}</h1>
                         </div>
                     </div>
                     <div class="flex flex-row justify-evenly">
                         <div class=" w-52">
-                            <h1 class="text-slate-400 text-base">Engine size: </h1>
+                            <h1 class="dark:text-slate-400 text-base">Engine size: </h1>
                             <h1 class="text-lg">{{ $car->engine_size }} cm3</h1>
                             <hr>
                         </div>
                         <div class="
                                 w-52">
-                            <h1 class="text-slate-400 text-base">Manufactured: </h1>
+                            <h1 class="dark:text-slate-400 text-base">Manufactured: </h1>
                             <h1 class="text-lg">{{ $car->car_year }}</h1>
                             <hr>
                         </div>
                     </div>
                     <div class="flex flex-row justify-evenly">
                         <div class="w-52">
-                            <h1 class="text-slate-400 text-base">Center Bore: </h1>
+                            <h1 class="dark:text-slate-400 text-base">Center Bore: </h1>
                             <h1 class="text-lg">{{ $car->center_bore }} cm</h1>
                             <hr>
                         </div>
                         <div class="w-52">
-                            <h1 class="text-slate-400 text-base"> Bolt pattern : </h1>
+                            <h1 class="dark:text-slate-400 text-base"> Bolt pattern : </h1>
                             <h1 class="text-lg">{{ $car->boltPattern->bolt_pattern }}</h1>
                             <hr>
                         </div>
                     </div>
                     <div class="flex flex-row justify-evenly">
                         <div class=" w-52">
-                            <h1 class="text-slate-400 text-base">Thread Size: </h1>
+                            <h1 class="dark:text-slate-400 text-base">Thread Size: </h1>
                             <h1 class="text-lg">{{ $car->nutBolt->type }} </h1>
                             <hr>
                         </div>
                         <div class="w-52">
-                            <h1 class="text-slate-400 text-base">Space for wheel: </h1>
+                            <h1 class="dark:text-slate-400 text-base">Space for wheel: </h1>
                             <h1 class="text-lg">{{ $car->mtsurface_fender_distance }} mm</h1>
                             <hr>
                         </div>
@@ -95,17 +95,17 @@
             {{-- @endif --}}
             @if (Auth::user())
                 <div
-                    class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
-                    <h1 class="text-slate-400 text-lg">Add wheel to the car:</h1>
+                    class="p-6 bg-jordy-blue overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
+                    <h1 class="dark:dark:text-slate-400 text-lg">Add wheel to the car:</h1>
                     <div class="pl-5">
                         @livewire('DependentDropdownForCars', ['car_id' => $car->id])
                     </div>
                 </div>
             @elseif (!Auth::user())
                 <div
-                    class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
-                    <h1 class="text-slate-400 text-lg">To add compatible wheels to this car, please <a href="/login"
-                            class="underline underline-offset-2">
+                    class="p-6 bg-jordy-blue overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
+                    <h1 class="dark:dark:text-slate-400 text-lg">To add compatible wheels to this car, please <a
+                            href="/login" class="underline underline-offset-2">
                             log in</a> or <a href="/register" class="underline underline-offset-2">register</a>
                     </h1>
                 </div>

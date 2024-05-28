@@ -1,6 +1,6 @@
 <div
-    class=" p-6 bg-white overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
-    <h1 class="mb-2 text-slate-400 text-lg">Accepted wheels:</h1>
+    class=" p-6 bg-ruddy-blue overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
+    <h1 class="mb-2 dark:text-slate-400 text-black text-lg">Accepted wheels:</h1>
     @foreach ($car->wheels ?? $wheel->cars as $one)
         @if ($one->pivot->accepted == 1 or $one->pivot->accepted == 0 && Auth::user() && Auth::user()->is_admin)
             <div class="flex flex-row justify-start mb-2">

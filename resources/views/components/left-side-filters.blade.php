@@ -1,12 +1,13 @@
-<div class="md:w-1/4 md:border-r-2 border-white dark:hover:[&>div>div>a>div]:bg-blue-900 ">
+<div
+    class="md:w-1/4 md:border-r-2 border-white dark:[&>div>div>a>div]:bg-gray-800 dark:hover:[&>div>div>a>div]:bg-blue-900 [&>div>div>a>div]:bg-jordy-blue hover:[&>div>div>a>div]:bg-ruddy-blue">
     @include('components.search-bar')
     {{-- compare --}}
     @if (Request::segment(1) == 'wheels')
-        <h1 class="dark:text-white font-semibold text-xl text-center mb-5">Compare</h1>
+        <h1 class="dark:text-white text-black font-semibold text-xl text-center mb-5">Compare</h1>
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 sm:rounded-lg mb-10">
             <div class="overflow-hidden shadow-sm">
                 <a href="/compare">
-                    <div class="flex flex-row flex-wrap text-center  sm:rounded-lg  mb-2 bg-gray-800">
+                    <div class="flex flex-row flex-wrap text-center  sm:rounded-lg  mb-2">
                         <?xml version="1.0" encoding="iso-8859-1"?>
                         <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
                         <svg class="mt-2 w-1/4 pr-0 " xmlns="http://www.w3.org/2000/svg"
@@ -255,14 +256,15 @@ C409.6,302.396,388.838,343.962,356.207,372.147z" />
             @endif
             {{-- new filters --}}
             <div id="select-box_man" class="w-full h-[350px] relative ">
-                <div id="content_man" class="p-[20px] dark:bg-gray-800 absolute rounded-lg w-full z-[999]">
+                <div id="content_man"
+                    class="p-[20px] dark:bg-gray-800 bg-jordy-blue absolute rounded-lg w-full">
                     <div id="search_man" class="">
                         <h1 class="dark:text-white text-xl font-semibold">Manufacturers</h1>
                         <input id="optionSearch_man" type="text" placeholder="Search" name=""
-                            class="w-full p-[15px] outline-0 dark:bg-slate-800 dark:text-white rounded-lg">
+                            class="w-full p-[15px] outline-0 bg-gray-200 dark:bg-slate-800 dark:text-white rounded-lg">
                     </div>
                     <ul id="options_man"
-                        class="mt-[10px] max-h-[200px] overflow-y-auto p-0 [&_li]:px-[10px] [&_li]:text-white [&_li]:py-[15px]  [&_li]:cursor-pointer [&_li]:border-b [&_li]:border-b-grey hover:[&_li]:bg-slate-300 dark:hover:[&_li]:bg-slate-900">
+                        class="mt-[10px] max-h-[200px] overflow-y-auto p-0 [&_li]:px-[10px] [&_li]:text-black dark:[&_li]:text-white [&_li]:py-[15px]  [&_li]:cursor-pointer [&_li]:border-b [&_li]:border-b-grey hover:[&_li]:bg-ruddy-blue dark:hover:[&_li]:bg-slate-900">
                         @foreach ($manufacturers as $manufacturer)
                             <form id="man_Form-{{ $manufacturer->id }}"
                                 @if (Request::segment(1) == 'ads') action="{{ route('ads') }}" method="GET"
@@ -273,7 +275,7 @@ C409.6,302.396,388.838,343.962,356.207,372.147z" />
                                 @csrf
                                 <input type="hidden" value="{{ $manufacturer->id }}" name="manufacturer_input"
                                     id="manufacturer_input">
-                                <li id="submitLiMan-{{ $manufacturer->id }}" class="submitLiMan">
+                                <li id="submitLiMan-{{ $manufacturer->id }}" class="submitLiMan ">
                                     {{ $manufacturer->manufacturer_name }}</li>
                             </form>
                         @endforeach
@@ -282,14 +284,15 @@ C409.6,302.396,388.838,343.962,356.207,372.147z" />
             </div>
             {{-- bolt_patterns --}}
             <div id="select-box_bolt" class="w-full h-[350px] relative">
-                <div id="content_bolt" class="p-[20px] dark:bg-gray-800 absolute rounded-lg w-full z-[999]">
+                <div id="content_bolt"
+                    class="p-[20px] dark:bg-gray-800 bg-jordy-blue absolute rounded-lg w-full ">
                     <div id="search_bolt" class="">
                         <h1 class="dark:text-white text-xl font-semibold">Bolt patterns:</h1>
                         <input id="optionSearch_bolt" type="text" placeholder="Search" name=""
-                            class="w-full p-[15px] outline-0 dark:bg-slate-800 dark:text-white rounded-lg">
+                            class="w-full p-[15px] outline-0 bg-gray-200 dark:bg-slate-800 dark:text-white rounded-lg">
                     </div>
                     <ul id="options_bolt"
-                        class="mt-[10px] max-h-[200px] overflow-y-auto p-0 [&_li]:px-[10px] [&_li]:text-white [&_li]:py-[15px]  [&_li]:cursor-pointer [&_li]:border-b [&_li]:border-b-grey hover:[&_li]:bg-slate-300 dark:hover:[&_li]:bg-slate-900">
+                        class="mt-[10px] max-h-[200px] overflow-y-auto p-0 [&_li]:px-[10px] [&_li]:text-black  dark:[&_li]:text-white [&_li]:py-[15px]  [&_li]:cursor-pointer [&_li]:border-b [&_li]:border-b-grey hover:[&_li]:bg-ruddy-blue dark:hover:[&_li]:bg-slate-900">
                         @foreach ($bolt_patterns as $bolt_pattern)
                             <form id="bolt_Form-{{ $bolt_pattern->id }}"
                                 @if (Request::segment(1) == 'ads') action="{{ route('ads') }}" method="GET"
@@ -310,14 +313,15 @@ C409.6,302.396,388.838,343.962,356.207,372.147z" />
             {{--  --}}
             @if (Request::segment(1) != 'cars')
                 <div id="select-box_wtype" class="w-full h-[350px] relative">
-                    <div id="content_wtype" class="p-[20px] dark:bg-gray-800 absolute rounded-lg w-full z-[999]">
+                    <div id="content_wtype"
+                        class="p-[20px] dark:bg-gray-800 bg-jordy-blue absolute rounded-lg w-full ">
                         <div id="search_wtype" class="">
                             <h1 class="dark:text-white text-xl font-semibold">Wheel types:</h1>
                             <input id="optionSearch_wtype" type="text" placeholder="Search" name=""
-                                class="w-full p-[15px] outline-0 dark:bg-slate-800 dark:text-white rounded-lg">
+                                class="w-full p-[15px] outline-0 bg-gray-200 dark:bg-slate-800 dark:text-white rounded-lg">
                         </div>
                         <ul id="options_wtype"
-                            class="mt-[10px] max-h-[200px] overflow-y-auto p-0 [&_li]:px-[10px] [&_li]:text-white [&_li]:py-[15px]  [&_li]:cursor-pointer [&_li]:border-b [&_li]:border-b-grey hover:[&_li]:bg-slate-300 dark:hover:[&_li]:bg-slate-900">
+                            class="mt-[10px] max-h-[200px] overflow-y-auto p-0 [&_li]:px-[10px] [&_li]:text-black dark:[&_li]:text-white [&_li]:py-[15px]  [&_li]:cursor-pointer [&_li]:border-b [&_li]:border-b-grey hover:[&_li]:bg-ruddy-blue dark:hover:[&_li]:bg-slate-900">
                             @foreach ($wheel_types as $wheel_type)
                                 <form id="wtype_Form-{{ $wheel_type->id }}"
                                     @if (Request::segment(1) == 'ads') action="{{ route('ads') }}" method="GET"
@@ -338,14 +342,15 @@ C409.6,302.396,388.838,343.962,356.207,372.147z" />
             @endif
             @if (Request::segment(1) != 'cars')
                 <div id="select-box_nut" class="w-full h-[350px] relative">
-                    <div id="content_nut" class="p-[20px] dark:bg-gray-800 absolute rounded-lg w-full z-[999]">
+                    <div id="content_nut"
+                        class="p-[20px] dark:bg-gray-800 bg-jordy-blue absolute rounded-lg w-full ">
                         <div id="search_nut" class="">
                             <h1 class="dark:text-white text-xl font-semibold">Mounting hardware:</h1>
                             <input id="optionSearch_nut" type="text" placeholder="Search" name=""
-                                class="w-full p-[15px] outline-0 dark:bg-slate-800 dark:text-white rounded-lg">
+                                class="w-full p-[15px] outline-0 bg-gray-200 dark:bg-slate-800 dark:text-white rounded-lg">
                         </div>
                         <ul id="options_nut"
-                            class="mt-[10px] max-h-[200px] overflow-y-auto p-0 [&_li]:px-[10px] [&_li]:text-white [&_li]:py-[15px]  [&_li]:cursor-pointer [&_li]:border-b [&_li]:border-b-grey hover:[&_li]:bg-slate-300 dark:hover:[&_li]:bg-slate-900">
+                            class="mt-[10px] max-h-[200px] overflow-y-auto p-0 [&_li]:px-[10px] [&_li]:text-black dark:[&_li]:text-white [&_li]:py-[15px]  [&_li]:cursor-pointer [&_li]:border-b [&_li]:border-b-grey hover:[&_li]:bg-ruddy-blue dark:hover:[&_li]:bg-slate-900">
                             @foreach ($nutBolts as $nut_bolt)
                                 <form id="nut_Form-{{ $nut_bolt->id }}"
                                     @if (Request::segment(1) == 'ads') action="{{ route('ads') }}" method="GET"

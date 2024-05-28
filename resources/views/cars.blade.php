@@ -5,10 +5,12 @@
                 {{ __('Cars') }}
             </h2>
             @if (Auth::user())
-            <div class="mx-auto">
-                <a class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-md p-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                    href="/ad_create">Add a car</a>
-            </div>
+                <div class="mx-auto">
+                    <x-primary-button class="dark:hover:bg-blue-700 bg-blue-700" x-data=""
+                        x-on:click.prevent="$dispatch('open-modal','car_create')">
+                        Add car
+                    </x-primary-button>
+                </div>
             @endif
             {{-- Create Modal --}}
             <x-modal name="car_create" :show="$errors->create_bag->isNotEmpty()" focusable>
@@ -158,7 +160,7 @@
                     @if ($car->car_id != 1)
                         <a href="cars/{{ $car->car_id }}">
                             <div
-                                class="bg-white overflow-hidden flex flex-row shadow-sm sm:rounded-lg  {{ $car->CA == 0 ? 'dark:bg-red-600 dark:hover:bg-red-700' : 'dark:bg-gray-800 dark:hover:bg-blue-900' }}  mb-1">
+                                class=" overflow-hidden flex flex-row shadow-sm sm:rounded-lg  {{ $car->CA == 0 ? 'bg-red-600 hover:bg-red-700 dark:bg-red-600 dark:hover:bg-red-700' : 'bg-jordy-blue hover:bg-ruddy-blue dark:bg-gray-800 dark:hover:bg-blue-900' }}  mb-1">
                                 <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
                                 <svg class="my-auto pl-3" width="100px" height="100px" viewBox="0 0 24 24"
                                     fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -183,13 +185,15 @@
                                 @method('post')
                                 <input type="hidden" value="{{ $car->car_id }}" name="car_id"
                                     class="block mt-1 w-full" />
-                                <x-primary-button class="w-[20vw] dark:bg-blue-700 dark:hover:bg-blue-800 dark:text-white">
+                                <x-primary-button
+                                    class="w-[20vw] dark:bg-red-600 dark:hover:bg-red-700 bg-red-600 hover:bg-red-700 dark:text-white">
                                     Delete car
                                 </x-primary-button>
                             </form>
                         @endcan
                         @can('update', $car)
-                            <x-primary-button class="w-[20vw] dark:bg-blue-700 dark:hover:bg-blue-800 dark:text-white" x-data=""
+                            <x-primary-button class="w-[20vw] dark:bg-blue-700 dark:hover:bg-blue-800 dark:text-black"
+                                x-data=""
                                 x-on:click.prevent="$dispatch('open-modal','car_update_post'),
                                      car_id='{{ $car->car_id }}',
                                      manufacturer_id='{{ $car->manufacturer_id }}',

@@ -13,7 +13,7 @@
             @foreach ($users as $user)
                 <a href="users/{{ $user->id }}">
                     <div
-                        class="bg-white overflow-hidden shadow-sm sm:rounded-lg dark:bg-gray-800 dark:hover:bg-blue-900 mb-12 ">
+                        class=" overflow-hidden shadow-sm sm:rounded-lg bg-jordy-blue hover:bg-ruddy-blue dark:bg-gray-800 dark:hover:bg-blue-900 mb-12 ">
                         <div class="p-6 text-gray-900 dark:text-gray-100 flex flex-row">
                             <div>
                                 <svg height="4vw" width="4vw" version="1.1" id="Capa_1"
@@ -21,9 +21,11 @@
                                     viewBox="0 0 60.671 60.671" xml:space="preserve">
                                     <g>
                                         <g>
-                                            <ellipse style="fill:#6506c5; stroke: #000000; stroke-width: 2px;"
-                                                cx="30.336" cy="12.097" rx="11.997" ry="12.097" />
-                                            <path style="fill:#1215c4; stroke: #000000; stroke-width: 2px;" d="M35.64,30.079H25.031c-7.021,0-12.714,5.739-12.714,12.821v17.771h36.037V42.9
+                                            <ellipse class="dark:fill-[#6506c5] fill-[#b95f89ff]"
+                                                style="stroke: #000000; stroke-width: 2px;" cx="30.336"
+                                                cy="12.097" rx="11.997" ry="12.097" />
+                                            <path class="dark:fill-[#1215c4] fill-deep-sky-blue"
+                                                style="stroke: #000000; stroke-width: 2px;" d="M35.64,30.079H25.031c-7.021,0-12.714,5.739-12.714,12.821v17.771h36.037V42.9
    C48.354,35.818,42.661,30.079,35.64,30.079z" />
                                         </g>
                                     </g>

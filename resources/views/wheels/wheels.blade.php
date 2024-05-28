@@ -7,7 +7,7 @@
             @if (Auth::user())
                 <div class="mx-auto">
                     <a class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-md p-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                        href="/ad_create">Add wheel</a>
+                        href="/wheel_create">Add wheel</a>
                 </div>
             @endif
         </div>
@@ -21,7 +21,7 @@
                     @if ($wheel->id != 1)
                         <a href="wheels/{{ $wheel->id }}">
                             <div
-                                class="bg-white overflow-hidden grid grid-cols-2 shadow-sm sm:rounded-lg {{ $wheel->accepted ? 'dark:bg-gray-800 dark:hover:bg-blue-900' : 'dark:bg-red-600 dark:hover:bg-red-700' }} mb-1 ">
+                                class=" overflow-hidden grid grid-cols-2 shadow-sm sm:rounded-lg {{ $wheel->accepted ? 'bg-jordy-blue hover:bg-ruddy-blue dark:bg-gray-800 dark:hover:bg-blue-900' : 'bg-jordy-blue hover:bg-ruddy-blue dark:bg-red-600 dark:hover:bg-red-700' }} mb-1 ">
                                 <div class="p-6 text-gray-900 dark:text-gray-100">
                                     <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200">
                                         {{ $wheel->title }}
@@ -45,7 +45,7 @@
                                     <input type="hidden" value="{{ $wheel->id }}" name="wheel_id"
                                         class="block mt-1 w-full" />
                                     <x-primary-button
-                                        class="w-[20vw] dark:bg-blue-700 dark:hover:bg-blue-800 dark:text-white">
+                                        class="w-[20vw] dark:bg-red-600 dark:hover:bg-red-700 bg-red-600 hover:bg-red-700 dark:text-white">
                                         Delete wheel
                                     </x-primary-button>
                                     {{-- class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-md p-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" --}}
@@ -53,7 +53,7 @@
                                 </form>
                             @endcan
                             @can('update', $wheel)
-                                <x-primary-button class="w-[20vw] dark:bg-blue-700 dark:hover:bg-blue-800 dark:text-white"
+                                <x-primary-button class="w-[20vw] dark:bg-blue-700 dark:hover:bg-blue-800 dark:text-black"
                                     x-data="" {{-- x-on:click.prevent="$dispatch('open-modal','wheel_update_post'),wheel_id={{ $wheel->id }},manufacturer_id={{ $wheel->manufacturer->id }},model='{{ $wheel->model }}', price={{ $wheel->price }}, wheel_type_id={{ $wheel->wheel_type_id }}, diameter={{ $wheel->diameter }}, width={{ $wheel->width }}, ET_number={{ $wheel->ET_number }}, bolt_pattern_id={{ $wheel->bolt_pattern_id }}, kba_number='{{ $wheel->kba_number }}', center_bore={{ $wheel->center_bore }}, nut_bolt_id={{ $wheel->nut_bolt_id }}, multipiece={{ $wheel->multipiece }}, note='{{ $wheel->note }}', accepted='{{ $wheel->accepted }}'"> --}}
                                     x-on:click.prevent="$dispatch('open-modal','wheel_update_post'),wheel_id='{{ $wheel->id }}', manufacturer_id='{{ $wheel->manufacturer_id }}',model='{{ $wheel->model }}',price={{ $wheel->price }},wheel_type_id={{ $wheel->wheel_type_id }},diameter={{ $wheel->diameter }},width={{ $wheel->width }},ET_number={{ $wheel->ET_number }}, bolt_pattern_id={{ $wheel->bolt_pattern_id }}, kba_number='{{ $wheel->kba_number }}', center_bore={{ $wheel->center_bore }}, nut_bolt_id={{ $wheel->nut_bolt_id }}, multipiece={{ $wheel->multipiece }}, note='{{ $wheel->note }}', accepted='{{ $wheel->accepted }}'">
                                     Update wheel

@@ -65,7 +65,7 @@
             </div>
             <div
                 class="
-                    bg-white overflow-hidden shadow-sm sm:rounded-lg justify-between dark:bg-gray-800 max-w-3xl
+                    bg-jordy-blue overflow-hidden shadow-sm sm:rounded-lg justify-between dark:bg-gray-800 max-w-3xl
                     mx-auto pb-5">
                 <div class=" w-full text-gray-900 dark:text-gray-100 ">
                     <div class=" justify-evenly pb-2 mt-2">
@@ -79,7 +79,7 @@
                 <div class="flex flex-row justify-start mx-[17%]">
                     <a href="/users/{{ $ad->user->id }}">
                         <div class="w-56">
-                            <h1 class="text-slate-400 text-base underline underline-offset-2">Seller:
+                            <h1 class="dark:text-slate-400 text-base underline underline-offset-2">Seller:
                                 {{ $ad->user->name }} </h1>
                             <h1 class="text-lg"></h1>
 
@@ -88,7 +88,8 @@
                     <a href="https://www.google.com/maps/search/?api=1&query={{ $ad->place }}" target="_blank">
                         <div class="w-56
                             ">
-                            <h1 class="text-slate-400 text-base underline underline-offset-2">Place: {{ $ad->place }}
+                            <h1 class="dark:text-slate-400 text-base underline underline-offset-2">Place:
+                                {{ $ad->place }}
                             </h1>
                             <h1 class="text-lg"></h1>
                         </div>
@@ -99,51 +100,51 @@
                     <h1 class="mx-[17%] mb-0 mt-5 text-3xl">Information about the wheel:</h1>
                     <div class="flex flex-row justify-evenly mt-2">
                         <div class="w-52">
-                            <h1 class="text-slate-400 text-base">Manufacturer:</h1>
+                            <h1 class="dark:text-slate-400 text-base">Manufacturer:</h1>
                             <a href="/manufacturers/wheels/{{ $ad->wheel->manufacturer->id }}">
                                 <h1 class="font-bold text-lg"> {{ $ad->wheel->manufacturer->manufacturer_name }}</h1>
                             </a>
                             <hr>
                         </div>
                         <div class="w-52">
-                            <h1 class="text-slate-400 text-base">Model:</h1>
+                            <h1 class="dark:text-slate-400 text-base">Model:</h1>
                             <h1 class="font-bold text-lg   "> {{ $ad->wheel->model }}</h1>
                             <hr>
                         </div>
                     </div>
                     <div class="flex flex-row justify-evenly">
                         <div class=" w-52">
-                            <h1 class="text-slate-400 text-base">Bolt Pattern: </h1>
+                            <h1 class="dark:text-slate-400 text-base">Bolt Pattern: </h1>
                             <h1 class="text-lg">{{ $ad->wheel->boltPattern->bolt_pattern }}</h1>
                             <hr>
                         </div>
                         <div class="
                                 w-52">
-                            <h1 class="text-slate-400 text-base">Center Bore: </h1>
+                            <h1 class="dark:text-slate-400 text-base">Center Bore: </h1>
                             <h1 class="text-lg">{{ $ad->wheel->center_bore }} cm</h1>
                             <hr>
                         </div>
                     </div>
                     <div class="flex flex-row justify-evenly">
                         <div class="w-52">
-                            <h1 class="text-slate-400 text-base">Diameter: </h1>
+                            <h1 class="dark:text-slate-400 text-base">Diameter: </h1>
                             <h1 class="text-lg">{{ $ad->wheel->diameter }} inch</h1>
                             <hr>
                         </div>
                         <div class="w-52">
-                            <h1 class="text-slate-400 text-base"> Width: </h1>
+                            <h1 class="dark:text-slate-400 text-base"> Width: </h1>
                             <h1 class="text-lg">{{ $ad->wheel->width }} inch</h1>
                             <hr>
                         </div>
                     </div>
                     <div class="flex flex-row justify-evenly">
                         <div class=" w-52">
-                            <h1 class="text-slate-400 text-base">ET number: </h1>
+                            <h1 class="dark:text-slate-400 text-base">ET number: </h1>
                             <h1 class="text-lg">{{ $ad->wheel->ET_number }} </h1>
                             <hr>
                         </div>
                         <div class="w-52">
-                            <h1 class="text-slate-400 text-base"> KBA number: </h1>
+                            <h1 class="dark:text-slate-400 text-base"> KBA number: </h1>
                             <h1 class="text-lg">{{ $ad->wheel->kba_number }}</h1>
                             <hr>
                         </div>
@@ -151,12 +152,12 @@
 
                     <div class="flex flex-row justify-evenly">
                         <div class=" w-52">
-                            <h1 class="text-slate-400 text-base">Mounting type: </h1>
+                            <h1 class="dark:text-slate-400 text-base">Mounting type: </h1>
                             <h1 class="text-lg">{{ $ad->wheel->nutBolt->type }}</h1>
                             <hr>
                         </div>
                         <div class=" w-52">
-                            <h1 class="text-slate-400 text-base">Wheel design:</h1>
+                            <h1 class="dark:text-slate-400 text-base">Wheel design:</h1>
                             @if ($ad->wheel->multipiece == 0)
                                 <h1 class="text-lg"> One piece</h1>
                                 <hr>
@@ -168,12 +169,12 @@
                     </div>
                     <div class="flex flex-row justify-evenly mb-5">
                         <div class="w-52">
-                            <h1 class="text-slate-400 text-base">Type: </h1>
+                            <h1 class="dark:text-slate-400 text-base">Type: </h1>
                             <h1 class="text-lg">{{ $ad->wheel->wheelType->wheel_type }}</h1>
                             <hr>
                         </div>
                         <div class="w-52">
-                            <h1 class="text-slate-400 text-base">Estimated price:</h1>
+                            <h1 class="dark:text-slate-400 text-base">Estimated price:</h1>
                             <h1 class="text-lg">{{ $ad->wheel->price }}</h1>
                             <hr>
                         </div>
@@ -181,9 +182,10 @@
                 </div>
                 <div class="mx-[17%]">
                     <div class="max-w-[28rem]">
-                        <h1 class="mt-1 inline-block text-slate-400 text-base">Wheel associated with ad: </h1>
+                        <h1 class="mt-1 inline-block  dark:text-slate-400 text-base">Wheel associated with
+                            ad: </h1>
                         <a href="/wheels/{{ $ad->wheel->id }}">
-                            <p class="inline text-base text-white underline underline-offset-2">
+                            <p class="inline text-base text-black dark:text-white underline underline-offset-2">
                                 {{ $ad->wheel->manufacturer->manufacturer_name }}
                                 {{ $ad->wheel->model }}</p>
                         </a>
@@ -191,13 +193,13 @@
 
                 </div>
                 {{--  --}}
-                <h1 class="mx-[17%] text-slate-400 text-base">Description: </h1>
+                <h1 class="mx-[17%] dark:text-slate-400 text-base">Description: </h1>
                 <div class=" mx-[17%] text-base">
                     <p class="dark:text-white mb-10">{{ $ad->description }}
                     </p>
                 </div>
                 <div class=" mx-[17%] text-base">
-                    <h1 class="text-slate-400 text-base">Uploaded: {{ $ad->updated_at }} </h1>
+                    <h1 class="dark:text-slate-400 text-base">Uploaded: {{ $ad->updated_at }} </h1>
                 </div>
             </div>
 

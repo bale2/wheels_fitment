@@ -43,13 +43,14 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 sm:rounded-lg">
                 <div
-                    class="p-6 text-gray-900 dark:text-gray-100 bg-white overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800">
+                    class="p-6 text-gray-900 dark:text-gray-100 overflow-hidden shadow-sm sm:rounded-lg my-5 bg-jordy-blue hover:bg-ruddy-blue dark:bg-gray-800 dark:hover:bg-gray-700">
                     <div>
-                        <h1 class="text-white text-xl mb-2">{{ $user->name }}'s wheels:</h1>
+                        <h1 class="text-black dark:text-white text-xl mb-2">{{ $user->name }}'s wheels:</h1>
                         @foreach ($user->wheels as $one)
                             <div class="flex flex-row">
                                 <a href="/wheels/{{ $one->id }}">
-                                    <p class="underline underline-offset-2 text-white text-lg ml-5 mb-1 pr-5">
+                                    <p
+                                        class="underline underline-offset-2 text-black dark:text-white text-lg ml-5 mb-1 pr-5">
                                         {{ $one->manufacturer->manufacturer_name }}
                                         {{ $one->model }}
                                     </p>
@@ -65,19 +66,20 @@
                                             class="block w-full" />
 
                                         <input type="submit" value="DELETE"
-                                        class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-2.5 py-1 me-2 mt-1 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
+                                            class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-2.5 py-1 me-2 mt-1 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
                                     </form>
                                 @endif
                             </div>
                         @endforeach
                     </div>
                     <div>
-                        <h1 class="text-white text-xl mb-2">{{ $user->name }}'s cars:</h1>
+                        <h1 class="text-black dark:text-white text-xl mb-2">{{ $user->name }}'s cars:</h1>
                         @foreach ($user->cars as $one)
                             <div class="flex flex-row">
 
                                 <a href="/cars/{{ $one->id }}" class="w-fit pr-5">
-                                    <p class="underline underline-offset-2 text-white text-lg ml-5 mb-1 w-fit">
+                                    <p
+                                        class="underline underline-offset-2 text-black dark:text-white text-lg ml-5 mb-1 w-fit">
                                         {{ $one->manufacturer->manufacturer_name }}
                                         {{ $one->car_model }}
                                     </p>
@@ -93,13 +95,13 @@
                                             class="block w-full" />
 
                                         <input type="submit" value="DELETE"
-                                        class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-2.5 py-1 me-2 mt-1 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
+                                            class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-2.5 py-1 me-2 mt-1 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
                                     </form>
                                 @endif
                             </div>
                         @endforeach
                     </div>
-                    <div class="text-white text-xl ">
+                    <div class="text-black dark:text-white text-xl ">
                         <h1 class="mt-2">{{ $user->name }}'s details:</h1>
                         <div class="ml-5">
                             <h2>Email: {{ $user->email }}</h2>
@@ -108,14 +110,17 @@
                         </div>
                     </div>
                 </div>
-                <h1 class="ml-4 text-white text-xl my-auto">{{ $user->name }}'s ads:</h1>
+                <h1 class="ml-4 text-black dark:text-white text-xl my-auto">{{ $user->name }}'s ads:</h1>
                 @foreach ($user->ads as $one)
                     <a href="/ads/{{ $one->id }}">
-                        @if ($one->accepted or !$one->accepted and Auth::user()->id == $one->user_id or Auth::user() && Auth::user()->is_admin)
+                        @if (
+                            $one->accepted or
+                                !$one->accepted and Auth::user() and Auth::user()->id == $one->user_id or
+                                Auth::user() && Auth::user()->is_admin)
                             <div
-                                class=" grid grid-cols-2 p-6 text-gray-900 dark:text-gray-100 dark:hover:bg-blue-900 bg-white overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800">
+                                class=" grid grid-cols-2 p-6 text-gray-900 dark:text-gray-100 overflow-hidden shadow-sm sm:rounded-lg my-5 bg-jordy-blue hover:bg-ruddy-blue dark:bg-gray-800 dark:hover:bg-blue-900">
                                 <div>
-                                    <p class=" text-white text-bold text-lg">{{ $one->title }}</p>
+                                    <p class=" dark:text-white text-bold text-lg">{{ $one->title }}</p>
                                     <p class="text-base">{{ $one->price }} €</p>
                                     <p class="text-base">{{ $one->wheel->manufacturer->manufacturer_name }}
                                         {{ $one->wheel->model }}
@@ -132,15 +137,15 @@
                 @if (Auth::user() and (Auth::user()->is_admin or Auth::user()->id == $user->id))
                     <div class="flex flex-col lg:flex-row ">
                         <div
-                            class="max-lg:rounded-lg lg:rounded-l-lg mx-auto p-6 w-full md:w-1/2 bg-white overflow-hidden shadow-sm  my-5 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
-                            <h1 class="text-slate-400 text-lg">Add wheel to the user:</h1>
+                            class="max-lg:rounded-lg lg:rounded-l-lg mx-auto p-6 w-full md:w-1/2  overflow-hidden shadow-sm  my-5 bg-jordy-blue hover:bg-ruddy-blue dark:bg-gray-800 text-gray-900 dark:text-gray-100">
+                            <h1 class="text-black dark:text-slate-400 text-lg">Add wheel to the user:</h1>
                             <div class="pl-1 lg:pl-5">
                                 @livewire('DependentDropdownForUsersWheels', ['user_id' => $user->id])
                             </div>
                         </div>
                         <div
-                            class="max-lg:rounded-lg lg:rounded-r-lg mx-auto p-6 w-full md:w-1/2 bg-white overflow-hidden shadow-sm  my-5 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
-                            <h1 class="text-slate-400 text-lg">Add car to the user:</h1>
+                            class="max-lg:rounded-lg lg:rounded-r-lg mx-auto p-6 w-full md:w-1/2 overflow-hidden shadow-sm  my-5 bg-jordy-blue hover:bg-ruddy-blue dark:bg-gray-800 text-gray-900 dark:text-gray-100">
+                            <h1 class="text-black dark:text-slate-400 text-lg">Add car to the user:</h1>
                             <div class="pl-1 lg:pl-5">
                                 @livewire('DependentDropdownForUsersCars', ['user_id' => $user->id])
                             </div>

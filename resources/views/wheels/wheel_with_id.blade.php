@@ -28,53 +28,53 @@
     <div class="py-12">
         <div class=" max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div
-                class=" bg-white overflow-hidden shadow-sm sm:rounded-lg flex flex-row flex-wrap-reverse mt-5 justify-between dark:bg-gray-800">
+                class=" bg-jordy-blue overflow-hidden shadow-sm sm:rounded-lg flex flex-row flex-wrap-reverse mt-5 justify-between dark:bg-gray-800">
                 <div class="md:w-3/4 w-full  p-6 text-gray-900 dark:text-gray-100 ">
                     <div class="flex flex-row justify-evenly pb-5 mt-2">
                         <div class="w-52">
-                            <h1 class="text-slate-400 text-base">Manufacturer:</h1>
+                            <h1 class="dark:text-slate-400 text-base">Manufacturer:</h1>
                             <a href="/manufacturers/wheels/{{ $wheel->manufacturer->id }}">
                                 <h1 class="font-bold text-3xl"> {{ $wheel->manufacturer->manufacturer_name }}</h1>
                             </a>
                         </div>
                         <div class="w-52">
-                            <h1 class="text-slate-400 text-base">Model:</h1>
+                            <h1 class="dark:text-slate-400 text-base">Model:</h1>
                             <h1 class="font-bold text-3xl   "> {{ $wheel->model }}</h1>
                         </div>
                     </div>
                     <div class="flex flex-row justify-evenly">
                         <div class=" w-52">
-                            <h1 class="text-slate-400 text-base">Bolt Pattern: </h1>
+                            <h1 class="dark:text-slate-400 text-base">Bolt Pattern: </h1>
                             <h1 class="text-lg">{{ $wheel->boltPattern->bolt_pattern }}</h1>
                             <hr>
                         </div>
                         <div class="
                                 w-52">
-                            <h1 class="text-slate-400 text-base">Center Bore: </h1>
+                            <h1 class="dark:text-slate-400 text-base">Center Bore: </h1>
                             <h1 class="text-lg">{{ $wheel->center_bore }} cm</h1>
                             <hr>
                         </div>
                     </div>
                     <div class="flex flex-row justify-evenly">
                         <div class="w-52">
-                            <h1 class="text-slate-400 text-base">Diameter: </h1>
+                            <h1 class="dark:text-slate-400 text-base">Diameter: </h1>
                             <h1 class="text-lg">{{ $wheel->diameter }} inch</h1>
                             <hr>
                         </div>
                         <div class="w-52">
-                            <h1 class="text-slate-400 text-base"> Width: </h1>
+                            <h1 class="dark:text-slate-400 text-base"> Width: </h1>
                             <h1 class="text-lg">{{ $wheel->width }} inch</h1>
                             <hr>
                         </div>
                     </div>
                     <div class="flex flex-row justify-evenly">
                         <div class=" w-52">
-                            <h1 class="text-slate-400 text-base">ET number: </h1>
+                            <h1 class="dark:text-slate-400 text-base">ET number: </h1>
                             <h1 class="text-lg">{{ $wheel->ET_number }} </h1>
                             <hr>
                         </div>
                         <div class="w-52">
-                            <h1 class="text-slate-400 text-base"> KBA number: </h1>
+                            <h1 class="dark:text-slate-400 text-base"> KBA number: </h1>
                             <h1 class="text-lg">{{ $wheel->kba_number }}</h1>
                             <hr>
                         </div>
@@ -82,12 +82,12 @@
 
                     <div class="flex flex-row justify-evenly">
                         <div class=" w-52">
-                            <h1 class="text-slate-400 text-base">Mounting type: </h1>
+                            <h1 class="dark:text-slate-400 text-base">Mounting type: </h1>
                             <h1 class="text-lg">{{ $wheel->nutBolt->type }}</h1>
                             <hr>
                         </div>
                         <div class=" w-52">
-                            <h1 class="text-slate-400 text-base">Wheel design:</h1>
+                            <h1 class="dark:text-slate-400 text-base">Wheel design:</h1>
                             @if ($wheel->multipiece == 0)
                                 <h1 class="text-lg"> One piece</h1>
                                 <hr>
@@ -99,17 +99,17 @@
                     </div>
                     <div class="flex flex-row justify-evenly mb-5">
                         <div class="w-52">
-                            <h1 class="text-slate-400 text-base">Type: </h1>
+                            <h1 class="dark:text-slate-400 text-base">Type: </h1>
                             <h1 class="text-lg">{{ $wheel->wheelType->wheel_type }}</h1>
                             <hr>
                         </div>
                         <div class="w-52">
-                            <h1 class="text-slate-400 text-base">Estimated price:</h1>
+                            <h1 class="dark:text-slate-400 text-base">Estimated price:</h1>
                             <h1 class="text-lg">{{ $wheel->price }}</h1>
                             <hr>
                         </div>
                     </div>
-                    <h1 class="mx-[17%] text-slate-400 text-base">Note: </h1>
+                    <h1 class="mx-[17%] dark:text-slate-400 text-base">Note: </h1>
                     <div class=" mx-[17%]">
                         <div class="flex flex-wrap text-base">
                             <p>{{ $wheel->note }}</p>
@@ -140,8 +140,8 @@
             @include('components.wheels_cars')
             @if (Auth::user())
                 <div
-                    class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
-                    <h1 class="text-slate-400 text-lg">Add car to the wheel:</h1>
+                    class="p-6 bg-ruddy-blue overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
+                    <h1 class="dark:text-slate-400 text-lg">Add car to the wheel:</h1>
                     <div class="pl-5">
                         @livewire('DependentDropdownForWheels', ['wheel_id' => $wheel->id])
                     </div>
@@ -149,8 +149,8 @@
             @elseif (!Auth::user())
                 <div
                     class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-lg my-5 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
-                    <h1 class="text-slate-400 text-lg">To add compatible cars to this wheel, please <a href="/login"
-                            class="underline underline-offset-2">
+                    <h1 class="dark:text-slate-400 text-lg">To add compatible cars to this wheel, please <a
+                            href="/login" class="underline underline-offset-2">
                             log in</a> or <a href="/register" class="underline underline-offset-2">register</a>
                     </h1>
                 </div>
