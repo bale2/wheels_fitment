@@ -71,7 +71,8 @@
                         <div class="col-md-6">
                             <select id="man_id" wire:model.live="selectedManufacturerCar"
                                 class="dark:text-gray-200 bg-jordy-blue dark:bg-gray-800 border-transparent rounded-lg w-80 form-control">
-                                <option value="" selected>Select category</option>
+                                <option class="dark:bg-gray-800 bg-jordy-blue" value="" selected>Select category
+                                </option>
                                 @foreach ($manufacturersCar as $manufacturer)
                                     <option class="dark:text-gray-200 bg-jordy-blue dark:bg-gray-800"
                                         value="{{ $manufacturer->id }}">
@@ -91,10 +92,12 @@
                                     class="dark:text-gray-200
                                     bg-jordy-blue dark:bg-gray-800 border-transparent rounded-lg w-80 form-control"
                                     name="car_id" id="car_id">
-                                    <option class="bg-jordy-blue" value="" selected>Choose product</option>
+                                    <option class="dark:bg-gray-800 bg-jordy-blue" value="" selected>Choose
+                                        product</option>
                                     @if ($cars)
                                         @foreach ($cars as $car)
-                                            <option value= "{{ $car }}">{{ $car->car_model }}</option>
+                                            <option class="dark:text-gray-200 bg-jordy-blue dark:bg-gray-800"
+                                                value= "{{ $car }}">{{ $car->car_model }}</option>
                                         @endforeach
                                     @endif
                                 </select>
@@ -112,9 +115,10 @@
                         <div class="col-md-6">
                             <select id="man_id" wire:model.live="selectedManufacturerWheel"
                                 class="dark:text-gray-200 bg-jordy-blue dark:bg-gray-800 border-transparent rounded-lg w-80 form-control">
-                                <option class="bg-jordy-blue" value="" selected>Select category</option>
+                                <option class="dark:bg-gray-800 bg-jordy-blue" value="" selected>Select category
+                                </option>
                                 @foreach ($manufacturersWheel as $manufacturer)
-                                    <option class="dark:text-gray-200 bg-white dark:bg-gray-800"
+                                    <option class="dark:text-gray-200 bg-jordy-blue dark:bg-gray-800"
                                         value="{{ $manufacturer->id }}">
                                         {{ $manufacturer->manufacturer_name }}</option>
                                 @endforeach
@@ -133,10 +137,12 @@
                                     class="dark:text-gray-200
                                     bg-jordy-blue dark:bg-gray-800 border-transparent rounded-lg w-80 form-control"
                                     name="wheel_id" id="wheel_id">
-                                    <option class="bg-jordy-blue" value="" selected>Choose product</option>
+                                    <option class="dark:bg-gray-800 bg-jordy-blue" value="" selected>Choose
+                                        product</option>
                                     @if ($wheels)
                                         @foreach ($wheels as $wheel)
-                                            <option value= "{{ $wheel }}">{{ $wheel->model }}</option>
+                                            <option class="dark:text-gray-200 bg-jordy-blue dark:bg-gray-800"
+                                                value= "{{ $wheel }}">{{ $wheel->model }}</option>
                                         @endforeach
                                     @endif
                                 </select>
@@ -148,9 +154,9 @@
             <div class="flex flex-row justify-evenly" x-data="width = 100, { wheel_id: '', model: '', price: 0, wheel_type_id: 0, diameter: 0, ET_number: 0, bolt_pattern_id: 0, kba_number: '', center_bore: 0, nut_bolt_id: 0, multipiece: 0, note: '', accepted: 0 }">
                 <canvas id="canvas" class="bg-white mt-8" width="650" height="500"></canvas>
                 <div style="display:none;">
+                    <img id="source3" src="{{ asset('suspension_photoshop3.png') }}" />
                     <img id="source1" src="{{ asset('bal_felni.png') }}" />
                     <img id="source2" src="{{ asset('jobb_felni.png') }}" />
-                    <img style="z-index: 100;" id="source3" src="{{ asset('suspension_photoshop3.png') }}" />
                 </div>
             </div>
         </div>
@@ -197,6 +203,9 @@
             ctx.lineTo(450 - felnidistance, 430);
             ctx.strokeStyle = 'green';
             ctx.stroke();
+            image3.addEventListener("load", (e) => {
+                ctx.drawImage(image3, 450, 50, 200, 344);
+            });
             image1.addEventListener("load", (e) => {
                 ctx.drawImage(image1, balposition, 221, felnibal, 200);
                 //x,y, x-szél, y-szél
@@ -208,10 +217,6 @@
                 ctx.drawImage(image2, 450, 220, felnijobb, 200);
                 // 4.2641509434
             });
-            image3.addEventListener("load", (e) => {
-                ctx.drawImage(image3, 450, 50, 200, 344);
-            });
-
         }
 
         function rajzolj() {
@@ -238,6 +243,9 @@
             let helyzetWheel = document.getElementById('wheel_id');
             let helyzet = document.getElementById('car_id');
             // console.log(helyzet);
+            helyzetWheel.addEventListener("click", event => {
+                ctx.drawImage(image3, 450, 50, 200, 344);
+            });
 
             helyzetWheel.addEventListener("click", event => {
                 ctx.drawImage(image1, balposition, 221, felnibal, 200);
@@ -250,10 +258,6 @@
                 ctx.drawImage(image2, 450, 220, felnijobb, 200);
                 // 4.2641509434
             });
-            helyzetWheel.addEventListener("click", event => {
-                ctx.drawImage(image3, 450, 50, 200, 344);
-            });
-
 
             helyzet.addEventListener("click", event => {
                 ctx.drawImage(image1, balposition, 221, felnibal, 200);

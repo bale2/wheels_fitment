@@ -21,7 +21,7 @@ class DependentDropdownForAds extends Component
 
     public function updatedSelectedManufacturer($manufacturer)
     {
-        $this->wheels = Wheel::where('manufacturer_id', $manufacturer)->get();
+        $this->wheels = Wheel::where('manufacturer_id', $manufacturer)->where('wheels.accepted', 1)->get();
     }
 
     public function submitForm()

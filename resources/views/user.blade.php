@@ -43,7 +43,7 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 sm:rounded-lg">
                 <div
-                    class="p-6 text-gray-900 dark:text-gray-100 overflow-hidden shadow-sm sm:rounded-lg my-5 bg-jordy-blue hover:bg-ruddy-blue dark:bg-gray-800 dark:hover:bg-gray-700">
+                    class="p-6 text-gray-900 dark:text-gray-100 overflow-hidden shadow-sm sm:rounded-lg my-5 bg-jordy-blue  dark:bg-gray-800 ">
                     <div>
                         <h1 class="text-black dark:text-white text-xl mb-2">{{ $user->name }}'s wheels:</h1>
                         @foreach ($user->wheels as $one)
@@ -137,14 +137,14 @@
                 @if (Auth::user() and (Auth::user()->is_admin or Auth::user()->id == $user->id))
                     <div class="flex flex-col lg:flex-row ">
                         <div
-                            class="max-lg:rounded-lg lg:rounded-l-lg mx-auto p-6 w-full md:w-1/2  overflow-hidden shadow-sm  my-5 bg-jordy-blue hover:bg-ruddy-blue dark:bg-gray-800 text-gray-900 dark:text-gray-100">
+                            class="max-lg:rounded-lg lg:rounded-l-lg mx-auto p-6 w-full md:w-1/2  overflow-hidden shadow-sm  my-5 bg-jordy-blue  dark:bg-gray-800 text-gray-900 dark:text-gray-100">
                             <h1 class="text-black dark:text-slate-400 text-lg">Add wheel to the user:</h1>
                             <div class="pl-1 lg:pl-5">
                                 @livewire('DependentDropdownForUsersWheels', ['user_id' => $user->id])
                             </div>
                         </div>
                         <div
-                            class="max-lg:rounded-lg lg:rounded-r-lg mx-auto p-6 w-full md:w-1/2 overflow-hidden shadow-sm  my-5 bg-jordy-blue hover:bg-ruddy-blue dark:bg-gray-800 text-gray-900 dark:text-gray-100">
+                            class="max-lg:rounded-lg lg:rounded-r-lg mx-auto p-6 w-full md:w-1/2 overflow-hidden shadow-sm  my-5 bg-jordy-blue  dark:bg-gray-800 text-gray-900 dark:text-gray-100">
                             <h1 class="text-black dark:text-slate-400 text-lg">Add car to the user:</h1>
                             <div class="pl-1 lg:pl-5">
                                 @livewire('DependentDropdownForUsersCars', ['user_id' => $user->id])

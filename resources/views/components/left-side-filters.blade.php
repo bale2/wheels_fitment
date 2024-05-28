@@ -2,6 +2,7 @@
     class="md:w-1/4 md:border-r-2 border-white dark:[&>div>div>a>div]:bg-gray-800 dark:hover:[&>div>div>a>div]:bg-blue-900 [&>div>div>a>div]:bg-jordy-blue hover:[&>div>div>a>div]:bg-ruddy-blue">
     @include('components.search-bar')
     {{-- compare --}}
+
     @if (Request::segment(1) == 'wheels')
         <h1 class="dark:text-white text-black font-semibold text-xl text-center mb-5">Compare</h1>
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 sm:rounded-lg mb-10">
@@ -255,9 +256,9 @@ C409.6,302.396,388.838,343.962,356.207,372.147z" />
                 </a>
             @endif
             {{-- new filters --}}
-            <div id="select-box_man" class="w-full h-[350px] relative ">
-                <div id="content_man"
-                    class="p-[20px] dark:bg-gray-800 bg-jordy-blue absolute rounded-lg w-full">
+            <div id="select-box_man "
+                class="{{ Request::segment(1) != 'wheels' ? 'max-md:w-96 max-sm:w-64' : 'w-full' }} h-[350px] relative ">
+                <div id="content_man" class="w-full p-[20px] dark:bg-gray-800 bg-jordy-blue absolute rounded-lg">
                     <div id="search_man" class="">
                         <h1 class="dark:text-white text-xl font-semibold">Manufacturers</h1>
                         <input id="optionSearch_man" type="text" placeholder="Search" name=""
@@ -284,8 +285,7 @@ C409.6,302.396,388.838,343.962,356.207,372.147z" />
             </div>
             {{-- bolt_patterns --}}
             <div id="select-box_bolt" class="w-full h-[350px] relative">
-                <div id="content_bolt"
-                    class="p-[20px] dark:bg-gray-800 bg-jordy-blue absolute rounded-lg w-full ">
+                <div id="content_bolt" class="p-[20px] dark:bg-gray-800 bg-jordy-blue absolute rounded-lg w-full ">
                     <div id="search_bolt" class="">
                         <h1 class="dark:text-white text-xl font-semibold">Bolt patterns:</h1>
                         <input id="optionSearch_bolt" type="text" placeholder="Search" name=""
@@ -342,8 +342,7 @@ C409.6,302.396,388.838,343.962,356.207,372.147z" />
             @endif
             @if (Request::segment(1) != 'cars')
                 <div id="select-box_nut" class="w-full h-[350px] relative">
-                    <div id="content_nut"
-                        class="p-[20px] dark:bg-gray-800 bg-jordy-blue absolute rounded-lg w-full ">
+                    <div id="content_nut" class="p-[20px] dark:bg-gray-800 bg-jordy-blue absolute rounded-lg w-full ">
                         <div id="search_nut" class="">
                             <h1 class="dark:text-white text-xl font-semibold">Mounting hardware:</h1>
                             <input id="optionSearch_nut" type="text" placeholder="Search" name=""
