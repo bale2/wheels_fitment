@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout :title="' - Page Title'">
     <x-slot name="header">
         <div class="flex justify-around">
             <div class="w-3 ">

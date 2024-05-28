@@ -156,19 +156,7 @@ class ManufacturerController extends Controller
     }
     public function show_cars()
     {
-        // $ads = Ad::join('wheels', 'ads.wheel_id', '=', 'wheels.id')->join('bolt_patterns', 'wheels.bolt_pattern_id', '=', 'bolt_patterns.id')->select('*', 'ads.id AS ad_id', 'wheels.id AS wheel_id', 'bolt_patterns.id AS bolt_pattern_id', 'ads.price AS ad_price', 'wheels.price AS wheel_price', 'bolt_patterns.accepted AS bolt_pattern_accepted', 'ads.accepted AS ad_accepted', 'wheels.accepted AS wheel_accepted')->orderBy('ads.updated_at');
-        // if (request()->has('search')) {
-        //     $ads = $ads->where('title', 'like', '%' . request()->get('search', '') . "%")->orWhere('description', 'like', '%' . request()->get('search', '') . "%")->orWhere('place', 'like', '%' . request()->get('search', '') . "%");
-        // }
-        // if (request()->has('manufacturer_input')) {
-        //     $ads = $ads->where('wheels.manufacturer_id', request()->get('manufacturer_input', ''));
-        // }
-        // // dd(request()->get('bolt_pattern_input'));
-        // if (request()->has('bolt_pattern_input')) {
-        //     $ads = $ads->where('wheels.bolt_pattern_id', request()->get('bolt_pattern_input', ''));
-        // }
         $isAdmin = Auth::user() && Auth()->user()->is_admin;
-        // dd($isAdmin);
         if ($isAdmin == 1) {
             $cars = Car::join('manufacturers', 'cars.manufacturer_id', '=', 'manufacturers.id')->select('*', 'cars.accepted AS CA', 'cars.id AS car_id')->whereNotNull('cars.created_at')->orderBy('cars.accepted', 'desc')->orderBy('manufacturers.manufacturer_name');
         } else {
