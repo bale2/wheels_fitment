@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ad;
 use App\Models\User;
 use App\Models\Wheel;
-use App\Models\Manufacturer;
 use Illuminate\View\View;
+use App\Models\Manufacturer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\Pivot;
-use Illuminate\Support\Facades\Redis;
 
 class ProfileController extends Controller
 {

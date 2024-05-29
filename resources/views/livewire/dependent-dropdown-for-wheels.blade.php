@@ -16,7 +16,7 @@
 
     @if (!is_null($selectedManufacturer))
         <div class="form-group row">
-            <label for="model" class="col-md-4 text-md-right text-black">Model</label>
+            <label for="model" class="col-md-4 text-md-right text-black dark:text-white">Model</label>
             <div class="col-md-6">
 
                 <form method="post" action="{{ route('car_wheel_post') }}" enctype="multipart/form-data">
@@ -29,7 +29,8 @@
                         <option value="" selected>Choose product</option>
                         @if ($cars)
                             @foreach ($cars as $car)
-                                <option class="bg-jordy-blue" value="{{ $car->id }}">{{ $car->car_model }}</option>
+                                <option class="bg-jordy-blue dark:bg-gray-800" value="{{ $car->id }}">
+                                    {{ $car->car_model }}</option>
                             @endforeach
                         @endif
                     </select>

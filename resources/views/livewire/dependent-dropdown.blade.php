@@ -5,7 +5,7 @@
         <div class="col-md-6">
             <select wire:model.live="selectedManufacturer"
                 class="dark:text-gray-200 bg-jordy-blue dark:bg-gray-800 border-transparent rounded-lg w-80 form-control">
-                <option class="bg-jordy-blue bg-gray-800" value="" selected>Select category</option>
+                <option class="bg-jordy-blue dark:bg-gray-800" value="" selected>Select category</option>
                 @foreach ($manufacturers as $manufacturer)
                     <option class="dark:text-gray-200 bg-jordy-blue dark:bg-gray-800" value="{{ $manufacturer->id }}">
                         {{ $manufacturer->manufacturer_name }}</option>

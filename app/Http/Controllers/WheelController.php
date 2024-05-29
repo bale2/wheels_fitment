@@ -151,7 +151,7 @@ class WheelController extends Controller
             'accepted' => $request->accepted,
             'updated_at' => now()
         ]);
-        return redirect()->action([WheelController::class, 'wheels_show']);
+        return redirect()->action([WheelController::class, 'wheels_show'])->with('success','Wheel data was sent to admin to check');
     }
 
 

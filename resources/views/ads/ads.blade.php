@@ -10,16 +10,12 @@
             </div>
         </div>
     </x-slot>
-    {{-- <div class="w-1/2 lg:w-1/3 xl:w-1/4 mx-auto mb-0">
-        @include('components.search-bar')
-    </div> --}}
-
-
-    {{--  --}}
     <div x-data="{ adid: '', title: '', price: 0, description: '', photo: '', accepted: '', place: '' }">
         <div class="flex flex-row flex-wrap-reverse py-12 justify-center">
             @include('components.left-side-filters')
             <div class="w-3/4 mx-auto sm:px-6 lg:px-8 sm:rounded-lg">
+                @include('components.success-message')
+                <h1 class="dark:text-white font-semibold text-xl text-center mb-5">Ads</h1>
                 @foreach ($ads as $ad)
                     @if ($ad->ad_accepted == 0 and Auth::user() and ($ad->user_id == auth()->id() or Auth::user()->is_admin))
                         <a href="ads/{{ $ad->ad_id }}">

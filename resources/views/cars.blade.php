@@ -153,8 +153,7 @@
         <div class="flex flex-row flex-wrap-reverse py-12 justify-center">
             @include('components.left-side-filters')
             <div class="w-3/4 mx-auto sm:px-6 lg:px-8 sm:rounded-lg">
-                <div class="mb-5 -mt-4">
-                </div>
+                @include('components.success-message')
                 <h1 class="dark:text-white font-semibold text-xl text-center mb-5">Cars</h1>
                 @foreach ($cars as $car)
                     @if ($car->car_id != 1)

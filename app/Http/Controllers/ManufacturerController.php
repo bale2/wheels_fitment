@@ -208,7 +208,7 @@ class ManufacturerController extends Controller
             'accepted' => $request->accepted,
             'updated_at' => now(),
         ]);
-        return redirect()->action([ManufacturerController::class, 'show_cars']);
+        return redirect()->action([ManufacturerController::class, 'show_cars'])->with('success','Car data was sent to admin to check');
     }
 
     public function car_update_post(Request $request)

@@ -124,6 +124,6 @@ class AdController extends Controller
             'photo' => $imagePaths,
             'accepted' => 0
         ]);
-        return redirect()->action([AdController::class, 'ads_show']);
+        return redirect()->action([AdController::class, 'ads_show'])->with('success', 'Ad was sent to admin to check');
     }
 }
